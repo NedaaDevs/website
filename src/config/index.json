@@ -1,48 +1,58 @@
 {
-    "org": {
-      "name": "Nedaa | نِداء",
-      "logo": "/assets/images/logo.png"
-    },
-    "callToAction": {
-      "text": "",
+  "org": {
+    "name": "Nedaa | نِداء",
+    "logo": "/assets/images/logo.png"
+  },
+  "callToAction": {
+    "text": "",
+    "href": "#"
+  },
+  "details": {
+    "title": "Nedaa | نِداء",
+    "subtitle": "App",
+    "description": "Prayer Times app. |  تطبيق أوقات الصلاة",
+    "img": "",
+    "iosDownload": {
+      "text": " App Store",
       "href": "#"
     },
-    "details": {
-      "title": "Nedaa | نِداء",
-      "subtitle": "App",
-      "description": "Prayer Times Reminder App!",
-      "img": "",
-      "iosDownload": {
-        "text": " App Store",
-        "href": "#"
-      },
-      "androidDownload": {
-        "text": "Google Play",
-        "href": "#"
-      },
-      "secondaryAction": {
-        "text": "Email us",
-        "href": "mailto:support@nedaa.io"
-      }
+    "androidDownload": {
+      "text": "Google Play",
+      "href": "#"
     },
-    "navigation": [
-      {
-        "name": "Home",
-        "href": "/"
-      },
-      {
-        "name": "Prayer Times",
-        "href": "prayer-times"
-      },
-      {
-        "name": "About",
-        "href": "about"
-      }
-    ],
-    "about": {
-      "socialMedia": {
-        "github": "https://github.com/NedaaApp"
-      }
+    "secondaryAction": {
+      "text": "Email us",
+      "href": "mailto:support@nedaa.io"
     }
+  },
+  "navigation": [
+    {
+      "name": "Home",
+      "href": "/"
+    },
+    {
+      "name": "Prayer Times",
+      "href": "prayer-times"
+    },
+    {
+      "name": "About",
+      "href": "about"
+    }
+  ],
+  "about": {
+    "socialMedia": {
+      "github": "https://github.com/NedaaApp"
+    }
+  },
+  "links": {
+    "apps": {
+      "android": "nedaa.apk",
+      "ios": "",
+      "testFlight": "https://testflight.apple.com/join/Bd9UnMmI"
+    }
+  },
+  "icons": {
+    "android": "/assets/icons/android.png",
+    "testFlight": "/assets/icons/testflight.png"
   }
-  
+}
