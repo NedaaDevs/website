@@ -2,13 +2,14 @@ import React, { Fragment } from "react";
 
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { Link } from "react-scroll";
+import { Link, useLocation } from "react-router-dom";
 
 import config from "../config/index.json";
 
 const Menu = () => {
   const { navigation, org, callToAction } = config;
   const { name, logo } = org;
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -47,18 +48,13 @@ const Menu = () => {
             <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
               {navigation.map((item) => (
                 <Link
-                  spy={true}
-                  activeClass="active"
-                  smooth={true}
-                  duration={1000}
                   key={item.name}
-                  to={item.href}
+                  to={pathname === `/${item.href}` ? "#" : item.href}
                   className="font-medium text-gray-500 hover:text-gray-900"
                 >
                   {item.name}
                 </Link>
               ))}
-        
             </div>
           </nav>
         </div>
@@ -95,12 +91,8 @@ const Menu = () => {
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
                   <Link
-                    spy={true}
-                    activeClass="active"
-                    smooth={true}
-                    duration={1000}
                     key={item.name}
-                    to={item.href}
+                    to={pathname === `/${item.href}` ? "#" : item.href}
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
                     {item.name}

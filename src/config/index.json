@@ -23,25 +23,29 @@
     "secondaryAction": {
       "text": "Email us",
       "href": "mailto:support@nedaa.io"
-    }
+    },
+    "supportEmail": "support@nedaa.io"
   },
   "navigation": [
     {
       "name": "Home",
-      "href": "/"
+      "href": "/",
+      "scroll": true
     },
     {
-      "name": "Prayer Times",
-      "href": "prayer-times"
+      "name": "Privacy",
+      "href": "privacy",
+      "scroll": false
     },
     {
       "name": "About",
-      "href": "about"
+      "href": "#about",
+      "scroll": true
     }
   ],
   "about": {
     "socialMedia": {
-      "github": "https://github.com/NedaaApp"
+      "github": "https://github.com/NedaaDevs"
     }
   },
   "links": {
