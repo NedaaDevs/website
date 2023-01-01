@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { Switch } from "@headlessui/react";
 
@@ -9,12 +10,23 @@ import Header from "./Header";
 import About from "./About";
 
 type Direction = "ltr" | "rtl";
+
 export default function PrivacyPolicy() {
-  const [language, setLanguage] = useState("en");
-  const [textDirection, setTextDirection] = useState<Direction>("ltr");
+  const url = useLocation().search;
+  let defaultLanguage = new URLSearchParams(url).get("lang") || "en";
+  if (defaultLanguage !== "en" && defaultLanguage !== "ar") {
+    defaultLanguage = "en";
+  }
+  const defaultTextDirection = defaultLanguage === "en" ? "ltr" : "rtl";
+
+  const [language, setLanguage] = useState(defaultLanguage);
+  const [textDirection, setTextDirection] =
+    useState<Direction>(defaultTextDirection);
   const styles: React.CSSProperties = {
     direction: textDirection,
   };
+  // set the strings localization
+  strings.setLanguage(language);
 
   const { supportEmail } = config.details;
 
