@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { Switch } from "@headlessui/react";
 
@@ -9,12 +10,23 @@ import Header from "./Header";
 import About from "./About";
 
 type Direction = "ltr" | "rtl";
+
 export default function PrivacyPolicy() {
-  const [language, setLanguage] = useState("en");
-  const [textDirection, setTextDirection] = useState<Direction>("ltr");
+  const url = useLocation().search;
+  let defaultLanguage = new URLSearchParams(url).get("lang") || "en";
+  if (defaultLanguage !== "en" && defaultLanguage !== "ar") {
+    defaultLanguage = "en";
+  }
+  const defaultTextDirection = defaultLanguage === "en" ? "ltr" : "rtl";
+
+  const [language, setLanguage] = useState(defaultLanguage);
+  const [textDirection, setTextDirection] =
+    useState<Direction>(defaultTextDirection);
   const styles: React.CSSProperties = {
     direction: textDirection,
   };
+  // set the strings localization
+  strings.setLanguage(language);
 
   const { supportEmail } = config.details;
 
@@ -76,34 +88,6 @@ export default function PrivacyPolicy() {
               {strings.logFilesContent}
             </p>
             <h4 className="text-4xl font-normal leading-normal mt-0 mb-2 text-center">
-              {strings.thirdPartyPrivacyPolicies}
-            </h4>
-            <p className="text-base font-light leading-relaxed mt-0 mb-4">
-              {strings.thirdPartyPrivacyPoliciesContent}
-            </p>
-            <h4 className="text-4xl font-normal leading-normal mt-0 mb-2 text-center">
-              {strings.childrensInformation}
-            </h4>
-            <p className="text-base font-light leading-relaxed mt-0 mb-4">
-              {strings.childrensInformationContentOne}
-            </p>
-            <p className="text-base font-light leading-relaxed mt-0 mb-4">
-              {strings.childrensInformationContentTwo}
-            </p>
-            <h4 className="text-4xl font-normal leading-normal mt-0 mb-2 text-center">
-              {strings.onlinePrivacyPolicyOnly}
-            </h4>
-            <p className="text-base font-light leading-relaxed mt-0 mb-4">
-              {strings.onlinePrivacyPolicyOnlyContent}
-              <a
-                rel="noreferrer"
-                target="_blank"
-                href="https://www.app-privacy-policy.com/app-privacy-policy-generator/"
-              >
-                {strings.onlinePrivacyPolicyOnlyContentLinkHref}
-              </a>
-            </p>
-            <h4 className="text-4xl font-normal leading-normal mt-0 mb-2 text-center">
               {strings.consent}
             </h4>
             <p className="text-base font-light leading-relaxed mt-0 mb-4">
@@ -114,13 +98,13 @@ export default function PrivacyPolicy() {
             </h4>
             <p className="text-base font-light leading-relaxed mt-0 mb-4">
               {strings.contactUsContent}
+              <span> </span>
               <a
                 rel="noreferrer"
                 target="_blank"
                 href="mailto:support@nedaa.io"
                 className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
               >
-                <br />
                 {supportEmail}
               </a>
               .
