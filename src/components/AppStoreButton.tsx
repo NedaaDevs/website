@@ -36,7 +36,9 @@ const AppStoreButton = () => {
       <div>
         <div className="text-xs">Download on the</div>
         <div className="text-2xl font-semibold font-sans -mt-1">
+          <a href={details.iosDownload.href} target="_blank">
           {details.iosDownload.text}
+          </a>
         </div>
       </div>
     </motion.button>

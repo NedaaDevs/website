@@ -14,11 +14,15 @@
     "img": "",
     "iosDownload": {
       "text": " App Store",
-      "href": "#"
+      "href": "https://apps.apple.com/us/app/nedaa-%D9%86%D8%AF%D8%A7%D8%A1/id1641552391"
     },
     "androidDownload": {
       "text": "Google Play",
-      "href": "#"
+      "href": "https://play.google.com/store/apps/details?id=io.nedaa.nedaaApp&pli=1"
+    },
+    "huaweiDownload": {
+      "text": "AppGallery",
+      "href": "https://appgallery.huawei.com/app/C107530839"
     },
     "secondaryAction": {
       "text": "Email us",

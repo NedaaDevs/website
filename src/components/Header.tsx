@@ -16,7 +16,7 @@ const Menu = () => {
       <svg
         className={`hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-background transform translate-x-1/2`}
         fill="currentColor"
-        viewBox="0 0 100 100"
+        viewBox="0 0 45 45"
         preserveAspectRatio="none"
         aria-hidden="true"
       >

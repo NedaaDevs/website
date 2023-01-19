@@ -48,7 +48,9 @@ const GooglePlayButton = () => {
         <div>
           <div className="text-xs">GET IT ON</div>
           <div className="text-xl font-semibold font-sans -mt-1">
+            <a href={details.androidDownload.href} target="_blank">
             {details.androidDownload.text}
+            </a>
           </div>
         </div>
       </motion.button>
