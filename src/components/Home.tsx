@@ -22,7 +22,9 @@ const Home: FC<Props> = () => {
           </div>
         </div>
       </div>
-      <Logo />
+      <div className="hidden md:block">
+        <Logo />
+      </div>
 
       <>
         {/* <Canvas /> */}
