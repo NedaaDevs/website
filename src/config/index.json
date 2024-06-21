@@ -26,9 +26,9 @@
     },
     "secondaryAction": {
       "text": "Email us",
-      "href": "mailto:support@nedaa.io"
+      "href": "mailto:support@nedaa.dev"
     },
-    "supportEmail": "support@nedaa.io"
+    "supportEmail": "support@nedaa.dev"
   },
   "navigation": [
     {

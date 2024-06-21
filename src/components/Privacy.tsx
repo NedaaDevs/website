@@ -102,7 +102,7 @@ export default function PrivacyPolicy() {
               <a
                 rel="noreferrer"
                 target="_blank"
-                href="mailto:support@nedaa.io"
+                href="mailto:support@nedaa.dev"
                 className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
               >
                 {supportEmail}
