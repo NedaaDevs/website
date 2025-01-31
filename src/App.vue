@@ -1,9 +1,12 @@
 <script lang="ts" setup>
+import AppFooter from './components/AppFooter.vue'
+
 //
 </script>
 
 <template>
-  <v-app>
-    <router-view />
-  </v-app>
+  <VApp>
+    <RouterView />
+    <AppFooter />
+  </VApp>
 </template>
