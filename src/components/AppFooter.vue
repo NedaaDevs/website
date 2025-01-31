@@ -1,78 +1,238 @@
-<template>
-  <VFooter height="40" app>
-    <a
-      v-for="item in items"
-      :key="item.title"
-      :href="item.href"
-      :title="item.title"
-      class="d-inline-block mx-2 social-link"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <VIcon :icon="item.icon" :size="item.icon === '$vuetify' ? 24 : 16" />
-    </a>
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
 
-    <div class="text-caption text-disabled" style="position: absolute; right: 16px">
-      &copy; 2016-{{ new Date().getFullYear() }}
-      <span class="d-none d-sm-inline-block">Vuetify, LLC</span>
-      —
+import { useI18n } from 'vue-i18n'
+
+import {
+  mdiAlertCircle,
+  mdiCheckCircle,
+  mdiLoading,
+  mdiGithub,
+  mdiTranslate,
+  mdiSend,
+} from '@mdi/js'
+
+type HealthResponse = {
+  status: number
+  message: string
+  data: {
+    status: string
+    info: {
+      [key: string]: {
+        status: string
+      }
+    }
+  }
+}
+
+type ApiStatus = {
+  status: string
+}
+
+const { t } = useI18n()
+
+const apis = ref<Record<string, ApiStatus>>({})
+const healthCheckError = ref(false)
+
+const checkHealth = async () => {
+  try {
+    const response = await fetch(import.meta.env.VITE_HEALTH_CHECK_URL)
+    const data: HealthResponse = await response.json()
+
+    if (data.status === 200) {
+      apis.value = Object.entries(data.data.info).reduce(
+        (acc, [key, value]) => {
+          acc[key] = { status: value.status }
+          return acc
+        },
+        {} as Record<string, ApiStatus>,
+      )
+      healthCheckError.value = false
+    } else {
+      healthCheckError.value = true
+    }
+  } catch (error) {
+    console.error('Health check failed:', error)
+    healthCheckError.value = true
+  }
+}
+
+const formatApiName = (name: string) => {
+  return name
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
+const healthStatus = computed(() => {
+  if (healthCheckError.value) return 'error'
+  if (Object.keys(apis.value).length === 0) return 'checking'
+  return Object.values(apis.value).every((api) => api.status === 'up') ? 'healthy' : 'error'
+})
+
+const healthIcon = computed(() => {
+  switch (healthStatus.value) {
+    case 'healthy':
+      return mdiCheckCircle
+    case 'error':
+      return mdiAlertCircle
+    default:
+      return mdiLoading
+  }
+})
+
+const healthColor = computed(() => {
+  switch (healthStatus.value) {
+    case 'healthy':
+      return 'success'
+    case 'error':
+      return 'error'
+    default:
+      return 'warning'
+  }
+})
+
+const healthText = computed(() => {
+  switch (healthStatus.value) {
+    case 'healthy':
+      return t('footer.health.allOperational')
+    case 'error':
+      return t('footer.health.issuesDetected')
+    default:
+      return t('footer.health.checking')
+  }
+})
+
+const socialItems = [
+  {
+    title: t('footer.social.github'),
+    icon: mdiGithub,
+    href: 'https://github.com/NedaaDevs/nedaa',
+  },
+  {
+    title: t('footer.social.telegram'),
+    icon: mdiSend,
+    href: 'https://t.me/NedaDev',
+  },
+  {
+    title: t('footer.social.translate'),
+    icon: mdiTranslate,
+    href: 'https://crowdin.com/project/nedaa',
+  },
+]
+
+onMounted(() => {
+  checkHealth()
+})
+</script>
+
+<template>
+  <VFooter border class="pa-4">
+    <!-- Health -->
+    <div class="health-status-container d-flex align-center">
+      <VTooltip location="top" :z-index="1">
+        <template v-slot:activator="{ props }">
+          <div v-bind="props" class="health-icon-wrapper d-flex align-center">
+            <VIcon :icon="healthIcon" :color="healthColor" size="small" class="mr-2" />
+          </div>
+        </template>
+        <span>{{ healthText }}</span>
+      </VTooltip>
+      <div class="health-details-wrapper">
+        <div class="health-details">
+          <div v-for="(api, name) in apis" :key="name" class="d-flex align-center pa-1">
+            <VIcon
+              :icon="api.status === 'up' ? mdiCheckCircle : mdiAlertCircle"
+              :color="api.status === 'up' ? 'success' : 'error'"
+              size="x-small"
+              class="mr-1"
+            />
+            <span class="text-caption">{{ formatApiName(name) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <VSpacer />
+
+    <!-- Social Links -->
+    <div class="d-flex align-center">
       <a
-        class="text-decoration-none on-surface"
-        href="https://vuetifyjs.com/about/licensing/"
+        v-for="item in socialItems"
+        :key="item.title"
+        :href="item.href"
+        :title="item.title"
+        class="d-inline-block mx-2 social-link"
         rel="noopener noreferrer"
         target="_blank"
       >
-        MIT License
+        <VIcon :icon="item.icon" size="small" />
       </a>
+    </div>
+
+    <VSpacer />
+
+    <!-- Copyright & License -->
+    <div class="text-caption text-disabled">
+      &copy; {{ new Date().getFullYear() }}
+      <span class="d-none d-sm-inline-block">{{ t('footer.appName') }}</span>
+      <!-- TODO: Add license -->
+      <!-- <a class="text-decoration-none" href="/license" rel="noopener noreferrer">
+        {{ t('footer.license') }}
+      </a> -->
     </div>
   </VFooter>
 </template>
 
-<script setup lang="ts">
-const items = [
-  {
-    title: 'Vuetify Documentation',
-    icon: `$vuetify`,
-    href: 'https://vuetifyjs.com/',
-  },
-  {
-    title: 'Vuetify Support',
-    icon: 'mdi-shield-star-outline',
-    href: 'https://support.vuetifyjs.com/',
-  },
-  {
-    title: 'Vuetify X',
-    icon: [
-      'M2.04875 3.00002L9.77052 13.3248L1.99998 21.7192H3.74882L10.5519 14.3697L16.0486 21.7192H22L13.8437 10.8137L21.0765 3.00002H19.3277L13.0624 9.76874L8.0001 3.00002H2.04875ZM4.62054 4.28821H7.35461L19.4278 20.4308H16.6937L4.62054 4.28821Z',
-    ],
-    href: 'https://x.com/vuetifyjs',
-  },
-  {
-    title: 'Vuetify GitHub',
-    icon: `mdi-github`,
-    href: 'https://github.com/vuetifyjs/vuetify',
-  },
-  {
-    title: 'Vuetify Discord',
-    icon: [
-      'M22,24L16.75,19L17.38,21H4.5A2.5,2.5 0 0,1 2,18.5V3.5A2.5,2.5 0 0,1 4.5,1H19.5A2.5,2.5 0 0,1 22,3.5V24M12,6.8C9.32,6.8 7.44,7.95 7.44,7.95C8.47,7.03 10.27,6.5 10.27,6.5L10.1,6.33C8.41,6.36 6.88,7.53 6.88,7.53C5.16,11.12 5.27,14.22 5.27,14.22C6.67,16.03 8.75,15.9 8.75,15.9L9.46,15C8.21,14.73 7.42,13.62 7.42,13.62C7.42,13.62 9.3,14.9 12,14.9C14.7,14.9 16.58,13.62 16.58,13.62C16.58,13.62 15.79,14.73 14.54,15L15.25,15.9C15.25,15.9 17.33,16.03 18.73,14.22C18.73,14.22 18.84,11.12 17.12,7.53C17.12,7.53 15.59,6.36 13.9,6.33L13.73,6.5C13.73,6.5 15.53,7.03 16.56,7.95C16.56,7.95 14.68,6.8 12,6.8M9.93,10.59C10.58,10.59 11.11,11.16 11.1,11.86C11.1,12.55 10.58,13.13 9.93,13.13C9.29,13.13 8.77,12.55 8.77,11.86C8.77,11.16 9.28,10.59 9.93,10.59M14.1,10.59C14.75,10.59 15.27,11.16 15.27,11.86C15.27,12.55 14.75,13.13 14.1,13.13C13.46,13.13 12.94,12.55 12.94,11.86C12.94,11.16 13.45,10.59 14.1,10.59Z',
-    ],
-    href: 'https://community.vuetifyjs.com/',
-  },
-  {
-    title: 'Vuetify Reddit',
-    icon: `mdi-reddit`,
-    href: 'https://reddit.com/r/vuetifyjs',
-  },
-]
-</script>
+<style scoped>
+.health-status-container {
+  position: relative;
+}
 
-<style scoped lang="sass">
-.social-link :deep(.v-icon)
-  color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity))
-  text-decoration: none
-  transition: .2s ease-in-out
+.health-icon-wrapper {
+  position: relative;
+  cursor: pointer;
+}
 
-  &:hover
-    color: rgba(25, 118, 210, 1)
+.health-details-wrapper {
+  position: relative;
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  z-index: 10;
+}
+
+.health-status-container:hover .health-details-wrapper {
+  display: block;
+}
+
+.health-details {
+  background: rgb(var(--v-theme-surface));
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+}
+
+.health-details::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: rgb(var(--v-theme-surface)) transparent transparent transparent;
+}
+
+.social-link .v-icon {
+  color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity));
+  transition: 0.2s ease-out;
+}
+
+.social-link:hover .v-icon {
+  color: rgb(var(--v-theme-primary));
+  transform: translateY(-1px);
+}
 </style>

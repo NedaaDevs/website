@@ -1,4 +1,17 @@
 {
+  "footer": {
+    "appName": "Nedaa",
+    "health": {
+      "allOperational": "All Systems Operational",
+      "checking": "Checking Systems...",
+      "issuesDetected": "System Issues Detected"
+    },
+    "social": {
+      "github": "GitHub Repository",
+      "telegram": "Telegram",
+      "translate": "Help Translate"
+    }
+  },
   "nedaa": "Nedaa",
   "welcomeTo": "Welcome to"
 }

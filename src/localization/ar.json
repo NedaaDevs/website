@@ -1,4 +1,17 @@
 {
-  "nedaa": "نداء",
+  "footer": {
+    "appName": "نِداء",
+    "health": {
+      "allOperational": "جميع الأنظمة تعمل",
+      "checking": "جاري فحص الأنظمة...",
+      "issuesDetected": "تم اكتشاف مشاكل في النظام"
+    },
+    "social": {
+      "github": "مستودع GitHub",
+      "telegram": "تلقرام",
+      "translate": "ساعد في الترجمة"
+    }
+  },
+  "nedaa": "نِداء",
   "welcomeTo": "مرحبا بك في"
 }

@@ -1,4 +1,17 @@
 {
+  "footer": {
+    "appName": "Nedaa",
+    "health": {
+      "allOperational": "Semua Sistem Beroperasi",
+      "checking": "Memeriksa Sistem...",
+      "issuesDetected": "Isu Sistem Dikesan"
+    },
+    "social": {
+      "github": "Repositori GitHub",
+      "telegram": "Telegram",
+      "translate": "Bantu Terjemahan"
+    }
+  },
   "nedaa": "Nedaa",
   "welcomeTo": "Selamat datang Ke"
 }
