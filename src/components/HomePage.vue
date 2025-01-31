@@ -5,6 +5,9 @@ import { useI18n } from 'vue-i18n'
 import LocaleSwitch from '@/components/common/LocaleSwitch.vue'
 import ThemeSwitch from '@/components/common/ThemeSwitch.vue'
 
+// Icon
+import { mdiRocketLaunchOutline } from '@mdi/js'
+
 const { t } = useI18n()
 </script>
 
@@ -31,7 +34,7 @@ const { t } = useI18n()
             class="py-4"
             color="surface-variant"
             image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
-            prepend-icon="mdi-rocket-launch-outline"
+            :prepend-icon="mdiRocketLaunchOutline"
             rounded="lg"
             variant="outlined"
           >
