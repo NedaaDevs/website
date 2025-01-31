@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
+// Components
+import LocaleSwitch from '@/components/common/LocaleSwitch.vue'
+import ThemeSwitch from '@/components/common/ThemeSwitch.vue'
+
 const { t } = useI18n()
 </script>
 
 <template>
   <VContainer class="fill-height">
+    <div class="controls position-fixed top-0 right-0 pa-4">
+      <LocaleSwitch class="mr-2" />
+      <ThemeSwitch />
+    </div>
     <VResponsive class="align-centerfill-height mx-auto" max-width="900">
       <VImg class="mb-4" height="150" src="@/assets/logo.png" />
 
