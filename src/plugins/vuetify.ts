@@ -15,6 +15,6 @@ export default createVuetify({
     },
   },
   theme: {
-    defaultTheme: !userPrefersDark ? 'dark' : 'light',
+    defaultTheme: userPrefersDark ? 'dark' : 'light',
   },
 })
