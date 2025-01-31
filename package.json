@@ -51,5 +51,11 @@
     "vite-plugin-vuetify": "^2.0.4",
     "vitest": "^3.0.2",
     "vue-tsc": "^2.2.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,vue}": [
+      "eslint --fix --max-warnings 0",
+      "prettier --write"
+    ]
   }
 }
