@@ -103,7 +103,7 @@ const healthText = computed(() => {
   }
 })
 
-const socialItems = [
+const socialItems = computed(() => [
   {
     title: t('footer.social.github'),
     icon: mdiGithub,
@@ -119,7 +119,7 @@ const socialItems = [
     icon: mdiTranslate,
     href: 'https://crowdin.com/project/nedaa',
   },
-]
+])
 
 onMounted(() => {
   checkHealth()
