@@ -1,3 +1,5 @@
+[![Deploy](https://github.com/NedaaDevs/website-v2/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/NedaaDevs/website-v2/actions/workflows/deploy.yml)
+
 # nedaa-website
 
 This template should help get you started developing with Vue 3 in Vite.
