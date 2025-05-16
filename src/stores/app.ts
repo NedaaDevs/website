@@ -33,7 +33,6 @@ export const useAppStore = defineStore(
     }
   },
   {
-    // @ts-ignore
     persist: true,
   },
 )
