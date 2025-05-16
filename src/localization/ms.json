@@ -1,4 +1,17 @@
 {
+  "app": {
+    "description": "Aplikasi waktu solat sumber terbuka yang ringkas tanpa iklan",
+    "name": "Nedaa",
+    "slogan": "Waktu solat yang dipermudahkan"
+  },
+  "common": {
+    "welcomeTo": "Selamat datang ke"
+  },
+  "cta": {
+    "downloadNow": "Muat Turun Sekarang",
+    "getStarted": "Mulakan",
+    "learnMore": "Ketahui Lebih Lanjut"
+  },
   "footer": {
     "appName": "Nedaa",
     "health": {
@@ -6,12 +19,53 @@
       "checking": "Memeriksa Sistem...",
       "issuesDetected": "Isu Sistem Dikesan"
     },
+    "license": "Lesen",
+    "privacy": "Privasi",
     "social": {
       "github": "Repositori GitHub",
       "telegram": "Telegram",
       "translate": "Bantu Terjemahan"
     }
   },
-  "nedaa": "Nedaa",
-  "welcomeTo": "Selamat datang Ke"
+  "hero": {
+    "subtitle": "Kekal berhubung dengan solat anda melalui pengalaman yang bersih dan fokus",
+    "title": "Waktu Solat Tanpa Gangguan"
+  },
+  "languages": {
+    "ar": {
+      "name": "Bahasa Arab",
+      "nativeName": "العربية"
+    },
+    "currentLanguage": "Bahasa semasa",
+    "en": {
+      "name": "Bahasa Inggeris",
+      "nativeName": "English"
+    },
+    "ms": {
+      "name": "Bahasa Melayu",
+      "nativeName": "Bahasa Melayu"
+    },
+    "selectLanguage": "Pilih bahasa"
+  },
+  "nav": {
+    "download": "Muat Turun",
+    "features": "Ciri-ciri",
+    "openSource": "Sumbangan",
+    "translate": "Terjemahan"
+  },
+  "translate": {
+    "becomeTranslator": "Jadilah penterjemah",
+    "description": "Jadikan Nedaa tersedia untuk lebih ramai umat Islam di seluruh dunia dengan membantu menterjemahkannya ke bahasa anda",
+    "errorFetching": "Tidak dapat memuatkan data terjemahan",
+    "joinProject": "Sertai Projek Terjemahan",
+    "languagesNeedingHelp": "Bahasa Yang Boleh Anda Bantu",
+    "loadingProgress": "Memuatkan kemajuan terjemahan...",
+    "noData": "Tiada data bahasa tersedia",
+    "otherLanguages": "Bahasa Menunggu Terjemahan",
+    "supportedLanguages": "Tidak disokong dalam mana-mana bahasa | Disokong dalam 1 bahasa | Disokong dalam {count} bahasa",
+    "title": "Bantu Terjemahkan Nedaa",
+    "totalLanguages": "Tiada bahasa di Crowdin | 1 bahasa di Crowdin | Jumlah {count} bahasa di Crowdin",
+    "translationPlatform": "Kami menggunakan Crowdin untuk terjemahan",
+    "translationProgress": "Kemajuan terjemahan"
+  }
 }

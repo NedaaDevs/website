@@ -1,17 +1,71 @@
 {
+  "app": {
+    "description": "تطبيق بسيط ومفتوح المصدر لمواقيت الصلاة بدون إعلانات",
+    "name": "نداء",
+    "slogan": "مواقيت الصلاة ببساطة"
+  },
+  "common": {
+    "welcomeTo": "مرحبًا بك في"
+  },
+  "cta": {
+    "downloadNow": "حمّل الآن",
+    "getStarted": "ابدأ الآن",
+    "learnMore": "اعرف المزيد"
+  },
   "footer": {
-    "appName": "نِداء",
+    "appName": "نداء",
     "health": {
       "allOperational": "جميع الأنظمة تعمل",
       "checking": "جاري فحص الأنظمة...",
       "issuesDetected": "تم اكتشاف مشاكل في النظام"
     },
+    "license": "الترخيص",
+    "privacy": "الخصوصية",
     "social": {
       "github": "مستودع GitHub",
-      "telegram": "تلقرام",
+      "telegram": "تليجرام",
       "translate": "ساعد في الترجمة"
     }
   },
-  "nedaa": "نِداء",
-  "welcomeTo": "مرحبا بك في"
+  "hero": {
+    "subtitle": "ابق على اتصال بصلواتك مع تجربة نظيفة ومركزة",
+    "title": "مواقيت الصلاة بدون تشتيت"
+  },
+  "languages": {
+    "ar": {
+      "name": "العربية",
+      "nativeName": "العربية"
+    },
+    "currentLanguage": "اللغة الحالية",
+    "en": {
+      "name": "الإنجليزية",
+      "nativeName": "English"
+    },
+    "ms": {
+      "name": "الملايو",
+      "nativeName": "Bahasa Melayu"
+    },
+    "selectLanguage": "اختر لغة"
+  },
+  "nav": {
+    "download": "تحميل",
+    "features": "المميزات",
+    "openSource": "المساهمة",
+    "translate": "الترجمة"
+  },
+  "translate": {
+    "becomeTranslator": "كن مترجمًا",
+    "description": "اجعل نداء متاحًا للمزيد من المسلمين حول العالم من خلال المساعدة في ترجمته إلى لغتك",
+    "errorFetching": "تعذر تحميل بيانات الترجمة",
+    "joinProject": "انضم إلى مشروع الترجمة",
+    "languagesNeedingHelp": "لغات يمكنك المساعدة فيها",
+    "loadingProgress": "جاري تحميل تقدم الترجمة...",
+    "noData": "لا توجد بيانات لغة متاحة",
+    "otherLanguages": "لغات تنتظر الترجمة",
+    "supportedLanguages": "مدعوم في {count} لغة | مدعوم في لغة واحدة | مدعوم في لغتين | مدعوم في {count} لغات | مدعوم في {count} لغة",
+    "title": "ساعد في ترجمة نداء",
+    "totalLanguages": "لا توجد لغات على Crowdin | لغة واحدة على Crowdin | لغتان على Crowdin | إجمالي {count} لغات على Crowdin | إجمالي {count} لغة على Crowdin",
+    "translationPlatform": "نستخدم Crowdin للترجمات",
+    "translationProgress": "تقدم الترجمة"
+  }
 }

@@ -1,4 +1,17 @@
 {
+  "app": {
+    "description": "A simple, open-source prayer times app with no ads",
+    "name": "Nedaa",
+    "slogan": "Prayer times simplified"
+  },
+  "common": {
+    "welcomeTo": "Welcome to"
+  },
+  "cta": {
+    "downloadNow": "Download Now",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
   "footer": {
     "appName": "Nedaa",
     "health": {
@@ -6,12 +19,52 @@
       "checking": "Checking Systems...",
       "issuesDetected": "System Issues Detected"
     },
+    "license": "License",
+    "privacy": "Privacy",
     "social": {
       "github": "GitHub Repository",
       "telegram": "Telegram",
       "translate": "Help Translate"
     }
   },
-  "nedaa": "Nedaa",
-  "welcomeTo": "Welcome to"
+  "hero": {
+    "subtitle": "Stay connected to your prayers with a clean, focused experience",
+    "title": "Prayer Times Without Distractions"
+  },
+  "languages": {
+    "ar": {
+      "name": "Arabic",
+      "nativeName": "العربية"
+    },
+    "currentLanguage": "Current language",
+    "en": {
+      "name": "English",
+      "nativeName": "English"
+    },
+    "ms": {
+      "name": "Malay",
+      "nativeName": "Bahasa Melayu"
+    },
+    "selectLanguage": "Select a language"
+  },
+  "nav": {
+    "download": "Download",
+    "features": "Features",
+    "openSource": "Contribute",
+    "translate": "Translate"
+  },
+  "translate": {
+    "becomeTranslator": "Become a translator",
+    "description": "Make Nedaa accessible to more Muslims around the world by helping translate it into your language",
+    "joinProject": "Join Translation Project",
+    "languagesCount": "Currently available in {count} languages",
+    "languagesNeedingHelp": "Languages You Could Help With",
+    "noData": "No language data available",
+    "otherLanguages": "Languages Awaiting Translation",
+    "supportedLanguages": "Not supported in any language | Supported in 1 language | Supported in {count} languages",
+    "title": "Help Translate Nedaa",
+    "totalLanguages": "No languages on Crowdin | 1 language on Crowdin | Total of {count} languages on Crowdin",
+    "translationPlatform": "We use Crowdin for translations",
+    "translationProgress": "Translation progress"
+  }
 }
