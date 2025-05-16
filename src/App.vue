@@ -1,12 +1,14 @@
-<script lang="ts" setup>
-import AppFooter from './components/AppFooter.vue'
-
-//
+<script setup lang="ts">
+import AppHeader from '@/components/layout/AppHeader.vue'
+import TheFooter from '@/components/layout/AppFooter.vue'
 </script>
 
 <template>
   <VApp>
-    <RouterView />
-    <AppFooter />
+    <AppHeader />
+    <VMain>
+      <router-view />
+    </VMain>
+    <TheFooter />
   </VApp>
 </template>
