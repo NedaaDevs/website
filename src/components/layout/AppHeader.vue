@@ -12,6 +12,13 @@ import ThemeSwitch from '@/components/ui/ThemeSwitch.vue'
 // Icons
 import { mdiMenu } from '@mdi/js'
 
+// Stores
+import { useAppStore } from '@/stores/app'
+
+import logo from '@/assets/logo.png'
+import logoDark from '@/assets/logo-dark.png'
+import { storeToRefs } from 'pinia'
+
 type NavLink = {
   title: string
   to: string
@@ -22,23 +29,25 @@ const { t } = useI18n()
 const { mobile } = useDisplay()
 const drawer = ref(false)
 
+const { theme } = storeToRefs(useAppStore())
+
 const navLinks = computed<NavLink[]>(() => [
   { title: t('nav.features'), to: '#features' },
   // { title: t('nav.download'), to: '#download' },
   // { title: t('nav.openSource'), to: '#open-source' },
   { title: t('nav.translate'), to: '#translate' },
 ])
+
+const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
 </script>
 
 <template>
   <VAppBar app elevation="1" color="surface" :height="70">
     <VContainer class="d-flex align-center py-0">
       <!-- Logo -->
-      <router-link to="/" class="d-flex align-center text-decoration-none">
-        <VAvatar color="primary" rounded="lg" size="36" class="mr-2">
-          <span class="text-h6 font-weight-bold text-white">N</span>
-        </VAvatar>
-        <span class="space-x-2 text-h6 font-weight-bold text-primary">{{ t('app.name') }}</span>
+      <router-link to="/" class="d-flex align-center text-decoration-none position-relative">
+        <VImg :src="logoSrc" alt="Logo" height="36" width="auto" max-width="90" />
+        <span class="text-h6 font-weight-bold text-primary logo-text">{{ t('app.name') }}</span>
       </router-link>
 
       <VSpacer />
