@@ -115,7 +115,7 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
         class="mx-2 my-1 theme-transition hover-feedback"
         color="primary"
         rounded="lg"
-        active-color="primary"
+        base-color="primary"
       >
         <template v-slot:prepend>
           <VIcon :icon="mdiChevronRight" size="small" class="mr-2" color="primary" />
