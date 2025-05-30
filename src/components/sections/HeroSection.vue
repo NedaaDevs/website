@@ -87,7 +87,7 @@ const buttonVariant = computed(() => {
         </div>
 
         <!-- CTA Button -->
-        <div class="mt-8">
+        <div class="mt-8 pb-2">
           <VBtn
             size="large"
             color="primary"
