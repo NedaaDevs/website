@@ -169,24 +169,32 @@ const joinTranslationProject = () => {
           </p>
 
           <div class="mb-6">
-            <VBtn
-              color="primary"
-              size="large"
-              rounded="pill"
-              :prepend-icon="mdiTranslate"
-              @click="joinTranslationProject"
-            >
-              {{ t('translate.joinProject') }}
-            </VBtn>
+            <VHover>
+              <template v-slot:default="{ isHovering, props }">
+                <VBtn
+                  v-bind="props"
+                  color="primary"
+                  size="large"
+                  rounded="pill"
+                  :prepend-icon="mdiTranslate"
+                  @click="joinTranslationProject"
+                  elevation="2"
+                  class="theme-transition"
+                  :class="{ 'translate-y-n1': isHovering }"
+                >
+                  {{ t('translate.joinProject') }}
+                </VBtn>
+              </template>
+            </VHover>
           </div>
 
-          <p class="text-caption text-medium-emphasis">
+          <p class="text-caption text-medium-emphasis theme-transition">
             {{ t('translate.translationPlatform') }}
           </p>
         </VCol>
 
         <VCol cols="12" md="6">
-          <VCard class="rounded-lg">
+          <VCard class="rounded-lg elevation-2 theme-transition">
             <VCardItem>
               <VCardTitle>{{ t('translate.translationProgress') }}</VCardTitle>
             </VCardItem>
@@ -199,30 +207,42 @@ const joinTranslationProject = () => {
               </VAlert>
 
               <div v-else>
-                <VList v-if="languages.length > 0">
+                <VList v-if="languages.length > 0" bg-color="transparent">
                   <!-- Supported languages section -->
                   <VListSubheader v-if="supportedLanguages.length > 0">
                     {{ t('translate.supportedLanguages', { count: supportedLanguageCount }) }}
                   </VListSubheader>
 
-                  <div v-for="lang in supportedLanguages" :key="lang.code" class="mb-3 px-3">
-                    <div class="d-flex justify-space-between mb-1">
-                      <span class="d-flex align-center">
-                        {{ lang.name }}
-                        <span v-if="lang.nativeName" class="ml-2 text-caption text-disabled">
-                          {{ lang.nativeName }}
-                        </span>
-                      </span>
-                      <span>{{ lang.progress }}%</span>
-                    </div>
-                    <VProgressLinear
-                      :model-value="lang.progress"
-                      height="10"
-                      rounded
-                      color="primary"
-                      bg-color="grey-lighten-3"
-                    />
-                  </div>
+                  <VHover v-for="lang in supportedLanguages" :key="lang.code">
+                    <template v-slot:default="{ isHovering, props }">
+                      <div
+                        v-bind="props"
+                        class="mb-3 rounded-lg pa-3 theme-transition-bg"
+                        :class="{ 'bg-primary-lighten-5': isHovering }"
+                      >
+                        <div class="d-flex justify-space-between mb-1">
+                          <span class="d-flex align-center">
+                            {{ lang.name }}
+                            <span
+                              v-if="lang.nativeName"
+                              class="ml-2 text-caption text-medium-emphasis"
+                            >
+                              {{ lang.nativeName }}
+                            </span>
+                          </span>
+                          <span>{{ lang.progress }}%</span>
+                        </div>
+                        <VProgressLinear
+                          :model-value="lang.progress"
+                          height="10"
+                          rounded
+                          color="primary"
+                          bg-color="surface-variant"
+                          class="progress-bar"
+                        />
+                      </div>
+                    </template>
+                  </VHover>
 
                   <!-- Divider between sections -->
                   <VDivider
@@ -236,19 +256,27 @@ const joinTranslationProject = () => {
                     {{ t('translate.languagesNeedingHelp') }}
                   </VListSubheader>
 
-                  <div v-for="lang in unsupportedLanguages" :key="lang.code" class="mb-3 px-3">
-                    <div class="d-flex justify-space-between mb-1">
-                      <span>{{ lang.name }}</span>
-                      <span>{{ lang.progress }}%</span>
-                    </div>
-                    <VProgressLinear
-                      :model-value="lang.progress"
-                      height="6"
-                      rounded
-                      color="secondary"
-                      bg-color="grey-lighten-3"
-                    />
-                  </div>
+                  <VHover v-for="lang in unsupportedLanguages" :key="lang.code">
+                    <template v-slot:default="{ isHovering, props }">
+                      <div
+                        v-bind="props"
+                        class="mb-3 rounded-lg pa-3 theme-transition-bg"
+                        :class="{ 'bg-primary-lighten-5': isHovering }"
+                      >
+                        <div class="d-flex justify-space-between mb-1">
+                          <span>{{ lang.name }}</span>
+                          <span>{{ lang.progress }}%</span>
+                        </div>
+                        <VProgressLinear
+                          :model-value="lang.progress"
+                          height="10"
+                          rounded
+                          color="primary"
+                          bg-color="surface-variant"
+                        />
+                      </div>
+                    </template>
+                  </VHover>
                 </VList>
                 <div v-else class="text-center pa-4">
                   {{ t('translate.noData') }}
@@ -258,14 +286,21 @@ const joinTranslationProject = () => {
 
             <VCardActions>
               <VSpacer />
-              <VBtn
-                variant="text"
-                color="primary"
-                :append-icon="mdiArrowRight"
-                @click="joinTranslationProject"
-              >
-                {{ t('translate.becomeTranslator') }}
-              </VBtn>
+              <VHover>
+                <template v-slot:default="{ isHovering, props }">
+                  <VBtn
+                    v-bind="props"
+                    variant="text"
+                    color="primary"
+                    :append-icon="mdiArrowRight"
+                    @click="joinTranslationProject"
+                    class="theme-transition"
+                    :class="{ 'translate-x-1': isHovering }"
+                  >
+                    {{ t('translate.becomeTranslator') }}
+                  </VBtn>
+                </template>
+              </VHover>
             </VCardActions>
           </VCard>
         </VCol>
