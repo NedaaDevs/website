@@ -1,5 +1,12 @@
-// Utilities
 import { createPinia } from 'pinia'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { createPersistedState } from 'pinia-plugin-persistedstate'
 
-export default createPinia().use(piniaPluginPersistedstate)
+const pinia = createPinia()
+
+pinia.use(
+  createPersistedState({
+    storage: sessionStorage,
+  }),
+)
+
+export default pinia
