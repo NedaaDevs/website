@@ -127,31 +127,58 @@ onMounted(() => {
 </script>
 
 <template>
-  <VFooter border class="pa-4">
+  <VFooter class="border pa-4 theme-transition">
     <!-- Health -->
-    <div class="health-status-container d-flex align-center">
-      <VTooltip location="top" :z-index="1">
-        <template v-slot:activator="{ props }">
-          <div v-bind="props" class="health-icon-wrapper d-flex align-center">
-            <VIcon :icon="healthIcon" :color="healthColor" size="small" class="mr-2" />
-          </div>
-        </template>
-        <span>{{ healthText }}</span>
-      </VTooltip>
-      <div class="health-details-wrapper">
-        <div class="health-details">
-          <div v-for="(api, name) in apis" :key="name" class="d-flex align-center pa-1">
-            <VIcon
-              :icon="api.status === 'up' ? mdiCheckCircle : mdiAlertCircle"
-              :color="api.status === 'up' ? 'success' : 'error'"
-              size="x-small"
-              class="mr-1"
-            />
-            <span class="text-caption">{{ formatApiName(name) }}</span>
+    <VHover>
+      <template v-slot:default="{ isHovering, props }">
+        <div v-bind="props" class="position-relative d-flex align-center">
+          <VTooltip
+            location="top"
+            :z-index="1000"
+            bg-color="surface"
+            color="on-surface"
+            min-width="160"
+            content-class="rounded-lg pa-3 text-center border"
+            elevation="4"
+            :offset="10"
+            transition="scale-transition"
+            open-delay="100"
+          >
+            <template v-slot:activator="{ props: tooltipProps }">
+              <div
+                v-bind="tooltipProps"
+                class="d-flex align-center cursor-pointer theme-transition"
+              >
+                <VIcon :icon="healthIcon" :color="healthColor" size="small" class="mr-2" />
+              </div>
+            </template>
+            <span class="font-weight-bold">{{ healthText }}</span>
+          </VTooltip>
+          <div
+            class="position-absolute bottom-100 start-0 z-10 min-w-[120px]"
+            :class="isHovering ? 'd-block' : 'd-none'"
+          >
+            <div
+              class="bg-surface rounded-lg elevation-4 theme-transition pa-3 border mb-2 health-details"
+            >
+              <div
+                v-for="(api, name) in apis"
+                :key="name"
+                class="d-flex align-center pa-2 theme-transition-text"
+              >
+                <VIcon
+                  :icon="api.status === 'up' ? mdiCheckCircle : mdiAlertCircle"
+                  :color="api.status === 'up' ? 'success' : 'error'"
+                  size="x-small"
+                  class="mr-2"
+                />
+                <span class="text-caption text-medium-emphasis">{{ formatApiName(name) }}</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </VHover>
 
     <VSpacer />
 
@@ -162,60 +189,43 @@ onMounted(() => {
         :key="item.title"
         :href="item.href"
         :title="item.title"
-        class="d-inline-block mx-2 social-link"
+        class="d-inline-block mx-2 text-medium-emphasis"
         rel="noopener noreferrer"
         target="_blank"
       >
-        <VIcon :icon="item.icon" size="small" />
+        <VHover>
+          <template v-slot:default="{ isHovering, props }">
+            <VIcon
+              v-bind="props"
+              :icon="item.icon"
+              size="small"
+              class="theme-transition"
+              v-ripple
+              :class="{ 'text-primary translate-y-n1': isHovering }"
+            />
+          </template>
+        </VHover>
       </a>
     </div>
 
     <VSpacer />
 
     <!-- Copyright & License -->
-    <div class="text-caption text-disabled">
+    <div class="text-caption text-medium-emphasis">
       &copy; {{ new Date().getFullYear() }}
       <span class="d-none d-sm-inline-block">{{ t('footer.appName') }}</span>
       <!-- TODO: Add license -->
-      <!-- <a class="text-decoration-none" href="/license" rel="noopener noreferrer">
+      <!-- <a class="text-decoration-none text-primary" href="/license" rel="noopener noreferrer">
         {{ t('footer.license') }}
       </a> -->
+      <router-link class="ml-2 text-decoration-none text-primary" to="/privacy">
+        {{ t('footer.privacy') }}
+      </router-link>
     </div>
   </VFooter>
 </template>
 
 <style scoped>
-.health-status-container {
-  position: relative;
-}
-
-.health-icon-wrapper {
-  position: relative;
-  cursor: pointer;
-}
-
-.health-details-wrapper {
-  position: relative;
-  display: none;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  z-index: 10;
-}
-
-.health-status-container:hover .health-details-wrapper {
-  display: block;
-}
-
-.health-details {
-  background: rgb(var(--v-theme-surface));
-  border-radius: 4px;
-  padding: 8px;
-  margin-bottom: 8px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  min-width: 120px;
-}
-
 .health-details::after {
   content: '';
   position: absolute;
@@ -223,16 +233,7 @@ onMounted(() => {
   left: 16px;
   border-width: 8px;
   border-style: solid;
-  border-color: rgb(var(--v-theme-surface)) transparent transparent transparent;
-}
-
-.social-link .v-icon {
-  color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity));
-  transition: 0.2s ease-out;
-}
-
-.social-link:hover .v-icon {
-  color: rgb(var(--v-theme-primary));
-  transform: translateY(-1px);
+  border-color: var(--v-theme-surface) transparent transparent transparent;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
