@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 
 //
+import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useDisplay } from 'vuetify'
 
@@ -14,10 +15,12 @@ import { mdiMenu } from '@mdi/js'
 
 // Stores
 import { useAppStore } from '@/stores/app'
-
+// Assets
 import logo from '@/assets/logo.png'
 import logoDark from '@/assets/logo-dark.png'
-import { storeToRefs } from 'pinia'
+
+// Icons
+import { mdiChevronRight } from '@mdi/js'
 
 type NavLink = {
   title: string
@@ -42,12 +45,21 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
 </script>
 
 <template>
-  <VAppBar app elevation="1" color="surface" :height="70">
+  <VAppBar app elevation="2" color="surface" :height="70" class="theme-transition">
     <VContainer class="d-flex align-center py-0">
       <!-- Logo -->
       <router-link to="/" class="d-flex align-center text-decoration-none position-relative">
-        <VImg :src="logoSrc" alt="Logo" height="36" width="auto" max-width="90" />
-        <span class="text-h6 font-weight-bold text-primary logo-text">{{ t('app.name') }}</span>
+        <VImg
+          :src="logoSrc"
+          alt="Logo"
+          height="36"
+          width="auto"
+          max-width="90"
+          class="logo-image"
+        />
+        <span class="text-h6 font-weight-bold text-primary transition-swing">{{
+          t('app.name')
+        }}</span>
       </router-link>
 
       <VSpacer />
@@ -58,7 +70,8 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
           v-for="link in navLinks"
           :key="link.to"
           :href="link.to"
-          class="text-decoration-none mx-3 nav-link"
+          class="text-decoration-none mx-3 position-relative nav-link font-weight-medium hover-feedback"
+          :class="{ 'text-primary': theme === 'light', 'text-primary-darken-1': theme === 'dark' }"
         >
           {{ link.title }}
         </a>
@@ -69,7 +82,14 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
         <ThemeSwitch class="mr-2" />
 
         <!-- Mobile Menu Button -->
-        <VBtn v-if="mobile" icon @click="drawer = !drawer">
+        <VBtn
+          v-if="mobile"
+          icon
+          variant="text"
+          @click="drawer = !drawer"
+          color="primary"
+          class="ml-1 hover-feedback"
+        >
           <VIcon :icon="mdiMenu" />
         </VBtn>
       </div>
@@ -77,22 +97,43 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
   </VAppBar>
 
   <!-- Mobile Navigation Drawer -->
-  <VNavigationDrawer v-model="drawer" temporary location="right">
-    <VList>
-      <VListItem v-for="link in navLinks" :key="link.to" :href="link.to" @click="drawer = false">
-        <VListItemTitle>{{ link.title }}</VListItemTitle>
+  <VNavigationDrawer
+    v-model="drawer"
+    temporary
+    location="right"
+    color="surface"
+    width="280"
+    elevation="4"
+    class="theme-transition"
+  >
+    <VList bg-color="transparent" class="pa-2">
+      <VListItem
+        v-for="link in navLinks"
+        :key="link.to"
+        :href="link.to"
+        @click="drawer = false"
+        class="mx-2 my-1 theme-transition hover-feedback"
+        color="primary"
+        rounded="lg"
+        active-color="primary"
+      >
+        <template v-slot:prepend>
+          <VIcon :icon="mdiChevronRight" size="small" class="mr-2" color="primary" />
+        </template>
+        <VListItemTitle class="font-weight-medium">{{ link.title }}</VListItemTitle>
       </VListItem>
     </VList>
+    <!-- TODO: Decide if we should move here or keep the nav buttons -->
+    <!-- <template v-slot:append>
+      <div class="pa-4 d-flex align-center justify-space-between">
+        <LocaleSwitch />
+        <ThemeSwitch />
+      </div>
+    </template> -->
   </VNavigationDrawer>
 </template>
 
 <style scoped>
-.nav-link {
-  position: relative;
-  color: rgb(var(--v-theme-text));
-  transition: color 0.3s ease;
-}
-
 .nav-link::after {
   content: '';
   position: absolute;
@@ -100,12 +141,8 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: rgb(var(--v-theme-primary));
+  background-color: currentColor;
   transition: width 0.3s ease;
-}
-
-.nav-link:hover {
-  color: rgb(var(--v-theme-primary));
 }
 
 .nav-link:hover::after {
