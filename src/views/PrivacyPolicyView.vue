@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, type LocationQueryValue } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 // Components
@@ -19,7 +19,7 @@ const { setLocale } = useAppStore()
 
 // Check for lang query parameter and set locale if valid
 onMounted(() => {
-  const langParam = route.query.lang as string
+  const langParam = route.query.lang as LocationQueryValue
   if (langParam && Object.values(AppLocale).includes(langParam as AppLocale)) {
     setLocale(langParam)
   }
@@ -45,11 +45,6 @@ onMounted(() => {
         <section class="mb-8">
           <h2 class="text-h5 mb-4">{{ t('privacy.consent.title') }}</h2>
           <p>{{ t('privacy.consent.content') }}</p>
-        </section>
-
-        <section class="mb-8">
-          <h2 class="text-h5 mb-4">{{ t('privacy.contact.title') }}</h2>
-          <p>{{ t('privacy.contact.content') }}</p>
         </section>
 
         <section class="mt-10">
