@@ -7,6 +7,8 @@
   "common": {
     "welcomeTo": "Welcome to"
   },
+  "common.switchToDarkTheme": "Switch to Dark Theme",
+  "common.switchToLightTheme": "Switch to Light Theme",
   "cta": {
     "downloadNow": "Download Now",
     "getStarted": "Get Started",
@@ -86,5 +88,5 @@
     "totalLanguages": "No languages on Crowdin | 1 language on Crowdin | Total of {count} languages on Crowdin",
     "translationPlatform": "We use Crowdin for translations",
     "translationProgress": "Translation progress"
-  }
+}
 }

@@ -7,6 +7,8 @@
   "common": {
     "welcomeTo": "مرحبًا بك في"
   },
+  "common.switchToDarkTheme": "التبديل إلى الوضع الداكن",
+  "common.switchToLightTheme": "التبديل إلى الوضع الفاتح",
   "cta": {
     "downloadNow": "حمّل الآن",
     "getStarted": "ابدأ الآن",

@@ -7,6 +7,8 @@
   "common": {
     "welcomeTo": "Selamat datang ke"
   },
+  "common.switchToDarkTheme": "Tukar ke Tema Gelap",
+  "common.switchToLightTheme": "Tukar ke Tema Cerah",
   "cta": {
     "downloadNow": "Muat Turun Sekarang",
     "getStarted": "Mulakan",
