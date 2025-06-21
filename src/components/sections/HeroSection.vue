@@ -63,7 +63,7 @@ const buttonVariant = computed(() => {
     class="theme-transition"
   >
     <VContainer class="h-100 d-flex align-center">
-      <VResponsive class="mx-auto text-center" :max-width="props.maxWidth">
+      <VResponsive class="mx-auto text-center px-4" :max-width="props.maxWidth">
         <VImg
           class="mb-4 mx-auto logo-image"
           :height="props.logoHeight"
@@ -81,7 +81,10 @@ const buttonVariant = computed(() => {
           <h1 :class="['text-h2 font-weight-bold theme-transition-text', textColorClass]">
             {{ t('app.name') }}
           </h1>
-          <p :class="['text-body-1 mt-4 theme-transition-text', textColorClass]">
+          <p
+            :class="['text-body-1 mt-4 theme-transition-text', textColorClass]"
+            style="white-space: normal; word-wrap: break-word"
+          >
             {{ t('app.description') }}
           </p>
         </div>
