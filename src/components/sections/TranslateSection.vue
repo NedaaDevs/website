@@ -149,7 +149,7 @@ const fetchTranslationProgress = async () => {
 }
 
 const joinTranslationProject = () => {
-  window.open(`https://crowdin.com/project/${import.meta.env.VITE_CROWDIN_PROJECT_ID}`, '_blank')
+  window.open(`${import.meta.env.VITE_CROWDIN_PROJECT_URL}`, '_blank')
 }
 </script>
 
