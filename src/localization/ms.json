@@ -78,11 +78,9 @@
   "translate": {
     "becomeTranslator": "Jadilah penterjemah",
     "description": "Jadikan Nedaa tersedia untuk lebih ramai umat Islam di seluruh dunia dengan membantu menterjemahkannya ke bahasa anda",
-    "errorFetching": "Tidak dapat memuatkan data terjemahan",
     "joinProject": "Sertai Projek Terjemahan",
     "languagesCount": "Tidak tersedia dalam mana-mana bahasa | Kini tersedia dalam 1 bahasa | Kini tersedia dalam {count} bahasa",
     "languagesNeedingHelp": "Bahasa Yang Boleh Anda Bantu",
-    "loadingProgress": "Memuatkan kemajuan terjemahan...",
     "noData": "Tiada data bahasa tersedia",
     "otherLanguages": "Bahasa Menunggu Terjemahan",
     "supportedLanguages": "Tidak disokong dalam mana-mana bahasa | Disokong dalam 1 bahasa | Disokong dalam {count} bahasa",
