@@ -11,8 +11,64 @@
   "common.switchToLightTheme": "Switch to Light Theme",
   "cta": {
     "downloadNow": "Download Now",
-    "getStarted": "Get Started",
     "learnMore": "Learn More"
+  },
+  "download": {
+    "platforms": {
+      "android": {
+        "description": "Available for Android devices",
+        "title": "Get it on Google Play"
+      },
+      "github": {
+        "description": "Get the latest release directly",
+        "title": "Download from GitHub"
+      },
+      "huawei": {
+        "description": "Available on Huawei devices",
+        "title": "Explore it on AppGallery"
+      },
+      "ios": {
+        "description": "Available for iPhone",
+        "title": "Download on the App Store"
+      }
+    },
+    "qr": {
+      "caption": "QR code for easy mobile access",
+      "description": "Scan the QR code to quickly access download links on your mobile device",
+      "title": "Quick Access"
+    },
+    "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
+    "title": "Download"
+  },
+  "features": {
+    "list": {
+      "accurateTimes": {
+        "description": "Precise prayer times based on your location with multiple calculation methods",
+        "title": "Accurate Prayer Times"
+      },
+      "darkMode": {
+        "description": "Beautiful dark and light themes for comfortable viewing",
+        "title": "Dark Mode"
+      },
+      "design": {
+        "description": "Minimalist interface focused on what matters most",
+        "title": "Clean Design"
+      },
+      "locationBased": {
+        "description": "Automatic location detection with manual location selection support",
+        "title": "Location Based"
+      },
+      "notifications": {
+        "description": "Configurable prayer notifications with multiple sound options",
+        "title": "Custom Notifications"
+      },
+      "offline": {
+        "description": "Prayer times available offline once initially loaded",
+        "title": "Works Offline"
+      }
+    },
+    "subtitle": "Everything you need for your daily prayers in a simple, elegant app",
+    "title": "Features"
   },
   "footer": {
     "appName": "Nedaa",
@@ -55,6 +111,62 @@
     "openSource": "Contribute",
     "translate": "Translate"
   },
+  "openSource": {
+    "contribute": {
+      "subtitle": "There are many ways to contribute to Nedaa, regardless of your technical background",
+      "title": "How You Can Contribute",
+      "types": {
+        "bugs": {
+          "action": "Report Bug",
+          "description": "Found a bug? Report it to help us improve the app for everyone",
+          "title": "Bug Reports"
+        },
+        "code": {
+          "action": "View Issues",
+          "description": "Help improve the app by contributing code, fixing bugs, or adding features",
+          "title": "Code Contributions"
+        },
+        "features": {
+          "action": "Suggest Feature",
+          "description": "Have an idea for a new feature? Share it with the community",
+          "title": "Feature Requests"
+        },
+        "translate": {
+          "action": "Start Translating",
+          "description": "Help make Nedaa available in more languages through our translation project",
+          "title": "Translations"
+        }
+      }
+    },
+    "features": {
+      "community": {
+        "description": "Built by the community, for the community with contributions welcome",
+        "title": "Community Driven"
+      },
+      "love": {
+        "description": "Developed with care for the Muslim community worldwide",
+        "title": "Made with Love"
+      },
+      "modern": {
+        "description": "Built with React Native, TypeScript, and modern development practices",
+        "title": "Modern Technology"
+      },
+      "transparent": {
+        "description": "All source code is publicly available for review and audit",
+        "title": "Fully Transparent"
+      }
+    },
+    "github": {
+      "starUs": "★ Star us",
+      "starUsDescription": "Support the project",
+      "viewOnGithub": "View on GitHub",
+      "viewSource": "View Source",
+      "viewSourceDescription": "Explore the code"
+    },
+    "license": "Nedaa is licensed under the <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>GPL-3.0 License</a> - Free and open for everyone",
+    "subtitle": "Nedaa is completely open source - built by the community, for the community",
+    "title": "Open Source"
+  },
   "privacy": {
     "consent": {
       "content": "By using our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.",
@@ -88,5 +200,5 @@
     "totalLanguages": "No languages on Crowdin | 1 language on Crowdin | Total of {count} languages on Crowdin",
     "translationPlatform": "We use Crowdin for translations",
     "translationProgress": "Translation progress"
-}
+  }
 }

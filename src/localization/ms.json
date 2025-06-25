@@ -11,8 +11,64 @@
   "common.switchToLightTheme": "Tukar ke Tema Cerah",
   "cta": {
     "downloadNow": "Muat Turun Sekarang",
-    "getStarted": "Mulakan",
     "learnMore": "Ketahui Lebih Lanjut"
+  },
+  "download": {
+    "platforms": {
+      "android": {
+        "description": "Tersedia untuk peranti Android",
+        "title": "Dapatkan di Google Play"
+      },
+      "github": {
+        "description": "Dapatkan keluaran terbaru secara langsung",
+        "title": "Muat Turun dari GitHub"
+      },
+      "huawei": {
+        "description": "Tersedia di peranti Huawei",
+        "title": "Teroka di AppGallery"
+      },
+      "ios": {
+        "description": "Tersedia untuk iPhone dan iPad",
+        "title": "Muat Turun di App Store"
+      }
+    },
+    "qr": {
+      "caption": "Kod QR untuk akses mudah melalui mudah alih",
+      "description": "Imbas kod QR untuk akses pantas ke pautan muat turun di peranti mudah alih anda",
+      "title": "Akses Pantas"
+    },
+    "subtitle": "Dapatkan Nedaa di platform pilihan anda dan jangan terlepas sebarang waktu solat",
+    "title": "Muat Turun"
+  },
+  "features": {
+    "list": {
+      "accurateTimes": {
+        "description": "Waktu solat yang tepat berdasarkan lokasi anda dengan pelbagai kaedah pengiraan",
+        "title": "Waktu Solat Tepat"
+      },
+      "darkMode": {
+        "description": "Tema gelap dan cerah yang cantik untuk tontonan yang selesa",
+        "title": "Mod Gelap"
+      },
+      "design": {
+        "description": "Antara muka minimalis yang fokus pada perkara yang paling penting",
+        "title": "Reka Bentuk Bersih"
+      },
+      "locationBased": {
+        "description": "Pengesanan lokasi automatik dengan sokongan pemilihan lokasi manual",
+        "title": "Berasaskan Lokasi"
+      },
+      "notifications": {
+        "description": "Pemberitahuan solat yang boleh dikonfigurasi dengan pelbagai pilihan bunyi",
+        "title": "Pemberitahuan Tersuai"
+      },
+      "offline": {
+        "description": "Waktu solat tersedia secara luar talian setelah dimuatkan pada mulanya",
+        "title": "Berfungsi Secara Luar Talian"
+      }
+    },
+    "subtitle": "Segala yang anda perlukan untuk solat harian anda dalam aplikasi yang ringkas dan elegan",
+    "title": "Ciri-ciri"
   },
   "footer": {
     "appName": "Nedaa",
@@ -54,6 +110,62 @@
     "features": "Ciri-ciri",
     "openSource": "Sumbangan",
     "translate": "Terjemahan"
+  },
+  "openSource": {
+    "contribute": {
+      "subtitle": "Terdapat banyak cara untuk menyumbang kepada Nedaa, tanpa mengira latar belakang teknikal anda",
+      "title": "Bagaimana Anda Boleh Menyumbang",
+      "types": {
+        "bugs": {
+          "action": "Laporkan Pepijat",
+          "description": "Menemui pepijat? Laporkan untuk membantu kami meningkatkan aplikasi untuk semua orang",
+          "title": "Laporan Pepijat"
+        },
+        "code": {
+          "action": "Lihat Isu",
+          "description": "Bantu meningkatkan aplikasi dengan menyumbang kod, membetulkan pepijat, atau menambah ciri",
+          "title": "Sumbangan Kod"
+        },
+        "features": {
+          "action": "Cadangkan Ciri",
+          "description": "Ada idea untuk ciri baru? Kongsi dengan komuniti",
+          "title": "Permintaan Ciri"
+        },
+        "translate": {
+          "action": "Mula Menterjemah",
+          "description": "Bantu menjadikan Nedaa tersedia dalam lebih banyak bahasa melalui projek terjemahan kami",
+          "title": "Terjemahan"
+        }
+      }
+    },
+    "features": {
+      "community": {
+        "description": "Dibina oleh komuniti, untuk komuniti dengan sumbangan dialu-alukan",
+        "title": "Didorong Komuniti"
+      },
+      "love": {
+        "description": "Dibangunkan dengan penjagaan untuk komuniti Muslim di seluruh dunia",
+        "title": "Dibuat dengan Kasih"
+      },
+      "modern": {
+        "description": "Dibina dengan React Native, TypeScript, dan amalan pembangunan moden",
+        "title": "Teknologi Moden"
+      },
+      "transparent": {
+        "description": "Semua kod sumber tersedia secara terbuka untuk semakan dan audit",
+        "title": "Telus Sepenuhnya"
+      }
+    },
+    "github": {
+      "starUs": "★ Berikan kami bintang",
+      "starUsDescription": "Sokong projek ini",
+      "viewOnGithub": "Lihat di GitHub",
+      "viewSource": "Lihat Sumber",
+      "viewSourceDescription": "Teroka kod"
+    },
+    "license": "Nedaa dilesenkan di bawah <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>Lesen GPL-3.0</a> - Percuma dan terbuka untuk semua",
+    "subtitle": "Nedaa adalah sumber terbuka sepenuhnya - dibina oleh komuniti, untuk komuniti",
+    "title": "Sumber Terbuka"
   },
   "privacy": {
     "consent": {

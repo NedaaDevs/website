@@ -11,8 +11,64 @@
   "common.switchToLightTheme": "التبديل إلى الوضع الفاتح",
   "cta": {
     "downloadNow": "حمّل الآن",
-    "getStarted": "ابدأ الآن",
     "learnMore": "اعرف المزيد"
+  },
+  "download": {
+    "platforms": {
+      "android": {
+        "description": "متوفر لأجهزة Android",
+        "title": "احصل عليه من Google Play"
+      },
+      "github": {
+        "description": "احصل على آخر إصدار مباشرة",
+        "title": "تحميل من GitHub"
+      },
+      "huawei": {
+        "description": "متوفر على أجهزة Huawei",
+        "title": "استكشفه على AppGallery"
+      },
+      "ios": {
+        "description": "متوفر لأجهزة iPhone و iPad",
+        "title": "تحميل من App Store"
+      }
+    },
+    "qr": {
+      "caption": "رمز QR للوصول السهل عبر الهاتف المحمول",
+      "description": "امسح رمز QR للوصول السريع لروابط التحميل على جهازك المحمول",
+      "title": "وصول سريع"
+    },
+    "subtitle": "احصل على نداء على منصتك المفضلة ولا تفوت أي وقت صلاة",
+    "title": "تحميل"
+  },
+  "features": {
+    "list": {
+      "accurateTimes": {
+        "description": "أوقات صلاة دقيقة بناءً على موقعك مع طرق حساب متعددة",
+        "title": "مواقيت صلاة دقيقة"
+      },
+      "darkMode": {
+        "description": "سمات جميلة داكنة وفاتحة للعرض المريح",
+        "title": "الوضع الداكن"
+      },
+      "design": {
+        "description": "واجهة بسيطة تركز على ما يهم أكثر",
+        "title": "تصميم نظيف"
+      },
+      "locationBased": {
+        "description": "اكتشاف تلقائي للموقع مع دعم اختيار الموقع يدوياً",
+        "title": "قائم على الموقع"
+      },
+      "notifications": {
+        "description": "إشعارات صلاة قابلة للتخصيص مع خيارات صوتية متعددة",
+        "title": "إشعارات مخصصة"
+      },
+      "offline": {
+        "description": "أوقات الصلاة متاحة دون اتصال بمجرد تحميلها في البداية",
+        "title": "يعمل دون اتصال"
+      }
+    },
+    "subtitle": "كل ما تحتاجه لصلواتك اليومية في تطبيق بسيط وأنيق",
+    "title": "المميزات"
   },
   "footer": {
     "appName": "نداء",
@@ -54,6 +110,62 @@
     "features": "المميزات",
     "openSource": "المساهمة",
     "translate": "الترجمة"
+  },
+  "openSource": {
+    "contribute": {
+      "subtitle": "هناك طرق عديدة للمساهمة في نداء، بغض النظر عن خلفيتك التقنية",
+      "title": "كيف يمكنك المساهمة",
+      "types": {
+        "bugs": {
+          "action": "أبلغ عن خطأ",
+          "description": "وجدت خطأ؟ أبلغ عنه لمساعدتنا في تحسين التطبيق للجميع",
+          "title": "تقارير الأخطاء"
+        },
+        "code": {
+          "action": "عرض المشاكل",
+          "description": "ساعد في تحسين التطبيق عبر المساهمة في الكود، إصلاح الأخطاء، أو إضافة ميزات",
+          "title": "مساهمات في الكود"
+        },
+        "features": {
+          "action": "اقترح ميزة",
+          "description": "لديك فكرة لميزة جديدة؟ شاركها مع المجتمع",
+          "title": "طلبات ميزات"
+        },
+        "translate": {
+          "action": "ابدأ الترجمة",
+          "description": "ساعد في جعل نداء متاحاً بلغات أكثر من خلال مشروع الترجمة",
+          "title": "الترجمات"
+        }
+      }
+    },
+    "features": {
+      "community": {
+        "description": "مبني من قبل المجتمع، للمجتمع مع الترحيب بالمساهمات",
+        "title": "مدفوع بواسطة المجتمع"
+      },
+      "love": {
+        "description": "مطور بعناية للمجتمع المسلم حول العالم",
+        "title": "مصنوع بحب"
+      },
+      "modern": {
+        "description": "مبني باستخدام React Native و TypeScript وممارسات التطوير الحديثة",
+        "title": "تقنية حديثة"
+      },
+      "transparent": {
+        "description": "جميع الأكواد المصدرية متاحة علنياً للمراجعة والتدقيق",
+        "title": "شفاف بالكامل"
+      }
+    },
+    "github": {
+      "starUs": "★ اعطنا نجمة",
+      "starUsDescription": "ادعم المشروع",
+      "viewOnGithub": "عرض على GitHub",
+      "viewSource": "عرض المصدر",
+      "viewSourceDescription": "استكشف الكود"
+    },
+    "license": "نداء مرخص تحت <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>رخصة GPL-3.0</a> - مجاني ومفتوح للجميع",
+    "subtitle": "نداء مفتوح المصدر بالكامل - مبني من قبل المجتمع، للمجتمع",
+    "title": "مفتوح المصدر"
   },
   "privacy": {
     "consent": {
