@@ -16,58 +16,58 @@
   "download": {
     "platforms": {
       "android": {
-        "description": "Tersedia untuk peranti Android",
-        "title": "Dapatkan di Google Play"
+        "description": "Available for Android devices",
+        "title": "Get it on Google Play"
       },
       "github": {
-        "description": "Dapatkan keluaran terbaru secara langsung",
-        "title": "Muat Turun dari GitHub"
+        "description": "Get the latest release directly",
+        "title": "Download from GitHub"
       },
       "huawei": {
-        "description": "Tersedia di peranti Huawei",
-        "title": "Teroka di AppGallery"
+        "description": "Available on Huawei devices",
+        "title": "Explore it on AppGallery"
       },
       "ios": {
-        "description": "Tersedia untuk iPhone dan iPad",
-        "title": "Muat Turun di App Store"
+        "description": "Available for iPhone",
+        "title": "Download on the App Store"
       }
     },
     "qr": {
-      "caption": "Kod QR untuk akses mudah melalui mudah alih",
-      "description": "Imbas kod QR untuk akses pantas ke pautan muat turun di peranti mudah alih anda",
-      "title": "Akses Pantas"
+      "caption": "QR code for easy mobile access",
+      "description": "Scan the QR code to quickly access download links on your mobile device",
+      "title": "Quick Access"
     },
-    "subtitle": "Dapatkan Nedaa di platform pilihan anda dan jangan terlepas sebarang waktu solat",
+    "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
     "title": "Muat Turun"
   },
   "features": {
     "list": {
       "accurateTimes": {
-        "description": "Waktu solat yang tepat berdasarkan lokasi anda dengan pelbagai kaedah pengiraan",
-        "title": "Waktu Solat Tepat"
+        "description": "Precise prayer times based on your location with multiple calculation methods",
+        "title": "Accurate Prayer Times"
       },
       "darkMode": {
-        "description": "Tema gelap dan cerah yang cantik untuk tontonan yang selesa",
-        "title": "Mod Gelap"
+        "description": "Beautiful dark and light themes for comfortable viewing",
+        "title": "Dark Mode"
       },
       "design": {
-        "description": "Antara muka minimalis yang fokus pada perkara yang paling penting",
-        "title": "Reka Bentuk Bersih"
+        "description": "Minimalist interface focused on what matters most",
+        "title": "Clean Design"
       },
       "locationBased": {
-        "description": "Pengesanan lokasi automatik dengan sokongan pemilihan lokasi manual",
-        "title": "Berasaskan Lokasi"
+        "description": "Automatic location detection with manual location selection support",
+        "title": "Location Based"
       },
       "notifications": {
-        "description": "Pemberitahuan solat yang boleh dikonfigurasi dengan pelbagai pilihan bunyi",
-        "title": "Pemberitahuan Tersuai"
+        "description": "Configurable prayer notifications with multiple sound options",
+        "title": "Custom Notifications"
       },
       "offline": {
-        "description": "Waktu solat tersedia secara luar talian setelah dimuatkan pada mulanya",
-        "title": "Berfungsi Secara Luar Talian"
+        "description": "Prayer times available offline once initially loaded",
+        "title": "Works Offline"
       }
     },
-    "subtitle": "Segala yang anda perlukan untuk solat harian anda dalam aplikasi yang ringkas dan elegan",
+    "subtitle": "Everything you need for your daily prayers in a simple, elegant app",
     "title": "Ciri-ciri"
   },
   "footer": {
@@ -113,59 +113,59 @@
   },
   "openSource": {
     "contribute": {
-      "subtitle": "Terdapat banyak cara untuk menyumbang kepada Nedaa, tanpa mengira latar belakang teknikal anda",
-      "title": "Bagaimana Anda Boleh Menyumbang",
+      "subtitle": "There are many ways to contribute to Nedaa, regardless of your technical background",
+      "title": "How You Can Contribute",
       "types": {
         "bugs": {
-          "action": "Laporkan Pepijat",
-          "description": "Menemui pepijat? Laporkan untuk membantu kami meningkatkan aplikasi untuk semua orang",
-          "title": "Laporan Pepijat"
+          "action": "Report Bug",
+          "description": "Found a bug? Report it to help us improve the app for everyone",
+          "title": "Bug Reports"
         },
         "code": {
-          "action": "Lihat Isu",
-          "description": "Bantu meningkatkan aplikasi dengan menyumbang kod, membetulkan pepijat, atau menambah ciri",
-          "title": "Sumbangan Kod"
+          "action": "View Issues",
+          "description": "Help improve the app by contributing code, fixing bugs, or adding features",
+          "title": "Code Contributions"
         },
         "features": {
-          "action": "Cadangkan Ciri",
-          "description": "Ada idea untuk ciri baru? Kongsi dengan komuniti",
-          "title": "Permintaan Ciri"
+          "action": "Suggest Feature",
+          "description": "Have an idea for a new feature? Share it with the community",
+          "title": "Feature Requests"
         },
         "translate": {
-          "action": "Mula Menterjemah",
-          "description": "Bantu menjadikan Nedaa tersedia dalam lebih banyak bahasa melalui projek terjemahan kami",
-          "title": "Terjemahan"
+          "action": "Start Translating",
+          "description": "Help make Nedaa available in more languages through our translation project",
+          "title": "Translations"
         }
       }
     },
     "features": {
       "community": {
-        "description": "Dibina oleh komuniti, untuk komuniti dengan sumbangan dialu-alukan",
-        "title": "Didorong Komuniti"
+        "description": "Built by the community, for the community with contributions welcome",
+        "title": "Community Driven"
       },
       "love": {
-        "description": "Dibangunkan dengan penjagaan untuk komuniti Muslim di seluruh dunia",
-        "title": "Dibuat dengan Kasih"
+        "description": "Developed with care for the Muslim community worldwide",
+        "title": "Made with Love"
       },
       "modern": {
-        "description": "Dibina dengan React Native, TypeScript, dan amalan pembangunan moden",
-        "title": "Teknologi Moden"
+        "description": "Built with React Native, TypeScript, and modern development practices",
+        "title": "Modern Technology"
       },
       "transparent": {
-        "description": "Semua kod sumber tersedia secara terbuka untuk semakan dan audit",
-        "title": "Telus Sepenuhnya"
+        "description": "All source code is publicly available for review and audit",
+        "title": "Fully Transparent"
       }
     },
     "github": {
-      "starUs": "★ Berikan kami bintang",
-      "starUsDescription": "Sokong projek ini",
-      "viewOnGithub": "Lihat di GitHub",
-      "viewSource": "Lihat Sumber",
-      "viewSourceDescription": "Teroka kod"
+      "starUs": "★ Star us",
+      "starUsDescription": "Support the project",
+      "viewOnGithub": "View on GitHub",
+      "viewSource": "View Source",
+      "viewSourceDescription": "Explore the code"
     },
-    "license": "Nedaa dilesenkan di bawah <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>Lesen GPL-3.0</a> - Percuma dan terbuka untuk semua",
-    "subtitle": "Nedaa adalah sumber terbuka sepenuhnya - dibina oleh komuniti, untuk komuniti",
-    "title": "Sumber Terbuka"
+    "license": "Nedaa is licensed under the <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>GPL-3.0 License</a> - Free and open for everyone",
+    "subtitle": "Nedaa is completely open source - built by the community, for the community",
+    "title": "Open Source"
   },
   "privacy": {
     "consent": {
