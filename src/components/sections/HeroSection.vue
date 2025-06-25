@@ -101,7 +101,7 @@ const buttonVariant = computed(() => {
             class="hover-feedback text-body-1 font-weight-bold"
             elevation="2"
           >
-            {{ t('cta.getStarted') }}
+            {{ t('cta.downloadNow') }}
           </VBtn>
         </div>
 
