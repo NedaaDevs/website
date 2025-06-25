@@ -5,15 +5,7 @@ import { useI18n } from 'vue-i18n'
 import SectionContainer from '@/components/sections/SectionContainer.vue'
 
 // Icons
-import {
-  mdiGithub,
-  mdiHeart,
-  // mdiCodeBraces,
-  mdiAccountGroup,
-  mdiStar,
-  mdiEye,
-  mdiArrowRight,
-} from '@mdi/js'
+import { mdiGithub, mdiHeart, mdiAccountGroup, mdiStar, mdiEye, mdiArrowRight } from '@mdi/js'
 
 type Props = {
   id?: string
@@ -36,12 +28,6 @@ const openSourceFeatures = [
     titleKey: 'openSource.features.community.title',
     descriptionKey: 'openSource.features.community.description',
   },
-  // TODO: Uncomment after setting up artifacts CI
-  // {
-  //   icon: mdiCodeBraces,
-  //   titleKey: 'openSource.features.modern.title',
-  //   descriptionKey: 'openSource.features.modern.description'
-  // },
   {
     icon: mdiHeart,
     titleKey: 'openSource.features.love.title',
