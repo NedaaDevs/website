@@ -1,8 +1,8 @@
 {
   "app": {
-    "description": "A simple, open-source prayer times app with no ads",
-    "name": "Nedaa",
-    "slogan": "Prayer times simplified"
+    "description": "ایک سادہ، اوپن سورس نماز کے اوقات کی ایپ، بغیر کسی اشتہار کے",
+    "name": "نداء",
+    "slogan": "نماز کے اوقات کو آسان بنایا گیا"
   },
   "common": {
     "welcomeTo": "Welcome to"
@@ -71,7 +71,7 @@
     "title": "Features"
   },
   "footer": {
-    "appName": "Nedaa",
+    "appName": "نداء",
     "health": {
       "allOperational": "All Systems Operational",
       "checking": "Checking Systems...",
