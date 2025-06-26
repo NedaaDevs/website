@@ -5,200 +5,200 @@
     "slogan": "نماز کے اوقات کو آسان بنایا گیا"
   },
   "common": {
-    "welcomeTo": "Welcome to"
+    "welcomeTo": "خوش آمدید"
   },
-  "common.switchToDarkTheme": "Switch to Dark Theme",
-  "common.switchToLightTheme": "Switch to Light Theme",
+  "common.switchToDarkTheme": "تاریک تھیم پر سوئچ کریں",
+  "common.switchToLightTheme": "ہلکے تھیم پر سوئچ کریں",
   "cta": {
-    "downloadNow": "Download Now",
-    "learnMore": "Learn More"
+    "downloadNow": "ابھی ڈاون لوڈ کریں",
+    "learnMore": "مزید جانیں"
   },
   "download": {
     "platforms": {
       "android": {
-        "description": "Available for Android devices",
-        "title": "Get it on Google Play"
+        "description": "اینڈرائیڈ ڈیوائسز کے لیے دستیاب",
+        "title": "گوگل پلے پر حاصل کریں"
       },
       "github": {
-        "description": "Get the latest release directly",
-        "title": "Download from GitHub"
+        "description": "تازہ ترین ریلیز براہ راست حاصل کریں",
+        "title": "براہِ راست گٹ ہب سے ڈاؤن لوڈ کریں"
       },
       "huawei": {
-        "description": "Available on Huawei devices",
-        "title": "Explore it on AppGallery"
+        "description": "ہواوی آلات کے لیے دستیاب",
+        "title": "ایپ گیلری میں اس کی تلاش کریں"
       },
       "ios": {
-        "description": "Available for iPhone",
-        "title": "Download on the App Store"
+        "description": "آئی فون کے لیے دستیاب",
+        "title": "ایپ اسٹور میں ڈاؤن لوڈ کریں"
       }
     },
     "qr": {
-      "caption": "QR code for easy mobile access",
-      "description": "Scan the QR code to quickly access download links on your mobile device",
-      "title": "Quick Access"
+      "caption": "آسان موبائل رسائی کے لیے QR کوڈ",
+      "description": "اپنے موبائل ڈیوائس پر ڈاؤن لوڈ لنکس تک فوری رسائی کے لیے QR کوڈ اسکین کریں",
+      "title": "فوری رسائی"
     },
-    "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
-    "title": "Download"
+    "subtitle": "اپنی پسندیدہ پلیٹ فارم پر \"نداء\" حاصل کریں اور کبھی بھی نماز نہ چھوڑیں۔",
+    "title": "ڈاؤن لوڈ"
   },
   "features": {
     "list": {
       "accurateTimes": {
-        "description": "Precise prayer times based on your location with multiple calculation methods",
-        "title": "Accurate Prayer Times"
+        "description": "آپ کے مقام کے مطابق درست نماز کے اوقات مختلف حساب کے طریقوں کے ساتھ",
+        "title": "درست نماز کے اوقات"
       },
       "darkMode": {
-        "description": "Beautiful dark and light themes for comfortable viewing",
-        "title": "Dark Mode"
+        "description": "آرام دہ دیکھنے کے لیے خوبصورت تاریک اور روشنی کے تھیمز",
+        "title": "تاریک موڈ"
       },
       "design": {
-        "description": "Minimalist interface focused on what matters most",
-        "title": "Clean Design"
+        "description": "سادہ انٹرفیس جو اہم چیزوں پر مرکوز ہے",
+        "title": "صاف ڈیزائن"
       },
       "locationBased": {
-        "description": "Automatic location detection with manual location selection support",
-        "title": "Location Based"
+        "description": "خودکار طور پر مقام کی شناخت اور دستی طور پر مقام منتخب کرنے کی سہولت",
+        "title": "مقام تبدیل ہوا"
       },
       "notifications": {
-        "description": "Configurable prayer notifications with multiple sound options",
-        "title": "Custom Notifications"
+        "description": "حسب ضرورت نماز کی اطلاعات کے ساتھ متعدد آواز کے اختیارات",
+        "title": "حسب ضرورت اطلاع"
       },
       "offline": {
-        "description": "Prayer times available offline once initially loaded",
-        "title": "Works Offline"
+        "description": "نماز کے اوقات ابتدائی طور پر لوڈ ہونے کے بعد آف لائن دستیاب ہیں",
+        "title": "آف لائن کام کرتا ہے"
       }
     },
-    "subtitle": "Everything you need for your daily prayers in a simple, elegant app",
-    "title": "Features"
+    "subtitle": "آپ کی روزانہ کی نمازوں کے لیے درکار سب کچھ ایک سادہ اور خوبصورت ایپ میں",
+    "title": "خصوصیات"
   },
   "footer": {
     "appName": "نداء",
     "health": {
-      "allOperational": "All Systems Operational",
-      "checking": "Checking Systems...",
-      "issuesDetected": "System Issues Detected"
+      "allOperational": "تمام نظام فعال ہیں",
+      "checking": "نظام کی جانچ ہو رہی ہے...",
+      "issuesDetected": "نظام میں مسائل کا پتہ چلا"
     },
-    "license": "License",
-    "privacy": "Privacy",
+    "license": "لائسنس",
+    "privacy": "رازداری",
     "social": {
-      "github": "GitHub Repository",
-      "telegram": "Telegram",
-      "translate": "Help Translate"
+      "github": "گٹ ہب ریپوزٹری",
+      "telegram": "ٹیلی گرام",
+      "translate": "ترجمہ میں مدد"
     }
   },
   "hero": {
-    "subtitle": "Stay connected to your prayers with a clean, focused experience",
-    "title": "Prayer Times Without Distractions"
+    "subtitle": "اپنی نمازوں سے جڑے رہیں ایک صاف اور مرکوز تجربے کے ساتھ",
+    "title": "نماز کے اوقات بغیر کسی خلل کے"
   },
   "languages": {
     "ar": {
-      "name": "Arabic",
+      "name": "عربی",
       "nativeName": "العربية"
     },
-    "currentLanguage": "Current language",
+    "currentLanguage": "موجودہ زبان",
     "en": {
-      "name": "English",
+      "name": "انگریزی",
       "nativeName": "English"
     },
     "ms": {
-      "name": "Malay",
+      "name": "مالائی",
       "nativeName": "Bahasa Melayu"
     },
-    "selectLanguage": "Select a language"
+    "selectLanguage": "زبان منتخب کریں"
   },
   "nav": {
-    "download": "Download",
-    "features": "Features",
-    "openSource": "Contribute",
-    "translate": "Translate"
+    "download": "ڈاؤن لوڈ",
+    "features": "خصوصیات",
+    "openSource": "شرکت لیں",
+    "translate": "ترجمہ کریں"
   },
   "openSource": {
     "contribute": {
-      "subtitle": "There are many ways to contribute to Nedaa, regardless of your technical background",
-      "title": "How You Can Contribute",
+      "subtitle": "آپ کی تکنیکی پس منظر سے قطع نظر، \"نداء\" میں شراکت کرنے کے بہت سے طریقے ہیں",
+      "title": "آپ کس طرح شراکت کر سکتے ہیں",
       "types": {
         "bugs": {
-          "action": "Report Bug",
-          "description": "Found a bug? Report it to help us improve the app for everyone",
-          "title": "Bug Reports"
+          "action": "بگ رپورٹ کریں",
+          "description": "کیا آپ نے بگ پایا؟ اسے رپورٹ کریں تاکہ ہم ایپ کو سب کے لیے بہتر بنا سکیں",
+          "title": "بگ رپورٹ"
         },
         "code": {
-          "action": "View Issues",
-          "description": "Help improve the app by contributing code, fixing bugs, or adding features",
-          "title": "Code Contributions"
+          "action": "مسائل دیکھیں",
+          "description": "کوڈ فراہم کرکے، بگ ٹھیک کرکے، یا خصوصیات شامل کرکے ایپ کو بہتر بنانے میں مدد کریں",
+          "title": "کوڈ کی شراکتیں"
         },
         "features": {
-          "action": "Suggest Feature",
-          "description": "Have an idea for a new feature? Share it with the community",
-          "title": "Feature Requests"
+          "action": "خصوصیات تجویز کریں",
+          "description": "کیا آپ کے پاس نئی خصوصیت کے لیے کوئی خیال ہے؟ اسے کمیونٹی کے ساتھ شیئر کریں",
+          "title": "خصوصیات کی درخواستیں"
         },
         "translate": {
-          "action": "Start Translating",
-          "description": "Help make Nedaa available in more languages through our translation project",
-          "title": "Translations"
+          "action": "ترجمہ شروع کریں",
+          "description": "ہمارے ترجمے پروجیکٹ کے ذریعے \"نداء\" کو مزید زبانوں میں دستیاب بنانے میں مدد کریں",
+          "title": "ترجمے"
         }
       }
     },
     "features": {
       "community": {
-        "description": "Built by the community, for the community with contributions welcome",
-        "title": "Community Driven"
+        "description": "کمیونٹی کے ذریعہ، کمیونٹی کے لیے بنایا گیا، شراکتیں خوش آمدید ہیں",
+        "title": "کمیونٹی کے زیر اثر"
       },
       "love": {
-        "description": "Developed with care for the Muslim community worldwide",
-        "title": "Made with Love"
+        "description": "دنیا بھر میں مسلم کمیونٹی کے لیے احتیاط سے تیار کیا گیا",
+        "title": "پیار سے بنایا ہوا"
       },
       "modern": {
-        "description": "Built with React Native, TypeScript, and modern development practices",
-        "title": "Modern Technology"
+        "description": "ری ایکٹ نیٹو، ٹائپ اسکرپٹ، اور جدید ترقیاتی طریقوں کے ساتھ بنایا گیا",
+        "title": "جدید ٹیکنالوجی"
       },
       "transparent": {
-        "description": "All source code is publicly available for review and audit",
-        "title": "Fully Transparent"
+        "description": "تمام سورس کوڈ عوامی طور پر جائزے اور آڈٹ کے لیے دستیاب ہے",
+        "title": "کامل طور پر شفاف"
       }
     },
     "github": {
-      "starUs": "★ Star us",
-      "starUsDescription": "Support the project",
-      "viewOnGithub": "View on GitHub",
-      "viewSource": "View Source",
-      "viewSourceDescription": "Explore the code"
+      "starUs": "★ ہمیں ستارہ دیں",
+      "starUsDescription": "پروجیکٹ کی سپورٹ کریں",
+      "viewOnGithub": "گٹ ہب پر دیکھیں",
+      "viewSource": "سورس دیکھیں",
+      "viewSourceDescription": "کوڈ کی جانچ کریں"
     },
-    "license": "Nedaa is licensed under the <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>GPL-3.0 License</a> - Free and open for everyone",
-    "subtitle": "Nedaa is completely open source - built by the community, for the community",
-    "title": "Open Source"
+    "license": "\"نداء\" کی لائسنس <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>GPL-3.0 لائسنس</a> - کے تحت ہے - سب کے لیے مفت اور کھلا",
+    "subtitle": "\"نداء\" مکمل طور پر اوپن سورس ہے - کمیونٹی کی جانب سے، کمیونٹی کے لیے",
+    "title": "اوپن سورس"
   },
   "privacy": {
     "consent": {
-      "content": "By using our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.",
-      "title": "Consent"
+      "content": "ہمارے ایپ کا استعمال کرتے ہوئے، آپ اس طرح ہماری رازداری کی پالیسی سے اتفاق کرتے ہیں اور اس کی شرائط و ضوابط پر رضا مند ہیں۔",
+      "title": "رضامندی"
     },
     "contact": {
-      "content": "If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at support@nedaa.dev.",
-      "title": "Contact Us"
+      "content": "اگر آپ کو ہماری رازداری کی پالیسی کے بارے میں کوئی سوالات یا تجاویز ہیں، تو براہ کرم ہم سے رابطہ کریں: support@nedaa.dev.",
+      "title": "ہم سے رابطہ کریں"
     },
-    "effectiveDate": "This policy is effective as of 2023-01-01",
+    "effectiveDate": "یہ پالیسی 2023-01-01 سے مؤثر ہے",
     "introduction": {
-      "content": "At Nedaa, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Nedaa and how we use it.",
-      "title": "Introduction"
+      "content": "\"نداء\" میں، ہمارے زائرین کی رازداری ہماری اہم ترجیحات میں سے ایک ہے۔ یہ رازداری کی پالیسی کا دستاویز ان معلومات کے اقسام پر مشتمل ہے جو \"نداء\" جمع اور ریکارڈ کرتا ہے اور ہم انہیں کیسے استعمال کرتے ہیں۔",
+      "title": "تعارف"
     },
     "logFiles": {
-      "content": "Nedaa follows a standard procedure of using log files. These files log visitors when they use app. The information collected by log files include the date and time stamp of access, the country that is used to fetch the prayer times, and also any errors and crashes that happen on the app, which helps us analyze bugs and fix them for future releases. The data collected are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the app, and help fix future issues.",
-      "title": "Log Files"
+      "content": "\"نداء\" لاگ فائلوں کے استعمال کا ایک معیاری طریقہ کار اختیار کرتا ہے۔ یہ فائلیں زائرین کو لاگ کرتی ہیں جب وہ ایپ کا استعمال کرتے ہیں۔ لاگ فائلوں کے ذریعے جمع کی جانے والی معلومات میں رسائی کی تاریخ اور وقت، وہ ملک جو نماز کے اوقات لینے کے لیے استعمال ہوتا ہے، اور ایپ پر ہونے والی کسی بھی غلطیوں اور کریشنگ شامل ہیں، جو ہمیں بگ کا تجزیہ کرنے اور انہیں مستقبل کی ریلیز کے لیے ٹھیک کرنے میں مدد دیتی ہیں۔ جمع کردہ ڈیٹا کسی بھی ذاتی طور پر شناختی معلومات سے منسلک نہیں ہے۔ معلومات کا مقصد رجحانات کا تجزیہ کرنا، ایپ کا انتظام کرنا، اور مستقبل کے مسائل کو حل کرنے میں مدد کرنا ہے۔",
+      "title": "لاگ فائلوں"
     },
-    "title": "Nedaa Privacy Policy"
+    "title": "\"نداء\" کی رازداری کی پالیسی"
   },
   "translate": {
-    "becomeTranslator": "Become a translator",
-    "description": "Make Nedaa accessible to more Muslims around the world by helping translate it into your language",
-    "joinProject": "Join Translation Project",
-    "languagesCount": "Currently available in {count} languages",
-    "languagesNeedingHelp": "Languages You Could Help With",
-    "noData": "No language data available",
-    "otherLanguages": "Languages Awaiting Translation",
-    "supportedLanguages": "Not supported in any language | Supported in 1 language | Supported in {count} languages",
-    "title": "Help Translate Nedaa",
-    "totalLanguages": "No languages on Crowdin | 1 language on Crowdin | Total of {count} languages on Crowdin",
-    "translationPlatform": "We use Crowdin for translations",
-    "translationProgress": "Translation progress"
+    "becomeTranslator": "ترجمہ کرنے والا بنیں",
+    "description": "نداء کو اپنی زبان میں ترجمہ کرنے میں مدد کر کے دنیا بھر کے زیادہ مسلمانوں کے لیے قابل رسائی بنائیں",
+    "joinProject": "ترجمہ پروجیکٹ میں شامل ہوں",
+    "languagesCount": "فی الحال {count} زبانوں میں دستیاب ہے",
+    "languagesNeedingHelp": "زبانیں جن میں آپ مدد کر سکتے ہیں",
+    "noData": "کوئی زبان کا ڈیٹا دستیاب نہیں",
+    "otherLanguages": "ترجمے کے منتظر زبانیں",
+    "supportedLanguages": "کسی زبان میں سپورٹ نہیں | 1 زبان میں سپورٹ ہے | {count} زبانوں میں سپورٹ ہے",
+    "title": "ترجمہ میں مدد",
+    "totalLanguages": "کسی زبان کا Crowdin پر نہیں | 1 زبان کا Crowdin پر ہے | کل {count} زبانیں Crowdin پر ہیں",
+    "translationPlatform": "ہم ترجمے کے لیے Crowdin کا استعمال کرتے ہیں",
+    "translationProgress": "پیش رفت کا ترجمہ"
   }
 }
