@@ -103,7 +103,11 @@
       "name": "الملايو",
       "nativeName": "Bahasa Melayu"
     },
-    "selectLanguage": "اختر لغة"
+    "selectLanguage": "اختر لغة",
+    "ur": {
+      "name": "الأردية",
+      "nativeName": "اردو"
+    }
   },
   "nav": {
     "download": "تحميل",

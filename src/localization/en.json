@@ -103,7 +103,11 @@
       "name": "Malay",
       "nativeName": "Bahasa Melayu"
     },
-    "selectLanguage": "Select a language"
+    "selectLanguage": "Select a language",
+    "ur": {
+      "name": "Urdu",
+      "nativeName": "اردو"
+    }
   },
   "nav": {
     "download": "Download",

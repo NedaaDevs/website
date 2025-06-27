@@ -103,7 +103,11 @@
       "name": "Bahasa Melayu",
       "nativeName": "Bahasa Melayu"
     },
-    "selectLanguage": "Pilih bahasa"
+    "selectLanguage": "Pilih bahasa",
+    "ur": {
+      "name": "Bahasa Urdu",
+      "nativeName": "اردو"
+    }
   },
   "nav": {
     "download": "Muat Turun",

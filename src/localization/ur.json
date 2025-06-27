@@ -103,7 +103,11 @@
       "name": "مالائی",
       "nativeName": "Bahasa Melayu"
     },
-    "selectLanguage": "زبان منتخب کریں"
+    "selectLanguage": "زبان منتخب کریں",
+    "ur": {
+      "name": "Urdu",
+      "nativeName": "اردو"
+    }
   },
   "nav": {
     "download": "ڈاؤن لوڈ",
