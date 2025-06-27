@@ -38,7 +38,7 @@ const downloadOptions = [
     icon: mdiGooglePlay,
     titleKey: 'download.platforms.android.title',
     descriptionKey: 'download.platforms.android.description',
-    url: 'https://play.google.com/store/apps/details?id=dev.nedaa.app',
+    url: 'https://play.google.com/store/apps/details?id=dev.nedaa.android',
     primary: true,
   },
   {
