@@ -1,0 +1,8 @@
+services:
+  nedaa-website:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${PORT:-80}:80"
+    env_file:
+      - .env
