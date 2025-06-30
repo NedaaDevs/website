@@ -46,7 +46,7 @@ const downloadOptions = [
     icon: mdiCellphone,
     titleKey: 'download.platforms.huawei.title',
     descriptionKey: 'download.platforms.huawei.description',
-    url: 'https://appgallery.huawei.com/app/C114413901',
+    url: 'https://appgallery.huawei.com/app/C114573733',
     primary: true,
   },
   // GitHub releases - commented out for now until we do artifacts CI
