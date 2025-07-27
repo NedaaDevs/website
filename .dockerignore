@@ -15,8 +15,6 @@ build
 coverage
 
 # Development
-.env
-.env.*
 *.log
 .DS_Store
 .vscode
