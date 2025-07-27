@@ -18,6 +18,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: |
+          echo "VITE_HEALTH_CHECK_URL=${{ secrets.VITE_HEALTH_CHECK_URL }}" >> .env
+          echo "VITE_CROWDIN_API_TOKEN=${{ secrets.VITE_CROWDIN_API_TOKEN }}" >> .env
+          echo "VITE_CROWDIN_PROJECT_ID=${{ secrets.VITE_CROWDIN_PROJECT_ID }}" >> .env
+          echo "VITE_CROWDIN_PROJECT_URL=${{ secrets.VITE_CROWDIN_PROJECT_URL }}" >> .env
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
