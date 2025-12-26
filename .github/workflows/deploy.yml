@@ -51,6 +51,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Trigger Deployment Update
-        run: |
-          curl -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" ${{ secrets.DEPLOY_ENDPOINT }}
+      # - name: Trigger Deployment Update
+      #   run: |
+      #     curl -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" ${{ secrets.DEPLOY_ENDPOINT }}
