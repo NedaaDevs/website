@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 
 import { useI18n } from 'vue-i18n'
+import { formatApiName } from '@/utils/string'
 
 import {
   mdiAlertCircle,
@@ -55,13 +56,6 @@ const checkHealth = async () => {
     console.error('Health check failed:', error)
     healthCheckError.value = true
   }
-}
-
-const formatApiName = (name: string) => {
-  return name
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
 }
 
 const healthStatus = computed(() => {
@@ -129,56 +123,39 @@ onMounted(() => {
 <template>
   <VFooter class="border pa-4 theme-transition">
     <!-- Health -->
-    <VHover>
-      <template v-slot:default="{ isHovering, props }">
-        <div v-bind="props" class="position-relative d-flex align-center">
-          <VTooltip
-            location="top"
-            :z-index="1000"
-            bg-color="surface"
-            color="on-surface"
-            min-width="160"
-            content-class="rounded-lg pa-3 text-center border"
-            elevation="4"
-            :offset="10"
-            transition="scale-transition"
-            open-delay="100"
-          >
-            <template v-slot:activator="{ props: tooltipProps }">
-              <div
-                v-bind="tooltipProps"
-                class="d-flex align-center cursor-pointer theme-transition"
-              >
-                <VIcon :icon="healthIcon" :color="healthColor" size="small" class="mr-2" />
-              </div>
-            </template>
-            <span class="font-weight-bold">{{ healthText }}</span>
-          </VTooltip>
-          <div
-            class="position-absolute bottom-100 start-0 z-10 min-w-[120px]"
-            :class="isHovering ? 'd-block' : 'd-none'"
-          >
-            <div
-              class="bg-surface rounded-lg elevation-4 theme-transition pa-3 border mb-2 health-details"
-            >
-              <div
-                v-for="(api, name) in apis"
-                :key="name"
-                class="d-flex align-center pa-2 theme-transition-text"
-              >
-                <VIcon
-                  :icon="api.status === 'up' ? mdiCheckCircle : mdiAlertCircle"
-                  :color="api.status === 'up' ? 'success' : 'error'"
-                  size="x-small"
-                  class="mr-2"
-                />
-                <span class="text-caption text-medium-emphasis">{{ formatApiName(name) }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <VMenu location="top" :close-on-content-click="false" transition="scale-transition">
+      <template v-slot:activator="{ props: menuProps }">
+        <VBtn
+          v-bind="menuProps"
+          variant="text"
+          size="small"
+          class="theme-transition"
+          :aria-label="healthText"
+        >
+          <VIcon :icon="healthIcon" :color="healthColor" size="small" class="me-2" />
+          <span class="text-caption d-none d-sm-inline">{{ healthText }}</span>
+        </VBtn>
       </template>
-    </VHover>
+      <VCard min-width="200" class="rounded-lg" elevation="4">
+        <VCardText class="pa-3">
+          <div
+            v-for="(api, name) in apis"
+            :key="name"
+            class="d-flex align-center pa-2 theme-transition-text"
+          >
+            <VIcon
+              :icon="api.status === 'up' ? mdiCheckCircle : mdiAlertCircle"
+              :color="api.status === 'up' ? 'success' : 'error'"
+              size="x-small"
+              class="me-2"
+            />
+            <span class="text-caption text-medium-emphasis">{{
+              formatApiName(name as string)
+            }}</span>
+          </div>
+        </VCardText>
+      </VCard>
+    </VMenu>
 
     <VSpacer />
 
@@ -218,22 +195,9 @@ onMounted(() => {
       <!-- <a class="text-decoration-none text-primary" href="/license" rel="noopener noreferrer">
         {{ t('footer.license') }}
       </a> -->
-      <router-link class="ml-2 text-decoration-none text-primary" to="/privacy">
+      <router-link class="ms-2 text-decoration-none text-primary" to="/privacy">
         {{ t('footer.privacy') }}
       </router-link>
     </div>
   </VFooter>
 </template>
-
-<style scoped>
-.health-details::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 16px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: var(--v-theme-surface) transparent transparent transparent;
-  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-</style>

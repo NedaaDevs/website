@@ -6,7 +6,7 @@ import TheFooter from '@/components/layout/AppFooter.vue'
 <template>
   <VApp>
     <AppHeader />
-    <VMain>
+    <VMain id="main-content">
       <router-view />
     </VMain>
     <TheFooter />

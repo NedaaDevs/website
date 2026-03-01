@@ -15,9 +15,8 @@ import { mdiMenu } from '@mdi/js'
 
 // Stores
 import { useAppStore } from '@/stores/app'
-// Assets
-import logo from '@/assets/logo.png'
-import logoDark from '@/assets/logo-dark.png'
+// Composables
+import { useThemedLogo } from '@/composables/useThemedLogo'
 
 // Icons
 import { mdiChevronRight } from '@mdi/js'
@@ -33,15 +32,14 @@ const { mobile } = useDisplay()
 const drawer = ref(false)
 
 const { theme } = storeToRefs(useAppStore())
+const { logoSrc } = useThemedLogo()
 
 const navLinks = computed<NavLink[]>(() => [
   { title: t('nav.features'), to: '#features' },
-  // { title: t('nav.download'), to: '#download' },
-  // { title: t('nav.openSource'), to: '#open-source' },
+  { title: t('nav.download'), to: '#download' },
+  { title: t('nav.openSource'), to: '#open-source' },
   { title: t('nav.translate'), to: '#translate' },
 ])
-
-const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
 </script>
 
 <template>
@@ -65,7 +63,7 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
       <VSpacer />
 
       <!-- Navigation Links (Desktop) -->
-      <div v-if="!mobile" class="d-none d-md-flex">
+      <nav v-if="!mobile" aria-label="Main navigation" class="d-none d-md-flex">
         <a
           v-for="link in navLinks"
           :key="link.to"
@@ -75,11 +73,11 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
         >
           {{ link.title }}
         </a>
-      </div>
+      </nav>
 
       <div class="d-flex align-center">
-        <LocaleSwitch class="mr-2" />
-        <ThemeSwitch class="mr-2" />
+        <LocaleSwitch class="me-2" />
+        <ThemeSwitch class="me-2" />
 
         <!-- Mobile Menu Button -->
         <VBtn
@@ -88,7 +86,7 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
           variant="text"
           @click="drawer = !drawer"
           color="primary"
-          class="ml-1 hover-feedback"
+          class="ms-1 hover-feedback"
         >
           <VIcon :icon="mdiMenu" />
         </VBtn>
@@ -118,7 +116,7 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
         base-color="primary"
       >
         <template v-slot:prepend>
-          <VIcon :icon="mdiChevronRight" size="small" class="mr-2" color="primary" />
+          <VIcon :icon="mdiChevronRight" size="small" class="me-2" color="primary" />
         </template>
         <VListItemTitle class="font-weight-medium">{{ link.title }}</VListItemTitle>
       </VListItem>
@@ -140,7 +138,7 @@ const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
   width: 0;
   height: 2px;
   bottom: -4px;
-  left: 0;
+  inset-inline-start: 0;
   background-color: currentColor;
   transition: width 0.3s ease;
 }

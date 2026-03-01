@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
+import { useEventListener } from '@vueuse/core'
 // Icons
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js'
 
@@ -71,39 +72,35 @@ const scrollToTarget = () => {
 }
 
 const handleScroll = () => {
-  // Handle down arrow visibility
   if (props.hideArrowOnScroll) {
-    // Show arrow only at the top of the page
-    if (window.scrollY < 100) {
-      showArrow.value = true
-    } else {
-      showArrow.value = false
-    }
+    showArrow.value = window.scrollY < 100
   }
-
-  // Handle up arrow visibility
   if (props.hideUpArrowOnScroll) {
-    // Show up arrow only when scrolled down
-    if (window.scrollY > 100) {
-      showUpArrow.value = true
-    } else {
-      showUpArrow.value = false
-    }
+    showUpArrow.value = window.scrollY > 100
   }
 }
 
-onMounted(() => {
-  if (props.hideArrowOnScroll || props.hideUpArrowOnScroll) {
-    window.addEventListener('scroll', handleScroll)
-    // Initial check
-    handleScroll()
+if (props.hideArrowOnScroll || props.hideUpArrowOnScroll) {
+  useEventListener(window, 'scroll', handleScroll)
+}
+
+const backgroundClass = computed(() => {
+  const map: Record<string, string> = {
+    primary: 'bg-primary text-white',
+    surface: 'bg-surface',
+    gradient: 'gradient-background',
   }
+  return map[props.background] ?? ''
 })
 
-onUnmounted(() => {
-  if (props.hideArrowOnScroll || props.hideUpArrowOnScroll) {
-    window.removeEventListener('scroll', handleScroll)
+const paddingClass = computed(() => {
+  const map: Record<string, string> = {
+    none: 'py-0',
+    small: 'py-4',
+    medium: 'py-8',
+    large: 'py-16',
   }
+  return map[props.paddingY] ?? 'py-8'
 })
 </script>
 
@@ -111,21 +108,9 @@ onUnmounted(() => {
   <section
     :id="id"
     :class="[
-      background === 'default'
-        ? ''
-        : background === 'primary'
-          ? 'bg-primary text-white'
-          : background === 'surface'
-            ? 'bg-surface'
-            : 'gradient-background',
+      backgroundClass,
+      paddingClass,
       fullHeight ? 'full-height' : '',
-      paddingY === 'none'
-        ? 'py-0'
-        : paddingY === 'small'
-          ? 'py-4'
-          : paddingY === 'medium'
-            ? 'py-8'
-            : 'py-16',
       'position-relative w-100 theme-transition',
     ]"
   >
@@ -141,6 +126,7 @@ onUnmounted(() => {
         @click="scrollToNext"
         class="scroll-button hover-feedback rounded-circle pa-3"
         elevation="1"
+        aria-label="Scroll to next section"
       >
         <VIcon :icon="mdiChevronDown" size="large" />
       </VBtn>
@@ -156,6 +142,7 @@ onUnmounted(() => {
         @click="scrollToTarget"
         class="scroll-button hover-feedback rounded-circle pa-3"
         elevation="1"
+        aria-label="Scroll to previous section"
       >
         <VIcon :icon="mdiChevronUp" size="large" />
       </VBtn>

@@ -47,7 +47,7 @@ const downloadOptions = [
     titleKey: 'download.platforms.huawei.title',
     descriptionKey: 'download.platforms.huawei.description',
     url: 'https://appgallery.huawei.com/app/C114573733',
-    primary: true,
+    primary: false,
   },
   // GitHub releases - commented out for now until we do artifacts CI
   // {
@@ -92,12 +92,17 @@ const handleDownload = (url: string) => {
         >
           <VCard
             :class="[
-              'h-100 theme-transition hover-card text-center cursor-pointer',
-              option.primary ? 'primary-download' : '',
+              'h-100 theme-transition text-center cursor-pointer',
+              option.primary ? 'hover-card--primary' : 'hover-card',
             ]"
             :elevation="option.primary ? 4 : 2"
             rounded="lg"
+            role="link"
+            :aria-label="t(option.titleKey)"
+            tabindex="0"
             @click="handleDownload(option.url)"
+            @keydown.enter="handleDownload(option.url)"
+            @keydown.space.prevent="handleDownload(option.url)"
           >
             <VCardItem class="pa-6">
               <div class="mb-4">
@@ -126,7 +131,7 @@ const handleDownload = (url: string) => {
                 size="large"
                 class="mt-2"
               >
-                Download
+                {{ t('cta.downloadNow') }}
               </VBtn>
             </VCardItem>
           </VCard>
@@ -163,43 +168,3 @@ const handleDownload = (url: string) => {
     </VContainer>
   </SectionContainer>
 </template>
-
-<style scoped>
-.hover-card {
-  transition:
-    transform 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-}
-
-.hover-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
-}
-
-.primary-download {
-  border: 2px solid rgb(var(--v-theme-primary));
-}
-
-.primary-download:hover {
-  box-shadow: 0 12px 40px rgba(var(--v-theme-primary), 0.3) !important;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.max-width-600 {
-  max-width: 600px;
-}
-
-.qr-card {
-  aspect-ratio: 1;
-}
-
-.qr-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 120px;
-}
-</style>
