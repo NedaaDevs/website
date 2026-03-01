@@ -127,3 +127,77 @@
 .hover-bg-primary-lighten-5:hover {
   background-color: rgba(var(--v-theme-primary), 0.05);
 }
+
+/* === Shared hover card styles === */
+.hover-card {
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.hover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hover-card--subtle {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-card--subtle:hover {
+  transform: translateY(-2px);
+}
+
+.hover-card--primary {
+  border: 2px solid rgb(var(--v-theme-primary));
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.hover-card--primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(var(--v-theme-primary), 0.3) !important;
+}
+
+/* === Utility classes === */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.max-width-600 {
+  max-width: 600px;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+/* === Skip-to-content link === */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--v-theme-primary, #1976d2);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
