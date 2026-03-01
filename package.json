@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@crowdin/crowdin-api-client": "^1.44.0",
+    "@vueuse/core": "^14.2.1",
     "pinia": "^3.0.2",
     "pinia-plugin-persistedstate": "^4.3.0",
     "vue": "^3.5.16",

@@ -2,7 +2,6 @@
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 
-//
 import SectionContainer from '@/components/sections/SectionContainer.vue'
 
 // Icons
@@ -12,9 +11,8 @@ import { mdiRocketLaunchOutline } from '@mdi/js'
 import { useAppStore } from '@/stores/app'
 import { storeToRefs } from 'pinia'
 
-// Assets
-import logo from '@/assets/logo.png'
-import logoDark from '@/assets/logo-dark.png'
+// Composables
+import { useThemedLogo } from '@/composables/useThemedLogo'
 
 type Props = {
   id?: string
@@ -34,8 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 const { theme } = storeToRefs(useAppStore())
-
-const logoSrc = computed(() => (theme.value === 'dark' ? logoDark : logo))
+const { logoSrc } = useThemedLogo()
 
 const textColorClass = computed(() => {
   if (props.background === 'gradient' || props.background === 'primary') {

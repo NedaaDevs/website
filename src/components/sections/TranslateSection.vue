@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useIntersectionObserver } from '@vueuse/core'
 
 // Components
 import SectionContainer from '@/components/sections/SectionContainer.vue'
@@ -79,31 +80,18 @@ const unsupportedLanguages = computed(() => languages.value.filter((lang) => !la
 const supportedLanguageCount = computed(() => supportedLanguages.value.length)
 const totalLanguageCount = computed(() => allLanguages.value.length)
 
-// Setup intersection observer to load data when section becomes visible
-const setupIntersectionObserver = () => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting && !dataFetched.value) {
-        fetchTranslationProgress()
-      }
-    },
-    { threshold: 0.1 },
-  )
+// Lazy-load data when section scrolls into view
+const sectionRef = ref<HTMLElement | null>(null)
 
-  const section = document.getElementById(props.id)
-  if (section) {
-    observer.observe(section)
-  }
-
-  // Return cleanup function when unmounted
-  return () => {
-    if (section) {
-      observer.unobserve(section)
+useIntersectionObserver(
+  sectionRef,
+  ([{ isIntersecting }]) => {
+    if (isIntersecting && !dataFetched.value) {
+      fetchTranslationProgress()
     }
-  }
-}
-
-onMounted(setupIntersectionObserver)
+  },
+  { threshold: 0.1 },
+)
 
 const fetchTranslationProgress = async () => {
   if (dataFetched.value) return
@@ -154,7 +142,7 @@ const joinTranslationProject = () => {
 </script>
 
 <template>
-  <SectionContainer :id="props.id" paddingY="large">
+  <SectionContainer ref="sectionRef" :id="props.id" paddingY="large">
     <VContainer>
       <VRow>
         <VCol cols="12" md="6" class="d-flex flex-column justify-center">
@@ -225,7 +213,7 @@ const joinTranslationProject = () => {
                             {{ lang.name }}
                             <span
                               v-if="lang.nativeName"
-                              class="ml-2 text-caption text-medium-emphasis"
+                              class="ms-2 text-caption text-medium-emphasis"
                             >
                               {{ lang.nativeName }}
                             </span>
