@@ -40,11 +40,31 @@
     "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
     "title": "Download"
   },
+  "downloadPage": {
+    "clickHere": "Click here if not redirected",
+    "notOnPlatform": "Not on {platform}? See all download options",
+    "redirecting": "Redirecting to {store}...",
+    "storeName": {
+      "android": "Google Play",
+      "huawei": "AppGallery",
+      "ios": "App Store"
+    },
+    "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
+    "title": "Download Nedaa"
+  },
   "features": {
     "list": {
       "accurateTimes": {
         "description": "Precise prayer times based on your location with multiple calculation methods",
         "title": "Accurate Prayer Times"
+      },
+      "alarm": {
+        "description": "Smart alarms with challenges to make sure you're up for Fajr and Jumu'ah prayers",
+        "title": "Fajr & Jumu'ah Alarm"
+      },
+      "athkar": {
+        "description": "Daily remembrances and supplications with beautiful audio recitations",
+        "title": "Athkar with Audio"
       },
       "darkMode": {
         "description": "Beautiful dark and light themes for comfortable viewing",

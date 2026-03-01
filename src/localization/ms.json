@@ -16,58 +16,78 @@
   "download": {
     "platforms": {
       "android": {
-        "description": "Available for Android devices",
-        "title": "Get it on Google Play"
+        "description": "Tersedia untuk peranti Android",
+        "title": "Dapatkan di Google Play"
       },
       "github": {
-        "description": "Get the latest release directly",
-        "title": "Download from GitHub"
+        "description": "Dapatkan keluaran terkini secara terus",
+        "title": "Muat turun dari GitHub"
       },
       "huawei": {
-        "description": "Available on Huawei devices",
-        "title": "Explore it on AppGallery"
+        "description": "Tersedia untuk peranti Huawei",
+        "title": "Terokai di AppGallery"
       },
       "ios": {
-        "description": "Available for iPhone",
-        "title": "Download on the App Store"
+        "description": "Tersedia untuk iPhone",
+        "title": "Muat turun di App Store"
       }
     },
     "qr": {
-      "caption": "QR code for easy mobile access",
-      "description": "Scan the QR code to quickly access download links on your mobile device",
-      "title": "Quick Access"
+      "caption": "Kod QR untuk akses mudah melalui telefon",
+      "description": "Imbas kod QR untuk mengakses pautan muat turun dengan cepat di telefon anda",
+      "title": "Akses Pantas"
     },
-    "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
+    "subtitle": "Dapatkan Nedaa di platform pilihan anda dan jangan terlepas solat.",
     "title": "Muat Turun"
+  },
+  "downloadPage": {
+    "clickHere": "Klik di sini jika tidak dialihkan",
+    "notOnPlatform": "Bukan pada {platform}? Lihat semua pilihan muat turun",
+    "redirecting": "Mengalihkan ke {store}...",
+    "storeName": {
+      "android": "Google Play",
+      "huawei": "AppGallery",
+      "ios": "App Store"
+    },
+    "subtitle": "Dapatkan Nedaa di platform pilihan anda dan jangan terlepas solat.",
+    "title": "Muat Turun Nedaa"
   },
   "features": {
     "list": {
       "accurateTimes": {
-        "description": "Precise prayer times based on your location with multiple calculation methods",
-        "title": "Accurate Prayer Times"
+        "description": "Waktu solat tepat berdasarkan lokasi anda dengan pelbagai kaedah pengiraan",
+        "title": "Waktu Solat Tepat"
+      },
+      "alarm": {
+        "description": "Penggera pintar dengan cabaran untuk memastikan anda bangun untuk solat Subuh dan Jumaat",
+        "title": "Penggera Subuh & Jumaat"
+      },
+      "athkar": {
+        "description": "Zikir dan doa harian dengan bacaan audio yang indah",
+        "title": "Zikir dengan Audio"
       },
       "darkMode": {
-        "description": "Beautiful dark and light themes for comfortable viewing",
-        "title": "Dark Mode"
+        "description": "Tema gelap dan cerah yang selesa untuk tontonan pada bila-bila masa",
+        "title": "Mod Gelap"
       },
       "design": {
-        "description": "Minimalist interface focused on what matters most",
-        "title": "Clean Design"
+        "description": "Antara muka ringkas yang fokus pada perkara penting",
+        "title": "Reka Bentuk Bersih"
       },
       "locationBased": {
-        "description": "Automatic location detection with manual location selection support",
-        "title": "Location Based"
+        "description": "Pengesanan lokasi automatik dengan sokongan pemilihan lokasi secara manual",
+        "title": "Berdasarkan Lokasi"
       },
       "notifications": {
-        "description": "Configurable prayer notifications with multiple sound options",
-        "title": "Custom Notifications"
+        "description": "Pemberitahuan solat yang boleh diubah suai dengan pelbagai pilihan bunyi",
+        "title": "Pemberitahuan Tersuai"
       },
       "offline": {
-        "description": "Prayer times available offline once initially loaded",
-        "title": "Works Offline"
+        "description": "Waktu solat tersedia tanpa internet selepas dimuat pertama kali",
+        "title": "Berfungsi Luar Talian"
       }
     },
-    "subtitle": "Everything you need for your daily prayers in a simple, elegant app",
+    "subtitle": "Semua yang anda perlukan untuk solat harian dalam aplikasi yang ringkas dan elegan",
     "title": "Ciri-ciri"
   },
   "footer": {
@@ -117,59 +137,59 @@
   },
   "openSource": {
     "contribute": {
-      "subtitle": "There are many ways to contribute to Nedaa, regardless of your technical background",
-      "title": "How You Can Contribute",
+      "subtitle": "Terdapat pelbagai cara untuk menyumbang kepada Nedaa, tanpa mengira latar belakang teknikal anda",
+      "title": "Cara Anda Boleh Menyumbang",
       "types": {
         "bugs": {
-          "action": "Report Bug",
-          "description": "Found a bug? Report it to help us improve the app for everyone",
-          "title": "Bug Reports"
+          "action": "Laporkan Pepijat",
+          "description": "Jumpa pepijat? Laporkan supaya kami boleh menambah baik aplikasi untuk semua",
+          "title": "Laporan Pepijat"
         },
         "code": {
-          "action": "View Issues",
-          "description": "Help improve the app by contributing code, fixing bugs, or adding features",
-          "title": "Code Contributions"
+          "action": "Lihat Isu",
+          "description": "Bantu tingkatkan aplikasi dengan menyumbang kod, membetulkan pepijat, atau menambah ciri baharu",
+          "title": "Sumbangan Kod"
         },
         "features": {
-          "action": "Suggest Feature",
-          "description": "Have an idea for a new feature? Share it with the community",
-          "title": "Feature Requests"
+          "action": "Cadangkan Ciri",
+          "description": "Ada idea untuk ciri baharu? Kongsikan dengan komuniti",
+          "title": "Cadangan Ciri"
         },
         "translate": {
-          "action": "Start Translating",
-          "description": "Help make Nedaa available in more languages through our translation project",
-          "title": "Translations"
+          "action": "Mula Menterjemah",
+          "description": "Bantu menjadikan Nedaa tersedia dalam lebih banyak bahasa melalui projek terjemahan kami",
+          "title": "Terjemahan"
         }
       }
     },
     "features": {
       "community": {
-        "description": "Built by the community, for the community with contributions welcome",
-        "title": "Community Driven"
+        "description": "Dibina oleh komuniti, untuk komuniti — sumbangan sentiasa dialu-alukan",
+        "title": "Dipacu Komuniti"
       },
       "love": {
-        "description": "Developed with care for the Muslim community worldwide",
-        "title": "Made with Love"
+        "description": "Dibangunkan dengan penuh keprihatinan untuk umat Islam di seluruh dunia",
+        "title": "Dibina dengan Kasih"
       },
       "modern": {
-        "description": "Built with React Native, TypeScript, and modern development practices",
-        "title": "Modern Technology"
+        "description": "Dibina menggunakan React Native, TypeScript, dan amalan pembangunan moden",
+        "title": "Teknologi Moden"
       },
       "transparent": {
-        "description": "All source code is publicly available for review and audit",
-        "title": "Fully Transparent"
+        "description": "Semua kod sumber tersedia secara terbuka untuk semakan dan audit",
+        "title": "Telus Sepenuhnya"
       }
     },
     "github": {
-      "starUs": "★ Star us",
-      "starUsDescription": "Support the project",
-      "viewOnGithub": "View on GitHub",
-      "viewSource": "View Source",
-      "viewSourceDescription": "Explore the code"
+      "starUs": "★ Beri bintang",
+      "starUsDescription": "Sokong projek ini",
+      "viewOnGithub": "Lihat di GitHub",
+      "viewSource": "Lihat Sumber",
+      "viewSourceDescription": "Terokai kod sumber"
     },
-    "license": "Nedaa is licensed under the <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>GPL-3.0 License</a> - Free and open for everyone",
-    "subtitle": "Nedaa is completely open source - built by the community, for the community",
-    "title": "Open Source"
+    "license": "Nedaa dilesenkan di bawah <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>Lesen GPL-3.0</a> — percuma dan terbuka untuk semua",
+    "subtitle": "Nedaa adalah sumber terbuka sepenuhnya — dibina oleh komuniti, untuk komuniti",
+    "title": "Sumber Terbuka"
   },
   "privacy": {
     "consent": {
