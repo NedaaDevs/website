@@ -16,58 +16,78 @@
   "download": {
     "platforms": {
       "android": {
-        "description": "Available for Android devices",
-        "title": "Get it on Google Play"
+        "description": "متوفر لأجهزة أندرويد",
+        "title": "حمّله من Google Play"
       },
       "github": {
-        "description": "Get the latest release directly",
-        "title": "Download from GitHub"
+        "description": "احصل على أحدث إصدار مباشرة",
+        "title": "حمّله من GitHub"
       },
       "huawei": {
-        "description": "Available on Huawei devices",
-        "title": "Explore it on AppGallery"
+        "description": "متوفر لأجهزة هواوي",
+        "title": "استكشفه على AppGallery"
       },
       "ios": {
-        "description": "Available for iPhone",
-        "title": "Download on the App Store"
+        "description": "متوفر للآيفون",
+        "title": "حمّله من App Store"
       }
     },
     "qr": {
-      "caption": "QR code for easy mobile access",
-      "description": "Scan the QR code to quickly access download links on your mobile device",
-      "title": "Quick Access"
+      "caption": "رمز QR للوصول السريع من الجوال",
+      "description": "امسح رمز QR للوصول بسرعة إلى روابط التحميل على جوالك",
+      "title": "وصول سريع"
     },
-    "subtitle": "Get Nedaa on your preferred platform and never miss a prayer.",
+    "subtitle": "حمّل نداء على منصتك المفضلة ولا تفوّت أي صلاة.",
     "title": "تحميل"
+  },
+  "downloadPage": {
+    "clickHere": "اضغط هنا إذا لم يتم التحويل",
+    "notOnPlatform": "لست على {platform}؟ عرض جميع خيارات التحميل",
+    "redirecting": "جارٍ التحويل إلى {store}...",
+    "storeName": {
+      "android": "Google Play",
+      "huawei": "AppGallery",
+      "ios": "App Store"
+    },
+    "subtitle": "حمّل نداء على منصتك المفضلة ولا تفوّت أي صلاة.",
+    "title": "تحميل نداء"
   },
   "features": {
     "list": {
       "accurateTimes": {
-        "description": "Precise prayer times based on your location with multiple calculation methods",
-        "title": "Accurate Prayer Times"
+        "description": "مواقيت صلاة دقيقة حسب موقعك مع طرق حساب متعددة",
+        "title": "مواقيت دقيقة"
+      },
+      "alarm": {
+        "description": "منبه ذكي مع تحديات تضمن استيقاظك لصلاة الفجر والجمعة",
+        "title": "منبه الفجر والجمعة"
+      },
+      "athkar": {
+        "description": "أذكار وأدعية يومية مع تلاوات صوتية",
+        "title": "أذكار مع صوت"
       },
       "darkMode": {
-        "description": "Beautiful dark and light themes for comfortable viewing",
-        "title": "Dark Mode"
+        "description": "مظهر داكن وفاتح لتجربة مريحة في جميع الأوقات",
+        "title": "الوضع الداكن"
       },
       "design": {
-        "description": "Minimalist interface focused on what matters most",
-        "title": "Clean Design"
+        "description": "واجهة بسيطة تركّز على ما يهمّك فعلًا",
+        "title": "تصميم أنيق"
       },
       "locationBased": {
-        "description": "Automatic location detection with manual location selection support",
-        "title": "Location Based"
+        "description": "تحديد تلقائي للموقع مع إمكانية الاختيار يدويًا",
+        "title": "حسب الموقع"
       },
       "notifications": {
-        "description": "Configurable prayer notifications with multiple sound options",
-        "title": "Custom Notifications"
+        "description": "تنبيهات مخصصة للصلاة مع خيارات صوتية متعددة",
+        "title": "تنبيهات مخصصة"
       },
       "offline": {
-        "description": "Prayer times available offline once initially loaded",
-        "title": "Works Offline"
+        "description": "مواقيت الصلاة متاحة بدون إنترنت بعد التحميل الأول",
+        "title": "يعمل بدون إنترنت"
       }
     },
-    "subtitle": "Everything you need for your daily prayers in a simple, elegant app",
+    "subtitle": "كل ما تحتاجه لصلواتك اليومية في تطبيق بسيط وأنيق",
     "title": "المميزات"
   },
   "footer": {
@@ -117,59 +137,59 @@
   },
   "openSource": {
     "contribute": {
-      "subtitle": "There are many ways to contribute to Nedaa, regardless of your technical background",
-      "title": "How You Can Contribute",
+      "subtitle": "هناك طرق عديدة للمساهمة في نداء، بغض النظر عن خلفيتك التقنية",
+      "title": "كيف يمكنك المساهمة",
       "types": {
         "bugs": {
-          "action": "Report Bug",
-          "description": "Found a bug? Report it to help us improve the app for everyone",
-          "title": "Bug Reports"
+          "action": "أبلغ عن خلل",
+          "description": "وجدت خللًا؟ أبلغ عنه لنتمكن من تحسين التطبيق للجميع",
+          "title": "الإبلاغ عن الأخطاء"
         },
         "code": {
-          "action": "View Issues",
-          "description": "Help improve the app by contributing code, fixing bugs, or adding features",
-          "title": "Code Contributions"
+          "action": "تصفّح المهام",
+          "description": "ساهم في تطوير التطبيق بكتابة أكواد أو إصلاح أخطاء أو إضافة ميزات جديدة",
+          "title": "المساهمة بالكود"
         },
         "features": {
-          "action": "Suggest Feature",
-          "description": "Have an idea for a new feature? Share it with the community",
-          "title": "Feature Requests"
+          "action": "اقترح ميزة",
+          "description": "لديك فكرة لميزة جديدة؟ شاركها مع المجتمع",
+          "title": "اقتراح ميزات"
         },
         "translate": {
-          "action": "Start Translating",
-          "description": "Help make Nedaa available in more languages through our translation project",
-          "title": "Translations"
+          "action": "ابدأ الترجمة",
+          "description": "ساعد في توفير نداء بلغات أكثر من خلال مشروع الترجمة",
+          "title": "الترجمة"
         }
       }
     },
     "features": {
       "community": {
-        "description": "Built by the community, for the community with contributions welcome",
-        "title": "Community Driven"
+        "description": "بُني بواسطة المجتمع ومن أجله، والمساهمات مرحّب بها دائمًا",
+        "title": "بدعم المجتمع"
       },
       "love": {
-        "description": "Developed with care for the Muslim community worldwide",
-        "title": "Made with Love"
+        "description": "طُوِّر بعناية لخدمة المسلمين حول العالم",
+        "title": "صُنع بحب"
       },
       "modern": {
-        "description": "Built with React Native, TypeScript, and modern development practices",
-        "title": "Modern Technology"
+        "description": "بُني باستخدام React Native و TypeScript وأحدث تقنيات التطوير",
+        "title": "تقنيات حديثة"
       },
       "transparent": {
-        "description": "All source code is publicly available for review and audit",
-        "title": "Fully Transparent"
+        "description": "الكود المصدري متاح بالكامل للمراجعة والتدقيق",
+        "title": "شفافية كاملة"
       }
     },
     "github": {
-      "starUs": "★ Star us",
-      "starUsDescription": "Support the project",
-      "viewOnGithub": "View on GitHub",
-      "viewSource": "View Source",
-      "viewSourceDescription": "Explore the code"
+      "starUs": "★ أعطنا نجمة",
+      "starUsDescription": "ادعم المشروع",
+      "viewOnGithub": "تصفّح على GitHub",
+      "viewSource": "عرض الكود",
+      "viewSourceDescription": "استكشف الكود المصدري"
     },
-    "license": "Nedaa is licensed under the <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>GPL-3.0 License</a> - Free and open for everyone",
-    "subtitle": "Nedaa is completely open source - built by the community, for the community",
-    "title": "Open Source"
+    "license": "نداء مرخّص بموجب <a href='https://github.com/nedaadevs/nedaa/blob/master/LICENSE' target='_blank' class='text-primary text-decoration-none'>رخصة GPL-3.0</a> — مجاني ومفتوح للجميع",
+    "subtitle": "نداء مفتوح المصدر بالكامل — من المجتمع وللمجتمع",
+    "title": "مفتوح المصدر"
   },
   "privacy": {
     "consent": {
