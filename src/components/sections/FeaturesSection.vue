@@ -12,6 +12,8 @@ import {
   mdiWeatherNight,
   mdiCellphoneOff,
   mdiPalette,
+  mdiBookOpenPageVariantOutline,
+  mdiAlarmCheck,
 } from '@mdi/js'
 
 type Props = {
@@ -55,6 +57,16 @@ const features = [
     titleKey: 'features.list.design.title',
     descriptionKey: 'features.list.design.description',
   },
+  {
+    icon: mdiBookOpenPageVariantOutline,
+    titleKey: 'features.list.athkar.title',
+    descriptionKey: 'features.list.athkar.description',
+  },
+  {
+    icon: mdiAlarmCheck,
+    titleKey: 'features.list.alarm.title',
+    descriptionKey: 'features.list.alarm.description',
+  },
 ]
 </script>
 
@@ -63,7 +75,7 @@ const features = [
     <VContainer>
       <VRow>
         <VCol cols="12" class="text-center mb-8">
-          <h2 class="text-h3 font-weight-bold mb-4">{{ t('nav.features') }}</h2>
+          <h2 class="text-h4 font-weight-bold mb-4">{{ t('nav.features') }}</h2>
           <p
             class="text-h6 text-medium-emphasis max-width-600 mx-auto"
             style="white-space: normal; word-wrap: break-word"
@@ -74,8 +86,31 @@ const features = [
       </VRow>
 
       <VRow>
+        <!-- Hero feature card -->
+        <VCol cols="12" md="8" class="mb-4">
+          <VCard class="h-100 theme-transition hover-card" elevation="3" rounded="lg">
+            <VCardItem class="d-flex align-center pa-6">
+              <div class="me-6">
+                <VIcon :icon="features[0].icon" size="72" color="primary" />
+              </div>
+              <div>
+                <VCardTitle class="text-h6 font-weight-bold mb-3">
+                  {{ t(features[0].titleKey) }}
+                </VCardTitle>
+                <VCardText
+                  class="text-body-2 text-medium-emphasis pa-0"
+                  style="white-space: normal; word-wrap: break-word"
+                >
+                  {{ t(features[0].descriptionKey) }}
+                </VCardText>
+              </div>
+            </VCardItem>
+          </VCard>
+        </VCol>
+
+        <!-- Remaining feature cards -->
         <VCol
-          v-for="feature in features"
+          v-for="feature in features.slice(1)"
           :key="feature.titleKey"
           cols="12"
           sm="6"
@@ -103,20 +138,3 @@ const features = [
     </VContainer>
   </SectionContainer>
 </template>
-
-<style scoped>
-.hover-card {
-  transition:
-    transform 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-}
-
-.hover-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-}
-
-.max-width-600 {
-  max-width: 600px;
-}
-</style>

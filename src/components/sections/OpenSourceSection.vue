@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import SectionContainer from '@/components/sections/SectionContainer.vue'
 
 // Icons
-import { mdiGithub, mdiHeart, mdiAccountGroup, mdiStar, mdiEye, mdiArrowRight } from '@mdi/js'
+import { mdiGithub, mdiHeart, mdiAccountGroup, mdiEye, mdiArrowRight } from '@mdi/js'
 
 type Props = {
   id?: string
@@ -40,21 +40,25 @@ const contributionTypes = [
     titleKey: 'openSource.contribute.types.code.title',
     descriptionKey: 'openSource.contribute.types.code.description',
     actionKey: 'openSource.contribute.types.code.action',
+    href: 'https://github.com/nedaadevs/nedaa/issues',
   },
   {
     titleKey: 'openSource.contribute.types.translate.title',
     descriptionKey: 'openSource.contribute.types.translate.description',
     actionKey: 'openSource.contribute.types.translate.action',
+    href: 'https://crowdin.com/project/nedaa',
   },
   {
     titleKey: 'openSource.contribute.types.bugs.title',
     descriptionKey: 'openSource.contribute.types.bugs.description',
     actionKey: 'openSource.contribute.types.bugs.action',
+    href: 'https://github.com/nedaadevs/nedaa/issues/new?template=bug_report.md',
   },
   {
     titleKey: 'openSource.contribute.types.features.title',
     descriptionKey: 'openSource.contribute.types.features.description',
     actionKey: 'openSource.contribute.types.features.action',
+    href: 'https://github.com/nedaadevs/nedaa/issues/new?template=feature_request.md',
   },
 ]
 </script>
@@ -66,64 +70,25 @@ const contributionTypes = [
       <VRow>
         <VCol cols="12" class="text-center mb-8">
           <VIcon :icon="mdiGithub" size="64" color="primary" class="mb-4" />
-          <h2 class="text-h3 font-weight-bold mb-4">{{ t('nav.openSource') }}</h2>
+          <h2 class="text-h4 font-weight-bold mb-4">{{ t('nav.openSource') }}</h2>
           <p
-            class="text-h6 text-medium-emphasis max-width-600 mx-auto"
+            class="text-h6 text-medium-emphasis max-width-600 mx-auto mb-6"
             style="white-space: normal; word-wrap: break-word"
           >
             {{ t('openSource.subtitle') }}
           </p>
-        </VCol>
-      </VRow>
-
-      <!-- GitHub Stats Section -->
-      <VRow class="mb-8">
-        <VCol cols="12" class="text-center">
-          <VCard elevation="2" rounded="lg" class="mx-auto" max-width="600">
-            <VCardItem class="pa-6">
-              <div class="d-flex justify-center align-center flex-wrap gap-6">
-                <div class="text-center">
-                  <div class="d-flex align-center justify-center mb-2">
-                    <VIcon :icon="mdiStar" color="warning" class="mr-1" />
-                    <span class="text-h5 font-weight-bold">{{
-                      t('openSource.github.starUs')
-                    }}</span>
-                  </div>
-                  <p class="text-caption text-medium-emphasis">
-                    {{ t('openSource.github.starUsDescription') }}
-                  </p>
-                </div>
-
-                <VDivider vertical class="d-none d-sm-block" />
-
-                <div class="text-center">
-                  <div class="d-flex align-center justify-center mb-2">
-                    <VIcon :icon="mdiGithub" color="primary" class="mr-1" />
-                    <span class="text-h5 font-weight-bold">{{
-                      t('openSource.github.viewSource')
-                    }}</span>
-                  </div>
-                  <p class="text-caption text-medium-emphasis">
-                    {{ t('openSource.github.viewSourceDescription') }}
-                  </p>
-                </div>
-              </div>
-
-              <VBtn
-                color="primary"
-                size="large"
-                rounded="pill"
-                :prepend-icon="mdiGithub"
-                :append-icon="mdiArrowRight"
-                class="mt-6"
-                href="https://github.com/nedaadevs/nedaa"
-                target="_blank"
-                elevation="2"
-              >
-                {{ t('openSource.github.viewOnGithub') }}
-              </VBtn>
-            </VCardItem>
-          </VCard>
+          <VBtn
+            color="primary"
+            size="large"
+            rounded="pill"
+            :prepend-icon="mdiGithub"
+            :append-icon="mdiArrowRight"
+            href="https://github.com/nedaadevs/nedaa"
+            target="_blank"
+            elevation="2"
+          >
+            {{ t('openSource.github.viewOnGithub') }}
+          </VBtn>
         </VCol>
       </VRow>
 
@@ -138,7 +103,7 @@ const contributionTypes = [
           class="mb-4"
         >
           <VCard
-            class="h-100 text-center theme-transition hover-feature"
+            class="h-100 text-center theme-transition hover-card--subtle"
             elevation="1"
             rounded="lg"
           >
@@ -163,7 +128,7 @@ const contributionTypes = [
       <!-- Contribution Section -->
       <VRow>
         <VCol cols="12" class="text-center mb-6">
-          <h3 class="text-h4 font-weight-bold mb-4">{{ t('openSource.contribute.title') }}</h3>
+          <h3 class="text-h5 font-weight-bold mb-4">{{ t('openSource.contribute.title') }}</h3>
           <p
             class="text-body-1 text-medium-emphasis max-width-600 mx-auto"
             style="white-space: normal; word-wrap: break-word"
@@ -192,7 +157,14 @@ const contributionTypes = [
               >
                 {{ t(contribution.descriptionKey) }}
               </VCardText>
-              <VBtn color="primary" variant="tonal" rounded="pill" :append-icon="mdiArrowRight">
+              <VBtn
+                color="primary"
+                variant="tonal"
+                rounded="pill"
+                :append-icon="mdiArrowRight"
+                :href="contribution.href"
+                target="_blank"
+              >
                 {{ t(contribution.actionKey) }}
               </VBtn>
             </VCardItem>
@@ -214,32 +186,3 @@ const contributionTypes = [
     </VContainer>
   </SectionContainer>
 </template>
-
-<style scoped>
-.hover-card {
-  transition:
-    transform 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-}
-
-.hover-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
-}
-
-.hover-feature {
-  transition: transform 0.2s ease-in-out;
-}
-
-.hover-feature:hover {
-  transform: translateY(-2px);
-}
-
-.max-width-600 {
-  max-width: 600px;
-}
-
-.gap-6 {
-  gap: 1.5rem;
-}
-</style>
