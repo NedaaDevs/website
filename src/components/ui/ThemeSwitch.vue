@@ -74,7 +74,7 @@ const iconColor = computed(() => {
 .theme-icon {
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
 }
 
 .theme-enter-active {

@@ -67,7 +67,7 @@ const currentLanguage = computed(() => {
             color="primary"
             :icon="mdiCheck"
             size="small"
-            class="mr-2"
+            class="me-2"
           />
         </template>
 
