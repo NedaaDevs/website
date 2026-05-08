@@ -1,0 +1,220 @@
+---
+import StoreRow from '@/components/StoreRow.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const facts: [string, string][] = [
+  ['Method', 'Umm al-Qurā'],
+  ['Madhhab', 'Standard · ʿAṣr 1×'],
+  ['Engine', 'Adhan (open source)'],
+  ['Accuracy', '±15 s · device clock'],
+  ['Offline', 'After first sync'],
+  ['Privacy', 'On-device only'],
+];
+---
+
+<section class="hero section">
+  <div class="shell">
+    <div class="dateline">
+      <span class="marginalia">Nedaa · نداء</span>
+      <span class="marginalia">17 Ramaḍān 1447 · Riyadh</span>
+      <span class="marginalia">v3.4 · iOS · Android · Huawei</span>
+    </div>
+    <hr class="rule rule-strong" style="border-top-width:2px" />
+
+    <div class="hero-grid">
+      <div class="stack stack-6 hero-copy fx-rise">
+        <span class="eyebrow">{t('hero.eyebrow')}</span>
+        <h1 class="h-display hero-title">
+          {t('hero.title')}<br />
+          <span class="accent">{t('hero.title2')}</span>
+        </h1>
+        <p class="lead hero-lead">{t('hero.lead')}</p>
+        <StoreRow primary="ios" />
+        <div class="row" style="gap:24px">
+          <span class="marginalia">{t('hero.fact')}</span>
+          <span class="marginalia shipped">
+            <span aria-hidden="true" class="dot"></span>
+            v3.4 · {t('hero.shipped')}
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-shot fx-rise">
+        <div class="phone">
+          <div class="notch" aria-hidden="true"></div>
+          <div class="screen">
+            <span class="screen-placeholder">Home</span>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="marginalia">Pl. I — Home</span>
+          <span class="marginalia">captured 14 Mar 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="rule" />
+    <div class="quiet-facts">
+      {
+        facts.map(([k, v]) => (
+          <div class="fact">
+            <div class="marginalia">{k}</div>
+            <div class="value">{v}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+  .dateline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .hero-title {
+    margin-top: 4px;
+    font-size: clamp(44px, 6vw, 84px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+  .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero-lead {
+    font-size: 18px;
+    max-width: 46ch;
+  }
+  .shipped {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--success-bd);
+  }
+
+  .hero-shot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .phone {
+    width: 78%;
+    max-width: 360px;
+    aspect-ratio: 9 / 19.5;
+    border: 1px solid var(--outline-strong);
+    border-radius: 38px;
+    padding: 8px;
+    background: var(--bg-2);
+    position: relative;
+    filter: drop-shadow(0 30px 60px var(--shadow-lg));
+  }
+  .notch {
+    position: absolute;
+    inset-block-start: 14px;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--type);
+    opacity: 0.85;
+    z-index: 2;
+  }
+  .screen {
+    border-radius: 32px;
+    overflow: hidden;
+    height: 100%;
+    background: var(--bg);
+    display: grid;
+    place-items: center;
+    color: var(--type-2);
+  }
+  .screen-placeholder {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .caption {
+    width: 78%;
+    max-width: 360px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+
+  .quiet-facts {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px solid var(--outline);
+  }
+  .fact {
+    padding: 18px 16px;
+    border-inline-end: 1px solid var(--outline);
+  }
+  .fact:last-child {
+    border-inline-end: none;
+  }
+  .fact .value {
+    font-size: 14px;
+    color: var(--type);
+    margin-top: 6px;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .quiet-facts {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .fact:nth-child(3n) {
+      border-inline-end: none;
+    }
+    .fact:nth-child(-n + 3) {
+      border-bottom: 1px solid var(--outline);
+    }
+  }
+  @media (max-width: 640px) {
+    .quiet-facts {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .fact {
+      border-inline-end: 1px solid var(--outline) !important;
+      border-bottom: 1px solid var(--outline);
+    }
+    .fact:nth-child(2n) {
+      border-inline-end: none !important;
+    }
+  }
+</style>
