@@ -1,0 +1,13 @@
+node_modules
+.astro
+dist
+.git
+.github
+.husky
+docs
+.claude
+.agent*
+*.log
+.env*
+README.md
+lighthouserc.cjs
