@@ -1,4 +1,7 @@
 export default {
+  // site
+  'site.brand': 'نداء',
+  'site.title': 'نداء — مواقيت صلاة بتصميم يليق',
   // nav
   'nav.home': 'الرئيسية',
   'nav.features': 'المزايا',

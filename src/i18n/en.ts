@@ -1,4 +1,7 @@
 export default {
+  // site
+  'site.brand': 'Nedaa',
+  'site.title': 'Nedaa | نداء — Prayer times, dignified by design',
   // nav
   'nav.home': 'Home',
   'nav.features': 'Features',
