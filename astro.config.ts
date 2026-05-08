@@ -11,7 +11,6 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'ar', 'ms', 'ur'],
     routing: { prefixDefaultLocale: false },
-    fallback: { ar: 'en', ms: 'en', ur: 'en' },
   },
   build: {
     inlineStylesheets: 'auto',
@@ -22,9 +21,6 @@ export default defineConfig({
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
-    },
-    build: {
-      cssMinify: 'lightningcss',
     },
   },
 });
