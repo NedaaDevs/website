@@ -1,0 +1,35 @@
+---
+interface Props {
+  size?: number;
+  monogram?: boolean;
+}
+const { size = 36 } = Astro.props;
+const stroke = Math.max(1.4, size / 22);
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 64 64"
+  aria-hidden="true"
+  style="display:block"
+>
+  <defs>
+    <clipPath id={`ndmask-${size}`}>
+      <rect x="2" y="2" width="60" height="60" rx="14" />
+    </clipPath>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="var(--primary)" />
+  <g
+    clip-path={`url(#ndmask-${size})`}
+    stroke="var(--type-contrast)"
+    fill="none"
+    stroke-width={stroke}
+    stroke-linecap="round"
+  >
+    <path d="M16 50 V32 a16 16 0 0 1 32 0 V50" />
+    <line x1="32" y1="14" x2="32" y2="22" />
+    <circle cx="32" cy="11" r="1.6" fill="var(--type-contrast)" stroke="none" />
+    <path d="M22 50 V34 a10 10 0 0 1 20 0 V50" opacity="0.45" />
+  </g>
+</svg>
