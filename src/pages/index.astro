@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ThemeToggle from '@/components/svelte/ThemeToggle.svelte';
+import Brand from '@/components/Brand.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('site.title')} locale={lang}>
+  <main class="shell" style="padding: 80px 32px;">
+    <div style="display:flex; align-items:center; gap:16px;">
+      <Brand size={48} />
+      <h1 class="h-display" style="font-size: 56px;">{t('site.brand')}</h1>
+    </div>
+    <p class="lead" style="margin-top: 24px;">{t('hero.lead')}</p>
+    <div style="margin-top: 32px;">
+      <ThemeToggle client:idle />
+    </div>
+  </main>
+</Layout>
