@@ -1,0 +1,57 @@
+name: Astro CI
+
+on:
+  push:
+    branches: ['astro-rewrite']
+  pull_request:
+    branches: ['astro-rewrite']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build + check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.2'
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      - run: bun run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 1
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.2'
+      - run: bun install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - run: bunx @lhci/cli@0.15 autorun --config=./lighthouserc.cjs
+
+  docker:
+    name: Docker smoke build
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t nedaa-website:ci .
+      - name: Smoke test
+        run: |
+          docker run --rm -d --name web -p 8080:80 nedaa-website:ci
+          for _ in 1 2 3 4 5; do sleep 2; curl -fsS http://localhost:8080/ && break; done
+          docker rm -f web
