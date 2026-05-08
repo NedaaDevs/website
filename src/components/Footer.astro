@@ -1,0 +1,89 @@
+---
+import Brand from '@/components/Brand.astro';
+import Wordmark from '@/components/Wordmark.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+
+const product = [
+  { href: path('/features'), label: t('nav.features') },
+  { href: path('/download'), label: t('nav.download') },
+  { href: path('/privacy'), label: t('nav.privacy') },
+  { href: path('/changelog'), label: t('footer.changelog') },
+];
+const community = [
+  { href: 'https://github.com/NedaaDevs/nedaa', label: t('footer.github') },
+  { href: 'https://crowdin.com', label: t('footer.translate') },
+  { href: path('/press'), label: t('footer.press') },
+];
+const contact = [
+  { href: path('/support'), label: t('nav.support') },
+  { href: path('/terms'), label: t('footer.terms') },
+  { href: path('/attributions'), label: t('footer.attrib') },
+];
+---
+
+<footer class="site">
+  <div class="shell">
+    <div class="grid">
+      <div class="stack stack-4">
+        <a href={path('/')} class="brand-link">
+          <Brand size={28} />
+          <Wordmark size="sm" />
+        </a>
+        <p class="body" style="max-width:38ch">{t('footer.tagline')}</p>
+      </div>
+
+      <div>
+        <h4>{t('footer.product')}</h4>
+        <ul>
+          {product.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+        </ul>
+      </div>
+
+      <div>
+        <h4>{t('footer.community')}</h4>
+        <ul>
+          {community.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+        </ul>
+      </div>
+
+      <div>
+        <h4>{t('footer.contact')}</h4>
+        <ul>
+          {contact.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <span>{t('footer.copy')}</span>
+      <span>{t('footer.license')}</span>
+      <span class="status">
+        <span aria-hidden="true" class="dot"></span>
+        {t('footer.status')}
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .status .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--success-bd);
+  }
+</style>
