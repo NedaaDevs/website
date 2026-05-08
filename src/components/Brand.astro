@@ -8,9 +8,9 @@ const { size = 36, alt = 'Nedaa' } = Astro.props;
 ---
 
 <picture class="brand" style={`--s:${size}px`}>
-  <img class="brand-img light" src="/logo.png" {alt} width={size} height={size} decoding="async" />
+  <img class="brand-img brand-img-light" src="/logo.png" {alt} width={size} height={size} decoding="async" />
   <img
-    class="brand-img dark"
+    class="brand-img brand-img-dark"
     src="/logo-dark.png"
     alt=""
     aria-hidden="true"
@@ -19,27 +19,3 @@ const { size = 36, alt = 'Nedaa' } = Astro.props;
     decoding="async"
   />
 </picture>
-
-<style>
-  .brand {
-    display: inline-block;
-    width: var(--s);
-    height: var(--s);
-    line-height: 0;
-  }
-  .brand-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-  .brand {
-    position: relative;
-  }
-  :global([data-theme='dark']) .brand .light {
-    display: none;
-  }
-  :global(:not([data-theme='dark'])) .brand .dark {
-    display: none;
-  }
-</style>
