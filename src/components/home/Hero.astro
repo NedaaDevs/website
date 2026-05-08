@@ -1,5 +1,6 @@
 ---
 import StoreRow from '@/components/StoreRow.astro';
+import release from '@/data/release.json';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -20,7 +21,7 @@ const facts: [string, string][] = [
     <div class="dateline">
       <span class="marginalia">Nedaa · نداء</span>
       <span class="marginalia">17 Ramaḍān 1447 · Riyadh</span>
-      <span class="marginalia">v3.4 · iOS · Android · Huawei</span>
+      <span class="marginalia">v{release.version} · iOS · Android · Huawei</span>
     </div>
     <hr class="rule rule-strong" style="border-top-width:2px" />
 
@@ -37,7 +38,7 @@ const facts: [string, string][] = [
           <span class="marginalia">{t('hero.fact')}</span>
           <span class="marginalia shipped">
             <span aria-hidden="true" class="dot"></span>
-            v3.4 · {t('hero.shipped')}
+            v{release.version} · {t('hero.shipped')}
           </span>
         </div>
       </div>

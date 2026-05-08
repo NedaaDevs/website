@@ -1,6 +1,7 @@
 ---
 import StoreButton from '@/components/StoreButton.astro';
 import type { Store } from '@/components/store';
+import release from '@/data/release.json';
 
 type Props = {
   primary?: Store;
@@ -8,9 +9,15 @@ type Props = {
 };
 
 const { primary = 'ios', compact = false } = Astro.props;
+
+const links: Record<Store, string> = {
+  ios: release.iosUrl,
+  android: release.androidUrl,
+  huawei: release.huaweiUrl,
+};
 const order: Store[] = ['ios', 'android', 'huawei'];
 ---
 
 <div class="row" style={`gap:${compact ? 8 : 12}px`}>
-  {order.map((s) => <StoreButton store={s} primary={s === primary} />)}
+  {order.map((s) => <StoreButton store={s} primary={s === primary} href={links[s]} />)}
 </div>
