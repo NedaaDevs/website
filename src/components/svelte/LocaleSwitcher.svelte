@@ -13,6 +13,6 @@
   const label = $derived(current === 'en' ? 'العربية' : 'English');
 </script>
 
-<button class="btn btn-ghost" type="button" aria-label="Switch language" onclick={swap}>
+<button class="btn btn-ghost" type="button" onclick={swap}>
   {label}
 </button>

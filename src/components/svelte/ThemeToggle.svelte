@@ -15,6 +15,21 @@
   };
 </script>
 
-<button class="btn btn-ghost" type="button" aria-label="Toggle theme" onclick={toggle}>
+<button class="btn btn-ghost" type="button" onclick={toggle}>
+  <span class="visually-hidden">Switch to&nbsp;</span>
   {theme === 'light' ? 'Dark' : 'Light'}
 </button>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
