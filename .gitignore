@@ -31,3 +31,9 @@ coverage
 
 
 .env
+
+# Astro
+.astro/
+
+# Lighthouse CI
+.lighthouseci/
