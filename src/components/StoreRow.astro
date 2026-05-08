@@ -1,0 +1,15 @@
+---
+import StoreButton, { type Store } from '@/components/StoreButton.astro';
+
+type Props = {
+  primary?: Store;
+  compact?: boolean;
+};
+
+const { primary = 'ios', compact = false } = Astro.props;
+const order: Store[] = ['ios', 'android', 'huawei'];
+---
+
+<div class="row" style={`gap:${compact ? 8 : 12}px`}>
+  {order.map((s) => <StoreButton store={s} primary={s === primary} />)}
+</div>

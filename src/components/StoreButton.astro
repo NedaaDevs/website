@@ -1,0 +1,31 @@
+---
+import Icon, { type IconName } from '@/components/Icon.astro';
+
+export type Store = 'ios' | 'android' | 'huawei';
+
+type Props = {
+  store: Store;
+  primary?: boolean;
+  full?: boolean;
+  href?: string;
+};
+
+const { store, primary = false, full = false, href = '#' } = Astro.props;
+
+const config: Record<Store, { line1: string; line2: string; icon: IconName }> = {
+  ios: { line1: 'Download on the', line2: 'App Store', icon: 'apple' },
+  android: { line1: 'Get it on', line2: 'Google Play', icon: 'android' },
+  huawei: { line1: 'Explore it on', line2: 'AppGallery', icon: 'huawei' },
+};
+
+const { line1, line2, icon } = config[store];
+const classes = ['store-btn', primary && 'primary'].filter(Boolean).join(' ');
+---
+
+<a class={classes} href={href} style={full ? 'width:100%' : undefined}>
+  <span class="glyph"><Icon name={icon} size={22} /></span>
+  <span class="lines">
+    <small>{line1}</small>
+    <strong>{line2}</strong>
+  </span>
+</a>
