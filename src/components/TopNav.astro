@@ -1,0 +1,60 @@
+---
+import Brand from '@/components/Brand.astro';
+import Wordmark from '@/components/Wordmark.astro';
+import Icon from '@/components/Icon.astro';
+import ThemeToggle from '@/components/svelte/ThemeToggle.svelte';
+import LocaleSwitcher from '@/components/svelte/LocaleSwitcher.svelte';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const items = [
+  { id: 'home', href: path('/'), label: t('nav.home') },
+  { id: 'features', href: path('/features'), label: t('nav.features') },
+  { id: 'privacy', href: path('/privacy'), label: t('nav.privacy') },
+  { id: 'open', href: path('/open'), label: t('nav.open') },
+  { id: 'download', href: path('/download'), label: t('nav.download') },
+  { id: 'support', href: path('/support'), label: t('nav.support') },
+];
+
+const isActive = (href: string) => current === href.replace(/\/$/, '');
+---
+
+<nav class="topnav" aria-label="Primary">
+  <div class="shell topnav-inner">
+    <a href={path('/')} class="brand-link" aria-label={t('site.brand')}>
+      <Brand size={28} />
+      <Wordmark size="sm" />
+    </a>
+
+    <div class="topnav-links">
+      {
+        items.map((it) => (
+          <a href={it.href} class={isActive(it.href) ? 'active' : ''}>
+            {it.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="row" style="gap:8px">
+      <LocaleSwitcher current={lang === 'ar' ? 'ar' : 'en'} client:idle />
+      <ThemeToggle client:idle />
+      <a class="btn btn-ghost" href={path('/download')}>
+        {t('nav.cta')}
+        <Icon name="arrow-right" size={14} />
+      </a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+</style>
