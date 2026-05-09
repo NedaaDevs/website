@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "bun run scripts/fetch-release.ts && astro check && astro build",
+    "build": "bun run scripts/fetch-release.ts && bun run scripts/fetch-prayers.ts && astro check && astro build",
     "fetch:release": "bun run scripts/fetch-release.ts",
+    "fetch:prayers": "bun run scripts/fetch-prayers.ts",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",

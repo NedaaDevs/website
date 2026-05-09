@@ -38,3 +38,4 @@ coverage
 # Lighthouse CI
 .lighthouseci/
 src/data/release.json
+src/data/prayers-default.json

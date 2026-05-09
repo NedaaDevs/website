@@ -7,6 +7,8 @@
  */
 export type TzCity = { city: string; lat: number; lng: number };
 
+export const MAKKAH: TzCity = { city: 'Makkah', lat: 21.3891, lng: 39.8579 };
+
 const TABLE: Record<string, TzCity> = {
   // Gulf / Levant / North Africa
   'Asia/Riyadh': { city: 'Riyadh', lat: 24.7136, lng: 46.6753 },
@@ -64,9 +66,12 @@ const TABLE: Record<string, TzCity> = {
   'Australia/Melbourne': { city: 'Melbourne', lat: -37.8136, lng: 144.9631 },
 };
 
-export const DEFAULT_CITY: TzCity = TABLE['Asia/Riyadh']!;
+export const DEFAULT_CITY: TzCity = MAKKAH;
 
 export const cityForTz = (tz: string): TzCity => TABLE[tz] ?? DEFAULT_CITY;
+
+export const sameCity = (a: TzCity, b: TzCity): boolean =>
+  Math.abs(a.lat - b.lat) < 0.05 && Math.abs(a.lng - b.lng) < 0.05;
 
 export const detectCity = (): TzCity => {
   if (typeof Intl === 'undefined') return DEFAULT_CITY;
