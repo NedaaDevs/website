@@ -1,9 +1,10 @@
 <script lang="ts">
   import { animate } from 'motion/mini';
   import { getPrayers, getReverseGeocode, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
-  import { detectCity, type TzCity } from '@/lib/tz-cities';
+  import { detectCity, sameCity, MAKKAH, type TzCity } from '@/lib/tz-cities';
   import { hijriDate } from '@/lib/format';
   import type { Locale } from '@/i18n/types';
+  import prebake from '@/data/prayers-default.json';
 
   type Props = { lang: Locale };
   const { lang }: Props = $props();
@@ -12,8 +13,8 @@
 
   let city = $state<TzCity>(detectCity());
   let cityLabel = $state<string>(city.city);
-  let day = $state<PrayerDay | null>(null);
-  let provider = $state<string | null>(null);
+  let day = $state<PrayerDay | null>(prebake.day);
+  let provider = $state<string | null>(prebake.provider);
   let now = $state<number>(Date.now());
   let error = $state<string | null>(null);
   let countdownEl: HTMLElement | undefined = $state();
@@ -32,8 +33,13 @@
 
   const NEXT_LABEL = { en: 'Next prayer', ar: 'الصلاة التالية', ms: 'Solat seterusnya', ur: 'اگلی نماز' };
   const IN_LABEL = { en: 'in', ar: 'بعد', ms: 'dalam', ur: 'میں' };
-  const MIN_LABEL = { en: 'min', ar: 'د', ms: 'min', ur: 'منٹ' };
   const PROVIDER_LABEL = { en: 'Source', ar: 'المصدر', ms: 'Sumber', ur: 'ماخذ' };
+
+  const pad2 = new Intl.NumberFormat(baseLocale, {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  const num = new Intl.NumberFormat(baseLocale, { useGrouping: false });
 
   const fmtTime = (iso: string) =>
     new Intl.DateTimeFormat(baseLocale, {
@@ -54,57 +60,61 @@
     return rows.find((r) => new Date(r.iso).getTime() > now) ?? rows[0]!;
   });
 
-  const minutesUntil = $derived.by((): number | null => {
-    if (!next) return null;
-    return Math.max(0, Math.round((new Date(next.iso).getTime() - now) / 60_000));
+  const remainingSeconds = $derived.by((): number => {
+    if (!next) return 0;
+    return Math.max(0, Math.floor((new Date(next.iso).getTime() - now) / 1000));
+  });
+
+  const countdown = $derived.by((): string => {
+    if (remainingSeconds === 0) return '';
+    const h = Math.floor(remainingSeconds / 3600);
+    const m = Math.floor((remainingSeconds % 3600) / 60);
+    const s = remainingSeconds % 60;
+    return h > 0
+      ? `${num.format(h)}:${pad2.format(m)}:${pad2.format(s)}`
+      : `${pad2.format(m)}:${pad2.format(s)}`;
   });
 
   $effect(() => {
-    if (countdownEl && minutesUntil != null) {
-      animate(
-        countdownEl,
-        { opacity: [0.4, 1], transform: ['translateY(2px)', 'translateY(0)'] },
-        { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-      );
+    countdown; // re-run on every tick
+    if (countdownEl) {
+      animate(countdownEl, { opacity: [0.78, 1] }, { duration: 0.18, ease: 'easeOut' });
     }
   });
 
-  const skipApi =
-    typeof window !== 'undefined' &&
-    (/Lighthouse|HeadlessChrome/i.test(navigator.userAgent) ||
-      navigator.webdriver === true ||
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1');
+  const isHeadless =
+    typeof navigator !== 'undefined' &&
+    (navigator.webdriver === true || /HeadlessChrome|Lighthouse/i.test(navigator.userAgent));
 
   $effect(() => {
-    if (skipApi) return;
-
     let cancelled = false;
 
-    (async () => {
-      const today = new Date();
-      const [prayers, geo] = await Promise.all([
-        getPrayers({
-          lat: city.lat,
-          lng: city.lng,
-          year: today.getFullYear(),
-          month: today.getMonth() + 1,
-        }),
-        getReverseGeocode({ lat: city.lat, lng: city.lng, locale: lang }),
-      ]);
-      if (cancelled) return;
-      if (!prayers.ok) {
-        error = prayers.error.kind;
-        return;
-      }
-      provider = prayers.data.provider;
-      day = todayFrom(prayers.data, today);
-      if (geo.ok) cityLabel = geo.data.city;
-    })();
+    if (!isHeadless && !sameCity(city, MAKKAH)) {
+      (async () => {
+        const today = new Date();
+        const [prayers, geo] = await Promise.all([
+          getPrayers({
+            lat: city.lat,
+            lng: city.lng,
+            year: today.getFullYear(),
+            month: today.getMonth() + 1,
+          }),
+          getReverseGeocode({ lat: city.lat, lng: city.lng, locale: lang }),
+        ]);
+        if (cancelled) return;
+        if (!prayers.ok) {
+          error = prayers.error.kind;
+          return;
+        }
+        provider = prayers.data.provider;
+        day = todayFrom(prayers.data, today);
+        if (geo.ok) cityLabel = geo.data.city;
+      })();
+    }
 
     const tick = setInterval(() => {
       now = Date.now();
-    }, 30_000);
+    }, 1_000);
 
     return () => {
       cancelled = true;
@@ -133,8 +143,8 @@
         {next ? fmtTime(next.iso) : '—'}
       </div>
       <div class="muted countdown" bind:this={countdownEl}>
-        {#if minutesUntil != null && minutesUntil > 0}
-          {IN_LABEL[lang]} {minutesUntil} {MIN_LABEL[lang]}
+        {#if countdown}
+          {IN_LABEL[lang]} <span class="tnum">{countdown}</span>
         {:else}
           &nbsp;
         {/if}
