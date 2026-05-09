@@ -16,6 +16,8 @@ export type IconName =
   | 'code'
   | 'arrow-right'
   | 'arrow-up-right'
+  | 'arrow-end'
+  | 'arrow-up-end'
   | 'shield'
   | 'no-eye'
   | 'hand'
