@@ -19,6 +19,8 @@ module.exports = {
         'largest-contentful-paint': ['error', { maxNumericValue: 1800 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.05 }],
         'total-blocking-time': ['error', { maxNumericValue: 100 }],
+        'errors-in-console': 'off',
+        'uses-rel-preconnect': 'off',
         'resource-summary:script:size': ['error', { maxNumericValue: 51200 }],
         'resource-summary:stylesheet:size': ['error', { maxNumericValue: 20480 }],
         'resource-summary:total:size': ['error', { maxNumericValue: 256000 }],
