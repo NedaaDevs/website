@@ -11,7 +11,7 @@ import { lookupByBundleId } from '@/lib/api/itunes';
 
 const BUNDLE_ID = 'dev.nedaa.app';
 const ANDROID_PACKAGE = 'dev.nedaa.android';
-const HUAWEI_APP_ID = 'C115223843';
+const HUAWEI_APP_ID = 'C114573733';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = resolve(ROOT, 'src/data/release.json');
