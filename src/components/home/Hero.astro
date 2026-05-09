@@ -1,10 +1,16 @@
 ---
 import StoreRow from '@/components/StoreRow.astro';
+import RelativeDate from '@/components/svelte/RelativeDate.svelte';
+import HijriDate from '@/components/svelte/HijriDate.svelte';
 import release from '@/data/release.json';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { hijriDate, relativeDays } from '@/lib/format';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const shippedFallback = relativeDays(lang, release.releaseDate);
+const hijriFallback = hijriDate(lang);
 
 const facts: [string, string][] = [
   ['Method', 'Umm al-Qurā'],
@@ -20,7 +26,9 @@ const facts: [string, string][] = [
   <div class="shell">
     <div class="dateline">
       <span class="marginalia">Nedaa · نداء</span>
-      <span class="marginalia">17 Ramaḍān 1447 · Riyadh</span>
+      <span class="marginalia">
+        <HijriDate lang={lang} fallback={hijriFallback} client:idle /> · Riyadh
+      </span>
       <span class="marginalia">v{release.version} · iOS · Android · Huawei</span>
     </div>
     <hr class="rule rule-strong" style="border-top-width:2px" />
@@ -38,7 +46,12 @@ const facts: [string, string][] = [
           <span class="marginalia">{t('hero.fact')}</span>
           <span class="marginalia shipped">
             <span aria-hidden="true" class="dot"></span>
-            v{release.version} · {t('hero.shipped')}
+            v{release.version} · <RelativeDate
+              lang={lang}
+              iso={release.releaseDate}
+              fallback={shippedFallback}
+              client:idle
+            />
           </span>
         </div>
       </div>

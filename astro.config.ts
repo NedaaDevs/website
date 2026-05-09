@@ -16,6 +16,7 @@ export default defineConfig({
     inlineStylesheets: 'auto',
     assets: '_astro',
   },
+  devToolbar: { enabled: true },
   vite: {
     resolve: {
       alias: {
