@@ -1,0 +1,61 @@
+---
+import Icon from '@/components/Icon.astro';
+import release from '@/data/release.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="section-sm">
+  <div class="shell">
+    <article class="card huawei fx-rise">
+      <span class="logo">
+        <Icon name="huawei" size={28} />
+      </span>
+      <div class="copy">
+        <div class="marginalia">{t('huawei.tag')}</div>
+        <h3 class="h-2">{t('huawei.title')}</h3>
+        <p class="body huawei-body">{t('huawei.body')}</p>
+      </div>
+      <a class="btn btn-ghost" href={release.huaweiUrl}>
+        {t('huawei.cta')}
+        <Icon name="arrow-up-end" size={14} />
+      </a>
+    </article>
+  </div>
+</section>
+
+<style>
+  .huawei {
+    padding: 36px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    border-color: var(--outline-strong);
+  }
+  .logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: var(--primary-10);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+  }
+  .h-2 {
+    margin-top: 8px;
+  }
+  .huawei-body {
+    font-size: 15px;
+    margin-top: 8px;
+    max-width: 64ch;
+  }
+  @media (max-width: 768px) {
+    .huawei {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+</style>
