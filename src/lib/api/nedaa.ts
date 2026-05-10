@@ -50,6 +50,17 @@ export const getPrayers = (q: PrayersQuery, opts?: { timeoutMs?: number }) => {
   return get<PrayersResponse>(`${NEDAA_API_BASE}/v3/prayers/?${params}`, opts);
 };
 
+export type PrayerProvider = {
+  id: string;
+  name: string;
+  website?: string;
+  description?: string;
+  supportedParams?: string[];
+};
+
+export const getPrayerProviders = (opts?: { timeoutMs?: number }) =>
+  get<PrayerProvider[]>(`${NEDAA_API_BASE}/v3/prayers/providers`, opts);
+
 // ── Reverse geocode ─────────────────────────────────────────────────────────
 
 export type ReverseGeocode = {

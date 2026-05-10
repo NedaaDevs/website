@@ -8,11 +8,12 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getPrayers, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
+import { getPrayers, getPrayerProviders, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
 import { MAKKAH } from '@/lib/tz-cities';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = resolve(ROOT, 'src/data/prayers-default.json');
+const PROVIDERS_OUT = resolve(ROOT, 'src/data/prayer-providers.json');
 
 export type DefaultPrayers = {
   city: string;
@@ -72,6 +73,14 @@ const main = async () => {
   await mkdir(dirname(OUT), { recursive: true });
   await writeFile(OUT, JSON.stringify(out, null, 2) + '\n', 'utf8');
   console.log(`[fetch-prayers] ${out.city} · provider=${out.provider}`);
+
+  const providers = await getPrayerProviders({ timeoutMs: 6000 });
+  if (providers.ok) {
+    await writeFile(PROVIDERS_OUT, JSON.stringify(providers.data, null, 2) + '\n', 'utf8');
+    console.log(`[fetch-prayers] ${providers.data.length} providers`);
+  } else {
+    console.warn('[fetch-prayers] providers failed:', providers.error.kind);
+  }
 };
 
 await main();
