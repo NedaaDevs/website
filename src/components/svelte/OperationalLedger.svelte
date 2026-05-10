@@ -1,8 +1,12 @@
 <script lang="ts">
   import type { Locale } from '@/i18n/types';
-  import type { StatsPeriod, StatsSummary } from '@/lib/api/nedaa';
+  import {
+    getStatsSummary,
+    type EndpointStat,
+    type StatsPeriod,
+    type StatsSummary,
+  } from '@/lib/api/nedaa';
 
-  type Bundle = { fetchedAt: string; windows: Record<StatsPeriod, StatsSummary> };
   type Labels = {
     period: string;
     totalRequests: string;
@@ -16,10 +20,12 @@
     requests: string;
     note: string;
     empty: string;
+    loading: string;
+    error: string;
   };
-  type Props = { lang: Locale; data: Bundle; labels: Labels };
+  type Props = { lang: Locale; labels: Labels };
 
-  const { lang, data, labels }: Props = $props();
+  const { lang, labels }: Props = $props();
 
   const PERIODS: { id: StatsPeriod; short: string }[] = [
     { id: '24h', short: '24 h' },
@@ -28,6 +34,8 @@
   ];
 
   let active = $state<StatsPeriod>('24h');
+  const cache = new Map<StatsPeriod, StatsSummary | 'loading' | 'error'>();
+  let tick = $state(0);
 
   const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
   const compact = new Intl.NumberFormat(baseLocale, {
@@ -40,19 +48,48 @@
     maximumFractionDigits: 2,
   });
 
-  const stats = $derived<StatsSummary>(data.windows[active]);
-  const total = $derived(stats.totalRequests);
-  const errorTone = $derived<'ok' | 'warn' | 'err'>(
-    stats.errorRate < 0.01 ? 'ok' : stats.errorRate < 0.05 ? 'warn' : 'err',
-  );
+  const isLegit = (e: EndpointStat): boolean =>
+    e.endpoint.startsWith('/v3/') && !e.endpoint.startsWith('/v3/health');
 
-  type CodeRow = { code: string; count: number };
-  const statusRows = $derived<CodeRow[]>(
-    Object.entries(stats.statusCodes ?? {})
-      .map(([code, count]) => ({ code, count: count as number }))
-      .sort((a, b) => Number(a.code) - Number(b.code)),
-  );
-  const statusTotal = $derived(statusRows.reduce((s, r) => s + r.count, 0) || 1);
+  const sanitise = (s: StatsSummary): StatsSummary => {
+    const endpoints = s.endpoints.filter(isLegit).sort((a, b) => b.count - a.count);
+    const totalRequests = endpoints.reduce((acc, e) => acc + e.count, 0);
+    const errorRate =
+      totalRequests > 0
+        ? endpoints.reduce((acc, e) => acc + e.count * e.errorRate, 0) / totalRequests
+        : 0;
+    const avgResponseTimeMs =
+      totalRequests > 0
+        ? endpoints.reduce((acc, e) => acc + e.count * e.avgMs, 0) / totalRequests
+        : 0;
+    return {
+      ...s,
+      endpoints,
+      totalRequests,
+      errorRate,
+      avgResponseTimeMs: Math.round(avgResponseTimeMs * 10) / 10,
+    };
+  };
+
+  const load = async (period: StatsPeriod) => {
+    if (cache.get(period)) return;
+    cache.set(period, 'loading');
+    tick += 1;
+    const res = await getStatsSummary(period, { timeoutMs: 6000 });
+    cache.set(period, res.ok ? sanitise(res.data) : 'error');
+    tick += 1;
+  };
+
+  $effect(() => {
+    void load(active);
+  });
+
+  const state = $derived.by(() => {
+    void tick;
+    return cache.get(active);
+  });
+
+  const stats = $derived(typeof state === 'object' ? state : null);
 
   const codeTone = (code: string): 'ok' | 'redir' | 'warn' | 'err' => {
     const n = Number(code);
@@ -61,6 +98,26 @@
     if (n >= 300) return 'redir';
     return 'ok';
   };
+
+  const errorTone = $derived<'ok' | 'warn' | 'err'>(
+    !stats
+      ? 'ok'
+      : stats.errorRate < 0.01
+        ? 'ok'
+        : stats.errorRate < 0.05
+          ? 'warn'
+          : 'err',
+  );
+
+  type CodeRow = { code: string; count: number };
+  const statusRows = $derived<CodeRow[]>(
+    stats
+      ? Object.entries(stats.statusCodes ?? {})
+          .map(([code, count]) => ({ code, count: count as number }))
+          .sort((a, b) => Number(a.code) - Number(b.code))
+      : [],
+  );
+  const statusTotal = $derived(statusRows.reduce((s, r) => s + r.count, 0) || 1);
 </script>
 
 <div class="ledger-card">
@@ -78,14 +135,18 @@
     {/each}
   </div>
 
-  {#if total === 0}
-    <p class="empty">{labels.empty}</p>
-  {:else}
+  {#if state === 'loading' || state === undefined}
+    <p class="status-msg">{labels.loading}</p>
+  {:else if state === 'error'}
+    <p class="status-msg err">{labels.error}</p>
+  {:else if stats && stats.totalRequests === 0}
+    <p class="status-msg">{labels.empty}</p>
+  {:else if stats}
     <div class="strip">
       <div class="metric">
         <div class="marginalia">{labels.totalRequests}</div>
-        <div class="metric-num tnum">{compact.format(total)}</div>
-        <div class="metric-meta">{exact.format(total)}</div>
+        <div class="metric-num tnum">{compact.format(stats.totalRequests)}</div>
+        <div class="metric-meta">{exact.format(stats.totalRequests)}</div>
       </div>
       <div class="metric">
         <div class="marginalia">{labels.errorRate}</div>
@@ -110,7 +171,7 @@
       {#each stats.endpoints as e}
         <div class="ep-row">
           <code class="path">{e.endpoint}</code>
-          <div class="bar"><div class="bar-fill" style="inline-size:{(e.count / total) * 100}%"></div></div>
+          <div class="bar"><div class="bar-fill" style="inline-size:{(e.count / stats.totalRequests) * 100}%"></div></div>
           <span class="tnum num">{exact.format(e.avgMs)}</span>
           <span class="tnum num">{exact.format(e.count)}</span>
         </div>
@@ -146,9 +207,7 @@
 </div>
 
 <style>
-  .ledger-card {
-    margin-top: 36px;
-  }
+  .ledger-card { margin-top: 36px; }
 
   .tabs {
     display: inline-flex;
@@ -170,21 +229,12 @@
     border-radius: 999px;
     cursor: pointer;
   }
-  .tabs button:hover {
-    color: var(--type);
-  }
-  .tabs button.active {
-    background: var(--primary);
-    color: var(--type-contrast);
-  }
-  :global([data-theme='dark']) .tabs button.active {
-    color: #1c1a12;
-  }
+  .tabs button:hover { color: var(--type); }
+  .tabs button.active { background: var(--primary); color: var(--type-contrast); }
+  :global([data-theme='dark']) .tabs button.active { color: #1c1a12; }
 
-  .empty {
-    margin-top: 24px;
-    color: var(--type-2);
-  }
+  .status-msg { margin-top: 24px; color: var(--type-2); }
+  .status-msg.err { color: var(--error); }
 
   .strip {
     display: grid;
@@ -195,10 +245,7 @@
     border-radius: 14px;
     overflow: hidden;
   }
-  .metric {
-    padding: 22px 24px;
-    border-inline-end: 1px solid var(--outline);
-  }
+  .metric { padding: 22px 24px; border-inline-end: 1px solid var(--outline); }
   .metric:last-child { border-inline-end: none; }
   .metric-num {
     font-family: var(--f-mono);

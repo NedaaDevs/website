@@ -1,6 +1,5 @@
 ---
 import Ledger from '@/components/svelte/OperationalLedger.svelte';
-import bundle from '@/data/stats.json';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -19,6 +18,8 @@ const labels = {
   requests: t('ledger.requests'),
   note: t('ledger.note'),
   empty: t('ledger.empty'),
+  loading: t('ledger.loading'),
+  error: t('ledger.error'),
 };
 ---
 
@@ -32,7 +33,7 @@ const labels = {
       </div>
     </div>
 
-    <Ledger lang={lang} data={bundle} labels={labels} client:visible />
+    <Ledger lang={lang} labels={labels} client:visible />
   </div>
 </section>
 

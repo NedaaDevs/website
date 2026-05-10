@@ -130,7 +130,7 @@ export default {
   'ledger.section': 'Operational ledger',
   'ledger.title': 'Read the numbers, not the marketing.',
   'ledger.lead':
-    'Real traffic from the Nedaa API. Refreshed on every deploy. No IPs, headers, or query bodies retained.',
+    'Live traffic from the Nedaa API. No IPs, headers, or query bodies retained.',
   'ledger.period': 'Window',
   'ledger.totalRequests': 'Total requests',
   'ledger.errorRate': 'Error rate',
@@ -142,7 +142,9 @@ export default {
   'ledger.avg': 'Avg ms',
   'ledger.requests': 'Requests',
   'ledger.note': 'Spam routes filtered. No IPs, headers, or query bodies retained.',
-  'ledger.empty': 'No data yet — stats will appear after the next deploy.',
+  'ledger.empty': 'No data yet.',
+  'ledger.loading': 'Loading…',
+  'ledger.error': 'Could not load live stats. Try again later.',
   // footer
   'footer.tagline':
     'A quiet, private companion for prayer times. Free, open source, designed to stay out of the way.',
