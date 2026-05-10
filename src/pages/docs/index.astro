@@ -1,0 +1,108 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import Icon from '@/components/Icon.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+import { getPublishedDocs, docMeta } from '@/lib/docs';
+import { gregorianShort } from '@/lib/format';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+
+const docs = (await getPublishedDocs(lang)).sort(
+  (a, b) =>
+    (b.data.last_updated?.getTime() ?? 0) - (a.data.last_updated?.getTime() ?? 0),
+);
+---
+
+<Layout title={`${t('docs.title')} · Nedaa`} locale={lang}>
+  <TopNav />
+  <main class="section docs-index">
+    <div class="shell">
+      <div class="almanac-rule" style="justify-content:flex-start">{t('docs.eyebrow')}</div>
+      <h1 class="h-display docs-h1">{t('docs.title')}</h1>
+      <p class="lead">{t('docs.lead')}</p>
+
+      <ul class="doc-list">
+        {
+          docs.map((d) => (
+            <li class="doc-row">
+              <a class="doc-link" href={path(`/docs/${docMeta(d).slug}`)}>
+                <div class="doc-titles">
+                  <h2 class="h-3 doc-title">{d.data.title}</h2>
+                  {d.data.description && (
+                    <p class="body doc-desc">{d.data.description}</p>
+                  )}
+                </div>
+                <div class="doc-meta">
+                  {d.data.last_updated && (
+                    <span class="marginalia">{gregorianShort(lang, d.data.last_updated)}</span>
+                  )}
+                  <Icon name="arrow-end" size={14} />
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .docs-index {
+    padding-top: 96px;
+  }
+  .docs-h1 {
+    font-size: clamp(40px, 5.4vw, 64px);
+    margin-top: 24px;
+  }
+  .doc-list {
+    list-style: none;
+    margin: 48px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--outline);
+  }
+  .doc-row {
+    border-bottom: 1px solid var(--outline);
+  }
+  .doc-link {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 22px 4px;
+    color: inherit;
+  }
+  .doc-link:hover .doc-title {
+    color: var(--accent);
+  }
+  .doc-titles {
+    min-width: 0;
+  }
+  .doc-title {
+    margin: 0;
+  }
+  .doc-desc {
+    margin-top: 6px;
+    font-size: 14.5px;
+    max-width: 70ch;
+  }
+  .doc-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--type-2);
+  }
+  @media (max-width: 640px) {
+    .doc-link {
+      grid-template-columns: 1fr;
+    }
+    .doc-meta {
+      justify-content: space-between;
+    }
+  }
+</style>
