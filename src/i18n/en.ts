@@ -9,6 +9,7 @@ export default {
   'nav.open': 'Open Source',
   'nav.download': 'Download',
   'nav.support': 'Support',
+  'nav.docs': 'Docs',
   'nav.cta': 'Download',
   // hero (quiet)
   'hero.eyebrow': 'For practicing Muslims',
@@ -259,6 +260,12 @@ export default {
     'If we change anything material, we’ll show a one-time, dismissible notice in the app — never a wall of text you have to accept to continue praying.',
   'pp.contact': 'Questions? support@nedaa.dev',
   'pp.gov': 'Governed under GPLv3 · code at github.com/NedaaDevs/nedaa',
+  // docs
+  'docs.eyebrow': 'Docs · methodology, comparisons, datasets',
+  'docs.title': 'How Nedaa works.',
+  'docs.lead':
+    'Detailed write-ups on prayer-time calculation, alarm reliability, the Athkar dataset, our privacy stance, and how we compare to other Islamic apps. Source for the marketing site, also indexable by LLM-powered search engines.',
+  'docs.back': 'All docs',
   // stub pages
   'stub.features.title': 'A scannable index of every feature.',
   'stub.features.body':

@@ -14,10 +14,10 @@ const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const items = [
   { id: 'home', href: path('/'), label: t('nav.home') },
   { id: 'features', href: path('/features'), label: t('nav.features') },
+  { id: 'docs', href: path('/docs'), label: t('nav.docs') },
   { id: 'privacy', href: path('/privacy'), label: t('nav.privacy') },
   { id: 'open', href: path('/open'), label: t('nav.open') },
   { id: 'download', href: path('/download'), label: t('nav.download') },
-  { id: 'support', href: path('/support'), label: t('nav.support') },
 ];
 
 const isActive = (href: string) => current === href.replace(/\/$/, '');
