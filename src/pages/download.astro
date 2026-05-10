@@ -1,0 +1,249 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import Icon, { } from '@/components/Icon.astro';
+import StoreButton from '@/components/StoreButton.astro';
+import type { IconName } from '@/components/icons';
+import type { Store } from '@/components/store';
+import release from '@/data/release.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+type Card = {
+  store: Store;
+  icon: IconName;
+  href: string;
+  eye: string;
+  name: string;
+  req: string;
+  bullets: string[];
+  primary?: boolean;
+};
+
+const cards: Card[] = [
+  {
+    store: 'ios',
+    icon: 'apple',
+    href: release.iosUrl,
+    eye: t('dl.ios.eye'),
+    name: t('dl.ios.name'),
+    req: `${t('dl.ios.req')} · iOS ${release.minimumOsVersion}+`,
+    bullets: [t('dl.ios.b1'), t('dl.ios.b2'), t('dl.ios.b3')],
+  },
+  {
+    store: 'android',
+    icon: 'android',
+    href: release.androidUrl,
+    eye: t('dl.gp.eye'),
+    name: t('dl.gp.name'),
+    req: t('dl.gp.req'),
+    bullets: [t('dl.gp.b1'), t('dl.gp.b2'), t('dl.gp.b3')],
+  },
+  {
+    store: 'huawei',
+    icon: 'huawei',
+    href: release.huaweiUrl,
+    eye: t('dl.hw.eye'),
+    name: t('dl.hw.name'),
+    req: t('dl.hw.req'),
+    bullets: [t('dl.hw.b1'), t('dl.hw.b2'), t('dl.hw.b3')],
+    primary: true,
+  },
+];
+---
+
+<Layout title={`${t('nav.download')} · Nedaa`} locale={lang}>
+  <TopNav />
+
+  <main>
+    <section class="section dl-hero">
+      <div class="shell">
+        <div class="meta">
+          <span class="marginalia">{t('dl.section')}</span>
+          <span class="marginalia">v{release.version}</span>
+        </div>
+        <hr class="rule" style="margin-top:16px" />
+        <div class="hero-grid">
+          <h1 class="h-display dl-title">
+            {t('dl.title')}<br />
+            <span class="accent">{t('dl.title2')}</span>
+          </h1>
+          <p class="lead">{t('dl.lead')}</p>
+        </div>
+        <hr class="rule" style="margin-top:56px" />
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="shell">
+        <div class="cards">
+          {
+            cards.map((c) => (
+              <article class={['card', 'dl-card', c.primary && 'primary'].filter(Boolean).join(' ')}>
+                <header class="card-head">
+                  <div class="card-id">
+                    <span class="card-icon">
+                      <Icon name={c.icon} size={24} />
+                    </span>
+                    <div>
+                      <div class="marginalia">{c.eye}</div>
+                      <div class="h-3" style="margin-top:2px">{c.name}</div>
+                    </div>
+                  </div>
+                  {c.primary && <span class="tag">{t('dl.recommend')}</span>}
+                </header>
+                <div class="muted req">{c.req}</div>
+                <ul class="bullets">
+                  {c.bullets.map((b) => (
+                    <li>
+                      <span class="tick"><Icon name="check" size={14} /></span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="cta">
+                  <StoreButton store={c.store} primary={c.primary} full href={c.href} />
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="shell">
+        <article class="card huawei-explainer">
+          <div>
+            <div class="marginalia accent">{t('dl.hwx.section')}</div>
+            <h2 class="h-2 hwx-title">{t('dl.hwx.title')}</h2>
+          </div>
+          <p class="body hwx-body">{t('dl.hwx.body')}</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .dl-hero {
+    padding-top: 72px;
+    padding-bottom: 56px;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    margin-top: 56px;
+    align-items: flex-end;
+  }
+  .dl-title {
+    font-size: clamp(40px, 6vw, 80px);
+  }
+  .accent {
+    color: var(--accent);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .dl-card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .dl-card.primary {
+    border-color: var(--accent);
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-id {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--primary-10);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+  }
+  .req {
+    font-size: 13px;
+    font-family: var(--f-mono);
+    letter-spacing: 0.04em;
+  }
+  .bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bullets li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14.5px;
+    color: var(--type);
+  }
+  .tick {
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .cta {
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .huawei-explainer {
+    padding: 36px;
+    background: var(--bg-muted);
+    border-color: var(--outline-strong);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 32px;
+  }
+  .hwx-title {
+    margin-top: 10px;
+  }
+  .hwx-body {
+    font-size: 15.5px;
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  @media (max-width: 1024px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 768px) {
+    .hero-grid,
+    .huawei-explainer {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
