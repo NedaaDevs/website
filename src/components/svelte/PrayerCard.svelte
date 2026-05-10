@@ -1,6 +1,6 @@
 <script lang="ts">
   import { animate } from 'motion/mini';
-  import { getPrayers, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
+  import { flattenDays, getPrayers, indexOfToday, type PrayerDay } from '@/lib/api/nedaa';
   import { detectCity, sameCity, MAKKAH, type TzCity } from '@/lib/tz-cities';
   import { hijriDate } from '@/lib/format';
   import type { Locale } from '@/i18n/types';
@@ -13,11 +13,29 @@
 
   let city = $state<TzCity>(detectCity());
   let cityLabel = $state<string>(city.city);
-  let day = $state<PrayerDay | null>(prebake.day);
+  /** Only today onwards — past days are not navigable. */
+  const fromToday = (all: PrayerDay[], when: Date = new Date()) =>
+    all.slice(indexOfToday(all, when));
+  let days = $state<PrayerDay[]>(fromToday(prebake.days));
   let provider = $state<string | null>(prebake.provider);
+  let cursor = $state<number>(0);
   let now = $state<number>(Date.now());
   let error = $state<string | null>(null);
+  let loading = $state<boolean>(false);
   let countdownEl: HTMLElement | undefined = $state();
+
+  const day = $derived<PrayerDay | null>(days[cursor] ?? null);
+  const isToday = $derived(cursor === 0);
+  const canPrev = $derived(cursor > 0);
+  const canNext = $derived(cursor < days.length - 1);
+
+  const step = (delta: number) => {
+    const target = Math.min(days.length - 1, Math.max(0, cursor + delta));
+    if (target !== cursor) cursor = target;
+  };
+  const goToday = () => {
+    cursor = 0;
+  };
 
   type Row = { key: string; label: string; iso: string };
 
@@ -33,7 +51,15 @@
 
   const NEXT_LABEL = { en: 'Next prayer', ar: 'الصلاة التالية', ms: 'Solat seterusnya', ur: 'اگلی نماز' };
   const IN_LABEL = { en: 'in', ar: 'بعد', ms: 'dalam', ur: 'میں' };
+  const PREV_LABEL = { en: 'Previous day', ar: 'اليوم السابق', ms: 'Sebelumnya', ur: 'پچھلا دن' };
+  const NEXT_DAY_LABEL = { en: 'Next day', ar: 'اليوم التالي', ms: 'Hari seterusnya', ur: 'اگلا دن' };
+  const BACK_TO_TODAY = { en: 'Back to today', ar: 'العودة إلى اليوم', ms: 'Kembali ke hari ini', ur: 'آج پر واپس' };
+
+  const relTime = new Intl.RelativeTimeFormat(baseLocale, { numeric: 'auto' });
+  const dayLabel = (i: number) =>
+    i === 0 ? relTime.format(0, 'day') : relTime.format(i, 'day');
   const PROVIDER_LABEL = { en: 'Source', ar: 'المصدر', ms: 'Sumber', ur: 'ماخذ' };
+  const FIRST_LABEL = { en: 'First prayer', ar: 'أول صلاة', ms: 'Solat pertama', ur: 'پہلی نماز' };
 
   const pad2 = new Intl.NumberFormat(baseLocale, {
     minimumIntegerDigits: 2,
@@ -56,7 +82,7 @@
   );
 
   const next = $derived.by((): Row | null => {
-    if (!day || rows.length === 0) return null;
+    if (!day || rows.length === 0 || !isToday) return null;
     return rows.find((r) => new Date(r.iso).getTime() > now) ?? rows[0]!;
   });
 
@@ -90,6 +116,7 @@
     let cancelled = false;
 
     if (!isHeadless && !sameCity(city, MAKKAH)) {
+      loading = true;
       (async () => {
         const today = new Date();
         const prayers = await getPrayers({
@@ -101,11 +128,21 @@
         if (cancelled) return;
         if (!prayers.ok) {
           error = prayers.error.kind;
+          loading = false;
           return;
         }
-        provider = prayers.data.provider;
-        day = todayFrom(prayers.data, today);
-        cityLabel = city.city;
+        const month = today.toISOString().slice(0, 7);
+        const monthDays = flattenDays(prayers.data).filter((d) =>
+          d.timings.fajr.startsWith(month),
+        );
+        const upcoming = fromToday(monthDays, today);
+        if (upcoming.length > 0) {
+          provider = prayers.data.provider;
+          days = upcoming;
+          cursor = 0;
+          cityLabel = city.city;
+        }
+        loading = false;
       })();
     }
 
@@ -122,34 +159,69 @@
 
 <div class="almanac">
   <div class="header">
-    <span class="marginalia">{cityLabel}</span>
+    <span class="marginalia city">
+      <span class:pulse={loading} class="city-dot" aria-hidden="true"></span>
+      {cityLabel}
+    </span>
     {#if day}
-      {@const today = new Date(day.timings.fajr)}
+      {@const dayDate = new Date(day.timings.fajr)}
       <span class="marginalia stack-end">
-        <span>{hijriDate(lang, today)}</span>
-        <span class="dim">{fmtGregorian(today)}</span>
+        <span>{hijriDate(lang, dayDate)}</span>
+        <span class="dim">{fmtGregorian(dayDate)}</span>
       </span>
     {/if}
   </div>
   <hr class="rule" />
 
+  <div class="day-nav">
+    <button
+      type="button"
+      class="nav-btn"
+      onclick={() => step(-1)}
+      disabled={!canPrev}
+      aria-label={PREV_LABEL[lang]}
+    >‹</button>
+    {#if isToday}
+      <span class="today-pill">{dayLabel(0)}</span>
+    {:else}
+      <button
+        type="button"
+        class="today-btn"
+        onclick={goToday}
+        aria-label={BACK_TO_TODAY[lang]}
+      >{dayLabel(cursor)}</button>
+    {/if}
+    <button
+      type="button"
+      class="nav-btn"
+      onclick={() => step(1)}
+      disabled={!canNext}
+      aria-label={NEXT_DAY_LABEL[lang]}
+    >›</button>
+  </div>
+
   <div class="grid">
     <div class="next-block">
-      <div class="marginalia accent">{NEXT_LABEL[lang]} · {next?.label ?? '—'}</div>
-      <div class="big tnum">
-        {next ? fmtTime(next.iso) : '—'}
-      </div>
-      <div class="muted countdown" bind:this={countdownEl}>
-        {#if countdown}
-          {IN_LABEL[lang]} <span class="tnum">{countdown}</span>
-        {:else}
-          &nbsp;
-        {/if}
-      </div>
+      {#if isToday && next}
+        <div class="marginalia accent">{NEXT_LABEL[lang]} · {next.label}</div>
+        <div class="big tnum">{fmtTime(next.iso)}</div>
+        <div class="muted countdown" bind:this={countdownEl}>
+          {#if countdown}
+            {IN_LABEL[lang]} <span class="tnum">{countdown}</span>
+          {:else}
+            &nbsp;
+          {/if}
+        </div>
+      {:else if rows.length > 0}
+        {@const first = rows[0]!}
+        <div class="marginalia accent">{FIRST_LABEL[lang]} · {first.label}</div>
+        <div class="big tnum">{fmtTime(first.iso)}</div>
+        <div class="muted">&nbsp;</div>
+      {/if}
     </div>
 
     <ul class="rows">
-      {#each rows.filter((r) => r.key !== next?.key) as r}
+      {#each rows.filter((r) => !isToday || r.key !== next?.key) as r}
         <li class="row">
           <span class="label">{r.label}</span>
           <span class="time tnum">{fmtTime(r.iso)}</span>
@@ -177,6 +249,78 @@
 </div>
 
 <style>
+  .city {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .city-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--success-bd);
+    flex-shrink: 0;
+  }
+  .city-dot.pulse {
+    background: var(--accent);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .city-dot.pulse { animation: none; opacity: 0.7; }
+  }
+
+  .day-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 12px 0 6px;
+  }
+  .nav-btn,
+  .today-btn {
+    border: 1px solid var(--outline);
+    background: var(--bg-2);
+    color: var(--type-2);
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--f-sans);
+    line-height: 1;
+  }
+  .nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    display: grid;
+    place-items: center;
+  }
+  .nav-btn:hover:not(:disabled),
+  .today-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .today-btn {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+  .today-pill {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 5px 12px;
+    border: 1px solid var(--outline);
+    border-radius: 999px;
+  }
+
   .almanac {
     background: var(--bg-2);
     border: 1px solid var(--outline);

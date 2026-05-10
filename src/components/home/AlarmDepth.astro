@@ -1,17 +1,19 @@
 ---
 import Icon from '@/components/Icon.astro';
 import prebake from '@/data/prayers-default.json';
+import { indexOfToday } from '@/lib/api/nedaa';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+const today = prebake.days[indexOfToday(prebake.days)] ?? prebake.days[0]!;
 const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
 const fajrTime = new Intl.DateTimeFormat(baseLocale, {
   hour: 'numeric',
   minute: '2-digit',
   hour12: lang === 'en',
-}).format(new Date(prebake.day.timings.fajr));
+}).format(new Date(today.timings.fajr));
 
 const features = [
   { t: t('alarm.f1.t'), b: t('alarm.f1.b') },

@@ -1,5 +1,6 @@
 ---
 import prebake from '@/data/prayers-default.json';
+import { indexOfToday } from '@/lib/api/nedaa';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -15,14 +16,15 @@ const ar = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
 const arTime = (iso: string) =>
   new Intl.DateTimeFormat('ar-SA', { hour: 'numeric', minute: '2-digit' }).format(new Date(iso));
 
-const today = new Date(prebake.day.timings.fajr);
-const fajrAr = arTime(prebake.day.timings.fajr);
+const todayRow = prebake.days[indexOfToday(prebake.days)] ?? prebake.days[0]!;
+const today = new Date(todayRow.timings.fajr);
+const fajrAr = arTime(todayRow.timings.fajr);
 const others = (
   [
-    ['الشروق', prebake.day.timings.sunrise],
-    ['الظهر', prebake.day.timings.dhuhr],
-    ['العصر', prebake.day.timings.asr],
-    ['المغرب', prebake.day.timings.maghrib],
+    ['الشروق', todayRow.timings.sunrise],
+    ['الظهر', todayRow.timings.dhuhr],
+    ['العصر', todayRow.timings.asr],
+    ['المغرب', todayRow.timings.maghrib],
   ] as const
 ).map(([name, iso]) => [name, arTime(iso)]);
 ---
