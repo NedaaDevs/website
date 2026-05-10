@@ -1,7 +1,7 @@
 export default {
   // site
   'site.brand': 'نداء',
-  'site.title': 'نداء — مواقيت صلاة بتصميم يليق',
+  'site.title': 'نداء — مواقيت الصلاة، بتصميمٍ يليق',
   // nav
   'nav.home': 'الرئيسية',
   'nav.features': 'المزايا',
@@ -9,6 +9,7 @@ export default {
   'nav.open': 'مفتوح المصدر',
   'nav.download': 'تنزيل',
   'nav.support': 'الدعم',
+  'nav.docs': 'الوثائق',
   'nav.cta': 'تنزيل',
   // hero
   'hero.eyebrow': 'لمن يحرصون على الصلاة',
