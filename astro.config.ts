@@ -21,11 +21,10 @@ export default defineConfig({
       name: 'IBM Plex Sans Arabic',
       cssVariable: '--f-arabic',
       provider: fontProviders.fontsource(),
-      weights: [500, 600],
+      weights: [500],
       styles: ['normal'],
       subsets: ['arabic'],
-      display: 'optional',
-      fallbacks: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
+      fallbacks: ['Noto Sans Arabic', 'Tahoma', 'Geeza Pro', 'system-ui', 'sans-serif'],
     },
   ],
   i18n: {
@@ -34,7 +33,7 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
     assets: '_astro',
   },
   devToolbar: { enabled: true },
