@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import { Font } from 'astro:assets';
 import { type Locale, dirFor } from '@/i18n/utils';
 
 type Props = {
@@ -28,6 +29,17 @@ const dir = dirFor(locale);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1c5d85" />
+    {locale === 'ar' || locale === 'ur' ? (
+      <Fragment>
+        <Font cssVariable="--f-arabic" preload />
+        <Font cssVariable="--f-sans" />
+      </Fragment>
+    ) : (
+      <Fragment>
+        <Font cssVariable="--f-sans" preload />
+        <Font cssVariable="--f-arabic" />
+      </Fragment>
+    )}
   </head>
   <body>
     <slot />

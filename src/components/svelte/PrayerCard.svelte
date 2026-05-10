@@ -1,6 +1,6 @@
 <script lang="ts">
   import { animate } from 'motion/mini';
-  import { getPrayers, getReverseGeocode, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
+  import { getPrayers, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
   import { detectCity, sameCity, MAKKAH, type TzCity } from '@/lib/tz-cities';
   import { hijriDate } from '@/lib/format';
   import type { Locale } from '@/i18n/types';
@@ -92,15 +92,12 @@
     if (!isHeadless && !sameCity(city, MAKKAH)) {
       (async () => {
         const today = new Date();
-        const [prayers, geo] = await Promise.all([
-          getPrayers({
-            lat: city.lat,
-            lng: city.lng,
-            year: today.getFullYear(),
-            month: today.getMonth() + 1,
-          }),
-          getReverseGeocode({ lat: city.lat, lng: city.lng, locale: lang }),
-        ]);
+        const prayers = await getPrayers({
+          lat: city.lat,
+          lng: city.lng,
+          year: today.getFullYear(),
+          month: today.getMonth() + 1,
+        });
         if (cancelled) return;
         if (!prayers.ok) {
           error = prayers.error.kind;
@@ -108,7 +105,7 @@
         }
         provider = prayers.data.provider;
         day = todayFrom(prayers.data, today);
-        if (geo.ok) cityLabel = geo.data.city;
+        cityLabel = city.city;
       })();
     }
 
@@ -185,6 +182,7 @@
     border: 1px solid var(--outline);
     border-radius: 16px;
     padding: 28px 28px 22px;
+    min-height: 360px;
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.5) inset,
       0 18px 50px var(--shadow);

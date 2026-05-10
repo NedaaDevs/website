@@ -1,11 +1,6 @@
 /* Nedaa marketing site — design tokens + base styles
    Tokens mirror the in-app Tamagui palette exactly. */
 
-@import '@fontsource-variable/asap';
-@import '@fontsource-variable/jetbrains-mono';
-@import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
-@import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
-
 :root {
   --primary: #1c5d85;
   --secondary: #1c5d7d;
@@ -39,9 +34,8 @@
   --info-bg: #dbeafe;
   --info-bd: #3b82f6;
 
-  --f-sans: 'Asap', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --f-arabic: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', ui-sans-serif, system-ui, sans-serif;
-  --f-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* --f-sans and --f-arabic are injected by Astro's astro:fonts. */
+  --f-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   --r-0: 0px;
   --r-2: 2px;
