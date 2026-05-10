@@ -1,0 +1,15 @@
+---
+import StubPage from '@/components/StubPage.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+---
+
+<StubPage
+  eyebrow={t('nav.features')}
+  title={t('stub.features.title')}
+  body={t('stub.features.body')}
+  links={[{ label: t('nav.home'), href: path('/'), primary: true }]}
+/>

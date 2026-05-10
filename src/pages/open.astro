@@ -1,0 +1,21 @@
+---
+import StubPage from '@/components/StubPage.astro';
+import gh from '@/data/github.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<StubPage
+  eyebrow={t('nav.open')}
+  title={t('stub.open.title')}
+  body={t('stub.open.body')}
+  links={[
+    { label: gh.fullName, href: `https://github.com/${gh.fullName}`, primary: true },
+    {
+      label: t('os.contrib'),
+      href: `https://github.com/${gh.fullName}/blob/${gh.branch}/CONTRIBUTING.md`,
+    },
+  ]}
+/>

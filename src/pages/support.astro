@@ -1,0 +1,21 @@
+---
+import StubPage from '@/components/StubPage.astro';
+import gh from '@/data/github.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<StubPage
+  eyebrow={t('nav.support')}
+  title={t('stub.support.title')}
+  body={t('stub.support.body')}
+  links={[
+    { label: 'support@nedaa.dev', href: 'mailto:support@nedaa.dev', primary: true },
+    {
+      label: 'GitHub Issues',
+      href: `https://github.com/${gh.fullName}/issues/new`,
+    },
+  ]}
+/>
