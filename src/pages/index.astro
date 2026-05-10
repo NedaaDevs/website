@@ -12,6 +12,7 @@ import LanguagesPreview from '@/components/home/LanguagesPreview.astro';
 import LocalizationModule from '@/components/home/LocalizationModule.astro';
 import HuaweiCallout from '@/components/home/HuaweiCallout.astro';
 import OpenSourceProof from '@/components/home/OpenSourceProof.astro';
+import OperationalLedger from '@/components/home/OperationalLedger.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -31,6 +32,7 @@ const t = useTranslations(lang);
     <LocalizationModule />
     <HuaweiCallout />
     <OpenSourceProof />
+    <OperationalLedger />
   </main>
   <Footer />
 </Layout>
