@@ -11,7 +11,17 @@ export const languages = {
   ur: 'اردو',
 } as const;
 
-export const ui = { en, ar } as const;
+export type UIKey = keyof typeof en;
+
+/**
+ * Locale dicts beyond `en` may be partial — missing keys fall back to
+ * English in `useTranslations`.
+ */
+export const ui: Record<'en' | 'ar', Partial<Record<UIKey, string>>> & {
+  en: Record<UIKey, string>;
+} = {
+  en,
+  ar,
+};
 
 export type UI = typeof ui;
-export type UIKey = keyof typeof en;

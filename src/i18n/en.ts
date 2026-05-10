@@ -161,12 +161,115 @@ export default {
   'footer.attribBody':
     'Quran text from Tanzil (tanzil.net). Audio from EveryAyah (everyayah.com) and QUL. Mushaf images from King Fahd Glorious Quran Printing Complex (QCF). Athkar from Hisn al-Muslim. Calligraphic resources from Unwan. Used per their licenses; full credits in-app and on the Open Source page.',
   // download page
-  'dl.title': 'Download Nedaa.',
-  'dl.lead': 'Free. Open source. No accounts.',
+  'dl.section': 'Download · iOS · Android · Huawei',
+  'dl.title': 'Three stores.',
+  'dl.title2': 'No wrong answer.',
+  'dl.lead':
+    'Pick your platform. We treat all three as first-class — including Huawei devices that can’t use Google Services.',
+  'dl.ios.eye': 'iOS',
+  'dl.ios.name': 'App Store',
+  'dl.ios.req': 'iPhone, iPad',
+  'dl.ios.b1': 'Real AlarmKit Fajr alarm',
+  'dl.ios.b2': 'Lock-screen widgets',
+  'dl.ios.b3': 'Ramadan Suhoor / Iftar widgets',
+  'dl.gp.eye': 'Android · GMS',
+  'dl.gp.name': 'Google Play',
+  'dl.gp.req': 'Android 9.0+ · Google Services',
+  'dl.gp.b1': 'Foreground-service Fajr alarm',
+  'dl.gp.b2': 'Home-screen widgets',
+  'dl.gp.b3': 'Custom Athan audio',
+  'dl.hw.eye': 'Huawei · HMS',
+  'dl.hw.name': 'AppGallery',
+  'dl.hw.req': 'EMUI / HarmonyOS · No Google Services required',
+  'dl.hw.b1': 'Dedicated production-hms build',
+  'dl.hw.b2': 'HMS push, location, sensors',
+  'dl.hw.b3': 'Same features, same code',
+  'dl.recommend': 'Worth shouting about',
+  'dl.hwx.section': 'For Huawei users',
+  'dl.hwx.title': 'Why Nedaa runs on a Mate 60.',
+  'dl.hwx.body':
+    'Nedaa ships a separate production-hms Android build — wired into Huawei Mobile Services for push, location, and the Qibla sensor stack. If you’ve been making do with a sideloaded APK that breaks on every update, you don’t have to anymore.',
   // privacy page
-  'privPage.title': 'Privacy stance',
-  'privPage.lead':
-    'Nedaa was built around the assumption that worship is private. The app should reach you when the time comes — and otherwise, leave you alone.',
+  'pp.section': 'Privacy · the full position',
+  'pp.last': 'Last updated',
+  'pp.title': 'We don’t want your data.',
+  'pp.title2': 'We never have.',
+  'pp.lead':
+    'Nedaa is a worship app, not a data product. The fastest way to explain our privacy policy is to list everything we don’t do. There is no fine print here, because there is no fine print.',
+  'pp.c1.t': 'No accounts',
+  'pp.c1.b': 'No sign-up. No email. No password. The app opens and works.',
+  'pp.c2.t': 'No tracking',
+  'pp.c2.b': 'No advertising SDKs, no analytics ad networks, no third-party fingerprinting.',
+  'pp.c3.t': 'No cloud sync',
+  'pp.c3.b':
+    'Your settings, custom Athkar, and Qada counts live on your phone — and stay there.',
+  'pp.collect.section': 'In plain language',
+  'pp.collect.title': 'What we collect, and what we don’t.',
+  'pp.does': 'What Nedaa does',
+  'pp.do.1':
+    'Requests low-accuracy location to compute your prayer times — only if you grant it.',
+  'pp.do.2':
+    'Stores your settings, custom Athkar, and Qada counts locally, on your device.',
+  'pp.do.3':
+    'Schedules notifications and the Fajr alarm via the operating system. The OS plays them.',
+  'pp.do.4':
+    'Fetches publicly-available data on first launch (Athkar text, mushaf images), then works offline.',
+  'pp.do.5':
+    'Receives crash-free session counts in aggregate via your platform’s built-in store reporting — like every app.',
+  'pp.doesnot': 'What Nedaa does not',
+  'pp.dont.1': 'No advertising. No ad SDKs. No revenue from showing you anything.',
+  'pp.dont.2':
+    'No accounts, sign-in, or email capture. We literally don’t know who you are.',
+  'pp.dont.3': 'No cloud sync, no server-side profile, no “Nedaa account” of any kind.',
+  'pp.dont.4':
+    'No third-party analytics that profile, segment, or fingerprint individuals.',
+  'pp.dont.5':
+    'No location data ever leaves your device. We don’t need it; we don’t want it.',
+  'pp.perm.section': 'Permissions, explained',
+  'pp.perm.title': 'Every permission, why we ask, and what happens if you say no.',
+  'pp.perm.col.what': 'Permission',
+  'pp.perm.col.why': 'Why',
+  'pp.perm.col.no': 'If you say no',
+  'pp.perm.location': 'Location (low accuracy)',
+  'pp.perm.location.why': 'Compute your local prayer times.',
+  'pp.perm.location.no': 'Set a city manually; everything else still works.',
+  'pp.perm.notif': 'Notifications',
+  'pp.perm.notif.why': 'Athan, pre-prayer warnings, and Iqama reminders.',
+  'pp.perm.notif.no': 'No reminders. The app still shows times on the home screen.',
+  'pp.perm.alarm': 'Alarms (iOS AlarmKit)',
+  'pp.perm.alarm.why': 'A real Fajr alarm — louder than a notification.',
+  'pp.perm.alarm.no': 'You’ll get a regular notification instead.',
+  'pp.perm.compass': 'Compass / heading sensor',
+  'pp.perm.compass.why': 'Point to the Qibla.',
+  'pp.perm.compass.no': 'Qibla shows the bearing; you align it yourself.',
+  'pp.perm.storage': 'Storage (custom Athan)',
+  'pp.perm.storage.why': 'Read the audio file you chose to play as Athan.',
+  'pp.perm.storage.no': 'The default Athan plays.',
+  'pp.perm.calendar': 'Calendar (optional)',
+  'pp.perm.calendar.why': 'Add prayer times to your calendar app.',
+  'pp.perm.calendar.no': 'Off by default. Nothing happens.',
+  'pp.foot1.t': 'Your rights',
+  'pp.foot1.b':
+    'Because we don’t collect personal data, GDPR access / deletion / portability requests are essentially trivial — there is nothing to access, delete, or port. Email support@nedaa.dev with any concern and we’ll respond within five working days.',
+  'pp.foot2.t': 'Children',
+  'pp.foot2.b':
+    'Nedaa is suitable for any age. We do not knowingly collect personal information from anyone, because we do not knowingly collect personal information from anyone.',
+  'pp.foot3.t': 'Changes',
+  'pp.foot3.b':
+    'If we change anything material, we’ll show a one-time, dismissible notice in the app — never a wall of text you have to accept to continue praying.',
+  'pp.contact': 'Questions? support@nedaa.dev',
+  'pp.gov': 'Governed under GPLv3 · code at github.com/NedaaDevs/nedaa',
+  // stub pages
+  'stub.features.title': 'A scannable index of every feature.',
+  'stub.features.body':
+    'The full index is in progress. For now, the home page covers what ships today across iOS, Android, and Huawei.',
+  'stub.open.title': 'Read the code, file an issue, translate a string.',
+  'stub.open.body':
+    'Nedaa lives openly on GitHub. The repository, contribution guide, and issue tracker are linked below.',
+  'stub.support.title': 'Email us. We answer.',
+  'stub.support.body':
+    'For questions about prayer-time calculation, alarms, translations, or anything else — reach out by email or open an issue on GitHub.',
+  'stub.back': 'Back to home',
   // theme & locale toggles
   'ui.theme': 'Theme',
   'ui.theme.light': 'Light',
