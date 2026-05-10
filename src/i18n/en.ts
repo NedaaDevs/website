@@ -32,7 +32,7 @@ export default {
   'cap.desc':
     'Your full daily companion — built by people who use it. No paid upgrades. No “pro” plan. Nothing sold to you.',
   'cap.times.t': 'Prayer times',
-  'cap.times.b': 'Accurate anywhere. 20+ calculation methods. Works offline after first sync.',
+  'cap.times.b': 'Accurate anywhere. 23 calculation methods + Custom. Works offline after first sync.',
   'cap.fajr.t': 'Smart Fajr alarm',
   'cap.fajr.b': 'A real OS-level alarm — not a notification. Optional tap or math wake-up.',
   'cap.widgets.t': 'Widgets',
@@ -87,7 +87,7 @@ export default {
     'Your settings, custom Athkar, and Qada counter live on your phone. Nothing is uploaded.',
   'priv.f4.t': 'No ads. No analytics tracking networks.',
   'priv.f4.b':
-    'No third-party SDKs that identify, segment, or sell you. We don’t know who you are.',
+    'No third-party SDKs that identify, segment, or sell you. Crash reporting via Sentry ships off by default — opt-in only. We don’t know who you are.',
   // languages
   'lang.section': 'Languages · RTL',
   'lang.title': 'Reads in your tongue.',
