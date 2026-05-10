@@ -41,3 +41,4 @@ src/data/release.json
 src/data/prayers-default.json
 src/data/prayer-providers.json
 src/data/github.json
+src/data/stats.json

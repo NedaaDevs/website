@@ -103,11 +103,9 @@ export type StatsSummary = {
 
 export const getStatsSummary = (
   period: StatsPeriod = '24h',
-  opts?: { timeoutMs?: number; token?: string },
+  opts?: { timeoutMs?: number; adminKey?: string },
 ): Promise<ApiResult<StatsSummary>> => {
-  const headers: HeadersInit = opts?.token
-    ? { Authorization: `Bearer ${opts.token}` }
-    : {};
+  const headers: HeadersInit = opts?.adminKey ? { 'x-admin-key': opts.adminKey } : {};
   return get<StatsSummary>(`${NEDAA_API_BASE}/v3/stats/summary?period=${period}`, {
     timeoutMs: opts?.timeoutMs,
     headers,
