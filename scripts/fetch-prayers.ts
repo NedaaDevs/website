@@ -8,7 +8,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getPrayers, getPrayerProviders, todayFrom, type PrayerDay } from '@/lib/api/nedaa';
+import { flattenDays, getPrayers, getPrayerProviders, type PrayerDay } from '@/lib/api/nedaa';
 import { MAKKAH } from '@/lib/tz-cities';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -20,7 +20,8 @@ export type DefaultPrayers = {
   lat: number;
   lng: number;
   provider: string;
-  day: PrayerDay;
+  /** Chronologically sorted PrayerDay rows for the current month. */
+  days: PrayerDay[];
   fetchedAt: string;
 };
 
@@ -55,9 +56,11 @@ const main = async () => {
     return;
   }
 
-  const day = todayFrom(res.data, today);
-  if (!day) {
-    console.warn("[fetch-prayers] couldn't locate today's row in API response");
+  const all = flattenDays(res.data);
+  const month = today.toISOString().slice(0, 7); // YYYY-MM
+  const days = all.filter((d) => d.timings.fajr.startsWith(month));
+  if (days.length === 0) {
+    console.warn('[fetch-prayers] response had no days for current month');
     process.exit(1);
   }
 
@@ -66,7 +69,7 @@ const main = async () => {
     lat: MAKKAH.lat,
     lng: MAKKAH.lng,
     provider: res.data.provider,
-    day,
+    days,
     fetchedAt: today.toISOString(),
   };
 
