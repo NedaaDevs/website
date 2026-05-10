@@ -3,7 +3,12 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      url: ['http://localhost/index.html', 'http://localhost/ar/index.html'],
+      url: [
+        'http://localhost/index.html',
+        'http://localhost/privacy/index.html',
+        'http://localhost/download/index.html',
+        'http://localhost/ar/index.html',
+      ],
       numberOfRuns: 1,
       settings: {
         preset: 'desktop',
