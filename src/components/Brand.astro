@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import lightLogo from '@/assets/logo.png';
+import darkLogo from '@/assets/logo-dark.png';
+
 type Props = {
   size?: number;
   alt?: string;
@@ -8,14 +12,24 @@ const { size = 36, alt = 'Nedaa' } = Astro.props;
 ---
 
 <picture class="brand" style={`--s:${size}px`}>
-  <img class="brand-img brand-img-light" src="/logo.png" {alt} width={size} height={size} decoding="async" />
-  <img
+  <Image
+    class="brand-img brand-img-light"
+    src={lightLogo}
+    {alt}
+    width={size * 2}
+    height={size * 2}
+    densities={[1, 2]}
+    format="webp"
+    loading="eager"
+  />
+  <Image
     class="brand-img brand-img-dark"
-    src="/logo-dark.png"
+    src={darkLogo}
     alt=""
-    aria-hidden="true"
-    width={size}
-    height={size}
-    decoding="async"
+    width={size * 2}
+    height={size * 2}
+    densities={[1, 2]}
+    format="webp"
+    loading="eager"
   />
 </picture>
