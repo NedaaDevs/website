@@ -155,7 +155,6 @@ export default {
   'footer.changelog': 'Changelog',
   'footer.github': 'GitHub',
   'footer.translate': 'Translate on Crowdin',
-  'footer.press': 'Press kit',
   'footer.terms': 'Terms',
   'footer.attrib': 'Attributions',
   'footer.copy': '© 2026 NedaaDevs · For those who answer the call.',
@@ -163,7 +162,7 @@ export default {
   'footer.status': 'Operational',
   'footer.attribTitle': 'Required attributions',
   'footer.attribBody':
-    'Quran text from Tanzil (tanzil.net). Audio from EveryAyah (everyayah.com) and QUL. Mushaf images from King Fahd Glorious Quran Printing Complex (QCF). Athkar from Hisn al-Muslim. Calligraphic resources from Unwan. Used per their licenses; full credits in-app and on the Open Source page.',
+    'Quran text from Tanzil (tanzil.net). Audio from EveryAyah (everyayah.com) and QUL. Mushaf images from King Fahd Glorious Quran Printing Complex (QCF). Athkar from Hisn al-Muslim. Used per their licenses; full credits in-app and on the Open Source page.',
   // download page
   'dl.section': 'Download · iOS · Android · Huawei',
   'dl.title': 'Three stores.',

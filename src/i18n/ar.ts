@@ -153,7 +153,6 @@ export default {
   'footer.changelog': 'سجلّ التغييرات',
   'footer.github': 'GitHub',
   'footer.translate': 'ترجمة على Crowdin',
-  'footer.press': 'حقيبة الصحافة',
   'footer.terms': 'الشروط',
   'footer.attrib': 'الإسنادات',
   'footer.copy': '© ٢٠٢٦ NedaaDevs · لمن يجيبون النداء.',
@@ -161,7 +160,7 @@ export default {
   'footer.status': 'يعمل',
   'footer.attribTitle': 'إسنادات لازمة',
   'footer.attribBody':
-    'نصّ القرآن من Tanzil (tanzil.net). الصوت من EveryAyah (everyayah.com) و QUL. صور المصحف من مجمّع الملك فهد لطباعة المصحف الشريف (QCF). الأذكار من حصن المسلم. الموارد الخطّية من Unwan. تُستخدم وفق تراخيصها؛ وإسنادات كاملة داخل التطبيق وفي صفحة المصدر المفتوح.',
+    'نصّ القرآن من Tanzil (tanzil.net). الصوت من EveryAyah (everyayah.com) و QUL. صور المصحف من مجمّع الملك فهد لطباعة المصحف الشريف (QCF). الأذكار من حصن المسلم. تُستخدم وفق تراخيصها؛ وإسنادات كاملة داخل التطبيق وفي صفحة المصدر المفتوح.',
   // download page
   'dl.title': 'حمّل نداء.',
   'dl.lead': 'مجاني. مفتوح المصدر. بلا حسابات.',
