@@ -63,7 +63,7 @@ export default {
   'alarm.f2.b': 'Sound, minutes-before, on/off — set independently for each prayer.',
   'alarm.f3.t': 'Your adhan',
   'alarm.f3.b':
-    'Add an audio file from your local masjid. It plays in place of the default. (Android only.)',
+    'Add your favorite adhan. It plays in place of the default. (Android only.)',
   'alarm.f3.tag': 'Android',
   'alarm.f4.t': 'Wake-up challenge',
   'alarm.f4.b': 'Optional tap or simple math problem to dismiss the Fajr alarm.',
@@ -72,7 +72,7 @@ export default {
   'calc.section': 'Calculation',
   'calc.title': 'Match your local masjid.',
   'calc.body':
-    'Twenty-plus calculation methods, plus a fully custom option for masjids with their own conventions. ʿAṣr madhabs (Standard / Hanafi). High-latitude rules. Manual minute offsets per prayer.',
+    '23 calculation methods, plus a fully custom option for masjids with their own conventions. ʿAṣr madhabs (Standard / Hanafi). High-latitude rules. Manual minute offsets per prayer.',
   // privacy
   'priv.section': 'Privacy',
   'priv.title': 'A worship app, not a data product.',
