@@ -97,7 +97,7 @@ export default {
   'loc.section': 'Translation · Community',
   'loc.title': 'Translated by the people who pray in it.',
   'loc.body':
-    'Nedaa is translated openly on Crowdin. Languages ship to the app once they cross 90% — and they’re reviewed by native speakers who pray in them daily. If yours is missing, you can add it.',
+    'Want to see your language in Nedaa? Share in the reward — translate on Crowdin.',
   'loc.live': 'Live · from Crowdin',
   'loc.updated': 'Last updated 14 Mar 2026 · 10:42 UTC',
   'loc.col.lang': 'Language',
@@ -107,12 +107,12 @@ export default {
   'loc.shipping': 'Shipping',
   'loc.cta1.t': 'Help translate Nedaa',
   'loc.cta1.b':
-    'Translation isn’t crowd labor. Your language matters here — and the people who use it should shape it. Every contribution is reviewed with native speakers who pray in the language.',
+    'Every word you contribute makes Nedaa better for everyone who speaks your language.',
   'loc.cta1.a1': 'Join on Crowdin',
   'loc.cta1.a2': 'Suggest improvements',
   'loc.cta2.t': 'Request a new language',
   'loc.cta2.b':
-    'Don’t see yours? Tell us — we’ll spin it up on Crowdin and reach out when it’s ready for review.',
+    'Don’t see yours? Tell us — we’ll add it on Crowdin and let you know when it’s ready to translate.',
   // huawei
   'huawei.tag': 'Huawei · No Google services? Covered.',
   'huawei.title': 'A real Huawei build, not a fallback APK.',
