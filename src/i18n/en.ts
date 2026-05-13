@@ -140,6 +140,7 @@ export default {
   'ledger.path': 'Path',
   'ledger.share': 'Share',
   'ledger.avg': 'Avg ms',
+  'ledger.p95': 'p95',
   'ledger.requests': 'Requests',
   'ledger.note': 'Spam routes filtered. No IPs, headers, or query bodies retained.',
   'ledger.empty': 'No data yet.',
