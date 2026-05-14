@@ -350,17 +350,30 @@
     <div class="settings-grid">
       <label class="setting">
         <span class="setting-label marginalia">{METHOD_LABEL[lang]}</span>
-        <select bind:value={settings.methodId} onchange={onSettingsChange}>
+        <select
+          value={String(settings.methodId)}
+          onchange={(e) => {
+            settings = { ...settings, methodId: Number((e.currentTarget as HTMLSelectElement).value) };
+            void onSettingsChange();
+          }}
+        >
           {#each CALC_METHODS as m}
-            <option value={m.id}>{lang === 'ar' ? m.ar : m.en}</option>
+            <option value={String(m.id)}>{lang === 'ar' ? m.ar : m.en}</option>
           {/each}
         </select>
       </label>
       <label class="setting">
         <span class="setting-label marginalia">{MADHHAB_LABEL[lang]}</span>
-        <select bind:value={settings.school} onchange={onSettingsChange}>
-          <option value={0}>{STANDARD_LABEL[lang]}</option>
-          <option value={1}>{HANAFI_LABEL[lang]}</option>
+        <select
+          value={String(settings.school)}
+          onchange={(e) => {
+            const v = Number((e.currentTarget as HTMLSelectElement).value);
+            settings = { ...settings, school: v === 1 ? 1 : 0 };
+            void onSettingsChange();
+          }}
+        >
+          <option value="0">{STANDARD_LABEL[lang]}</option>
+          <option value="1">{HANAFI_LABEL[lang]}</option>
         </select>
       </label>
     </div>
