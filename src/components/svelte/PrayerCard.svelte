@@ -88,6 +88,12 @@
   };
   const LOCATING = { en: 'Locating…', ar: 'جارٍ التحديد…', ms: 'Mencari…', ur: 'تلاش جاری ہے…' };
   const MY_LOCATION = { en: 'My location', ar: 'موقعي', ms: 'Lokasi saya', ur: 'میری لوکیشن' };
+  const CITY_TRANSLATIONS: Record<string, Record<Locale, string>> = {
+    Makkah: { en: 'Makkah', ar: 'مكة', ms: 'Makkah', ur: 'مکہ' },
+    'My location': MY_LOCATION,
+  };
+  const localizeCity = (label: string): string =>
+    CITY_TRANSLATIONS[label]?.[lang] ?? label;
   const SETTINGS_LABEL = { en: 'Settings', ar: 'الإعدادات', ms: 'Tetapan', ur: 'ترتیبات' };
   const METHOD_LABEL = { en: 'Method', ar: 'طريقة الحساب', ms: 'Kaedah', ur: 'طریقہ' };
   const MADHHAB_LABEL = { en: 'Madhhab', ar: 'المذهب', ms: 'Mazhab', ur: 'مذہب' };
@@ -200,7 +206,7 @@
         }),
       );
       const next: CityRef = {
-        city: MY_LOCATION[lang],
+        city: 'My location',
         lat: roundCoord(pos.coords.latitude),
         lng: roundCoord(pos.coords.longitude),
       };
@@ -258,7 +264,7 @@
   <div class="header">
     <span class="marginalia city">
       <span class:pulse={loading} class="city-dot" aria-hidden="true"></span>
-      {cityLabel}
+      {localizeCity(cityLabel)}
       <button
         type="button"
         class="locate-btn"
