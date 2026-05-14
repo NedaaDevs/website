@@ -22,7 +22,5 @@ export const riseIn = (el: Element, { delay = 0, y = 12, duration = 0.5 }: RiseO
 };
 
 export const autoRise = (root: ParentNode = document) => {
-  root
-    .querySelectorAll<HTMLElement>('.fx-rise')
-    .forEach((el, i) => riseIn(el, { delay: i * 0.05 }));
+  for (const el of root.querySelectorAll<HTMLElement>('.fx-rise')) riseIn(el);
 };
