@@ -266,7 +266,7 @@ export default {
   'docs.eyebrow': 'Docs · methodology, comparisons, datasets',
   'docs.title': 'How Nedaa works.',
   'docs.lead':
-    'Detailed write-ups on prayer-time calculation, alarm reliability, the Athkar dataset, our privacy stance, and how we compare to other Islamic apps. Source for the marketing site, also indexable by LLM-powered search engines.',
+    'Detailed write-ups on prayer-time calculation, alarm reliability, the Athkar dataset, our privacy stance, and how we compare to other Islamic apps.',
   'docs.back': 'All docs',
   // stub pages
   'stub.features.title': 'A scannable index of every feature.',
