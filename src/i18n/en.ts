@@ -157,7 +157,7 @@ export default {
   'footer.translate': 'Translate on Crowdin',
   'footer.terms': 'Terms',
   'footer.attrib': 'Attributions',
-  'footer.copy': '© 2026 NedaaDevs · For those who answer the call.',
+  'footer.copy': '© 2026 Nedaa · For those who answer the call.',
   'footer.license': 'GPLv3 · source available',
   'footer.status': 'Operational',
   'footer.attribTitle': 'Required attributions',
@@ -248,9 +248,6 @@ export default {
   'pp.perm.storage': 'Storage (custom Athan)',
   'pp.perm.storage.why': 'Read the audio file you chose to play as Athan.',
   'pp.perm.storage.no': 'The default Athan plays.',
-  'pp.perm.calendar': 'Calendar (optional)',
-  'pp.perm.calendar.why': 'Add prayer times to your calendar app.',
-  'pp.perm.calendar.no': 'Off by default. Nothing happens.',
   'pp.foot1.t': 'Your rights',
   'pp.foot1.b':
     'There’s nothing for us to delete — we never collected anything. If you want your data gone, just delete the app. For any other privacy question, email support@nedaa.dev; we reply within five working days.',

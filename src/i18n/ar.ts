@@ -154,7 +154,7 @@ export default {
   'footer.translate': 'ترجمة على Crowdin',
   'footer.terms': 'الشروط',
   'footer.attrib': 'الإسنادات',
-  'footer.copy': '© ٢٠٢٦ NedaaDevs · لمن يجيبون النداء.',
+  'footer.copy': '© ٢٠٢٦ نداء · لمن يجيبون النداء.',
   'footer.license': 'GPLv3 · المصدر متاح',
   'footer.status': 'يعمل',
   'footer.attribTitle': 'إسنادات لازمة',
@@ -237,9 +237,6 @@ export default {
   'pp.perm.storage': 'التخزين (لأذانك المفضّل)',
   'pp.perm.storage.why': 'لقراءة ملفّ الأذان الذي اخترته.',
   'pp.perm.storage.no': 'يُشغَّل الأذان الافتراضي.',
-  'pp.perm.calendar': 'التقويم (اختياري)',
-  'pp.perm.calendar.why': 'لإضافة المواقيت إلى تقويمك.',
-  'pp.perm.calendar.no': 'معطّل افتراضيًا. لا شيء يحدث.',
   'pp.foot1.t': 'حقوقك',
   'pp.foot1.b':
     'لا شيءَ لدينا لنحذفه — لم نجمع شيئًا أصلًا. وإن أردتَ مسحَ بياناتك، فيكفي حذف التطبيق. لأيّ سؤالٍ آخر عن الخصوصية، راسلنا على support@nedaa.dev، ونردّ خلال خمسة أيام عمل.',
