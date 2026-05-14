@@ -21,6 +21,19 @@ export default {
     'Nedaa is a quiet, private prayer-times companion. Accurate timings, a real Fajr alarm, beautiful widgets, daily Athkar, Qibla, Hijri date — and not a single ad, account, or tracker.',
   'hero.fact': 'Free · Open source · No accounts',
   'hero.shipped': 'shipped 4 days ago',
+  'hero.dateline.city': 'Riyadh',
+  'hero.f.method': 'Method',
+  'hero.f.method.v': 'Umm al-Qurā',
+  'hero.f.madhhab': 'Madhhab',
+  'hero.f.madhhab.v': 'Standard · ʿAṣr 1×',
+  'hero.f.engine': 'Engine',
+  'hero.f.engine.v': 'Adhan (open source)',
+  'hero.f.accuracy': 'Accuracy',
+  'hero.f.accuracy.v': '±15 s · device clock',
+  'hero.f.offline': 'Offline',
+  'hero.f.offline.v': 'After first sync',
+  'hero.f.privacy': 'Privacy',
+  'hero.f.privacy.v': 'On-device only',
   // honest
   'honest.free': 'Free',
   'honest.ads': 'No ads',
@@ -69,6 +82,9 @@ export default {
   'alarm.f4.t': 'Wake-up challenge',
   'alarm.f4.b': 'Optional tap or simple math problem to dismiss the Fajr alarm.',
   'alarm.label': 'Lock screen · Fajr 5:12',
+  'alarm.layer.pre': 'Pre-prayer',
+  'alarm.layer.athan': 'Athan',
+  'alarm.layer.iqama': 'Iqama reminder',
   // calc
   'calc.section': 'Calculation',
   'calc.title': 'Match your local masjid.',
@@ -277,6 +293,10 @@ export default {
   'stub.support.body':
     'For questions about prayer-time calculation, alarms, translations, or anything else — reach out by email or open an issue on GitHub.',
   'stub.back': 'Back to home',
+  // store buttons
+  'store.ios.line1': 'Download on the',
+  'store.android.line1': 'Get it on',
+  'store.huawei.line1': 'Explore it on',
   // theme & locale toggles
   'ui.theme': 'Theme',
   'ui.theme.light': 'Light',

@@ -49,6 +49,8 @@
     isha: { en: 'ʿIshāʾ', ar: 'العشاء', ms: 'Isyak', ur: 'عشاء' },
   };
 
+  const STATUS_LIVE = { en: 'live', ar: 'مباشر', ms: 'langsung', ur: 'لائیو' };
+  const STATUS_OFFLINE = { en: 'offline', ar: 'غير متّصل', ms: 'luar talian', ur: 'آف لائن' };
   const NEXT_LABEL = { en: 'Next prayer', ar: 'الصلاة التالية', ms: 'Solat seterusnya', ur: 'اگلی نماز' };
   const IN_LABEL = { en: 'in', ar: 'بعد', ms: 'dalam', ur: 'میں' };
   const PREV_LABEL = { en: 'Previous day', ar: 'اليوم السابق', ms: 'Sebelumnya', ur: 'پچھلا دن' };
@@ -243,7 +245,7 @@
     <span class="marginalia">{PROVIDER_LABEL[lang]} · {provider ?? '—'}</span>
     <span class="marginalia status" class:offline={!!error}>
       <span aria-hidden="true" class="dot"></span>
-      {error ? 'offline' : 'live'}
+      {error ? STATUS_OFFLINE[lang] : STATUS_LIVE[lang]}
     </span>
   </div>
 </div>

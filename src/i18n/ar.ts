@@ -21,6 +21,19 @@ export default {
     'نداء رفيقٌ بسيط وخاصّ لمواقيت الصلاة. مواقيت دقيقة، منبّه فجر حقيقي، أدوات أنيقة، أذكار يومية، اتجاه القبلة، والتاريخ الهجري — دون إعلانٍ واحد، ولا حساب، ولا تتبّع.',
   'hero.fact': 'مجاني · مفتوح المصدر · بلا حسابات',
   'hero.shipped': 'صدر قبل ٤ أيام',
+  'hero.dateline.city': 'الرياض',
+  'hero.f.method': 'طريقة الحساب',
+  'hero.f.method.v': 'أم القرى',
+  'hero.f.madhhab': 'المذهب',
+  'hero.f.madhhab.v': 'الجمهور · العصر ١×',
+  'hero.f.engine': 'المحرّك',
+  'hero.f.engine.v': 'Adhan (مفتوح المصدر)',
+  'hero.f.accuracy': 'الدقّة',
+  'hero.f.accuracy.v': '±١٥ ث · ساعة الجهاز',
+  'hero.f.offline': 'دون إنترنت',
+  'hero.f.offline.v': 'بعد المزامنة الأولى',
+  'hero.f.privacy': 'الخصوصية',
+  'hero.f.privacy.v': 'على جهازك فقط',
   // honest
   'honest.free': 'مجاني',
   'honest.ads': 'بلا إعلانات',
@@ -69,6 +82,9 @@ export default {
   'alarm.f4.t': 'تحدّي الإيقاظ',
   'alarm.f4.b': 'يمكنك أن تختار بين لمسةٍ أو حلِّ مسألةٍ بسيطة لإيقاف منبّه الفجر.',
   'alarm.label': 'شاشة القفل · الفجر ٥:١٢',
+  'alarm.layer.pre': 'قبل الصلاة',
+  'alarm.layer.athan': 'الأذان',
+  'alarm.layer.iqama': 'تذكير الإقامة',
   // calc
   'calc.section': 'الحساب',
   'calc.title': 'وافق مسجدك المحلّي.',
@@ -265,6 +281,10 @@ export default {
   'stub.support.body':
     'لأيّ سؤال — عن حساب المواقيت، المنبّهات، الترجمات، أو غيرها — راسلنا، أو افتح مشكلة على GitHub.',
   'stub.back': 'العودة للرئيسية',
+  // store buttons
+  'store.ios.line1': 'حمّل من',
+  'store.android.line1': 'احصل عليه من',
+  'store.huawei.line1': 'تصفّحه على',
   // toggles
   'ui.theme': 'المظهر',
   'ui.theme.light': 'فاتح',

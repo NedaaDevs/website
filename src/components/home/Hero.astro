@@ -14,12 +14,12 @@ const shippedFallback = relativeDays(lang, release.releaseDate);
 const hijriFallback = hijriDate(lang);
 
 const facts: [string, string][] = [
-  ['Method', 'Umm al-Qurā'],
-  ['Madhhab', 'Standard · ʿAṣr 1×'],
-  ['Engine', 'Adhan (open source)'],
-  ['Accuracy', '±15 s · device clock'],
-  ['Offline', 'After first sync'],
-  ['Privacy', 'On-device only'],
+  [t('hero.f.method'), t('hero.f.method.v')],
+  [t('hero.f.madhhab'), t('hero.f.madhhab.v')],
+  [t('hero.f.engine'), t('hero.f.engine.v')],
+  [t('hero.f.accuracy'), t('hero.f.accuracy.v')],
+  [t('hero.f.offline'), t('hero.f.offline.v')],
+  [t('hero.f.privacy'), t('hero.f.privacy.v')],
 ];
 ---
 
@@ -28,9 +28,9 @@ const facts: [string, string][] = [
     <div class="dateline">
       <span class="marginalia">Nedaa · نداء</span>
       <span class="marginalia">
-        <HijriDate lang={lang} fallback={hijriFallback} client:idle /> · Riyadh
+        <HijriDate lang={lang} fallback={hijriFallback} client:idle /> · {t('hero.dateline.city')}
       </span>
-      <span class="marginalia">v{release.version} · iOS · Android · Huawei</span>
+      <span class="marginalia">v{release.version} · {t('hero.eyebrow2')}</span>
     </div>
     <hr class="rule rule-strong" style="border-top-width:2px" />
 

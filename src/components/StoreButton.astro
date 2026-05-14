@@ -2,6 +2,7 @@
 import Icon from '@/components/Icon.astro';
 import type { IconName } from '@/components/icons';
 import type { Store } from '@/components/store';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 type Props = {
   store: Store;
@@ -12,10 +13,13 @@ type Props = {
 
 const { store, primary = false, full = false, href = '#' } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const config: Record<Store, { line1: string; line2: string; icon: IconName }> = {
-  ios: { line1: 'Download on the', line2: 'App Store', icon: 'apple' },
-  android: { line1: 'Get it on', line2: 'Google Play', icon: 'android' },
-  huawei: { line1: 'Explore it on', line2: 'AppGallery', icon: 'huawei' },
+  ios: { line1: t('store.ios.line1'), line2: 'App Store', icon: 'apple' },
+  android: { line1: t('store.android.line1'), line2: 'Google Play', icon: 'android' },
+  huawei: { line1: t('store.huawei.line1'), line2: 'AppGallery', icon: 'huawei' },
 };
 
 const { line1, line2, icon } = config[store];
