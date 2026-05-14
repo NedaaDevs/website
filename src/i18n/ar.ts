@@ -268,8 +268,8 @@ export default {
     'لأيّ سؤال — عن حساب المواقيت، المنبّهات، الترجمات، أو غيرها — راسلنا، أو افتح مشكلة على GitHub.',
   'stub.back': 'العودة للرئيسية',
   // toggles
-  'ui.theme': 'السِمة',
-  'ui.theme.light': 'فاتحة',
-  'ui.theme.dark': 'داكنة',
+  'ui.theme': 'المظهر',
+  'ui.theme.light': 'فاتح',
+  'ui.theme.dark': 'داكن',
   'ui.locale': 'اللغة',
 } as const;
