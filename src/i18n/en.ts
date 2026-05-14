@@ -216,9 +216,9 @@ export default {
   'pp.do.3':
     'Schedules notifications and the Fajr alarm via the operating system. The OS plays them.',
   'pp.do.4':
-    'Fetches publicly-available data on first launch (Athkar text, mushaf images), then works offline.',
+    'Fetches a year of prayer times on first launch. Works offline otherwise — except when you’re browsing the Quran.',
   'pp.do.5':
-    'Receives crash-free session counts in aggregate via your platform’s built-in store reporting — like every app.',
+    'The only exception is crash data: automatic reports from your app store (like any app), details via Sentry if you enabled it, and in-app logs if you sent them to support.',
   'pp.doesnot': 'What Nedaa does not',
   'pp.dont.1': 'No advertising. No ad SDKs. No revenue from showing you anything.',
   'pp.dont.2':
@@ -253,10 +253,10 @@ export default {
   'pp.perm.calendar.no': 'Off by default. Nothing happens.',
   'pp.foot1.t': 'Your rights',
   'pp.foot1.b':
-    'Because we don’t collect personal data, GDPR access / deletion / portability requests are essentially trivial — there is nothing to access, delete, or port. Email support@nedaa.dev with any concern and we’ll respond within five working days.',
+    'There’s nothing for us to delete — we never collected anything. If you want your data gone, just delete the app. For any other privacy question, email support@nedaa.dev; we reply within five working days.',
   'pp.foot2.t': 'Children',
   'pp.foot2.b':
-    'Nedaa is suitable for any age. We do not knowingly collect personal information from anyone, because we do not knowingly collect personal information from anyone.',
+    'Nedaa is suitable for any age. We don’t knowingly collect personal information from anyone — adult or child.',
   'pp.foot3.t': 'Changes',
   'pp.foot3.b':
     'If we change anything material, we’ll show a one-time, dismissible notice in the app — never a wall of text you have to accept to continue praying.',
