@@ -161,6 +161,11 @@ export default {
   'ledger.empty': 'لا بيانات بعد.',
   'ledger.loading': 'جارٍ التحميل…',
   'ledger.error': 'تعذّر تحميل الإحصاءات الحيّة. حاول لاحقًا.',
+  'ledger.over': 'خلال',
+  'ledger.acrossEndpoints': 'على كلّ الواجهات',
+  'ledger.period.24h': '٢٤ ساعة',
+  'ledger.period.7d': '٧ أيام',
+  'ledger.period.30d': '٣٠ يومًا',
   // footer
   'footer.tagline': 'رفيق صلاتك: بسيط، خاصّ، ولا يُزعجك. مجّاني ومفتوح المصدر.',
   'footer.product': 'المنتج',

@@ -163,6 +163,11 @@ export default {
   'ledger.empty': 'No data yet.',
   'ledger.loading': 'Loading…',
   'ledger.error': 'Could not load live stats. Try again later.',
+  'ledger.over': 'over',
+  'ledger.acrossEndpoints': 'across all endpoints',
+  'ledger.period.24h': '24 h',
+  'ledger.period.7d': '7 d',
+  'ledger.period.30d': '30 d',
   // footer
   'footer.tagline':
     'A quiet, private companion for prayer times. Free, open source, designed to stay out of the way.',

@@ -22,15 +22,20 @@
     empty: string;
     loading: string;
     error: string;
+    over: string;
+    acrossEndpoints: string;
+    period24h: string;
+    period7d: string;
+    period30d: string;
   };
   type Props = { lang: Locale; labels: Labels };
 
   const { lang, labels }: Props = $props();
 
   const PERIODS: { id: StatsPeriod; short: string }[] = [
-    { id: '24h', short: '24 h' },
-    { id: '7d', short: '7 d' },
-    { id: '30d', short: '30 d' },
+    { id: '24h', short: labels.period24h },
+    { id: '7d', short: labels.period7d },
+    { id: '30d', short: labels.period30d },
   ];
 
   let active = $state<StatsPeriod>('24h');
@@ -151,12 +156,12 @@
       <div class="metric">
         <div class="marginalia">{labels.errorRate}</div>
         <div class="metric-num tnum tone-{errorTone}">{percent.format(stats.errorRate)}</div>
-        <div class="metric-meta">over {PERIODS.find((p) => p.id === active)?.short}</div>
+        <div class="metric-meta">{labels.over} {PERIODS.find((p) => p.id === active)?.short}</div>
       </div>
       <div class="metric">
         <div class="marginalia">{labels.avgResponse}</div>
         <div class="metric-num tnum">{exact.format(stats.avgResponseTimeMs)} <small>ms</small></div>
-        <div class="metric-meta">across all endpoints</div>
+        <div class="metric-meta">{labels.acrossEndpoints}</div>
       </div>
     </div>
 
