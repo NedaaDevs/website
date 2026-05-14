@@ -1,7 +1,8 @@
 <script lang="ts">
   import { animate } from 'motion/mini';
-  import { flattenDays, getPrayers, indexOfToday, type PrayerDay } from '@/lib/api/nedaa';
-  import { detectCity, sameCity, MAKKAH, type TzCity } from '@/lib/tz-cities';
+  import { indexOfToday, type PrayerDay } from '@/lib/api/nedaa';
+  import { getAladhanCalendar, roundCoord } from '@/lib/api/aladhan';
+  import { MAKKAH, sameLocation, type CityRef } from '@/lib/cities';
   import { hijriDate } from '@/lib/format';
   import type { Locale } from '@/i18n/types';
   import prebake from '@/data/prayers-default.json';
@@ -11,7 +12,19 @@
 
   const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
 
-  let city = $state<TzCity>(detectCity());
+  const STORAGE_KEY = 'nedaa:prayer-card:location';
+
+  const loadSaved = (): CityRef | null => {
+    if (typeof localStorage === 'undefined') return null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? (JSON.parse(raw) as CityRef) : null;
+    } catch {
+      return null;
+    }
+  };
+
+  let city = $state<CityRef>(loadSaved() ?? MAKKAH);
   let cityLabel = $state<string>(city.city);
   /** Only today onwards — past days are not navigable. */
   const fromToday = (all: PrayerDay[], when: Date = new Date()) =>
@@ -51,6 +64,13 @@
 
   const STATUS_LIVE = { en: 'live', ar: 'مباشر', ms: 'langsung', ur: 'لائیو' };
   const STATUS_OFFLINE = { en: 'offline', ar: 'غير متّصل', ms: 'luar talian', ur: 'آف لائن' };
+  const USE_LOCATION = {
+    en: '📍 Use my location',
+    ar: '📍 استخدم موقعي',
+    ms: '📍 Gunakan lokasi saya',
+    ur: '📍 میری لوکیشن استعمال کریں',
+  };
+  const LOCATING = { en: 'Locating…', ar: 'جارٍ التحديد…', ms: 'Mencari…', ur: 'تلاش جاری ہے…' };
   const NEXT_LABEL = { en: 'Next prayer', ar: 'الصلاة التالية', ms: 'Solat seterusnya', ur: 'اگلی نماز' };
   const IN_LABEL = { en: 'in', ar: 'بعد', ms: 'dalam', ur: 'میں' };
   const PREV_LABEL = { en: 'Previous day', ar: 'اليوم السابق', ms: 'Sebelumnya', ur: 'پچھلا دن' };
@@ -114,37 +134,73 @@
     typeof navigator !== 'undefined' &&
     (navigator.webdriver === true || /HeadlessChrome|Lighthouse/i.test(navigator.userAgent));
 
+  const fetchFor = async (target: CityRef): Promise<void> => {
+    if (isHeadless) return;
+    loading = true;
+    error = null;
+    const today = new Date();
+    const res = await getAladhanCalendar({
+      lat: target.lat,
+      lng: target.lng,
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+    });
+    if (!res.ok) {
+      error = res.error.kind;
+      loading = false;
+      return;
+    }
+    const month = today.toISOString().slice(0, 7);
+    const monthDays = res.data.filter((d) => d.timings.fajr.startsWith(month));
+    const upcoming = fromToday(monthDays, today);
+    if (upcoming.length > 0) {
+      provider = 'aladhan';
+      days = upcoming;
+      cursor = 0;
+      cityLabel = target.city;
+    }
+    loading = false;
+  };
+
+  let locating = $state(false);
+
+  const useMyLocation = async () => {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) return;
+    locating = true;
+    try {
+      const pos = await new Promise<GeolocationPosition>((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: false,
+          timeout: 10_000,
+          maximumAge: 600_000,
+        }),
+      );
+      const next: CityRef = {
+        city: cityLabel,
+        lat: roundCoord(pos.coords.latitude),
+        lng: roundCoord(pos.coords.longitude),
+      };
+      city = next;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      } catch {
+        /* storage may be disabled */
+      }
+      await fetchFor(next);
+    } catch {
+      /* permission denied or timeout — keep current */
+    } finally {
+      locating = false;
+    }
+  };
+
   $effect(() => {
     let cancelled = false;
 
-    if (!isHeadless && !sameCity(city, MAKKAH)) {
-      loading = true;
+    if (!sameLocation(city, MAKKAH)) {
       (async () => {
-        const today = new Date();
-        const prayers = await getPrayers({
-          lat: city.lat,
-          lng: city.lng,
-          year: today.getFullYear(),
-          month: today.getMonth() + 1,
-        });
+        await fetchFor(city);
         if (cancelled) return;
-        if (!prayers.ok) {
-          error = prayers.error.kind;
-          loading = false;
-          return;
-        }
-        const month = today.toISOString().slice(0, 7);
-        const monthDays = flattenDays(prayers.data).filter((d) =>
-          d.timings.fajr.startsWith(month),
-        );
-        const upcoming = fromToday(monthDays, today);
-        if (upcoming.length > 0) {
-          provider = prayers.data.provider;
-          days = upcoming;
-          cursor = 0;
-          cityLabel = city.city;
-        }
-        loading = false;
       })();
     }
 
@@ -164,6 +220,15 @@
     <span class="marginalia city">
       <span class:pulse={loading} class="city-dot" aria-hidden="true"></span>
       {cityLabel}
+      <button
+        type="button"
+        class="locate-btn"
+        onclick={useMyLocation}
+        disabled={locating}
+        title={USE_LOCATION[lang]}
+      >
+        {locating ? LOCATING[lang] : USE_LOCATION[lang]}
+      </button>
     </span>
     {#if day}
       {@const dayDate = new Date(day.timings.fajr)}
@@ -262,6 +327,24 @@
     border-radius: 999px;
     background: var(--success-bd);
     flex-shrink: 0;
+  }
+  .locate-btn {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin-inline-start: 4px;
+    font: inherit;
+    color: var(--type-2);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .locate-btn:hover:not(:disabled) {
+    color: var(--accent);
+  }
+  .locate-btn:disabled {
+    cursor: default;
+    opacity: 0.6;
   }
   .city-dot.pulse {
     background: var(--accent);

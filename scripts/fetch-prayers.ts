@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { flattenDays, getPrayers, getPrayerProviders, type PrayerDay } from '@/lib/api/nedaa';
-import { MAKKAH } from '@/lib/tz-cities';
+import { MAKKAH } from '@/lib/cities';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = resolve(ROOT, 'src/data/prayers-default.json');
