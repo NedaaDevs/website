@@ -1,9 +1,10 @@
 ---
-import { CALC_METHODS } from '@/data/calc-methods';
+import { getCalcMethods } from '@/data/calc-methods';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const methods = getCalcMethods(lang);
 
 const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
 const numFmt = new Intl.NumberFormat(baseLocale, {
@@ -23,7 +24,7 @@ const numFmt = new Intl.NumberFormat(baseLocale, {
 
       <ul class="methods">
         {
-          CALC_METHODS.map((m, i) => (
+          methods.map((m, i) => (
             <li class="method">
               <span>{m}</span>
               <span class="marginalia">{numFmt.format(i + 1)}</span>

@@ -3,7 +3,9 @@
  * Sourced from https://aladhan.com/calculation-methods. Plus a custom option
  * for masjids that follow their own conventions.
  */
-export const CALC_METHODS = [
+import type { Locale } from '@/i18n/types';
+
+const en = [
   'Umm al-Qura University, Makkah',
   'Muslim World League',
   'Islamic Society of North America',
@@ -29,3 +31,32 @@ export const CALC_METHODS = [
   'Shia Ithna-Ashari, Leva Institute',
   'Custom (your own imam)',
 ];
+
+const ar = [
+  'جامعة أمّ القرى، مكّة',
+  'رابطة العالم الإسلامي',
+  'الجمعية الإسلامية لأمريكا الشمالية',
+  'الهيئة المصرية العامّة للمساحة',
+  'جامعة العلوم الإسلامية، كراتشي',
+  'معهد الجيوفيزياء، جامعة طهران',
+  'رئاسة الشؤون الدينية (تركيا)',
+  'لجنة تحرّي الهلال العالمية',
+  'الكويت',
+  'قطر',
+  'المجلس الديني الإسلامي السنغافوري (MUIS)',
+  'الجزائر (MARA)',
+  'المغرب',
+  'KEMENAG (إندونيسيا)',
+  'تونس',
+  'JAKIM (ماليزيا)',
+  'اتحاد المنظمات الإسلامية بفرنسا',
+  'الإدارة الدينية لمسلمي روسيا',
+  'منطقة الخليج',
+  'دبي (تجريبي)',
+  'الجالية الإسلامية بلشبونة',
+  'الأردن (وزارة الأوقاف)',
+  'الشيعة الاثنا عشرية، معهد ليفا',
+  'مخصّص (إعدادات إمامك)',
+];
+
+export const getCalcMethods = (lang: Locale): string[] => (lang === 'ar' ? ar : en);
