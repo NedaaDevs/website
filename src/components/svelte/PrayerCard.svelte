@@ -6,25 +6,41 @@
   import { hijriDate } from '@/lib/format';
   import type { Locale } from '@/i18n/types';
   import prebake from '@/data/prayers-default.json';
+  import { CALC_METHODS, DEFAULT_METHOD_ID } from '@/data/calc-methods';
 
   type Props = { lang: Locale };
   const { lang }: Props = $props();
 
   const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
 
-  const STORAGE_KEY = 'nedaa:prayer-card:location';
+  const LOC_KEY = 'nedaa:prayer-card:location';
+  const SET_KEY = 'nedaa:prayer-card:settings';
 
-  const loadSaved = (): CityRef | null => {
+  type Settings = { methodId: number; school: 0 | 1 };
+  const DEFAULT_SETTINGS: Settings = { methodId: DEFAULT_METHOD_ID, school: 0 };
+
+  const loadSavedLocation = (): CityRef | null => {
     if (typeof localStorage === 'undefined') return null;
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(LOC_KEY);
       return raw ? (JSON.parse(raw) as CityRef) : null;
     } catch {
       return null;
     }
   };
 
-  let city = $state<CityRef>(loadSaved() ?? MAKKAH);
+  const loadSavedSettings = (): Settings => {
+    if (typeof localStorage === 'undefined') return DEFAULT_SETTINGS;
+    try {
+      const raw = localStorage.getItem(SET_KEY);
+      return raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : DEFAULT_SETTINGS;
+    } catch {
+      return DEFAULT_SETTINGS;
+    }
+  };
+
+  let city = $state<CityRef>(loadSavedLocation() ?? MAKKAH);
+  let settings = $state<Settings>(loadSavedSettings());
   let cityLabel = $state<string>(city.city);
   /** Only today onwards — past days are not navigable. */
   const fromToday = (all: PrayerDay[], when: Date = new Date()) =>
@@ -71,6 +87,12 @@
     ur: '📍 میری لوکیشن استعمال کریں',
   };
   const LOCATING = { en: 'Locating…', ar: 'جارٍ التحديد…', ms: 'Mencari…', ur: 'تلاش جاری ہے…' };
+  const MY_LOCATION = { en: 'My location', ar: 'موقعي', ms: 'Lokasi saya', ur: 'میری لوکیشن' };
+  const SETTINGS_LABEL = { en: 'Settings', ar: 'الإعدادات', ms: 'Tetapan', ur: 'ترتیبات' };
+  const METHOD_LABEL = { en: 'Method', ar: 'طريقة الحساب', ms: 'Kaedah', ur: 'طریقہ' };
+  const MADHHAB_LABEL = { en: 'Madhhab', ar: 'المذهب', ms: 'Mazhab', ur: 'مذہب' };
+  const STANDARD_LABEL = { en: 'Standard', ar: 'الجمهور', ms: 'Standard', ur: 'معیاری' };
+  const HANAFI_LABEL = { en: 'Hanafi', ar: 'الحنفي', ms: 'Hanafi', ur: 'حنفی' };
   const NEXT_LABEL = { en: 'Next prayer', ar: 'الصلاة التالية', ms: 'Solat seterusnya', ur: 'اگلی نماز' };
   const IN_LABEL = { en: 'in', ar: 'بعد', ms: 'dalam', ur: 'میں' };
   const PREV_LABEL = { en: 'Previous day', ar: 'اليوم السابق', ms: 'Sebelumnya', ur: 'پچھلا دن' };
@@ -144,6 +166,8 @@
       lng: target.lng,
       year: today.getFullYear(),
       month: today.getMonth() + 1,
+      method: settings.methodId,
+      school: settings.school,
     });
     if (!res.ok) {
       error = res.error.kind;
@@ -176,13 +200,13 @@
         }),
       );
       const next: CityRef = {
-        city: cityLabel,
+        city: MY_LOCATION[lang],
         lat: roundCoord(pos.coords.latitude),
         lng: roundCoord(pos.coords.longitude),
       };
       city = next;
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        localStorage.setItem(LOC_KEY, JSON.stringify(next));
       } catch {
         /* storage may be disabled */
       }
@@ -194,10 +218,25 @@
     }
   };
 
+  const onSettingsChange = async () => {
+    try {
+      localStorage.setItem(SET_KEY, JSON.stringify(settings));
+    } catch {
+      /* storage may be disabled */
+    }
+    await fetchFor(city);
+  };
+
   $effect(() => {
     let cancelled = false;
 
-    if (!sameLocation(city, MAKKAH)) {
+    // Re-fetch if non-default location OR non-default settings on mount.
+    const needsFetch =
+      !sameLocation(city, MAKKAH) ||
+      settings.methodId !== DEFAULT_SETTINGS.methodId ||
+      settings.school !== DEFAULT_SETTINGS.school;
+
+    if (needsFetch) {
       (async () => {
         await fetchFor(city);
         if (cancelled) return;
@@ -306,6 +345,27 @@
   </div>
 
   <hr class="rule" />
+  <details class="settings">
+    <summary class="marginalia">{SETTINGS_LABEL[lang]}</summary>
+    <div class="settings-grid">
+      <label class="setting">
+        <span class="setting-label marginalia">{METHOD_LABEL[lang]}</span>
+        <select bind:value={settings.methodId} onchange={onSettingsChange}>
+          {#each CALC_METHODS as m}
+            <option value={m.id}>{lang === 'ar' ? m.ar : m.en}</option>
+          {/each}
+        </select>
+      </label>
+      <label class="setting">
+        <span class="setting-label marginalia">{MADHHAB_LABEL[lang]}</span>
+        <select bind:value={settings.school} onchange={onSettingsChange}>
+          <option value={0}>{STANDARD_LABEL[lang]}</option>
+          <option value={1}>{HANAFI_LABEL[lang]}</option>
+        </select>
+      </label>
+    </div>
+  </details>
+  <hr class="rule" />
   <div class="footer">
     <span class="marginalia">{PROVIDER_LABEL[lang]} · {provider ?? '—'}</span>
     <span class="marginalia status" class:offline={!!error}>
@@ -345,6 +405,59 @@
   .locate-btn:disabled {
     cursor: default;
     opacity: 0.6;
+  }
+  .settings {
+    margin: 0;
+  }
+  .settings > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 4px 0;
+    user-select: none;
+  }
+  .settings > summary::-webkit-details-marker {
+    display: none;
+  }
+  .settings > summary::before {
+    content: '▸';
+    display: inline-block;
+    margin-inline-end: 6px;
+    transition: transform 0.15s ease;
+  }
+  .settings[open] > summary::before {
+    transform: rotate(90deg);
+  }
+  [dir='rtl'] .settings > summary::before {
+    content: '◂';
+  }
+  [dir='rtl'] .settings[open] > summary::before {
+    transform: rotate(-90deg);
+  }
+  .settings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .setting {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+  .setting select {
+    font: inherit;
+    font-size: 13px;
+    padding: 6px 8px;
+    border: 1px solid var(--outline);
+    border-radius: 6px;
+    background: var(--bg-2);
+    color: var(--type);
+    width: 100%;
+  }
+  .setting select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
   }
   .city-dot.pulse {
     background: var(--accent);
