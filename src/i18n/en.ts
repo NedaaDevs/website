@@ -272,6 +272,10 @@ export default {
   'stub.open.title': 'Read the code, file an issue, translate a string.',
   'stub.open.body':
     'Nedaa lives openly on GitHub. The repository, contribution guide, and issue tracker are linked below.',
+  'stub.privacy.title': 'A formal privacy policy is on the way.',
+  'stub.privacy.body':
+    'A store-grade privacy policy is being written. Meanwhile, our full position on privacy — what we collect, what we don’t, and why — is on the stance page.',
+  'stub.privacy.link': 'Read our privacy stance',
   'stub.support.title': 'Email us. We answer.',
   'stub.support.body':
     'For questions about prayer-time calculation, alarms, translations, or anything else — reach out by email or open an issue on GitHub.',

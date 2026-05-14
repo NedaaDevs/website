@@ -1,0 +1,366 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import Icon from '@/components/Icon.astro';
+import release from '@/data/release.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { gregorianShort } from '@/lib/format';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// "Last updated" reflects the most recent release date for now — we ship
+// privacy text alongside app releases.
+const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
+
+const claims = [
+  { n: '00', t: t('pp.c1.t'), b: t('pp.c1.b') },
+  { n: '00', t: t('pp.c2.t'), b: t('pp.c2.b') },
+  { n: '00 GB', t: t('pp.c3.t'), b: t('pp.c3.b') },
+];
+
+const does = [
+  t('pp.do.1'),
+  t('pp.do.2'),
+  t('pp.do.3'),
+  t('pp.do.4'),
+  t('pp.do.5'),
+];
+const doesNot = [
+  t('pp.dont.1'),
+  t('pp.dont.2'),
+  t('pp.dont.3'),
+  t('pp.dont.4'),
+  t('pp.dont.5'),
+];
+
+const perms = [
+  { p: t('pp.perm.location'), why: t('pp.perm.location.why'), no: t('pp.perm.location.no') },
+  { p: t('pp.perm.notif'), why: t('pp.perm.notif.why'), no: t('pp.perm.notif.no') },
+  { p: t('pp.perm.alarm'), why: t('pp.perm.alarm.why'), no: t('pp.perm.alarm.no') },
+  { p: t('pp.perm.compass'), why: t('pp.perm.compass.why'), no: t('pp.perm.compass.no') },
+  { p: t('pp.perm.storage'), why: t('pp.perm.storage.why'), no: t('pp.perm.storage.no') },
+];
+
+const footBlocks = [
+  { t: t('pp.foot1.t'), b: t('pp.foot1.b') },
+  { t: t('pp.foot2.t'), b: t('pp.foot2.b') },
+  { t: t('pp.foot3.t'), b: t('pp.foot3.b') },
+];
+---
+
+<Layout title={`${t('priv.section')} · Nedaa`} locale={lang}>
+  <TopNav />
+
+  <main>
+    <section class="section pp-hero">
+      <div class="shell">
+        <div class="meta">
+          <span class="marginalia">{t('pp.section')}</span>
+          <span class="marginalia">{t('pp.last')} · {lastUpdated}</span>
+        </div>
+        <hr class="rule" style="margin-top:16px" />
+        <div class="hero-grid">
+          <h1 class="h-display hero-title">
+            {t('pp.title')}<br />
+            <span class="accent">{t('pp.title2')}</span>
+          </h1>
+          <p class="lead pp-lead">{t('pp.lead')}</p>
+        </div>
+        <hr class="rule" style="margin-top:56px" />
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="shell">
+        <div class="claims">
+          {
+            claims.map((c) => (
+              <article class="claim">
+                <div class="claim-num">{c.n}</div>
+                <h2 class="h-3 claim-title">{c.t}</h2>
+                <p class="body claim-body">{c.b}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="almanac-rule">{t('pp.collect.section')}</div>
+        <h2 class="h-1 collect-title">{t('pp.collect.title')}</h2>
+
+        <div class="cols">
+          <div class="col col-does">
+            <div class="marginalia col-tag does">{t('pp.does')}</div>
+            <ul class="lst">
+              {
+                does.map((x) => (
+                  <li class="lst-row">
+                    <span class="dot does-dot"><Icon name="check" size={14} /></span>
+                    <span>{x}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div class="col col-doesnt">
+            <div class="marginalia col-tag doesnt">{t('pp.doesnot')}</div>
+            <ul class="lst">
+              {
+                doesNot.map((x) => (
+                  <li class="lst-row">
+                    <span class="dash" aria-hidden="true">—</span>
+                    <span>{x}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pp-perms">
+      <div class="shell">
+        <div class="almanac-rule">{t('pp.perm.section')}</div>
+        <h2 class="h-1 perm-title">{t('pp.perm.title')}</h2>
+
+        <div class="perm-table">
+          <div class="perm-head">
+            <span class="marginalia">{t('pp.perm.col.what')}</span>
+            <span class="marginalia">{t('pp.perm.col.why')}</span>
+            <span class="marginalia">{t('pp.perm.col.no')}</span>
+          </div>
+          {
+            perms.map((r) => (
+              <div class="perm-row">
+                <span class="perm-name">{r.p}</span>
+                <span class="perm-why">{r.why}</span>
+                <span class="perm-no">{r.no}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="grid-3 foot-grid">
+          {
+            footBlocks.map((b, i) => (
+              <article>
+                <div class="marginalia">{String(i + 1).padStart(2, '0')}</div>
+                <h3 class="h-3 foot-title">{b.t}</h3>
+                <p class="body foot-body">{b.b}</p>
+              </article>
+            ))
+          }
+        </div>
+        <hr class="rule" style="margin-top:56px" />
+        <div class="foot-meta">
+          <span class="marginalia">{t('pp.contact')}</span>
+          <span class="marginalia">{t('pp.gov')}</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .pp-hero {
+    padding-top: 72px;
+    padding-bottom: 48px;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 48px;
+  }
+  .hero-title {
+    font-size: clamp(40px, 6vw, 72px);
+  }
+  .accent {
+    color: var(--accent);
+  }
+  .pp-lead {
+    max-width: 50ch;
+  }
+
+  .claims {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--outline);
+  }
+  .claim {
+    padding: 36px 28px;
+    border-inline-end: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+  }
+  .claim:last-child {
+    border-inline-end: none;
+  }
+  .claim-num {
+    font-family: var(--f-mono);
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .claim-title {
+    margin-top: 14px;
+  }
+  .claim-body {
+    font-size: 14.5px;
+    margin-top: 6px;
+  }
+
+  .collect-title {
+    margin-top: 24px;
+    max-width: 24ch;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 40px;
+  }
+  .col {
+    border-top: 1px solid var(--outline);
+    padding: 24px 32px 32px 0;
+  }
+  .col-doesnt {
+    border-inline-start: 1px solid var(--outline);
+    padding-inline-start: 32px;
+    padding-inline-end: 0;
+  }
+  .col-tag.does {
+    color: var(--success);
+  }
+  .col-tag.doesnt {
+    color: var(--error);
+  }
+  .lst {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .lst-row {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--type);
+  }
+  .does-dot {
+    color: var(--success);
+    margin-top: 4px;
+  }
+  .dash {
+    color: var(--error);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .perm-title {
+    margin-top: 20px;
+    max-width: 30ch;
+  }
+  .perm-table {
+    margin-top: 32px;
+    background: var(--bg-2);
+    border: 1px solid var(--outline);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .perm-head,
+  .perm-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.6fr 1.6fr;
+    gap: 24px;
+    padding: 18px 24px;
+    align-items: flex-start;
+  }
+  .perm-head {
+    background: var(--bg-muted);
+    border-bottom: 1px solid var(--outline);
+  }
+  .perm-row {
+    border-bottom: 1px solid var(--outline);
+  }
+  .perm-row:last-child {
+    border-bottom: none;
+  }
+  .perm-name {
+    font-weight: 600;
+    color: var(--type);
+    font-size: 15px;
+  }
+  .perm-why,
+  .perm-no {
+    color: var(--type-2);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .pp-perms {
+    background: var(--bg-muted);
+    border-top: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+  }
+
+  .foot-grid {
+    gap: 32px;
+  }
+  .foot-title {
+    margin-top: 8px;
+  }
+  .foot-body {
+    font-size: 14.5px;
+    margin-top: 8px;
+  }
+  .foot-meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid,
+    .cols,
+    .claims,
+    .perm-head,
+    .perm-row {
+      grid-template-columns: 1fr;
+    }
+    .claim {
+      border-inline-end: none;
+    }
+    .col-doesnt {
+      border-inline-start: none;
+      padding-inline-start: 0;
+      border-top: 1px solid var(--outline);
+    }
+    .col {
+      padding-inline: 0;
+    }
+  }
+</style>
