@@ -1,15 +1,142 @@
 ---
-import StubPage from '@/components/StubPage.astro';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
+import release from '@/data/release.json';
+import { gregorianShort } from '@/lib/format';
+import '@/styles/doc-page.css';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const path = useTranslatedPath(lang);
+const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
 ---
 
-<StubPage
-  eyebrow={t('nav.privacy')}
-  title={t('stub.privacy.title')}
-  body={t('stub.privacy.body')}
-  links={[{ label: t('stub.privacy.link'), href: path('/privacy-stance'), primary: true }]}
-/>
+<Layout
+  title="Privacy Policy — Nedaa"
+  description="How Nedaa handles your data. Plain language, no fine print."
+  locale={lang}
+>
+  <TopNav />
+  <main class="section doc">
+    <div class="shell-narrow">
+      <article class="prose">
+        <header class="doc-head">
+          <span class="marginalia">Last updated · {lastUpdated}</span>
+          <h1 class="h-display doc-h1">Privacy Policy</h1>
+          <p class="lead doc-desc">
+            Nedaa is a mobile app, built and published by NedaaDev — a community of contributors.
+            This policy describes what Nedaa does and does not do with your data. Plain language. No fine print.
+          </p>
+        </header>
+        <hr class="rule doc-rule" />
+
+        <h2>TL;DR</h2>
+        <ul>
+          <li>We don't collect personal data. No accounts. No tracking.</li>
+          <li>A few things happen locally on your device (your settings, custom Athkar, fasting Qada counter).</li>
+          <li>The only data that leaves your device is: anonymized crash reports from your app store (automatic, like every app), opt-in Sentry crash details (off by default), in-app log files you choose to send for support, and prayer-time API requests (no IPs, headers, or bodies retained).</li>
+          <li>If you want your data gone: delete the app. There is nothing on a server to delete.</li>
+        </ul>
+
+        <h2>What information we collect, how, and why</h2>
+
+        <h3>On your device only (we never see it)</h3>
+        <ul>
+          <li>Your settings, custom Athkar, and fasting Qada counter. Stored locally so the app works between sessions.</li>
+          <li>Your location (only if you grant the permission). Used to compute your prayer times. Low-precision. Never transmitted off your device.</li>
+        </ul>
+
+        <h3>What may reach us — and only under these conditions</h3>
+        <ul>
+          <li><strong>App-store crash reports.</strong> When the app crashes, your platform (Apple or Google) sends us anonymized crash counts and stack traces. This is the same as every app; it is handled by the store, not by us.</li>
+          <li><strong>Sentry crash details (opt-in).</strong> If you turn on Sentry reporting in Nedaa's settings, we receive crash details that help us fix bugs. This is off by default. You can turn it off at any time.</li>
+          <li><strong>In-app log files (user-sent).</strong> If you contact support and choose to attach app log files, we receive whatever you sent. Logs may contain device/OS info and a record of what the app did before the issue. We use them solely to help you.</li>
+          <li><strong>Prayer-time API requests.</strong> Our API is a proxy that forwards requests to a prayer-time provider — currently Aladhan, which is open source. Nedaa requests times roughly once a year per area, plus an extra request whenever you change a setting that requires a refetch (e.g., calculation method or madhab); the rest of the year, timings are read from local storage on your device. At our proxy, your coordinates are rounded to a coarse grid before forwarding — only the area bucket is passed downstream to the provider. The exact coordinates, IPs, request headers, and request bodies are not retained.</li>
+        </ul>
+
+        <h3>What we never collect</h3>
+        <ul>
+          <li>No accounts, sign-ups, emails, or passwords.</li>
+          <li>No advertising SDKs.</li>
+          <li>No analytics SDKs that profile, segment, or fingerprint individuals.</li>
+          <li>No location data sent off your device — ever.</li>
+          <li>No third-party data brokers.</li>
+          <li>No cookies, no cross-site tracking.</li>
+        </ul>
+
+        <h2>How we use what we receive</h2>
+        <ul>
+          <li><strong>Crash data</strong> is used to diagnose and fix bugs. We do not sell, share, or use it for any other purpose.</li>
+          <li><strong>Log files you send</strong> are used only to answer your support request.</li>
+          <li><strong>Prayer-time requests</strong> are served and discarded; nothing about who requested them is retained.</li>
+        </ul>
+
+        <h2>Sharing and third parties</h2>
+        <p>Nedaa uses a small number of third parties strictly to operate. No data is sold or shared with advertisers.</p>
+        <ul>
+          <li><strong>Your app store</strong> (Apple App Store, Google Play, Huawei AppGallery) — distributes the app, reports anonymized crash counts.</li>
+          <li><strong>Sentry</strong> (only if you opted in) — receives crash details. Sentry's own privacy policy applies to data they process on our behalf.</li>
+          <li><strong>The Nedaa API</strong> — operated by us; a proxy that forwards bucketed prayer-time requests to a provider. No retention as described above.</li>
+          <li><strong>Aladhan</strong> — current open-source provider behind our proxy. Receives only the bucketed area, never your exact location or device identifiers.</li>
+        </ul>
+        <p>We do not work with advertising networks, analytics ad networks, or data brokers.</p>
+
+        <h2>Data retention</h2>
+        <ul>
+          <li><strong>Crash reports</strong> received via Sentry are retained for as long as needed to diagnose bugs, then deleted.</li>
+          <li><strong>Support emails and attached logs</strong> are retained for as long as the support thread is active, then deleted.</li>
+          <li><strong>API request logs</strong>: aggregate counts only; no identifying data is retained.</li>
+        </ul>
+
+        <h2>Your rights</h2>
+        <p>
+          Because Nedaa does not maintain user accounts or personal data on a server, traditional data-subject requests
+          (access, deletion, portability) are mostly moot — there is nothing on our side to access, delete, or port.
+        </p>
+        <ul>
+          <li><strong>To remove all data</strong>: delete the app. Local data is removed with it.</li>
+          <li><strong>To opt out of Sentry</strong>: turn it off in Nedaa's settings.</li>
+          <li><strong>For any other privacy question</strong>: email support@nedaa.dev. We respond within five working days.</li>
+        </ul>
+
+        <h2>International transfers</h2>
+        <p>
+          Nedaa is available globally. Crash data sent to Sentry may be processed in regions outside your country.
+          If you do not wish for any data to leave your device, do not enable Sentry; everything else operates locally
+          or stays anonymized.
+        </p>
+
+        <h2>Children</h2>
+        <p>Nedaa is suitable for users of all ages. We do not knowingly collect personal information from anyone — adult or child.</p>
+
+        <h2>Security</h2>
+        <p>We follow standard practices to protect what little data we receive:</p>
+        <ul>
+          <li>HTTPS in transit for all network calls.</li>
+          <li>Crash data accessed only by maintainers.</li>
+          <li>No system is perfectly secure; we'll notify users promptly if a breach affecting them ever occurs.</li>
+        </ul>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          If we change this policy in a material way, we'll show a one-time, dismissible notice in the app — not a wall
+          of text you must accept to continue praying. Non-material clarifications may be posted to this page without
+          notice. The effective date at the top reflects the latest version.
+        </p>
+
+        <h2>Contact</h2>
+        <p>For any privacy-related question or concern, email <a href="mailto:support@nedaa.dev">support@nedaa.dev</a>.</p>
+
+        <hr class="rule" />
+        <p>
+          <em>Nedaa is open source. Our source code, including everything that handles your data, is at
+          <a href="https://github.com/NedaaDevs/nedaa">github.com/NedaaDevs/nedaa</a>.</em>
+        </p>
+
+        <p><a class="back" href={path('/privacy-stance')}>Read our privacy stance →</a></p>
+      </article>
+    </div>
+  </main>
+  <Footer />
+</Layout>

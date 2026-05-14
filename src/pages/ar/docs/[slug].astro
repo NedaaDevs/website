@@ -7,6 +7,7 @@ import Icon from '@/components/Icon.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
 import { getPublishedDocs, docMeta } from '@/lib/docs';
 import { gregorianShort } from '@/lib/format';
+import '@/styles/doc-page.css';
 
 export const getStaticPaths = async () => {
   const all = await getPublishedDocs('ar');
@@ -55,75 +56,3 @@ const path = useTranslatedPath(lang);
   <Footer />
 </Layout>
 
-<style>
-  .doc { padding-top: 64px; }
-  .shell-narrow {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-  @media (max-width: 768px) {
-    .shell-narrow { padding: 0 20px; }
-  }
-
-  .back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--type-2);
-  }
-  .back:hover { color: var(--accent); }
-  .back-arrow { transform: scaleX(-1); }
-  :global([dir='rtl']) .back-arrow { transform: none; }
-
-  .doc-head {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .doc-h1 { font-size: clamp(36px, 4.8vw, 56px); margin: 0; }
-  .doc-desc { margin: 0; }
-  .doc-rule { margin: 32px 0; }
-
-  .prose :global(h2) {
-    font-family: var(--f-arabic);
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 1.3;
-    margin-top: 48px;
-    margin-bottom: 12px;
-  }
-  .prose :global(h3) {
-    font-family: var(--f-arabic);
-    font-weight: 600;
-    font-size: 18px;
-    margin-top: 32px;
-    margin-bottom: 8px;
-  }
-  .prose :global(p),
-  .prose :global(li) {
-    color: var(--type);
-    line-height: 1.75;
-  }
-  .prose :global(p) { margin: 16px 0; }
-  .prose :global(strong) { color: var(--type); }
-  .prose :global(ul),
-  .prose :global(ol) { padding-inline-start: 22px; margin: 16px 0; }
-  .prose :global(li) { margin: 6px 0; }
-  .prose :global(a) {
-    color: var(--accent);
-    border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
-  }
-  .prose :global(code) {
-    font-family: var(--f-mono);
-    font-size: 0.9em;
-    background: var(--bg-muted);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-</style>
