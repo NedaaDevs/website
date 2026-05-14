@@ -1,7 +1,7 @@
 export default {
   // site
   'site.brand': 'نداء',
-  'site.title': 'نداء — مواقيت الصلاة، بتصميمٍ يليق',
+  'site.title': 'نداء — رفيقُ النداء',
   // nav
   'nav.home': 'الرئيسية',
   'nav.features': 'المزايا',
@@ -154,7 +154,7 @@ export default {
   'footer.translate': 'ترجمة على Crowdin',
   'footer.terms': 'الشروط',
   'footer.attrib': 'الإسنادات',
-  'footer.copy': '© ٢٠٢٦ نداء · لمن يجيبون النداء.',
+  'footer.copy': '© ٢٠٢٦ نداء · رفيقُ النداء.',
   'footer.license': 'GPLv3 · المصدر متاح',
   'footer.status': 'يعمل',
   'footer.attribTitle': 'إسنادات لازمة',

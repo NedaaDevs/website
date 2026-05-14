@@ -1,7 +1,7 @@
 export default {
   // site
   'site.brand': 'Nedaa',
-  'site.title': 'Nedaa | نداء — Prayer times, dignified by design',
+  'site.title': 'Nedaa — Companion to the call',
   // nav
   'nav.home': 'Home',
   'nav.features': 'Features',
@@ -157,7 +157,7 @@ export default {
   'footer.translate': 'Translate on Crowdin',
   'footer.terms': 'Terms',
   'footer.attrib': 'Attributions',
-  'footer.copy': '© 2026 Nedaa · For those who answer the call.',
+  'footer.copy': '© 2026 Nedaa · Companion to the call.',
   'footer.license': 'GPLv3 · source available',
   'footer.status': 'Operational',
   'footer.attribTitle': 'Required attributions',
