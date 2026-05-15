@@ -7,12 +7,14 @@ type Props = {
   title: string;
   description?: string;
   locale?: Locale;
+  jsonLd?: unknown;
 };
 
 const {
   title,
   description = 'A quiet, private, free, open-source prayer-times companion.',
   locale = 'en',
+  jsonLd,
 } = Astro.props;
 const dir = dirFor(locale);
 ---
@@ -40,6 +42,7 @@ const dir = dirFor(locale);
         <Font cssVariable="--f-arabic" />
       </Fragment>
     )}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <slot />

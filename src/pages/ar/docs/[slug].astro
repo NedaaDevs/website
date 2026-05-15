@@ -7,6 +7,7 @@ import Icon from '@/components/Icon.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
 import { getPublishedDocs, docMeta } from '@/lib/docs';
 import { gregorianShort } from '@/lib/format';
+import { jsonLdBySlug } from '@/data/jsonld';
 import '@/styles/doc-page.css';
 
 export const getStaticPaths = async () => {
@@ -23,12 +24,14 @@ const { Content } = await render(entry);
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const path = useTranslatedPath(lang);
+const jsonLd = jsonLdBySlug[docMeta(entry).slug];
 ---
 
 <Layout
   title={entry.data.title}
   description={entry.data.description}
   locale={lang}
+  jsonLd={jsonLd}
 >
   <TopNav />
   <main class="section doc">
