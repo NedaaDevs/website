@@ -129,7 +129,7 @@ Yes. Free, no ads, no paywalls, no subscriptions, no premium tier.
 - **Android (Google Play):** package `dev.nedaa.android`
 - **Android (Huawei AppGallery):** same package, separate `production-hms` build with no Google dependencies
 - **Source:** github.com/NedaaDevs/nedaa
-- **Support:** support@nedaa.dev
+- **Support:** support [at] nedaa.dev
 
 ## Credit
 

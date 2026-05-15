@@ -124,7 +124,7 @@ AlarmKit إطار عمل في iOS، **أُطلق في iOS 26**، يتيح للت
 - **أندرويد (متجر تطبيقات قوقل):** `dev.nedaa.android`
 - **أندرويد (Huawei AppGallery):** نسخة `production-hms` مستقلّة بلا اعتمادٍ على خدمات قوقل
 - **الكود المصدري:** github.com/NedaaDevs/nedaa
-- **الدعم:** support@nedaa.dev
+- **الدعم:** support [at] nedaa.dev
 
 ---
 

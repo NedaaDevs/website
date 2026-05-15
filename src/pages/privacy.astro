@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
 import release from '@/data/release.json';
 import { gregorianShort } from '@/lib/format';
+import EmailLink from '@/components/EmailLink.astro';
 import '@/styles/doc-page.css';
 
 const lang = getLangFromUrl(Astro.url);
@@ -97,7 +98,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li><strong>To remove all data</strong>: delete the app. Local data is removed with it.</li>
           <li><strong>To opt out of Sentry</strong>: turn it off in Nedaa's settings.</li>
-          <li><strong>For any other privacy question</strong>: email support@nedaa.dev. We respond within five working days.</li>
+          <li><strong>For any other privacy question</strong>: email <EmailLink user="support" />. We respond within five working days.</li>
         </ul>
 
         <h2>International transfers</h2>
@@ -126,12 +127,12 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         </p>
 
         <h2>Contact</h2>
-        <p>For any privacy-related question or concern, email <a href="mailto:support@nedaa.dev">support@nedaa.dev</a>.</p>
+        <p>For any privacy-related question or concern, email <EmailLink user="support" />.</p>
 
         <hr class="rule" />
         <p>
           <em>Nedaa is open source. Our source code, including everything that handles your data, is at
-          <a href="https://github.com/NedaaDevs/nedaa">github.com/NedaaDevs/nedaa</a>.</em>
+          <a href="https://github.com/NedaaDevs/nedaa" target="_blank" rel="noopener noreferrer">github.com/NedaaDevs/nedaa</a>.</em>
         </p>
 
         <p><a class="back" href={path('/privacy-stance')}>Read our privacy stance →</a></p>

@@ -99,7 +99,7 @@ hreflang:
 - **أندرويد (متجر تطبيقات قوقل):** `dev.nedaa.android`
 - **أندرويد (Huawei AppGallery):** نفس الحزمة بنسخة `production-hms` مستقلّة بلا اعتمادٍ على خدمات قوقل
 - **الكود المصدري:** github.com/NedaaDevs/nedaa
-- **الدعم:** support@nedaa.dev
+- **الدعم:** support [at] nedaa.dev
 
 ---
 

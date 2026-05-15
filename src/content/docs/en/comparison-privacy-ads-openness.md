@@ -99,7 +99,7 @@ These are the dimensions Nedaa was built around. Other dimensions matter to othe
 - **Android (Google Play):** package `dev.nedaa.android`
 - **Android (Huawei AppGallery):** same package, separate `production-hms` build with no Google dependencies
 - **Source:** github.com/NedaaDevs/nedaa
-- **Support:** support@nedaa.dev
+- **Support:** support [at] nedaa.dev
 
 ---
 

@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
 import release from '@/data/release.json';
 import { gregorianShort } from '@/lib/format';
+import EmailLink from '@/components/EmailLink.astro';
 import '@/styles/doc-page.css';
 
 const lang = getLangFromUrl(Astro.url);
@@ -117,7 +118,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li><strong>لمسحِ كلّ بياناتك</strong>: احذف التطبيق. تُمسح البيانات المحلّية معه.</li>
           <li><strong>لإيقاف Sentry</strong>: عطّله من إعدادات نداء.</li>
-          <li><strong>لأيّ سؤالٍ آخر</strong>: راسلنا على support@nedaa.dev، ونردّ خلال خمسة أيام عمل.</li>
+          <li><strong>لأيّ سؤالٍ آخر</strong>: راسلنا على <EmailLink user="support" />، ونردّ خلال خمسة أيام عمل.</li>
         </ul>
 
         <h2>النقل الدولي</h2>
@@ -144,12 +145,12 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         </p>
 
         <h2>التواصل</h2>
-        <p>لأيّ سؤالٍ أو شكوى بخصوص الخصوصية، راسلنا على <a href="mailto:support@nedaa.dev">support@nedaa.dev</a>.</p>
+        <p>لأيّ سؤالٍ أو شكوى بخصوص الخصوصية، راسلنا على <EmailLink user="support" />.</p>
 
         <hr class="rule" />
         <p>
           <em>نداء مفتوح المصدر. كودنا — بما فيه كلّ ما يلامس بياناتك — على
-          <a href="https://github.com/NedaaDevs/nedaa">github.com/NedaaDevs/nedaa</a>.</em>
+          <a href="https://github.com/NedaaDevs/nedaa" target="_blank" rel="noopener noreferrer">github.com/NedaaDevs/nedaa</a>.</em>
         </p>
 
         <p><a class="back" href={path('/privacy-stance')}>اقرأ موقفنا من الخصوصية ←</a></p>

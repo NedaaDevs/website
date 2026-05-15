@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import EmailLink from '@/components/EmailLink.astro';
 import { getLangFromUrl, useTranslations, languages } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -19,7 +20,7 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
       </div>
 
       <div class="stack stack-3 head-meta">
-        <a class="chip" href={CROWDIN_URL}>
+        <a class="chip" href={CROWDIN_URL} target="_blank" rel="noopener noreferrer">
           <span class="dot"></span>
           {t('loc.live')}
         </a>
@@ -42,11 +43,11 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
         <h3 class="h-2">{t('loc.cta1.t')}</h3>
         <p class="body cta-body">{t('loc.cta1.b')}</p>
         <div class="row" style="margin-top:18px">
-          <a class="btn btn-primary" href={CROWDIN_URL}>
+          <a class="btn btn-primary" href={CROWDIN_URL} target="_blank" rel="noopener noreferrer">
             {t('loc.cta1.a1')}
             <Icon name="arrow-up-end" size={14} />
           </a>
-          <a class="btn btn-ghost" href="https://github.com/NedaaDevs/nedaa/issues/new?labels=i18n">
+          <a class="btn btn-ghost" href="https://github.com/NedaaDevs/nedaa/issues/new?labels=i18n" target="_blank" rel="noopener noreferrer">
             {t('loc.cta1.a2')}
           </a>
         </div>
@@ -56,10 +57,7 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
         <h3 class="h-2">{t('loc.cta2.t')}</h3>
         <p class="body cta-body">{t('loc.cta2.b')}</p>
         <div class="row" style="margin-top:18px">
-          <a class="btn btn-ghost" href="mailto:support@nedaa.dev">
-            support@nedaa.dev
-            <Icon name="arrow-up-end" size={14} />
-          </a>
+          <EmailLink user="support" class="btn btn-ghost" />
         </div>
       </article>
     </div>

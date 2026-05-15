@@ -272,14 +272,14 @@ export default {
   'pp.perm.storage.no': 'The default Athan plays.',
   'pp.foot1.t': 'Your rights',
   'pp.foot1.b':
-    'There’s nothing for us to delete — we never collected anything. If you want your data gone, just delete the app. For any other privacy question, email support@nedaa.dev; we reply within five working days.',
+    'There’s nothing for us to delete — we never collected anything. If you want your data gone, just delete the app. For any other privacy question, email us; we reply within five working days.',
   'pp.foot2.t': 'Children',
   'pp.foot2.b':
     'Nedaa is suitable for any age. We don’t knowingly collect personal information from anyone — adult or child.',
   'pp.foot3.t': 'Changes',
   'pp.foot3.b':
     'If we change anything material, we’ll show a one-time, dismissible notice in the app — never a wall of text you have to accept to continue praying.',
-  'pp.contact': 'Questions? support@nedaa.dev',
+  'pp.contact': 'Questions?',
   'pp.gov': 'Governed under GPLv3 · code at github.com/NedaaDevs/nedaa',
   // docs
   'docs.eyebrow': 'Docs · methodology, comparisons, datasets',

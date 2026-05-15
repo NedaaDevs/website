@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import TopNav from '@/components/TopNav.astro';
 import Footer from '@/components/Footer.astro';
 import Icon from '@/components/Icon.astro';
+import EmailLink from '@/components/EmailLink.astro';
 import release from '@/data/release.json';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { gregorianShort } from '@/lib/format';
@@ -163,7 +164,7 @@ const footBlocks = [
         </div>
         <hr class="rule" style="margin-top:56px" />
         <div class="foot-meta">
-          <span class="marginalia">{t('pp.contact')}</span>
+          <span class="marginalia">{t('pp.contact')} <EmailLink user="support" /></span>
           <span class="marginalia">{t('pp.gov')}</span>
         </div>
       </div>
