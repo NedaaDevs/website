@@ -4,7 +4,6 @@ export default {
   'site.title': 'Nedaa — Companion to the call',
   // nav
   'nav.home': 'Home',
-  'nav.features': 'Features',
   'nav.privacy': 'Privacy',
   'nav.open': 'Open Source',
   'nav.download': 'Download',
@@ -12,6 +11,7 @@ export default {
   'nav.docs': 'Docs',
   'nav.stance': 'Privacy stance',
   'nav.cta': 'Download',
+  'nav.menu': 'Menu',
   'dl.redirect.notice': 'Opening {store} in 1 second…',
   'dl.redirect.cancel': 'Cancel',
   'dl.redirect.ios': 'the App Store',

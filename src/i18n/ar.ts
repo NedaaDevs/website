@@ -4,7 +4,6 @@ export default {
   'site.title': 'نداء — رفيقُ النداء',
   // nav
   'nav.home': 'الرئيسية',
-  'nav.features': 'المزايا',
   'nav.privacy': 'الخصوصية',
   'nav.open': 'مفتوح المصدر',
   'nav.download': 'تنزيل',
@@ -12,6 +11,7 @@ export default {
   'nav.docs': 'الوثائق',
   'nav.stance': 'موقف الخصوصية',
   'nav.cta': 'تنزيل',
+  'nav.menu': 'القائمة',
   'dl.redirect.notice': 'سيُفتح {store} بعد ثانية…',
   'dl.redirect.cancel': 'إلغاء',
   'dl.redirect.ios': 'متجر App Store',
