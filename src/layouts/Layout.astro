@@ -2,12 +2,14 @@
 import '@/styles/global.css';
 import { Font } from 'astro:assets';
 import { type Locale, dirFor } from '@/i18n/utils';
+import { ogPathFor } from '@/lib/og-manifest';
 
 type Props = {
   title: string;
   description?: string;
   locale?: Locale;
   jsonLd?: unknown;
+  ogSlug?: string;
 };
 
 const {
@@ -15,8 +17,14 @@ const {
   description = 'A quiet, private, free, open-source prayer-times companion.',
   locale = 'en',
   jsonLd,
+  ogSlug,
 } = Astro.props;
 const dir = dirFor(locale);
+
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const ogPath = ogSlug ? `/og/${ogSlug}.png` : ogPathFor(pathname, locale);
+const canonical = new URL(pathname || '/', Astro.site).toString();
+const ogImage = new URL(ogPath, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -31,6 +39,20 @@ const dir = dirFor(locale);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1c5d85" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nedaa" />
+    <meta property="og:locale" content={locale === 'ar' ? 'ar_SA' : 'en_US'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     {locale === 'ar' || locale === 'ur' ? (
       <Fragment>
         <Font cssVariable="--f-arabic" preload />

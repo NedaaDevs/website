@@ -1,0 +1,258 @@
+---
+export const prerender = true;
+// Dev-only scaffold pages — one per OG manifest entry. The gen-og script
+// boots `astro dev`, navigates here, screenshots the `.og` element, and
+// saves to public/og/. Production `astro build` skips these.
+import { OG_MANIFEST, type OgEntry } from '@/lib/og-manifest';
+import { Font } from 'astro:assets';
+
+export const getStaticPaths = () => {
+  if (import.meta.env.PROD) return [];
+  return OG_MANIFEST.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+};
+
+type Props = { entry: OgEntry };
+const { entry } = Astro.props;
+const isRtl = entry.locale === 'ar';
+const isDark = entry.theme === 'dark';
+const wordmark = isRtl ? 'نداء' : 'Nedaa';
+const tagline = isRtl ? 'رفيقُ النداء' : 'Companion to the call';
+const eyebrow = isRtl ? 'نـداء · رفيق النداء' : 'NEDAA · COMPANION TO THE CALL';
+const logoSrc = isDark ? '/logo-dark.png' : '/logo.png';
+---
+
+<html lang={entry.locale} dir={isRtl ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <title>OG {entry.slug}</title>
+    <Font cssVariable="--f-sans" preload />
+    <Font cssVariable="--f-arabic" preload />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=block"
+      rel="stylesheet"
+    />
+    <style is:global>
+      :root {
+        --bg: #e8eaee;
+        --paper: #f5f7fa;
+        --ink: #0f2c44;
+        --ink-2: #4b5563;
+        --primary: #1c5d85;
+        --muted: #6b7280;
+        --rule: rgba(15, 44, 68, 0.18);
+        --rule-strong: rgba(15, 44, 68, 0.32);
+      }
+      [data-theme='dark'] {
+        --bg: #0f2c44;
+        --paper: #143552;
+        --ink: #f5efe1;
+        --ink-2: #c9c0a8;
+        --primary: #e6c469;
+        --muted: #9aa0a6;
+        --rule: rgba(245, 239, 225, 0.16);
+        --rule-strong: rgba(245, 239, 225, 0.3);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--bg);
+        font-family: var(--f-sans), system-ui, sans-serif;
+        color: var(--ink);
+      }
+      body[dir='rtl'] {
+        font-family: var(--f-arabic), var(--f-sans), system-ui, sans-serif;
+      }
+      astro-dev-toolbar { display: none !important; }
+
+      .og {
+        width: 1200px;
+        height: 630px;
+        position: relative;
+        overflow: hidden;
+        background: var(--bg);
+        padding: 64px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* subtle paper layer + accent ribbon on the far side */
+      .og::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,0.55) 0%, transparent 55%),
+          radial-gradient(80% 60% at 100% 100%, rgba(28,93,133,0.05) 0%, transparent 60%);
+        pointer-events: none;
+      }
+      .ribbon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        background: var(--primary);
+      }
+      .og[dir='ltr'] .ribbon { left: 0; }
+      .og[dir='rtl'] .ribbon { right: 0; }
+
+      /* head: logo + eyebrow */
+      .head {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        z-index: 1;
+      }
+      .logo {
+        width: 64px;
+        height: 64px;
+        display: block;
+      }
+      .eyebrow {
+        font-family: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .eyebrow::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--primary);
+      }
+      body[dir='rtl'] .eyebrow {
+        font-family: var(--f-arabic), ui-monospace, monospace;
+        letter-spacing: 0;
+      }
+
+      /* body: wordmark + headline + lede */
+      .body {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+      }
+      .wordmark {
+        font-size: 132px;
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+        margin: 0 0 12px;
+      }
+      body[dir='rtl'] .wordmark {
+        font-size: 120px;
+        letter-spacing: 0;
+        line-height: 1;
+      }
+      .headline {
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.022em;
+        color: var(--ink);
+        margin: 0;
+        max-width: 18ch;
+      }
+      .headline em {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        color: var(--primary);
+        letter-spacing: -0.005em;
+      }
+      body[dir='rtl'] .headline em {
+        font-family: var(--f-arabic);
+        font-style: normal;
+      }
+      body[dir='rtl'] .headline {
+        font-size: 44px;
+        letter-spacing: 0;
+        line-height: 1.25;
+      }
+      .lede {
+        font-size: 22px;
+        line-height: 1.45;
+        color: var(--ink-2);
+        margin: 16px 0 0;
+        max-width: 60ch;
+      }
+      body[dir='rtl'] .lede { font-size: 24px; }
+
+      /* foot: rule + marginalia row */
+      .foot {
+        position: relative;
+        z-index: 1;
+      }
+      .foot hr {
+        border: 0;
+        border-top: 1px solid var(--rule);
+        margin: 0 0 18px;
+      }
+      .foot-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: ui-monospace, 'JetBrains Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      .foot-row .url { color: var(--ink); font-weight: 600; }
+      body[dir='rtl'] .foot-row .tagline {
+        font-family: var(--f-arabic);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body dir={isRtl ? 'rtl' : 'ltr'} data-theme={isDark ? 'dark' : 'light'}>
+    <div class="og" dir={isRtl ? 'rtl' : 'ltr'}>
+      <span class="ribbon"></span>
+
+      <div class="head">
+        <img class="logo" src={logoSrc} alt="" />
+        <span class="eyebrow">{eyebrow}</span>
+      </div>
+
+      <div class="body">
+        <h1 class="wordmark">{wordmark}</h1>
+        {entry.title && (
+          <p class="headline">
+            {entry.title}
+            {entry.subtitle && (
+              <>
+                {' '}
+                <em>{entry.subtitle}</em>
+              </>
+            )}
+          </p>
+        )}
+      </div>
+
+      <div class="foot">
+        <hr />
+        <div class="foot-row">
+          <span class="tagline">{tagline}</span>
+          <span class="url">nedaa.dev</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

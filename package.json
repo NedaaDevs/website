@@ -15,7 +15,8 @@
     "check": "astro check",
     "astro": "astro",
     "format": "prettier --write \"src/**/*.{astro,svelte,ts,tsx,md}\"",
-    "lhci": "lhci autorun"
+    "lhci": "lhci autorun",
+    "og:gen": "bun run scripts/gen-og.ts"
   },
   "packageManager": "bun@1.2.21",
   "trustedDependencies": ["esbuild", "sharp"],
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.60.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.4.0"
