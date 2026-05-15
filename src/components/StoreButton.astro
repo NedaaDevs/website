@@ -28,7 +28,7 @@ const { line1, line2, icon } = config[store];
 const classes = ['store-btn', primary && 'primary'].filter(Boolean).join(' ');
 ---
 
-<a class={classes} href={href} style={full ? 'width:100%' : undefined}>
+<a class={classes} href={href} target="_blank" rel="noopener noreferrer" style={full ? 'width:100%' : undefined}>
   <span class="glyph">
     {store === 'android' ? (
       <LogoGooglePlay size={22} />

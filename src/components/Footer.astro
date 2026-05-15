@@ -40,7 +40,7 @@ const contact = [{ href: path('/support'), label: t('nav.support') }];
       <div>
         <h2 class="col-title">{t('footer.community')}</h2>
         <ul>
-          {community.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+          {community.map((l) => (<li><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a></li>))}
         </ul>
       </div>
 

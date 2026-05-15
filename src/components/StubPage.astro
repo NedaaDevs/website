@@ -29,12 +29,20 @@ const path = useTranslatedPath(lang);
       <p class="lead">{body}</p>
       <div class="row stub-actions">
         {
-          links.map((l) => (
-            <a class={`btn ${l.primary ? 'btn-primary' : 'btn-ghost'}`} href={l.href}>
-              {l.label}
-              <Icon name="arrow-end" size={14} />
-            </a>
-          ))
+          links.map((l) => {
+            const external = /^https?:/.test(l.href);
+            return (
+              <a
+                class={`btn ${l.primary ? 'btn-primary' : 'btn-ghost'}`}
+                href={l.href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                {l.label}
+                <Icon name="arrow-end" size={14} />
+              </a>
+            );
+          })
         }
         <a class="btn btn-link" href={path('/')}>
           <Icon name="arrow-end" size={14} />
