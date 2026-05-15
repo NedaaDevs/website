@@ -4,7 +4,8 @@
 FROM oven/bun:1.3-alpine AS deps
 WORKDIR /app
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
+RUN --mount=type=cache,target=/root/.bun/install/cache \
+    bun install --frozen-lockfile
 
 # ---- build --------------------------------------------------------------
 FROM oven/bun:1.3-alpine AS build
@@ -13,6 +14,11 @@ ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN bun run build
+# Precompress static assets so Nginx can serve .gz directly via gzip_static.
+RUN find dist -type f \( \
+      -name '*.html' -o -name '*.css' -o -name '*.js' -o \
+      -name '*.svg' -o -name '*.json' -o -name '*.xml' -o -name '*.txt' \
+    \) -size +256c -exec gzip -9 -k {} +
 
 # ---- runtime ------------------------------------------------------------
 FROM nginx:1.27-alpine AS runtime
