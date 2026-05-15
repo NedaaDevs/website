@@ -1,7 +1,9 @@
 export default {
   // site
   'site.brand': 'Nedaa',
-  'site.title': 'Nedaa — Companion to the call',
+  'site.title': 'Nedaa — Private prayer times, real Fajr alarm, daily athkar',
+  'site.description':
+    'A quiet, private, free, open-source prayer-times companion: accurate timings, a real Fajr alarm, daily athkar, Qibla, and Hijri date — no ads, accounts, or trackers.',
   // nav
   'nav.home': 'Home',
   'nav.privacy': 'Privacy',
