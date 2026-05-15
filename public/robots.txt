@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nedaa.dev/sitemap-index.xml
