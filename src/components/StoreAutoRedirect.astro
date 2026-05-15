@@ -1,0 +1,130 @@
+---
+import release from '@/data/release.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const labels = {
+  ios: t('dl.redirect.ios'),
+  android: t('dl.redirect.android'),
+  huawei: t('dl.redirect.huawei'),
+};
+---
+
+<div
+  id="store-redirect"
+  class="store-redirect"
+  hidden
+  data-ios-url={release.iosUrl}
+  data-android-url={release.androidUrl}
+  data-huawei-url={release.huaweiUrl}
+  data-label-ios={labels.ios}
+  data-label-android={labels.android}
+  data-label-huawei={labels.huawei}
+  data-notice={t('dl.redirect.notice')}
+  data-cancel={t('dl.redirect.cancel')}
+>
+  <div class="shell store-redirect-inner">
+    <span class="store-redirect-msg" data-role="msg"></span>
+    <button type="button" class="store-redirect-cancel" data-role="cancel"></button>
+  </div>
+  <div class="store-redirect-bar" data-role="bar"></div>
+</div>
+
+<script>
+  const el = document.getElementById('store-redirect');
+  if (el) {
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.includes('Mac') && 'ontouchend' in document);
+    const isHuawei = /HuaweiBrowser|HMSCore|HONOR/i.test(ua) || ua.includes('; HMS');
+    const isAndroid = /Android/i.test(ua);
+
+    let store: 'ios' | 'android' | 'huawei' | null = null;
+    if (isIOS) store = 'ios';
+    else if (isHuawei) store = 'huawei';
+    else if (isAndroid) store = 'android';
+
+    if (store) {
+      const url = el.dataset[`${store}Url`];
+      const label = el.dataset[`label${store[0].toUpperCase()}${store.slice(1)}` as keyof DOMStringMap];
+      const notice = el.dataset.notice ?? '';
+      const cancel = el.dataset.cancel ?? '';
+
+      const msg = el.querySelector<HTMLElement>('[data-role="msg"]');
+      const btn = el.querySelector<HTMLButtonElement>('[data-role="cancel"]');
+      const bar = el.querySelector<HTMLElement>('[data-role="bar"]');
+
+      if (url && msg && btn && bar) {
+        msg.textContent = notice.replace('{store}', label ?? '');
+        btn.textContent = cancel;
+        el.hidden = false;
+
+        // trigger CSS transition
+        requestAnimationFrame(() => bar.classList.add('run'));
+
+        let cancelled = false;
+        const timer = window.setTimeout(() => {
+          if (!cancelled) window.location.href = url;
+        }, 1000);
+
+        btn.addEventListener('click', () => {
+          cancelled = true;
+          window.clearTimeout(timer);
+          el.classList.add('cancelled');
+          window.setTimeout(() => {
+            el.hidden = true;
+          }, 200);
+        });
+      }
+    }
+  }
+</script>
+
+<style>
+  .store-redirect {
+    position: sticky;
+    top: 64px;
+    z-index: 40;
+    background: var(--accent);
+    color: var(--on-accent, #fff);
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 70%, black);
+  }
+  .store-redirect.cancelled {
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+  .store-redirect-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  .store-redirect-msg {
+    font-weight: 500;
+  }
+  .store-redirect-cancel {
+    background: transparent;
+    color: inherit;
+    border: 1px solid color-mix(in oklab, var(--on-accent, #fff) 70%, transparent);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .store-redirect-cancel:hover {
+    background: color-mix(in oklab, var(--on-accent, #fff) 12%, transparent);
+  }
+  .store-redirect-bar {
+    height: 2px;
+    background: color-mix(in oklab, var(--on-accent, #fff) 60%, transparent);
+    width: 0%;
+  }
+  .store-redirect-bar.run {
+    width: 100%;
+    transition: width 1s linear;
+  }
+</style>

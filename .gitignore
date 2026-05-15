@@ -31,3 +31,13 @@ coverage
 
 
 .env
+
+# Astro
+.astro/
+
+# Lighthouse CI
+.lighthouseci/
+src/data/release.json
+src/data/prayers-default.json
+src/data/prayer-providers.json
+src/data/github.json

@@ -1,0 +1,211 @@
+---
+import Brand from '@/components/Brand.astro';
+import Wordmark from '@/components/Wordmark.astro';
+import Icon from '@/components/Icon.astro';
+import ThemeToggle from '@/components/svelte/ThemeToggle.svelte';
+import LocaleSwitcher from '@/components/svelte/LocaleSwitcher.svelte';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const items = [
+  { id: 'home', href: path('/'), label: t('nav.home') },
+  { id: 'docs', href: path('/docs'), label: t('nav.docs') },
+  { id: 'privacy', href: path('/privacy'), label: t('nav.privacy') },
+  { id: 'privacy-stance', href: path('/privacy-stance'), label: t('nav.stance') },
+  { id: 'open', href: path('/open'), label: t('nav.open') },
+  { id: 'download', href: path('/download'), label: t('nav.download') },
+];
+
+const isActive = (href: string) => current === href.replace(/\/$/, '');
+---
+
+<nav class="topnav" aria-label="Primary">
+  <div class="shell topnav-inner">
+    <a href={path('/')} class="brand-link">
+      <Brand size={28} />
+      <Wordmark size="sm" />
+    </a>
+
+    <div class="topnav-links">
+      {
+        items.map((it) => (
+          <a href={it.href} class={isActive(it.href) ? 'active' : ''}>
+            {it.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="topnav-actions">
+      <div class="topnav-desktop-actions">
+        <LocaleSwitcher current={lang === 'ar' ? 'ar' : 'en'} client:idle />
+        <ThemeToggle client:idle />
+        <a class="btn btn-ghost" href={path('/download')}>
+          {t('nav.cta')}
+          <Icon name="arrow-end" size={14} />
+        </a>
+      </div>
+      <button
+        type="button"
+        class="topnav-toggle"
+        aria-expanded="false"
+        aria-controls="topnav-mobile"
+        aria-label={t('nav.menu') ?? 'Menu'}
+        data-mobile-toggle
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="topnav-mobile" class="topnav-mobile" hidden>
+    <div class="shell topnav-mobile-inner">
+      {
+        items.map((it) => (
+          <a href={it.href} class={isActive(it.href) ? 'active' : ''}>
+            {it.label}
+          </a>
+        ))
+      }
+      <div class="topnav-mobile-tools">
+        <LocaleSwitcher current={lang === 'ar' ? 'ar' : 'en'} client:idle />
+        <ThemeToggle client:idle />
+      </div>
+      <a class="btn btn-primary topnav-mobile-cta" href={path('/download')}>
+        {t('nav.cta')}
+        <Icon name="arrow-end" size={14} />
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-mobile-toggle]');
+  const panel = document.getElementById('topnav-mobile');
+  if (toggle && panel) {
+    const close = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      document.body.classList.remove('mobile-nav-open');
+    };
+    const open = () => {
+      toggle.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      document.body.classList.add('mobile-nav-open');
+    };
+    toggle.addEventListener('click', () => {
+      toggle.getAttribute('aria-expanded') === 'true' ? close() : open();
+    });
+    panel.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  }
+</script>
+
+<style>
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .topnav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topnav-desktop-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topnav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid var(--outline);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    color: var(--type);
+  }
+  .topnav-toggle .bar {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .topnav-toggle[aria-expanded='true'] .bar:nth-child(1) {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+  .topnav-toggle[aria-expanded='true'] .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .topnav-toggle[aria-expanded='true'] .bar:nth-child(3) {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+  .topnav-mobile {
+    border-top: 1px solid var(--outline);
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+  .topnav-mobile-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0 20px;
+  }
+  .topnav-mobile-inner > a {
+    padding: 12px 4px;
+    font-size: 15px;
+    color: var(--type-2);
+    border-bottom: 1px solid var(--outline);
+  }
+  .topnav-mobile-inner > a.active {
+    color: var(--type);
+  }
+  .topnav-mobile-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0 4px;
+  }
+  .topnav-mobile-cta {
+    margin-top: 12px;
+    justify-content: center;
+    border-bottom: 0 !important;
+    color: var(--type-contrast) !important;
+  }
+  [data-theme='dark'] .topnav-mobile-cta {
+    color: #1c1a12 !important;
+  }
+  @media (max-width: 768px) {
+    .topnav-toggle {
+      display: inline-flex;
+    }
+    .topnav-desktop-actions {
+      display: none;
+    }
+  }
+  @media (min-width: 769px) {
+    .topnav-mobile {
+      display: none !important;
+    }
+  }
+</style>

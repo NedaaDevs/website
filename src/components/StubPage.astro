@@ -1,0 +1,70 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import Icon from '@/components/Icon.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+type Slot = { label: string; href: string; primary?: boolean };
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  body: string;
+  links?: Slot[];
+};
+
+const { eyebrow, title, body, links = [] } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+---
+
+<Layout title={`${eyebrow} · Nedaa`} locale={lang}>
+  <TopNav />
+  <main class="section stub">
+    <div class="shell">
+      <div class="almanac-rule">{eyebrow}</div>
+      <h1 class="h-display stub-title">{title}</h1>
+      <p class="lead">{body}</p>
+      <div class="row stub-actions">
+        {
+          links.map((l) => {
+            const external = /^https?:/.test(l.href);
+            return (
+              <a
+                class={`btn ${l.primary ? 'btn-primary' : 'btn-ghost'}`}
+                href={l.href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                {l.label}
+                <Icon name="arrow-end" size={14} />
+              </a>
+            );
+          })
+        }
+        <a class="btn btn-link" href={path('/')}>
+          <Icon name="arrow-end" size={14} />
+          {t('stub.back')}
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .stub {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+  .stub-title {
+    margin-top: 24px;
+    font-size: clamp(40px, 5.4vw, 64px);
+    max-width: 22ch;
+  }
+  .stub-actions {
+    margin-top: 28px;
+  }
+</style>

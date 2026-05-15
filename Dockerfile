@@ -1,59 +1,26 @@
-# Use Bun for faster builds
-FROM oven/bun:1-alpine AS base
+# syntax=docker/dockerfile:1.7
 
-# Install security updates
-RUN apk add --no-cache dumb-init && \
-    apk upgrade
-
-# Create non-root user for security
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -S appuser -u 1001 -G appgroup
-
-# Set working directory
+# ---- deps ---------------------------------------------------------------
+FROM oven/bun:1.3-alpine AS deps
 WORKDIR /app
-
-# Change ownership of working directory
-RUN chown -R appuser:appgroup /app
-
-# Switch to non-root user
-USER appuser
-
-# Copy package files
-COPY --chown=appuser:appgroup package.json bun.lock* ./
-
-# Install dependencies
+COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
-# === Build stage ===
-FROM base AS builder
-
-# Copy source code (including .env created by CI)
-COPY --chown=appuser:appgroup . .
-
-# Build the Vue app with env file loaded
-RUN bun --env-file=.env run build-only
-
-# === Production stage ===
-FROM nginx:alpine AS production
-
-# Install security updates and dumb-init
-RUN apk add --no-cache dumb-init && \
-    apk upgrade
-
-# Copy built Vue app from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy custom nginx configuration
-COPY deployment/config/nginx.conf /etc/nginx/conf.d/default.conf
-
-# Set environment variables
+# ---- build --------------------------------------------------------------
+FROM oven/bun:1.3-alpine AS build
+WORKDIR /app
 ENV NODE_ENV=production
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN bun run build
 
-# Expose port
+# ---- runtime ------------------------------------------------------------
+FROM nginx:1.27-alpine AS runtime
+RUN apk add --no-cache curl \
+ && rm /etc/nginx/conf.d/default.conf
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
-
-# Use dumb-init to handle signals properly
-ENTRYPOINT ["dumb-init", "--"]
-
-# Start nginx
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -fsS http://localhost/ >/dev/null || exit 1
 CMD ["nginx", "-g", "daemon off;"]

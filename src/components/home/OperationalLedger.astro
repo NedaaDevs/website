@@ -1,0 +1,66 @@
+---
+import Ledger from '@/components/svelte/OperationalLedger.svelte';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const labels = {
+  period: t('ledger.period'),
+  totalRequests: t('ledger.totalRequests'),
+  errorRate: t('ledger.errorRate'),
+  avgResponse: t('ledger.avgResponse'),
+  endpoints: t('ledger.endpoints'),
+  statusCodes: t('ledger.statusCodes'),
+  path: t('ledger.path'),
+  share: t('ledger.share'),
+  avg: t('ledger.avg'),
+  requests: t('ledger.requests'),
+  note: t('ledger.note'),
+  empty: t('ledger.empty'),
+  loading: t('ledger.loading'),
+  error: t('ledger.error'),
+  over: t('ledger.over'),
+  acrossEndpoints: t('ledger.acrossEndpoints'),
+  period24h: t('ledger.period.24h'),
+  period7d: t('ledger.period.7d'),
+  period30d: t('ledger.period.30d'),
+};
+---
+
+<section class="section ledger">
+  <div class="shell">
+    <div class="head fx-rise">
+      <div>
+        <div class="almanac-rule" style="justify-content:flex-start">{t('ledger.section')}</div>
+        <h2 class="h-1 ledger-title">{t('ledger.title')}</h2>
+        <p class="body ledger-lead">{t('ledger.lead')}</p>
+      </div>
+    </div>
+
+    <Ledger lang={lang} labels={labels} client:visible />
+  </div>
+</section>
+
+<style>
+  .ledger {
+    background: var(--bg-muted);
+    border-top: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .ledger-title {
+    margin-top: 8px;
+  }
+  .ledger-lead {
+    margin-top: 12px;
+    font-size: 16px;
+    max-width: 60ch;
+  }
+</style>

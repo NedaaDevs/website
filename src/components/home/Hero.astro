@@ -1,0 +1,179 @@
+---
+import StoreRow from '@/components/StoreRow.astro';
+import RelativeDate from '@/components/svelte/RelativeDate.svelte';
+import HijriDate from '@/components/svelte/HijriDate.svelte';
+import PrayerCard from '@/components/svelte/PrayerCard.svelte';
+import release from '@/data/release.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { hijriDate, relativeDays } from '@/lib/format';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const shippedFallback = relativeDays(lang, release.releaseDate);
+const hijriFallback = hijriDate(lang);
+
+const facts: [string, string][] = [
+  [t('hero.f.method'), t('hero.f.method.v')],
+  [t('hero.f.madhhab'), t('hero.f.madhhab.v')],
+  [t('hero.f.engine'), t('hero.f.engine.v')],
+  [t('hero.f.accuracy'), t('hero.f.accuracy.v')],
+  [t('hero.f.offline'), t('hero.f.offline.v')],
+  [t('hero.f.privacy'), t('hero.f.privacy.v')],
+];
+---
+
+<section class="hero section">
+  <div class="shell">
+    <div class="dateline">
+      <span class="marginalia">Nedaa · نداء</span>
+      <span class="marginalia">
+        <HijriDate lang={lang} fallback={hijriFallback} client:idle /> · {t('hero.dateline.city')}
+      </span>
+      <span class="marginalia">v{release.version} · {t('hero.eyebrow2')}</span>
+    </div>
+    <hr class="rule rule-strong" style="border-top-width:2px" />
+
+    <div class="hero-grid">
+      <div class="stack stack-6 hero-copy fx-rise">
+        <span class="eyebrow">{t('hero.eyebrow')}</span>
+        <h1 class="h-display hero-title">
+          {t('hero.title')}<br />
+          <span class="accent">{t('hero.title2')}</span>
+        </h1>
+        <p class="lead hero-lead">{t('hero.lead')}</p>
+        <StoreRow primary="ios" />
+        <div class="row" style="gap:24px">
+          <span class="marginalia">{t('hero.fact')}</span>
+          <span class="marginalia shipped">
+            <span aria-hidden="true" class="dot"></span>
+            v{release.version} · <RelativeDate
+              lang={lang}
+              iso={release.releaseDate}
+              fallback={shippedFallback}
+              client:idle
+            />
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-shot fx-rise">
+        <PrayerCard lang={lang} client:idle />
+      </div>
+    </div>
+
+    <hr class="rule" />
+    <div class="quiet-facts">
+      {
+        facts.map(([k, v]) => (
+          <div class="fact">
+            <div class="marginalia">{k}</div>
+            <div class="value">{v}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+  .dateline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .hero-title {
+    margin-top: 4px;
+    font-size: clamp(44px, 6vw, 84px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+  .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero-lead {
+    font-size: 18px;
+    max-width: 46ch;
+  }
+  .shipped {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--success-bd);
+  }
+
+  .hero-shot {
+    width: 100%;
+  }
+
+  .quiet-facts {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px solid var(--outline);
+  }
+  .fact {
+    padding: 18px 16px;
+    border-inline-end: 1px solid var(--outline);
+  }
+  .fact:last-child {
+    border-inline-end: none;
+  }
+  .fact .value {
+    font-size: 14px;
+    color: var(--type);
+    margin-top: 6px;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .quiet-facts {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .fact:nth-child(3n) {
+      border-inline-end: none;
+    }
+    .fact:nth-child(-n + 3) {
+      border-bottom: 1px solid var(--outline);
+    }
+  }
+  @media (max-width: 640px) {
+    .quiet-facts {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .fact {
+      border-inline-end: 1px solid var(--outline) !important;
+      border-bottom: 1px solid var(--outline);
+    }
+    .fact:nth-child(2n) {
+      border-inline-end: none !important;
+    }
+  }
+</style>

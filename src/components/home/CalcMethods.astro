@@ -1,0 +1,74 @@
+---
+import { getCalcMethods } from '@/data/calc-methods';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const methods = getCalcMethods(lang);
+
+const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
+const numFmt = new Intl.NumberFormat(baseLocale, {
+  minimumIntegerDigits: 2,
+  useGrouping: false,
+});
+---
+
+<section class="section">
+  <div class="shell">
+    <div class="grid">
+      <div class="copy fx-rise">
+        <div class="almanac-rule">{t('calc.section')}</div>
+        <h2 class="h-1">{t('calc.title')}</h2>
+        <p class="body lead-body">{t('calc.body')}</p>
+      </div>
+
+      <ul class="methods">
+        {
+          methods.map((m, i) => (
+            <li class="method">
+              <span>{m}</span>
+              <span class="marginalia">{numFmt.format(i + 1)}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+    align-items: flex-start;
+  }
+  .copy .h-1 {
+    margin-top: 16px;
+  }
+  .lead-body {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+  .methods {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--outline);
+  }
+  .method {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--outline);
+    font-size: 15px;
+    color: var(--type);
+  }
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

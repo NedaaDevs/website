@@ -1,0 +1,128 @@
+---
+import Icon from '@/components/Icon.astro';
+import type { IconName } from '@/components/icons';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cells: { icon: IconName; title: string; body: string; tag?: string }[] = [
+  { icon: 'clock', title: t('cap.times.t'), body: t('cap.times.b') },
+  { icon: 'alarm', title: t('cap.fajr.t'), body: t('cap.fajr.b') },
+  { icon: 'widget', title: t('cap.widgets.t'), body: t('cap.widgets.b') },
+  { icon: 'beads', title: t('cap.athkar.t'), body: t('cap.athkar.b') },
+  { icon: 'compass', title: t('cap.qibla.t'), body: t('cap.qibla.b') },
+  { icon: 'calendar', title: t('cap.hijri.t'), body: t('cap.hijri.b') },
+  { icon: 'counter', title: t('cap.qada.t'), body: t('cap.qada.b') },
+  { icon: 'kaaba', title: t('cap.umrah.t'), body: t('cap.umrah.b') },
+  { icon: 'book', title: t('cap.quran.t'), body: t('cap.quran.b'), tag: t('cap.quran.tag') },
+];
+---
+
+<section class="section">
+  <div class="shell">
+    <div class="almanac-rule">{t('cap.section')}</div>
+    <div class="head">
+      <h2 class="h-1">{t('cap.title')}</h2>
+      <p class="body lead-body">{t('cap.desc')}</p>
+    </div>
+
+    <div class="grid">
+      {
+        cells.map((c) => (
+          <article class="cell fx-rise">
+            <div class="cell-top">
+              <span class="cell-icon">
+                <Icon name={c.icon} size={22} />
+              </span>
+              {c.tag && <span class="tag">{c.tag}</span>}
+            </div>
+            <h3 class="h-3">{c.title}</h3>
+            <p class="body cell-body">{c.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 48px;
+    margin-top: 24px;
+    align-items: flex-start;
+  }
+  .lead-body {
+    font-size: 17px;
+    margin-top: 6px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+    border-top: 1px solid var(--outline);
+  }
+  .cell {
+    padding: 28px 24px;
+    border-inline-end: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cell:nth-child(3n) {
+    border-inline-end: none;
+  }
+  .cell:nth-child(n + 7) {
+    border-bottom: none;
+  }
+  .cell-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cell-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--primary-10);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+  }
+  .cell-body {
+    font-size: 14.5px;
+  }
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cell:nth-child(3n) {
+      border-inline-end: 1px solid var(--outline);
+    }
+    .cell:nth-child(2n) {
+      border-inline-end: none;
+    }
+    .cell:nth-child(n + 7) {
+      border-bottom: 1px solid var(--outline);
+    }
+    .cell:last-child {
+      border-bottom: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .head {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .cell {
+      border-inline-end: none !important;
+    }
+  }
+</style>

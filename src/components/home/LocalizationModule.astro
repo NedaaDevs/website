@@ -1,0 +1,126 @@
+---
+import Icon from '@/components/Icon.astro';
+import EmailLink from '@/components/EmailLink.astro';
+import { getLangFromUrl, useTranslations, languages } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const CROWDIN_URL = 'https://crowdin.com/project/nedaa-v2/';
+const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
+---
+
+<section class="section localization">
+  <div class="shell">
+    <div class="head">
+      <div class="stack stack-3 head-copy fx-rise">
+        <div class="almanac-rule" style="justify-content: flex-start">{t('loc.section')}</div>
+        <h2 class="h-1">{t('loc.title')}</h2>
+        <p class="body loc-body">{t('loc.body')}</p>
+      </div>
+
+      <div class="stack stack-3 head-meta">
+        <a class="chip" href={CROWDIN_URL} target="_blank" rel="noopener noreferrer">
+          <span class="dot"></span>
+          {t('loc.live')}
+        </a>
+      </div>
+    </div>
+
+    <ul class="lang-strip fx-rise">
+      {
+        SHIPPING.map((code) => (
+          <li class="lang-item">
+            <span class="lang-name">{languages[code]}</span>
+            <span class="tag">{t('loc.shipping')}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="cta-grid">
+      <article class="card fx-rise">
+        <h3 class="h-2">{t('loc.cta1.t')}</h3>
+        <p class="body cta-body">{t('loc.cta1.b')}</p>
+        <div class="row" style="margin-top:18px">
+          <a class="btn btn-primary" href={CROWDIN_URL} target="_blank" rel="noopener noreferrer">
+            {t('loc.cta1.a1')}
+            <Icon name="arrow-up-end" size={14} />
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/NedaaDevs/nedaa/issues/new?labels=i18n" target="_blank" rel="noopener noreferrer">
+            {t('loc.cta1.a2')}
+          </a>
+        </div>
+      </article>
+
+      <article class="card fx-rise">
+        <h3 class="h-2">{t('loc.cta2.t')}</h3>
+        <p class="body cta-body">{t('loc.cta2.b')}</p>
+        <div class="row" style="margin-top:18px">
+          <EmailLink user="support" class="btn btn-ghost" />
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .localization {
+    background: var(--bg-muted);
+    border-top: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .head-copy {
+    max-width: 540px;
+  }
+  .loc-body {
+    font-size: 16px;
+  }
+  .lang-strip {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 16px 24px;
+    background: var(--bg-2);
+    border: 1px solid var(--outline);
+    border-radius: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .lang-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--outline);
+    border-radius: var(--r-pill);
+    background: var(--bg);
+    font-size: 14px;
+    color: var(--type);
+  }
+  .lang-name {
+    font-weight: 500;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .cta-body {
+    font-size: 15.5px;
+    margin-top: 10px;
+  }
+  @media (max-width: 768px) {
+    .cta-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

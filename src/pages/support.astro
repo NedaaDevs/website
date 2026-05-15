@@ -1,0 +1,51 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import Icon from '@/components/Icon.astro';
+import EmailLink from '@/components/EmailLink.astro';
+import gh from '@/data/github.json';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+---
+
+<Layout title={`${t('nav.support')} · Nedaa`} locale={lang}>
+  <TopNav />
+  <main class="section stub">
+    <div class="shell">
+      <div class="almanac-rule">{t('nav.support')}</div>
+      <h1 class="h-display stub-title">{t('stub.support.title')}</h1>
+      <p class="lead">{t('stub.support.body')}</p>
+      <div class="row stub-actions">
+        <EmailLink user="support" class="btn btn-primary" />
+        <a class="btn btn-ghost" href={`https://github.com/${gh.fullName}/issues/new`} target="_blank" rel="noopener noreferrer">
+          GitHub Issues
+          <Icon name="arrow-end" size={14} />
+        </a>
+        <a class="btn btn-link" href={path('/')}>
+          <Icon name="arrow-end" size={14} />
+          {t('stub.back')}
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .stub {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+  .stub-title {
+    margin-top: 24px;
+    font-size: clamp(40px, 5.4vw, 64px);
+    max-width: 22ch;
+  }
+  .stub-actions {
+    margin-top: 28px;
+  }
+</style>

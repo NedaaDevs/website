@@ -1,0 +1,62 @@
+---
+import '@/styles/global.css';
+import { Font } from 'astro:assets';
+import { type Locale, dirFor } from '@/i18n/utils';
+
+type Props = {
+  title: string;
+  description?: string;
+  locale?: Locale;
+  jsonLd?: unknown;
+};
+
+const {
+  title,
+  description = 'A quiet, private, free, open-source prayer-times companion.',
+  locale = 'en',
+  jsonLd,
+} = Astro.props;
+const dir = dirFor(locale);
+---
+
+<!doctype html>
+<html lang={locale} dir={dir} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1c5d85" />
+    {locale === 'ar' || locale === 'ur' ? (
+      <Fragment>
+        <Font cssVariable="--f-arabic" preload />
+        <Font cssVariable="--f-sans" />
+      </Fragment>
+    ) : (
+      <Fragment>
+        <Font cssVariable="--f-sans" preload />
+        <Font cssVariable="--f-arabic" />
+      </Fragment>
+    )}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { autoRise } from '@/lib/motion';
+
+      const stored = localStorage.getItem('nedaa.theme');
+      if (stored === 'dark' || stored === 'light') {
+        document.documentElement.dataset.theme = stored;
+      }
+
+      const run = () => autoRise();
+      if (document.readyState !== 'loading') run();
+      else document.addEventListener('DOMContentLoaded', run);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const items = [
+  t('honest.free'),
+  t('honest.ads'),
+  t('honest.accounts'),
+  t('honest.tracking'),
+  t('honest.os'),
+];
+---
+
+<section class="honest">
+  <div class="shell row-wrap">
+    {
+      items.map((it, i) => (
+        <span class="item">
+          {i > 0 && <span aria-hidden="true" class="dot" />}
+          {it}
+        </span>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .honest {
+    border-top: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+    background: var(--bg-muted);
+  }
+  .row-wrap {
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .item {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: clamp(15px, 1.6vw, 19px);
+    font-weight: 500;
+    color: var(--type);
+    letter-spacing: -0.005em;
+  }
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+</style>

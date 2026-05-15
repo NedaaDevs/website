@@ -1,8 +1,27 @@
 services:
-  nedaa-website:
+  web:
     build: .
+    image: nedaa-website:latest
+    container_name: nedaa-website
     restart: unless-stopped
     ports:
-      - "${PORT:-80}:80"
-    env_file:
-      - .env
+      - '80:80'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 128M
+        reservations:
+          cpus: '0.10'
+          memory: 32M
+    healthcheck:
+      test: ['CMD', 'curl', '-fsS', 'http://localhost/']
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'

@@ -1,0 +1,62 @@
+---
+type Props = {
+  user: string;
+  domain?: string;
+  class?: string;
+  placeholder?: string;
+};
+const {
+  user,
+  domain = 'nedaa.dev',
+  class: className,
+  placeholder = '••••••',
+} = Astro.props;
+
+const userB64 = Buffer.from(user).toString('base64');
+---
+
+<a
+  class:list={['email-link', className]}
+  href="#"
+  data-user={userB64}
+  data-domain={domain}
+  data-state="hidden"
+  aria-label="Reveal email address"
+><span class="email-local">{placeholder}</span><span aria-hidden="true">@</span>{domain}</a>
+
+<script>
+  const decode = (b64: string) => {
+    try {
+      return atob(b64);
+    } catch {
+      return '';
+    }
+  };
+
+  document.querySelectorAll<HTMLAnchorElement>('.email-link').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (el.dataset.state === 'hidden') {
+        e.preventDefault();
+        const user = decode(el.dataset.user ?? '');
+        const domain = el.dataset.domain ?? '';
+        if (!user || !domain) return;
+        const addr = `${user}@${domain}`;
+        const local = el.querySelector<HTMLElement>('.email-local');
+        if (local) local.textContent = user;
+        el.href = `mailto:${addr}`;
+        el.setAttribute('aria-label', addr);
+        el.dataset.state = 'revealed';
+      }
+    });
+  });
+</script>
+
+<style>
+  .email-link {
+    cursor: pointer;
+  }
+  .email-link[data-state='hidden'] .email-local {
+    user-select: none;
+    letter-spacing: 0.05em;
+  }
+</style>

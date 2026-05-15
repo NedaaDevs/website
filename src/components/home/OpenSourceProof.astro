@@ -1,0 +1,125 @@
+---
+import Icon from '@/components/Icon.astro';
+import gh from '@/data/github.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { relativeDays } from '@/lib/format';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const repoUrl = `https://github.com/${gh.fullName}`;
+const contribUrl = `${repoUrl}/blob/${gh.branch}/CONTRIBUTING.md`;
+---
+
+<section class="section">
+  <div class="shell">
+    <div class="grid">
+      <div class="copy stack stack-5 fx-rise">
+        <div class="almanac-rule">{t('os.section')}</div>
+        <h2 class="h-1">{t('os.title')}</h2>
+        <p class="body os-body">{t('os.body')}</p>
+        <div class="row">
+          <a class="btn btn-primary" href={repoUrl}>
+            <Icon name="github" size={16} />
+            {gh.fullName}
+          </a>
+          <a class="btn btn-link" href={contribUrl}>{t('os.contrib')}</a>
+        </div>
+      </div>
+
+      <div class="repo-card fx-rise">
+        <div class="repo-head">
+          <div class="repo-id">
+            <Icon name="github" size={16} />
+            <span class="repo-name">{gh.fullName}</span>
+          </div>
+          <span class="marginalia">{gh.branch} · {gh.stars}★ · {gh.openIssues} open issues</span>
+        </div>
+        <ul class="commits">
+          {
+            gh.commits.map((c) => (
+              <li class="commit">
+                <a href={c.url} class="sha">{c.short}</a>
+                <span class="msg">{c.message}</span>
+                <span class="when marginalia">{relativeDays(lang, c.date)}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .os-body {
+    font-size: 16px;
+  }
+  .repo-card {
+    background: var(--bg-2);
+    border: 1px solid var(--outline);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .repo-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--outline);
+    background: var(--bg-muted);
+  }
+  .repo-id {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--type);
+  }
+  .commits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .commit {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--outline);
+  }
+  .commit:last-child {
+    border-bottom: none;
+  }
+  .sha {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .sha:hover {
+    text-decoration: underline;
+  }
+  .msg {
+    font-size: 14px;
+    color: var(--type);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .when {
+    font-size: 11px;
+  }
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

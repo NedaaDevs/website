@@ -1,0 +1,45 @@
+---
+import Icon from '@/components/Icon.astro';
+import LogoGooglePlay from '@/components/LogoGooglePlay.astro';
+import LogoAppGallery from '@/components/LogoAppGallery.astro';
+import type { IconName } from '@/components/icons';
+import type { Store } from '@/components/store';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+type Props = {
+  store: Store;
+  primary?: boolean;
+  full?: boolean;
+  href?: string;
+};
+
+const { store, primary = false, full = false, href = '#' } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const config: Record<Store, { line1: string; line2: string; icon: IconName }> = {
+  ios: { line1: t('store.ios.line1'), line2: 'App Store', icon: 'apple' },
+  android: { line1: t('store.android.line1'), line2: 'Google Play', icon: 'android' },
+  huawei: { line1: t('store.huawei.line1'), line2: 'AppGallery', icon: 'huawei' },
+};
+
+const { line1, line2, icon } = config[store];
+const classes = ['store-btn', primary && 'primary'].filter(Boolean).join(' ');
+---
+
+<a class={classes} href={href} target="_blank" rel="noopener noreferrer" style={full ? 'width:100%' : undefined}>
+  <span class="glyph">
+    {store === 'android' ? (
+      <LogoGooglePlay size={22} />
+    ) : store === 'huawei' ? (
+      <LogoAppGallery size={22} />
+    ) : (
+      <Icon name={icon} size={22} />
+    )}
+  </span>
+  <span class="lines">
+    <small>{line1}</small>
+    <strong>{line2}</strong>
+  </span>
+</a>

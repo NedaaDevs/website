@@ -1,0 +1,135 @@
+---
+import Icon from '@/components/Icon.astro';
+import type { IconName } from '@/components/icons';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+
+const facts: { icon: IconName; t: string; b: string }[] = [
+  { icon: 'no-eye', t: t('priv.f1.t'), b: t('priv.f1.b') },
+  { icon: 'shield', t: t('priv.f2.t'), b: t('priv.f2.b') },
+  { icon: 'lock', t: t('priv.f3.t'), b: t('priv.f3.b') },
+  { icon: 'hand', t: t('priv.f4.t'), b: t('priv.f4.b') },
+];
+---
+
+<section class="section privacy">
+  <div class="shell">
+    <div class="grid">
+      <div class="copy fx-rise">
+        <div class="eyebrow-line">{t('priv.section')}</div>
+        <h2 class="h-1 white">{t('priv.title')}</h2>
+        <p class="lead-dark">{t('priv.lead')}</p>
+        <a class="btn ghost-on-dark" href={path('/privacy-stance')}>
+          {t('priv.cta')}
+          <Icon name="arrow-end" size={14} />
+        </a>
+      </div>
+
+      <div class="cells">
+        {
+          facts.map((f) => (
+            <article class="cell fx-rise">
+              <span class="cell-icon">
+                <Icon name={f.icon} size={20} />
+              </span>
+              <div class="cell-title">{f.t}</div>
+              <p class="cell-body">{f.b}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .privacy {
+    background: var(--bg-elev);
+    color: var(--type-contrast);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 64px;
+  }
+  .eyebrow-line {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .white {
+    color: var(--type-contrast);
+    margin-top: 14px;
+  }
+  .lead-dark {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 17px;
+    line-height: 1.55;
+    margin-top: 16px;
+    text-wrap: pretty;
+    max-width: 56ch;
+  }
+  .ghost-on-dark {
+    margin-top: 24px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--type-contrast);
+  }
+  .ghost-on-dark:hover {
+    border-color: var(--type-contrast);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .cells {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .cell {
+    padding: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .cell:nth-child(odd) {
+    border-inline-end: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .cell-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    display: grid;
+    place-items: center;
+    color: var(--type-contrast);
+  }
+  .cell-title {
+    margin-top: 14px;
+    font-weight: 600;
+    color: var(--type-contrast);
+    font-size: 16px;
+  }
+  .cell-body {
+    margin-top: 6px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+  @media (max-width: 640px) {
+    .cells {
+      grid-template-columns: 1fr;
+    }
+    .cell:nth-child(odd) {
+      border-inline-end: none;
+    }
+  }
+</style>

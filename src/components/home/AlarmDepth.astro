@@ -1,0 +1,204 @@
+---
+import Icon from '@/components/Icon.astro';
+import prebake from '@/data/prayers-default.json';
+import { indexOfToday } from '@/lib/api/nedaa';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const today = prebake.days[indexOfToday(prebake.days)] ?? prebake.days[0]!;
+const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
+const fajrTime = new Intl.DateTimeFormat(baseLocale, {
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: lang === 'en',
+}).format(new Date(today.timings.fajr));
+
+const features = [
+  { t: t('alarm.f1.t'), b: t('alarm.f1.b') },
+  { t: t('alarm.f2.t'), b: t('alarm.f2.b') },
+  { t: t('alarm.f3.t'), b: t('alarm.f3.b'), tag: t('alarm.f3.tag') },
+  { t: t('alarm.f4.t'), b: t('alarm.f4.b') },
+];
+---
+
+<section class="section alarm">
+  <div class="shell">
+    <div class="almanac-rule">{t('alarm.section')}</div>
+
+    <div class="grid">
+      <div class="stack stack-6 fx-rise">
+        <h2 class="h-1">{t('alarm.title')}</h2>
+        <p class="lead">{t('alarm.lead')}</p>
+
+        <ul class="features">
+          {
+            features.map((f) => (
+              <li class="feat">
+                <span class="check">
+                  <Icon name="check" size={14} />
+                </span>
+                <div>
+                  <div class="feat-title">
+                    {f.t}
+                    {f.tag && <span class="tag">{f.tag}</span>}
+                  </div>
+                  <p class="body feat-body">{f.b}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <aside class="alarm-card fx-rise" aria-label={t('alarm.label')}>
+        <div class="alarm-head">
+          <span class="marginalia">{t('alarm.label')}</span>
+          <span class="dot" aria-hidden="true"></span>
+        </div>
+
+        <div class="alarm-body">
+          <div class="bell" aria-hidden="true">
+            <Icon name="alarm" size={22} />
+          </div>
+          <div class="when">
+            <div class="time tnum">{fajrTime}</div>
+            <div class="meta marginalia">{prebake.city}</div>
+          </div>
+        </div>
+
+        <ul class="layers">
+          <li><span class="marginalia">−10 min</span><span>{t('alarm.layer.pre')}</span></li>
+          <li><span class="marginalia">00:00</span><span>{t('alarm.layer.athan')}</span></li>
+          <li><span class="marginalia">+20 min</span><span>{t('alarm.layer.iqama')}</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .alarm {
+    background: var(--bg-muted);
+    border-top: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 24px;
+    align-items: center;
+  }
+  .features {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .feat {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .check {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--bg-2);
+    border: 1px solid var(--outline-strong);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+  .feat-title {
+    font-weight: 600;
+    color: var(--type);
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .feat-body {
+    font-size: 14.5px;
+    margin-top: 2px;
+  }
+
+  .alarm-card {
+    background: var(--bg-elev);
+    color: var(--type-contrast);
+    border-radius: 18px;
+    padding: 24px 24px 18px;
+    box-shadow: 0 24px 60px var(--shadow-lg);
+  }
+  .alarm-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .alarm-head .marginalia {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .alarm-head .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .alarm-body {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .bell {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    display: grid;
+    place-items: center;
+    color: var(--type-contrast);
+  }
+  .time {
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .meta {
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+  }
+  .layers {
+    list-style: none;
+    margin: 22px 0 0;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .layers li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 13px;
+  }
+  .layers li:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

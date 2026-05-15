@@ -1,0 +1,38 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import Hero from '@/components/home/Hero.astro';
+import HonestLine from '@/components/home/HonestLine.astro';
+import Capabilities from '@/components/home/Capabilities.astro';
+import AlarmDepth from '@/components/home/AlarmDepth.astro';
+import CalcMethods from '@/components/home/CalcMethods.astro';
+import PrivacyStance from '@/components/home/PrivacyStance.astro';
+import LanguagesPreview from '@/components/home/LanguagesPreview.astro';
+import LocalizationModule from '@/components/home/LocalizationModule.astro';
+import HuaweiCallout from '@/components/home/HuaweiCallout.astro';
+import OpenSourceProof from '@/components/home/OpenSourceProof.astro';
+import OperationalLedger from '@/components/home/OperationalLedger.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('site.title')} locale={lang}>
+  <TopNav />
+  <main>
+    <Hero />
+    <HonestLine />
+    <Capabilities />
+    <AlarmDepth />
+    <CalcMethods />
+    <PrivacyStance />
+    <LanguagesPreview />
+    <LocalizationModule />
+    <HuaweiCallout />
+    <OpenSourceProof />
+    <OperationalLedger />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,135 @@
+---
+import prebake from '@/data/prayers-default.json';
+import { indexOfToday } from '@/lib/api/nedaa';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Use Arabic on the demo card so the LTR/RTL story is visible regardless of the
+// page's current locale.
+const ar = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const arTime = (iso: string) =>
+  new Intl.DateTimeFormat('ar-SA', { hour: 'numeric', minute: '2-digit' }).format(new Date(iso));
+
+const todayRow = prebake.days[indexOfToday(prebake.days)] ?? prebake.days[0]!;
+const today = new Date(todayRow.timings.fajr);
+const fajrAr = arTime(todayRow.timings.fajr);
+const others = (
+  [
+    ['الشروق', todayRow.timings.sunrise],
+    ['الظهر', todayRow.timings.dhuhr],
+    ['العصر', todayRow.timings.asr],
+    ['المغرب', todayRow.timings.maghrib],
+  ] as const
+).map(([name, iso]) => [name, arTime(iso)]);
+---
+
+<section class="section">
+  <div class="shell">
+    <div class="almanac-rule">{t('lang.section')}</div>
+
+    <div class="grid">
+      <div class="stack stack-5 fx-rise">
+        <h2 class="h-1">{t('lang.title')}</h2>
+        <p class="body lang-body">{t('lang.body')}</p>
+      </div>
+
+      <div class="demo fx-rise">
+        <div class="demo-head">
+          <span class="marginalia">العربية · RTL</span>
+          <span class="marginalia">{ar.format(today)}</span>
+        </div>
+        <hr class="rule" />
+        <div lang="ar" dir="rtl" class="demo-body">
+          <div class="next-label">الصلاة القادمة · الفجر</div>
+          <div class="next-time tnum">{fajrAr}</div>
+          <hr class="rule mid" />
+          <ul class="row-list">
+            {
+              others.map(([name, time]) => (
+                <li>
+                  <span class="muted">{name}</span>
+                  <span class="tnum">{time}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 24px;
+    align-items: center;
+  }
+  .lang-body {
+    font-size: 16.5px;
+  }
+  .demo {
+    border: 1px solid var(--outline);
+    border-radius: 16px;
+    background: var(--bg-2);
+    padding: 28px;
+    box-shadow: 0 18px 50px var(--shadow);
+  }
+  .demo-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .demo-body {
+    font-family: var(--f-arabic);
+    text-align: right;
+    margin-top: 20px;
+  }
+  .next-label {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .next-time {
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 4px;
+    color: var(--type);
+    font-variant-numeric: tabular-nums;
+  }
+  .mid {
+    margin: 20px 0;
+  }
+  .row-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .row-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--outline);
+    font-size: 14px;
+  }
+  .muted {
+    color: var(--type-2);
+  }
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
