@@ -14,6 +14,7 @@ export default {
   'nav.stance': 'Privacy stance',
   'nav.cta': 'Download',
   'nav.menu': 'Menu',
+  'nav.toTop': 'Back to top',
   'dl.redirect.notice': 'Opening {store} in 1 second…',
   'dl.redirect.cancel': 'Cancel',
   'dl.redirect.ios': 'the App Store',

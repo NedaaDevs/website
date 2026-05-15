@@ -3,6 +3,7 @@ import '@/styles/global.css';
 import { Font } from 'astro:assets';
 import { type Locale, dirFor, useTranslations } from '@/i18n/utils';
 import { ogPathFor } from '@/lib/og-manifest';
+import ScrollWidgets from '@/components/ScrollWidgets.astro';
 
 type Props = {
   title: string;
@@ -70,6 +71,7 @@ const ogImage = new URL(ogPath, Astro.site).toString();
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
+    <ScrollWidgets />
     <slot />
     <script>
       import { autoRise } from '@/lib/motion';
