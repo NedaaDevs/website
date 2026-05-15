@@ -12,6 +12,11 @@ export default {
   'nav.docs': 'Docs',
   'nav.stance': 'Privacy stance',
   'nav.cta': 'Download',
+  'dl.redirect.notice': 'Opening {store} in 1 second…',
+  'dl.redirect.cancel': 'Cancel',
+  'dl.redirect.ios': 'the App Store',
+  'dl.redirect.android': 'Google Play',
+  'dl.redirect.huawei': 'AppGallery',
   // hero (quiet)
   'hero.eyebrow': 'For practicing Muslims',
   'hero.eyebrow2': 'iOS · Android · Huawei',

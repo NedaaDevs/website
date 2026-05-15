@@ -6,6 +6,7 @@ import Icon, { } from '@/components/Icon.astro';
 import LogoGooglePlay from '@/components/LogoGooglePlay.astro';
 import LogoAppGallery from '@/components/LogoAppGallery.astro';
 import StoreButton from '@/components/StoreButton.astro';
+import StoreAutoRedirect from '@/components/StoreAutoRedirect.astro';
 import type { IconName } from '@/components/icons';
 import type { Store } from '@/components/store';
 import release from '@/data/release.json';
@@ -59,6 +60,7 @@ const cards: Card[] = [
 
 <Layout title={`${t('nav.download')} · Nedaa`} locale={lang}>
   <TopNav />
+  <StoreAutoRedirect />
 
   <main>
     <section class="section dl-hero">

@@ -12,6 +12,11 @@ export default {
   'nav.docs': 'الوثائق',
   'nav.stance': 'موقف الخصوصية',
   'nav.cta': 'تنزيل',
+  'dl.redirect.notice': 'سيُفتح {store} بعد ثانية…',
+  'dl.redirect.cancel': 'إلغاء',
+  'dl.redirect.ios': 'متجر App Store',
+  'dl.redirect.android': 'متجر Google Play',
+  'dl.redirect.huawei': 'متجر AppGallery',
   // hero
   'hero.eyebrow': 'لمن يحرصون على الصلاة',
   'hero.eyebrow2': 'آيفون · أندرويد · هواوي',
