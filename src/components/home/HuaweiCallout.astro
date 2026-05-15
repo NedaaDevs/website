@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import LogoAppGallery from '@/components/LogoAppGallery.astro';
 import release from '@/data/release.json';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
@@ -11,7 +12,7 @@ const t = useTranslations(lang);
   <div class="shell">
     <article class="card huawei fx-rise">
       <span class="logo">
-        <Icon name="huawei" size={28} />
+        <LogoAppGallery size={28} />
       </span>
       <div class="copy">
         <div class="marginalia">{t('huawei.tag')}</div>

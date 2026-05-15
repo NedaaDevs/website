@@ -1,5 +1,7 @@
 ---
 import Icon from '@/components/Icon.astro';
+import LogoGooglePlay from '@/components/LogoGooglePlay.astro';
+import LogoAppGallery from '@/components/LogoAppGallery.astro';
 import type { IconName } from '@/components/icons';
 import type { Store } from '@/components/store';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
@@ -27,7 +29,15 @@ const classes = ['store-btn', primary && 'primary'].filter(Boolean).join(' ');
 ---
 
 <a class={classes} href={href} style={full ? 'width:100%' : undefined}>
-  <span class="glyph"><Icon name={icon} size={22} /></span>
+  <span class="glyph">
+    {store === 'android' ? (
+      <LogoGooglePlay size={22} />
+    ) : store === 'huawei' ? (
+      <LogoAppGallery size={22} />
+    ) : (
+      <Icon name={icon} size={22} />
+    )}
+  </span>
   <span class="lines">
     <small>{line1}</small>
     <strong>{line2}</strong>
