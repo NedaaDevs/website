@@ -179,18 +179,13 @@ export default {
   'footer.changelog': 'سجلّ التغييرات',
   'footer.github': 'GitHub',
   'footer.translate': 'ترجمة على Crowdin',
-  'footer.terms': 'الشروط',
-  'footer.attrib': 'الإسنادات',
   'footer.copy': '© ٢٠٢٦ نداء · رفيقُ النداء.',
   'footer.license': 'GPLv3 · المصدر متاح',
   'footer.status': 'يعمل',
-  'footer.attribTitle': 'إسنادات لازمة',
-  'footer.attribBody':
-    'نصّ القرآن من Tanzil (tanzil.net). الصوت من EveryAyah (everyayah.com) و QUL. صور المصحف من مجمّع الملك فهد لطباعة المصحف الشريف (QCF). الأذكار من حصن المسلم. تُستخدم وفق تراخيصها؛ وإسنادات كاملة داخل التطبيق وفي صفحة المصدر المفتوح.',
   // download page
   'dl.section': 'تنزيل · آيفون · أندرويد · هواوي',
   'dl.title': 'ثلاثة متاجر.',
-  'dl.title2': 'لا إجابةَ خاطئة.',
+  'dl.title2': 'بلا استثناء.',
   'dl.lead':
     'اختر منصّتك. الثلاث بالأهميّة نفسها لدينا — حتى أجهزة هواوي بلا خدمات قوقل.',
   'dl.ios.eye': 'آيفون',
