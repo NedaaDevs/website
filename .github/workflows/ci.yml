@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ['astro-rewrite', 'master']
+    branches: ['master']
   pull_request:
-    branches: ['astro-rewrite', 'master']
+    branches: ['master']
 
 permissions:
   contents: read
