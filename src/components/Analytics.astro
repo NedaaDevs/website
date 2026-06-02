@@ -1,13 +1,19 @@
 ---
-// Emits nothing unless both env vars are set and we're in a prod build,
-// so local dev and previews never pollute stats.
-const siteId = import.meta.env.PUBLIC_RYBBIT_SITE_ID;
+// Self-hosted Rybbit analytics (cookieless). PUBLIC_RYBBIT_HOST and
+// PUBLIC_RYBBIT_SITE_ID are substituted at container start (docker/runtime-env.sh);
+// the bootstrap injects the tracker only when both resolve to a real value, so an
+// environment with them unset ships no analytics. Gated to prod builds so dev and
+// previews never load it.
 const host = import.meta.env.PUBLIC_RYBBIT_HOST;
-const enabled = import.meta.env.PROD && Boolean(siteId) && Boolean(host);
+const siteId = import.meta.env.PUBLIC_RYBBIT_SITE_ID;
+
+const bootstrap = `(function(){
+  var h=${JSON.stringify(host)},s=${JSON.stringify(siteId)};
+  if(!h||!s||h.charAt(0)==='%')return;
+  var e=document.createElement('script');
+  e.defer=true;e.src=h+'/api/script.js';e.setAttribute('data-site-id',s);
+  document.head.appendChild(e);
+})();`;
 ---
 
-{
-  enabled && (
-    <script is:inline defer src={`${host}/api/script.js`} data-site-id={siteId} />
-  )
-}
+{import.meta.env.PROD && <script is:inline set:html={bootstrap} />}

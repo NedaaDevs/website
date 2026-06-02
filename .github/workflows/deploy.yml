@@ -43,11 +43,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            PUBLIC_RYBBIT_HOST=${{ vars.PUBLIC_RYBBIT_HOST }}
-            PUBLIC_RYBBIT_SITE_ID=${{ vars.PUBLIC_RYBBIT_SITE_ID }}
-            PUBLIC_CROWDIN_PROJECT_URL=${{ vars.PUBLIC_CROWDIN_PROJECT_URL }}
-            PUBLIC_NEDAA_API=${{ vars.PUBLIC_NEDAA_API }}
 
       # - name: Trigger Deployment Update
       #   run: |
