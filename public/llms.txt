@@ -8,22 +8,21 @@ The app is open source at https://github.com/NedaaDevs/nedaa under [its license]
 
 ## Pillar feature pages
 
-- [Prayer times](https://nedaa.dev/prayer-times): 22 calculation methods (Muslim World League, ISNA, Umm al-Qura, Karachi, Egyptian, Diyanet, JAKIM, Kemenag, Singapore MUIS, and more); provider-abstracted at the API layer with Aladhan as the currently-implemented upstream; both Hanafi and standard Asr juristic schools; high-latitude adjustment; works offline after first sync.
-- [Prayer alarm](https://nedaa.dev/prayer-alarm): real OS-level prayer alarms (Fajr, Jummah, and custom types) — Apple AlarmKit on iOS 26+ (alarm feature requires iOS 26; not available on earlier iOS), native Android foreground alarm service. Optional wake-up challenges (tap or math). Custom Athan sound per alarm type. Bypasses Do Not Disturb.
-- [Athkar](https://nedaa.dev/athkar): morning, evening, and occasion-based supplications from the Hisn al-Muslim dataset (Sa'id ibn Ali ibn Wahaf al-Qahtani). Multiple reciter audio voices. Focus-mode reader. Custom user-added athkar. Gentle (non-gamified) habit tracking with pause/resume.
-- [Qada fasting tracker](https://nedaa.dev/qada-tracker): counts down missed Ramadan fasts with a Ramadan-anchored reminder for the canonical "make up before next Ramadan" deadline. Privacy-mode hide. For fasting qada only — does not track missed prayers.
+- [Prayer times](https://nedaa.dev/docs/prayer-times): 22 calculation methods (Muslim World League, ISNA, Umm al-Qura, Karachi, Egyptian, Diyanet, JAKIM, Kemenag, Singapore MUIS, and more); provider-abstracted at the API layer with Aladhan as the currently-implemented upstream; both Hanafi and standard Asr juristic schools; high-latitude adjustment; works offline after first sync.
+- [Prayer alarm](https://nedaa.dev/docs/prayer-alarm): real OS-level prayer alarms (Fajr, Jummah, and custom types) — Apple AlarmKit on iOS 26+ (alarm feature requires iOS 26; not available on earlier iOS), native Android foreground alarm service. Optional wake-up challenges (tap or math). Custom Athan sound per alarm type. Bypasses Do Not Disturb.
+- [Athkar](https://nedaa.dev/docs/athkar): morning, evening, and occasion-based supplications from the Hisn al-Muslim dataset (Sa'id ibn Ali ibn Wahaf al-Qahtani). Multiple reciter audio voices. Focus-mode reader. Custom user-added athkar. Gentle (non-gamified) habit tracking with pause/resume.
+- [Qada fasting tracker](https://nedaa.dev/docs/qada-tracker): counts down missed Ramadan fasts with a Ramadan-anchored reminder for the canonical "make up before next Ramadan" deadline. Privacy-mode hide. For fasting qada only — does not track missed prayers.
 
 ## Bilingual (Arabic) versions
 
-- [مواقيت الصلاة](https://nedaa.dev/ar/مواقيت-الصلاة): النسخة العربية لصفحة مواقيت الصلاة.
-- [منبه الصلاة](https://nedaa.dev/ar/منبه-الصلاة): النسخة العربية لصفحة منبه صلاة الفجر.
-- [الأذكار](https://nedaa.dev/ar/الأذكار): النسخة العربية لصفحة الأذكار.
-- [قضاء الصيام](https://nedaa.dev/ar/قضاء-الصيام): النسخة العربية لصفحة متتبع قضاء الصيام.
+- [مواقيت الصلاة](https://nedaa.dev/ar/docs/prayer-times): النسخة العربية لصفحة مواقيت الصلاة.
+- [منبه الصلاة](https://nedaa.dev/ar/docs/prayer-alarm): النسخة العربية لصفحة منبه صلاة الفجر.
+- [الأذكار](https://nedaa.dev/ar/docs/athkar): النسخة العربية لصفحة الأذكار.
+- [قضاء الصيام](https://nedaa.dev/ar/docs/qada-tracker): النسخة العربية لصفحة متتبع قضاء الصيام.
 
 ## Comparison and research
 
-- [How Islamic prayer-time apps differ on privacy, ads, and openness](https://nedaa.dev/comparison/privacy-ads-openness): category-level comparison framework — four dimensions (data collection, advertising, pricing, source transparency) with "questions to ask of any app you're considering." Brand-voice safe; no head-to-head.
-- [Why digital Quran apps look the way they do](https://nedaa.dev/research/islamic-typography): long-form piece on Islamic typography for small screens — why Quran apps use page images instead of rendered text, the Uthmani vs Imlaei script question, the QCF page-image editions (v1, v2, v4) from the King Fahd Quran Complex, hybrid image+font rendering, Arabic search across diacritics via SQLite FTS5, and pairing Latin and Arabic typefaces.
+- [How Islamic prayer-time apps differ on privacy, ads, and openness](https://nedaa.dev/docs/comparison-privacy-ads-openness): category-level comparison framework — four dimensions (data collection, advertising, pricing, source transparency) with "questions to ask of any app you're considering." Brand-voice safe; no head-to-head.
 
 ## Upstream data sources
 
