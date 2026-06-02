@@ -1,7 +1,6 @@
 import { get, type ApiResult } from '@/lib/api/client';
 
-export const NEDAA_API_BASE =
-  (import.meta.env?.PUBLIC_NEDAA_API ?? 'https://new.nedaa.dev').replace(/\/$/, '');
+export const NEDAA_API_BASE = (import.meta.env.PUBLIC_NEDAA_API ?? '').replace(/\/$/, '');
 
 // ── Prayer times ────────────────────────────────────────────────────────────
 
