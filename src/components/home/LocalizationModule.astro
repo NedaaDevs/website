@@ -3,12 +3,12 @@ import Icon from '@/components/Icon.astro';
 import EmailLink from '@/components/EmailLink.astro';
 import { getLangFromUrl, useTranslations, languages } from '@/i18n/utils';
 import type { LanguageProgress } from '@/lib/api/crowdin';
+import { CROWDIN_URL } from '@/lib/links';
 import progressData from '@/data/crowdin-progress.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const CROWDIN_URL = import.meta.env.PUBLIC_CROWDIN_PROJECT_URL;
 const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
 const shipping = new Set<string>(SHIPPING);
 const isShipping = (id: string) => shipping.has(id) || shipping.has(id.split('-')[0]);
