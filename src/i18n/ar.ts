@@ -123,7 +123,7 @@ export default {
   'loc.body':
     'هل تودّ أن ترى لغتك في نداء؟ شاركنا الأجر — وترجم على Crowdin.',
   'loc.live': 'مباشر · من Crowdin',
-  'loc.updated': 'آخر تحديث ١٤ مارس ٢٠٢٦ · ١٠:٤٢ ت.ع.م',
+  'loc.updated': 'آخر تحديث',
   'loc.col.lang': 'اللغة',
   'loc.col.progress': 'التقدّم',
   'loc.col.tr': 'مترجم',

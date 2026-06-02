@@ -2,12 +2,37 @@
 import Icon from '@/components/Icon.astro';
 import EmailLink from '@/components/EmailLink.astro';
 import { getLangFromUrl, useTranslations, languages } from '@/i18n/utils';
+import type { LanguageProgress } from '@/lib/api/crowdin';
+import progressData from '@/data/crowdin-progress.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const CROWDIN_URL = import.meta.env.PUBLIC_CROWDIN_PROJECT_URL;
 const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
+const shipping = new Set<string>(SHIPPING);
+const isShipping = (id: string) => shipping.has(id) || shipping.has(id.split('-')[0]);
+
+const progress = progressData as { fetchedAt: string | null; languages: LanguageProgress[] };
+const hasProgress = progress.languages.length > 0;
+
+// English is the source language; Crowdin's progress API returns only target
+// languages, so prepend it at 100% to show the full set.
+const rows: LanguageProgress[] = hasProgress
+  ? [{ id: 'en', name: 'English', translated: 100, approved: 100 }, ...progress.languages]
+  : [];
+
+const intlLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
+const pct = new Intl.NumberFormat(intlLocale, { style: 'percent', maximumFractionDigits: 0 });
+const langNames = new Intl.DisplayNames([lang], { type: 'language' });
+const displayName = (l: LanguageProgress) => langNames.of(l.id) ?? l.name;
+const updated =
+  progress.fetchedAt &&
+  new Intl.DateTimeFormat(intlLocale, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: 'UTC',
+  }).format(new Date(progress.fetchedAt));
 ---
 
 <section class="section localization">
@@ -27,16 +52,49 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
       </div>
     </div>
 
-    <ul class="lang-strip fx-rise">
-      {
-        SHIPPING.map((code) => (
-          <li class="lang-item">
-            <span class="lang-name">{languages[code]}</span>
-            <span class="tag">{t('loc.shipping')}</span>
-          </li>
-        ))
-      }
-    </ul>
+    {
+      hasProgress ? (
+        <div class="progress-wrap fx-rise">
+          <table class="progress">
+            <thead>
+              <tr>
+                <th>{t('loc.col.lang')}</th>
+                <th>{t('loc.col.progress')}</th>
+                <th class="num">{t('loc.col.tr')}</th>
+                <th class="num">{t('loc.col.ap')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((l) => (
+                <tr>
+                  <td class="lang">
+                    <span class="lang-name">{displayName(l)}</span>
+                    {isShipping(l.id) && <span class="tag">{t('loc.shipping')}</span>}
+                  </td>
+                  <td>
+                    <div class="bar">
+                      <span style={`width:${l.translated}%`} />
+                    </div>
+                  </td>
+                  <td class="num tnum">{pct.format(l.translated / 100)}</td>
+                  <td class="num tnum">{pct.format(l.approved / 100)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {updated && <p class="updated">{t('loc.updated')} {updated} UTC</p>}
+        </div>
+      ) : (
+        <ul class="lang-strip fx-rise">
+          {SHIPPING.map((code) => (
+            <li class="lang-item">
+              <span class="lang-name">{languages[code]}</span>
+              <span class="tag">{t('loc.shipping')}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
 
     <div class="cta-grid">
       <article class="card fx-rise">
@@ -83,6 +141,74 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
   .loc-body {
     font-size: 16px;
   }
+
+  .progress-wrap {
+    margin-top: 36px;
+    background: var(--bg-2);
+    border: 1px solid var(--outline);
+    border-radius: 14px;
+    padding: 8px 24px 16px;
+  }
+  .progress {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .progress th {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--type-2);
+    font-weight: 500;
+    text-align: start;
+    padding: 14px 12px 10px;
+    border-bottom: 1px solid var(--outline);
+  }
+  .progress td {
+    padding: 12px;
+    border-bottom: 1px solid var(--outline);
+    color: var(--type);
+    vertical-align: middle;
+  }
+  .progress tr:last-child td {
+    border-bottom: 0;
+  }
+  .progress .num {
+    text-align: end;
+    width: 84px;
+  }
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .lang-name {
+    font-weight: 500;
+  }
+  .bar {
+    position: relative;
+    height: 6px;
+    min-width: 120px;
+    border-radius: 999px;
+    background: var(--bg-muted);
+    overflow: hidden;
+  }
+  .bar > span {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    background: var(--accent);
+    border-radius: 999px;
+  }
+  .updated {
+    margin: 12px 0 0;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--type-2);
+  }
+
   .lang-strip {
     list-style: none;
     margin: 36px 0 0;
@@ -105,9 +231,6 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
     font-size: 14px;
     color: var(--type);
   }
-  .lang-name {
-    font-weight: 500;
-  }
   .cta-grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
@@ -121,6 +244,13 @@ const SHIPPING = ['en', 'ar', 'ms', 'ur'] as const;
   @media (max-width: 768px) {
     .cta-grid {
       grid-template-columns: 1fr;
+    }
+    .bar {
+      min-width: 80px;
+    }
+    .progress th,
+    .progress td {
+      padding-inline: 8px;
     }
   }
 </style>

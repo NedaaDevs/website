@@ -17,9 +17,13 @@ ENV PUBLIC_NEDAA_API=%%PUBLIC_NEDAA_API%% \
     PUBLIC_RYBBIT_HOST=%%PUBLIC_RYBBIT_HOST%% \
     PUBLIC_RYBBIT_SITE_ID=%%PUBLIC_RYBBIT_SITE_ID%% \
     PUBLIC_CROWDIN_PROJECT_URL=%%PUBLIC_CROWDIN_PROJECT_URL%%
+ARG CROWDIN_PROJECT_ID
+ENV CROWDIN_PROJECT_ID=$CROWDIN_PROJECT_ID
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN bun run build
+RUN --mount=type=secret,id=crowdin_token \
+    CROWDIN_API_TOKEN="$(cat /run/secrets/crowdin_token 2>/dev/null)" \
+    bun run build
 
 # ---- runtime ------------------------------------------------------------
 FROM nginx:1.27-alpine AS runtime

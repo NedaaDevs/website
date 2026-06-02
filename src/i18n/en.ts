@@ -124,7 +124,7 @@ export default {
   'loc.body':
     'Want to see your language in Nedaa? Share in the reward — translate on Crowdin.',
   'loc.live': 'Live · from Crowdin',
-  'loc.updated': 'Last updated 14 Mar 2026 · 10:42 UTC',
+  'loc.updated': 'Last updated',
   'loc.col.lang': 'Language',
   'loc.col.progress': 'Progress',
   'loc.col.tr': 'Translated',
