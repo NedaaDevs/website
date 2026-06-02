@@ -33,6 +33,7 @@ export const CALC_METHODS: CalcMethod[] = [
 ];
 
 export const DEFAULT_METHOD_ID = 4; // Umm al-Qura
+export const DEFAULT_SCHOOL = 0; // 0 = Standard Asr, 1 = Hanafi
 
 export const getCalcMethods = (lang: Locale): string[] =>
   CALC_METHODS.map((m) => (lang === 'ar' ? m.ar : m.en));

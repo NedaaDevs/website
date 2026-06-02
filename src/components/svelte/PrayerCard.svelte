@@ -6,7 +6,7 @@
   import { hijriDate } from '@/lib/format';
   import type { Locale } from '@/i18n/types';
   import prebake from '@/data/prayers-default.json';
-  import { CALC_METHODS, DEFAULT_METHOD_ID } from '@/data/calc-methods';
+  import { CALC_METHODS, DEFAULT_METHOD_ID, DEFAULT_SCHOOL } from '@/data/calc-methods';
 
   type Props = { lang: Locale };
   const { lang }: Props = $props();
@@ -17,7 +17,7 @@
   const SET_KEY = 'nedaa:prayer-card:settings';
 
   type Settings = { methodId: number; school: 0 | 1 };
-  const DEFAULT_SETTINGS: Settings = { methodId: DEFAULT_METHOD_ID, school: 0 };
+  const DEFAULT_SETTINGS: Settings = { methodId: DEFAULT_METHOD_ID, school: DEFAULT_SCHOOL };
 
   const loadSavedLocation = (): CityRef | null => {
     if (typeof localStorage === 'undefined') return null;
