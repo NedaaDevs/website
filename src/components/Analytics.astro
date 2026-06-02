@@ -1,0 +1,13 @@
+---
+// Emits nothing unless both env vars are set and we're in a prod build,
+// so local dev and previews never pollute stats.
+const siteId = import.meta.env.PUBLIC_RYBBIT_SITE_ID;
+const host = import.meta.env.PUBLIC_RYBBIT_HOST;
+const enabled = import.meta.env.PROD && Boolean(siteId) && Boolean(host);
+---
+
+{
+  enabled && (
+    <script is:inline defer src={`${host}/api/script.js`} data-site-id={siteId} />
+  )
+}

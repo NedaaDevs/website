@@ -11,6 +11,11 @@ RUN --mount=type=cache,target=/root/.bun/install/cache \
 FROM oven/bun:1.3-alpine AS build
 WORKDIR /app
 ENV NODE_ENV=production
+# PUBLIC_* config baked into the static output at build time (ships in HTML).
+ARG PUBLIC_RYBBIT_HOST
+ARG PUBLIC_RYBBIT_SITE_ID
+ENV PUBLIC_RYBBIT_HOST=$PUBLIC_RYBBIT_HOST \
+    PUBLIC_RYBBIT_SITE_ID=$PUBLIC_RYBBIT_SITE_ID
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN bun run build

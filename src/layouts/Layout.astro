@@ -4,6 +4,7 @@ import { Font } from 'astro:assets';
 import { type Locale, dirFor, useTranslations } from '@/i18n/utils';
 import { ogPathFor } from '@/lib/og-manifest';
 import ScrollWidgets from '@/components/ScrollWidgets.astro';
+import Analytics from '@/components/Analytics.astro';
 
 type Props = {
   title: string;
@@ -69,6 +70,7 @@ const ogImage = new URL(ogPath, Astro.site).toString();
       </Fragment>
     )}
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <Analytics />
   </head>
   <body>
     <ScrollWidgets />
