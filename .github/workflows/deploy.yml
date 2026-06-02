@@ -46,6 +46,7 @@ jobs:
           build-args: |
             PUBLIC_RYBBIT_HOST=${{ vars.PUBLIC_RYBBIT_HOST }}
             PUBLIC_RYBBIT_SITE_ID=${{ vars.PUBLIC_RYBBIT_SITE_ID }}
+            PUBLIC_CROWDIN_PROJECT_URL=${{ vars.PUBLIC_CROWDIN_PROJECT_URL }}
 
       # - name: Trigger Deployment Update
       #   run: |
