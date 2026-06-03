@@ -185,6 +185,7 @@ export default {
   'footer.copy': '© ٢٠٢٦ نداء · رفيقُ النداء.',
   'footer.license': 'GPLv3 · المصدر متاح',
   'footer.status': 'يعمل',
+  'footer.status.down': 'متوقّف',
   // download page
   'dl.section': 'تنزيل · آيفون · أندرويد · هواوي',
   'dl.title': 'ثلاثة متاجر.',

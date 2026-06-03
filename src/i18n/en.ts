@@ -188,6 +188,7 @@ export default {
   'footer.copy': '© 2026 Nedaa · Companion to the call.',
   'footer.license': 'GPLv3 · source available',
   'footer.status': 'Operational',
+  'footer.status.down': 'Down',
   // download page
   'dl.section': 'Download · iOS · Android · Huawei',
   'dl.title': 'Three stores.',

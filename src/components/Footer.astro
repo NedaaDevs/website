@@ -18,6 +18,20 @@ const community = [
   { href: CROWDIN_URL, label: t('footer.translate') },
 ];
 const contact = [{ href: path('/support'), label: t('nav.support') }];
+
+// Live status: ping ${PUBLIC_NEDAA_API}/v3/health at runtime and flip the badge
+// to "down" if it doesn't answer ok. Base is a runtime-substituted token, so the
+// check stays inline in the HTML (cache-safe); empty/unsubstituted → stays static.
+const apiBase = import.meta.env.PUBLIC_NEDAA_API ?? '';
+const healthScript = `(function(){
+  var base=${JSON.stringify(apiBase)}.replace(/\\/+$/,'');
+  if(!base||base.charAt(0)==='%')return;
+  var box=document.querySelector('footer.site .status');
+  if(!box)return;
+  var dot=box.querySelector('.dot'),label=box.querySelector('.status-label');
+  var down=function(){dot.dataset.state='down';label.textContent=${JSON.stringify(t('footer.status.down'))};};
+  fetch(base+'/v3/health',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||d.status!=='ok')down();}).catch(down);
+})();`;
 ---
 
 <footer class="site">
@@ -58,8 +72,9 @@ const contact = [{ href: path('/support'), label: t('nav.support') }];
       <span>{t('footer.license')}</span>
       <span class="status">
         <span aria-hidden="true" class="dot"></span>
-        {t('footer.status')}
+        <span class="status-label">{t('footer.status')}</span>
       </span>
+      <script is:inline set:html={healthScript} />
     </div>
   </div>
 </footer>
@@ -80,5 +95,8 @@ const contact = [{ href: path('/support'), label: t('nav.support') }];
     height: 6px;
     border-radius: 999px;
     background: var(--success-bd);
+  }
+  .status .dot[data-state='down'] {
+    background: var(--error-bd);
   }
 </style>
