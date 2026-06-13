@@ -29,6 +29,7 @@ const resolvedDescription = description ?? t('site.description');
 const pathname = Astro.url.pathname.replace(/\/$/, '');
 const ogPath = ogSlug ? `/og/${ogSlug}.png` : ogPathFor(pathname, locale);
 const canonical = new URL(pathname || '/', Astro.site).toString();
+const mdHref = `${pathname}/index.md`;
 const ogImage = new URL(ogPath, Astro.site).toString();
 ---
 
@@ -45,6 +46,7 @@ const ogImage = new URL(ogPath, Astro.site).toString();
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1c5d85" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="text/markdown" href={mdHref} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Nedaa" />
     <meta property="og:locale" content={locale === 'ar' ? 'ar_SA' : 'en_US'} />
