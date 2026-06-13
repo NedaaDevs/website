@@ -27,7 +27,9 @@ RUN --mount=type=secret,id=crowdin_token \
 # ---- runtime ------------------------------------------------------------
 FROM nginx:1.27-alpine AS runtime
 RUN apk add --no-cache curl \
- && rm /etc/nginx/conf.d/default.conf
+ && rm /etc/nginx/conf.d/default.conf \
+ # Register the markdown MIME type so .md twins serve as text/markdown.
+ && sed -i 's#\(text/plain  *txt;\)#\1\n    text/markdown                         md;#' /etc/nginx/mime.types
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 # Runs before nginx starts (nginx image executes /docker-entrypoint.d/*.sh).
