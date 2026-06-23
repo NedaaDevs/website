@@ -38,6 +38,18 @@ const ogImage = new URL(ogPath, Astro.site).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Set theme before paint: saved choice, else system preference. */}
+    <script is:inline>
+      try {
+        const s = localStorage.getItem('nedaa.theme');
+        document.documentElement.dataset.theme =
+          s === 'dark' || s === 'light'
+            ? s
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+      } catch (e) {}
+    </script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={resolvedDescription} />
@@ -79,11 +91,6 @@ const ogImage = new URL(ogPath, Astro.site).toString();
     <slot />
     <script>
       import { autoRise } from '@/lib/motion';
-
-      const stored = localStorage.getItem('nedaa.theme');
-      if (stored === 'dark' || stored === 'light') {
-        document.documentElement.dataset.theme = stored;
-      }
 
       const run = () => autoRise();
       if (document.readyState !== 'loading') run();
