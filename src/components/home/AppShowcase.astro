@@ -1,0 +1,252 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import release from '@/data/release.json';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import ScrollStory from '@/components/svelte/ScrollStory.svelte';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Frame-only renders from the nedaa pipeline, named
+// frame-<slug>-ios-<locale>-<theme>.png. Refreshing them is a pure drop-in.
+const assets = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/screenshots/*.png',
+  { eager: true },
+);
+const loc = lang === 'ar' ? 'ar' : 'en';
+const slugs = [
+  'prayer-times',
+  'reliable-alarms',
+  'qibla',
+  'athkar-with-audio',
+  'tools',
+  'umrah',
+] as const;
+const shot = (slug: string, theme: 'light' | 'dark') =>
+  assets[`/src/assets/screenshots/frame-${slug}-ios-${loc}-${theme}.png`]?.default;
+
+const screens = slugs
+  .map((slug, i) => {
+    const light = shot(slug, 'light');
+    if (!light) return null;
+    // Dark set is optional — fall back to the light shot if one is missing.
+    const dark = shot(slug, 'dark') ?? light;
+    return {
+      slug,
+      light,
+      dark,
+      fig: `Fig. ${String(i + 1).padStart(2, '0')}`,
+      title: t(`show.${slug}.label`),
+      body: t(`show.${slug}.cap`),
+    };
+  })
+  .filter((s): s is NonNullable<typeof s> => s !== null);
+
+// Optimised image data for the scroll-story island (Svelte can't take <Image>).
+const STORY_WIDTHS = [340, 520, 760];
+const story = await Promise.all(
+  screens.map(async (s) => {
+    const [light, dark] = await Promise.all([
+      getImage({ src: s.light, widths: STORY_WIDTHS, format: 'webp' }),
+      getImage({ src: s.dark, widths: STORY_WIDTHS, format: 'webp' }),
+    ]);
+    return {
+      fig: s.fig,
+      title: s.title,
+      body: s.body,
+      w: s.light.width,
+      h: s.light.height,
+      light: { src: light.src, srcset: light.srcSet.attribute },
+      dark: { src: dark.src, srcset: dark.srcSet.attribute },
+    };
+  }),
+);
+---
+
+<section class="section show">
+  <div class="shell">
+    {/* dateline */}
+    <div class="dateline">
+      <span class="marginalia">{t('show.plate')}</span>
+      <span class="marginalia">{t('hero.eyebrow2')}</span>
+      <span class="marginalia">v{release.version}</span>
+    </div>
+    <hr class="rule rule-strong" style="border-top-width:2px" />
+
+    <div class="head">
+      <h2 class="h-1">{t('show.title')}</h2>
+      <p class="body lead-body">{t('show.desc')}</p>
+    </div>
+
+    {/* Ruled plate of phones — also the fallback for mobile / reduced-motion / no-JS */}
+    <div class="plate plate-fallback">
+      <div aria-hidden="true" class="ledger"></div>
+      <div class="grid">
+        {
+          screens.map((s) => (
+            <figure class="cell fx-rise">
+              <div class="phone">
+                <Image
+                  class="phone-img phone-img--light"
+                  src={s.light}
+                  alt={s.title}
+                  widths={[264, 360, 528]}
+                  sizes="(max-width: 880px) 70vw, 264px"
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <Image
+                  class="phone-img phone-img--dark"
+                  src={s.dark}
+                  alt={s.title}
+                  widths={[264, 360, 528]}
+                  sizes="(max-width: 880px) 70vw, 264px"
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption class="cap">
+                <span class="marginalia fig">{s.fig}</span>
+                <div>
+                  <div class="cap-title">{s.title}</div>
+                  <div class="cap-body body">{s.body}</div>
+                </div>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <hr class="rule" style="margin-top:28px" />
+      <div class="signature">
+        <span class="marginalia">{t('show.plate')}</span>
+        <span class="marginalia">{screens.length} / {slugs.length}</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Desktop + motion enhancement: replaces the grid above with a sticky scroll story */}
+  <ScrollStory client:idle screens={story} lang={lang} />
+</section>
+
+<style>
+  .dateline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 48px;
+    margin-top: 28px;
+    align-items: flex-start;
+  }
+  .lead-body {
+    font-size: 17px;
+    margin-top: 6px;
+  }
+
+  .plate {
+    position: relative;
+    margin-top: 44px;
+  }
+  /* When the scroll-story island activates, it tags the section and the
+     static grid steps aside. No JS / mobile / reduced-motion keeps the grid. */
+  :global(.has-scroll) .plate-fallback {
+    display: none;
+  }
+  /* faint ledger rules behind the shots */
+  .ledger {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 47px,
+      var(--outline) 47px,
+      var(--outline) 48px
+    );
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 84%, transparent 100%);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 32px;
+    position: relative;
+    justify-items: center;
+  }
+  .cell {
+    width: 100%;
+    max-width: 300px;
+    margin: 0;
+  }
+  .phone {
+    display: flex;
+    justify-content: center;
+  }
+  .phone-img {
+    width: 100%;
+    max-width: 264px;
+    height: auto;
+  }
+  /* Light/dark app shots follow the site theme — same swap the logo uses.
+     The hidden set is display:none + lazy, so the browser never fetches it. */
+  :global(html[data-theme='dark']) .phone-img--light {
+    display: none;
+  }
+  :global(html:not([data-theme='dark'])) .phone-img--dark {
+    display: none;
+  }
+  .cap {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 12px;
+    padding-top: 14px;
+    margin-top: 18px;
+    border-top: 1px solid var(--outline);
+  }
+  .cap-title {
+    font-size: 15px;
+    color: var(--type);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .cap-body {
+    font-size: 13.5px;
+    margin-top: 4px;
+  }
+
+  .signature {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 880px) {
+    .head {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 24px;
+    }
+  }
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+</style>

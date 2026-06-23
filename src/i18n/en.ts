@@ -311,4 +311,23 @@ export default {
   'ui.theme.light': 'Light',
   'ui.theme.dark': 'Dark',
   'ui.locale': 'Language',
+  // app showcase — "Plate II" editorial gallery
+  'show.plate': 'Plate II — Screens',
+  'show.title': 'See it in your hand.',
+  'show.desc':
+    'No mockups dressed up for marketing — these are the screens you use every day. Quiet, legible, and the same in your language and script.',
+  'show.prayer-times.label': 'Prayer times',
+  'show.prayer-times.cap': 'Today’s schedule with the next prayer counted down to the minute.',
+  'show.reliable-alarms.label': 'Fajr alarm',
+  'show.reliable-alarms.cap': 'A real alarm that wakes you for Fajr — not a notification you sleep through.',
+  'show.qibla.label': 'Qibla',
+  'show.qibla.cap': 'A compass that points to Makkah, with distance and accuracy.',
+  'show.qada.label': 'Qada tracker',
+  'show.qada.cap': 'Count missed fasts and clear them, day by day.',
+  'show.athkar-with-audio.label': 'Athkar',
+  'show.athkar-with-audio.cap': 'Morning and evening remembrances, read aloud.',
+  'show.tools.label': 'Tools',
+  'show.tools.cap': 'Converters, trackers, and guides gathered in one place.',
+  'show.umrah.label': 'Umrah guide',
+  'show.umrah.cap': 'Each rite of ʿUmrah, in order, step by step.',
 } as const;

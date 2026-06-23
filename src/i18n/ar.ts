@@ -299,4 +299,23 @@ export default {
   'ui.theme.light': 'فاتح',
   'ui.theme.dark': 'داكن',
   'ui.locale': 'اللغة',
+  // app showcase — "Plate II" editorial gallery
+  'show.plate': 'اللوحة الثانية — الشاشات',
+  'show.title': 'شاهده في يدك.',
+  'show.desc':
+    'ليست نماذج مُجمَّلة للتسويق — بل الشاشات التي تستخدمها كلّ يوم. هادئة، واضحة، وكما هي بلغتك وحرفك.',
+  'show.prayer-times.label': 'مواقيت الصلاة',
+  'show.prayer-times.cap': 'جدول اليوم مع عدٍّ تنازليٍّ للصلاة القادمة حتى الدقيقة.',
+  'show.reliable-alarms.label': 'منبّه الفجر',
+  'show.reliable-alarms.cap': 'منبّه حقيقي يوقظك للفجر، لا مجرّد إشعارٍ قد لا تسمعه.',
+  'show.qibla.label': 'القبلة',
+  'show.qibla.cap': 'بوصلة تشير إلى مكة، مع المسافة ودقّة الاتجاه.',
+  'show.qada.label': 'قضاء الصيام',
+  'show.qada.cap': 'تتبّع أيام الصيام الفائتة واقضِها يومًا بيوم.',
+  'show.athkar-with-audio.label': 'الأذكار',
+  'show.athkar-with-audio.cap': 'أذكار الصباح والمساء، تُتلى بصوتٍ مسموع.',
+  'show.tools.label': 'الأدوات',
+  'show.tools.cap': 'محوّلات وعدّادات وأدلّة مجموعة في مكان واحد.',
+  'show.umrah.label': 'دليل العمرة',
+  'show.umrah.cap': 'مناسك العمرة مرتّبةً، خطوةً بخطوة.',
 } as const;
