@@ -635,7 +635,7 @@ footer.site .colophon {
 [data-theme='dark'] .brand-img-light {
   display: none;
 }
-:not([data-theme='dark']) .brand-img-dark {
+html:not([data-theme='dark']) .brand-img-dark {
   display: none;
 }
 
