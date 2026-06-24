@@ -50,6 +50,16 @@ const ogImage = new URL(ogPath, Astro.site).toString();
               : 'light';
       } catch (e) {}
     </script>
+    {/* navigator.languages can differ from Accept-Language; nudge home → /ar/. */}
+    <script is:inline>
+      try {
+        if (location.pathname === '/' && !/(?:^|;\s*)nedaa_locale=/.test(document.cookie)) {
+          const langs = navigator.languages?.length ? navigator.languages : [navigator.language || ''];
+          const pref = langs.map((l) => l.toLowerCase().split('-')[0]).find((t) => t === 'ar' || t === 'en');
+          if (pref === 'ar') location.replace('/ar/');
+        }
+      } catch (e) {}
+    </script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={resolvedDescription} />
