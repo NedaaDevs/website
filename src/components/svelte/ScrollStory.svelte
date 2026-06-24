@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { scroll, animate } from 'motion';
   import type { Locale } from '@/i18n/types';
 
   type Img = { src: string; srcset: string };
@@ -20,8 +19,6 @@
   let active = $state(false);
   let idx = $state(0);
   let trackEl = $state<HTMLElement>();
-  let textEl = $state<HTMLElement>();
-  let slideEls = $state<HTMLElement[]>([]);
 
   const cur = $derived(screens[idx] ?? screens[0]);
 
@@ -32,44 +29,34 @@
     if (desktop && !reduce) active = true;
   });
 
-  // Progress from the track's own offset, so every screen gets an equal 1/N
-  // band — including the first and last. floor(p × N) keeps one active at a time.
+  // Read native scroll (rAF-throttled) and map the track's progress to a screen.
+  // floor(p × N) gives every screen, including the last, an equal hold.
   $effect(() => {
     if (!active || !trackEl) return;
     const el = trackEl;
-    const section = el.closest('section');
-    section?.classList.add('has-scroll');
-    const cancel = scroll(
-      () => {
-        const pinned = el.offsetHeight - window.innerHeight;
-        if (pinned <= 0) return;
-        const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / pinned));
-        const ni = Math.min(N - 1, Math.floor(p * N));
-        if (ni !== idx) idx = ni;
-      },
-      { target: el },
-    );
-    return () => {
-      cancel();
-      section?.classList.remove('has-scroll');
+    el.closest('section')?.classList.add('has-scroll');
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const pinned = el.offsetHeight - window.innerHeight;
+      if (pinned <= 0) return;
+      const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / pinned));
+      const ni = Math.min(N - 1, Math.floor(p * N));
+      if (ni !== idx) idx = ni;
     };
-  });
-
-  $effect(() => {
-    const i = idx;
-    const els = slideEls;
-    for (let j = 0; j < els.length; j++) {
-      const el = els[j];
-      if (!el) continue;
-      animate(el, { opacity: j === i ? 1 : 0 }, { duration: j === i ? 0.4 : 0.25, ease: 'easeOut' });
-    }
-    if (textEl) {
-      animate(
-        textEl,
-        { opacity: [0, 1], transform: ['translateY(10px)', 'translateY(0px)'] },
-        { duration: 0.35, ease: 'easeOut' },
-      );
-    }
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      el.closest('section')?.classList.remove('has-scroll');
+    };
   });
 
   const jump = (i: number) => {
@@ -86,7 +73,7 @@
       <div class="stage-inner shell">
         <div class="phone-col">
           {#each screens as s, i (s.fig)}
-            <div class="slide" bind:this={slideEls[i]} style={`opacity:${i === 0 ? 1 : 0}`}>
+            <div class="slide" class:active={i === idx}>
               <img
                 class="phone-img phone-img--light"
                 src={s.light.src}
@@ -114,11 +101,13 @@
         </div>
 
         <div class="text-col">
-          <div class="text" bind:this={textEl}>
-            <span class="marginalia fig">{cur.fig}</span>
-            <h3 class="cap-title">{cur.title}</h3>
-            <p class="cap-body">{cur.body}</p>
-          </div>
+          {#key idx}
+            <div class="text">
+              <span class="marginalia fig">{cur.fig}</span>
+              <h3 class="cap-title">{cur.title}</h3>
+              <p class="cap-body">{cur.body}</p>
+            </div>
+          {/key}
           <div class="dots" role="tablist" aria-label="Screens">
             {#each screens as s, i (s.fig)}
               <button
@@ -167,7 +156,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
     will-change: opacity;
+  }
+  .slide.active {
+    opacity: 1;
   }
   .phone-img {
     height: 100%;
@@ -185,6 +179,19 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+  }
+  .text {
+    animation: fade-rise 0.35s ease both;
+  }
+  @keyframes fade-rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
   .fig {
     display: block;
@@ -209,27 +216,44 @@
   }
   .dots {
     display: flex;
-    gap: 10px;
+    gap: 6px;
   }
+  /* 24px hit target (WCAG/target-size) with a smaller visual dot. */
   .dot {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  .dot::before {
+    content: '';
     width: 9px;
     height: 9px;
     border-radius: 999px;
     border: 1px solid var(--outline-strong);
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
     transition:
       background 0.2s ease,
       border-color 0.2s ease,
       transform 0.2s ease;
   }
-  .dot:hover {
+  .dot:hover::before {
     border-color: var(--accent);
   }
-  .dot.on {
+  .dot.on::before {
     background: var(--accent);
     border-color: var(--accent);
     transform: scale(1.15);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slide {
+      transition: none;
+    }
+    .text {
+      animation: none;
+    }
   }
 </style>
