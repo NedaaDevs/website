@@ -54,7 +54,7 @@ Optional notifications can prompt you for morning athkar after Fajr and evening 
 
 ## How Nedaa handles your data
 
-The short version: no account, no cloud sync, no advertising, no third-party tracking SDKs. Athkar progress, custom athkar, downloaded audio, and habit streaks live in a local SQLite database on your device. Crash reporting via Sentry ships off and is opt-in. Source at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
+The short version: no account, no cloud sync, no advertising, no third-party tracking SDKs. Athkar progress, custom athkar, downloaded audio, and habit streaks live in a local SQLite database on your device. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. Source at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
 
 The full position is on the [Privacy page](/privacy).
 
@@ -82,7 +82,7 @@ Yes. The text is bundled. Audio works offline once you've downloaded the reciter
 
 ### Does Nedaa sell my data?
 
-No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. Crash and performance telemetry is off by default and opt-in only. The source is open for audit.
+No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. There is no crash or analytics SDK; diagnostic logs stay on-device unless you share them. The source is open for audit.
 
 ### Is Nedaa free?
 

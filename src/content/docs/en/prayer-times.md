@@ -81,7 +81,7 @@ Nedaa ships native widgets for both iOS (lock screen and home screen) and Androi
 
 ## How Nedaa handles your data
 
-The short version: Nedaa doesn't have a server profile of you. No account, no cloud sync, no advertising, no third-party tracking SDKs. Location is used at low accuracy on the device only — just enough to compute your prayer times. Crash reporting via Sentry ships off and is opt-in. The source is at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
+The short version: Nedaa doesn't have a server profile of you. No account, no cloud sync, no advertising, no third-party tracking SDKs. Location is used at low accuracy on the device only — just enough to compute your prayer times. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. The source is at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
 
 The full position is on the [Privacy page](/privacy).
 
@@ -117,7 +117,7 @@ Yes. Pre-prayer warnings, Athan notifications, and Iqama reminders are configura
 
 ### Does Nedaa sell my data?
 
-No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. Crash and performance telemetry is off by default and opt-in only. The source is open for audit.
+No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. There is no crash or analytics SDK; diagnostic logs stay on-device unless you share them. The source is open for audit.
 
 ### Is Nedaa free?
 

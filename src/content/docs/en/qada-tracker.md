@@ -53,7 +53,7 @@ An optional toggle hides the count from your notifications. With privacy mode on
 
 ## How Nedaa handles your data
 
-The short version: no account, no cloud sync, no advertising, no third-party tracking SDKs. Your qada count and notes live in a local SQLite database on your device. Crash reporting via Sentry ships off and is opt-in. Source at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
+The short version: no account, no cloud sync, no advertising, no third-party tracking SDKs. Your qada count and notes live in a local SQLite database on your device. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. Source at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
 
 The full position is on the [Privacy page](/privacy).
 
@@ -87,7 +87,7 @@ The tracker is designed for obligatory Ramadan fasts. You could repurpose it for
 
 ### Does Nedaa sell my data?
 
-No. Nedaa does not collect personal data and therefore has nothing to sell. There are no advertising or third-party tracking SDKs in the app. Crash and performance reporting is **off by default** — it only runs if you opt in. Even when enabled, it is unlinked and untracked, declared in the iOS Privacy Manifest, and the full source is open for audit.
+No. Nedaa does not collect personal data and therefore has nothing to sell. There are no advertising or third-party tracking SDKs in the app. There is no crash or analytics SDK in the app. Diagnostic logs are written locally, stay on your device, and reach us only if you choose to share them — and the full source is open for audit.
 
 ### Is Nedaa free?
 

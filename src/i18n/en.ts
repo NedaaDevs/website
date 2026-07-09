@@ -112,7 +112,7 @@ export default {
     'Your settings, custom Athkar, and Qada counter live on your phone. Nothing is uploaded.',
   'priv.f4.t': 'No ads. No analytics tracking networks.',
   'priv.f4.b':
-    'No third-party SDKs that identify, segment, or sell you. Crash reporting via Sentry ships off by default — opt-in only. We don’t know who you are.',
+    'No third-party SDKs that identify, segment, or sell you. Not even a crash reporter — diagnostic logs stay on your device unless you share them. We don’t know who you are.',
   // languages
   'lang.section': 'Languages · RTL',
   'lang.title': 'Reads in your tongue.',
@@ -244,7 +244,7 @@ export default {
   'pp.do.4':
     'Fetches a year of prayer times on first launch. Works offline otherwise — except when you’re browsing the Quran.',
   'pp.do.5':
-    'The only exception is crash data: automatic reports from your app store (like any app), details via Sentry if you enabled it, and in-app logs if you sent them to support.',
+    'The only exception is crash data: automatic reports from your app store (like any app), and in-app diagnostic logs — which stay on your device unless you choose to send them to support.',
   'pp.doesnot': 'What Nedaa does not',
   'pp.dont.1': 'No advertising. No ad SDKs. No revenue from showing you anything.',
   'pp.dont.2':

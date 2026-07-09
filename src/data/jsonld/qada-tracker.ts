@@ -69,7 +69,7 @@ export default
           "name": "Does Nedaa sell my data?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. Crash and performance telemetry is off by default and opt-in only. The source is open for audit."
+            "text": "No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. There is no crash or analytics SDK; diagnostic logs stay on-device unless you share them. The source is open for audit."
           }
         },
         {

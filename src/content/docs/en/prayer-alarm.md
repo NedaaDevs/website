@@ -80,7 +80,7 @@ Nedaa lets you provide **your own Athan audio file** as the alarm sound — usef
 
 ## How Nedaa handles your data
 
-The short version: no account, no cloud sync, no advertising, no third-party tracking SDKs. Alarm settings live in a local SQLite database on your device. Crash reporting via Sentry ships off and is opt-in. Source at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
+The short version: no account, no cloud sync, no advertising, no third-party tracking SDKs. Alarm settings live in a local SQLite database on your device. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. Source at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
 
 The full position is on the [Privacy page](/privacy).
 
@@ -112,7 +112,7 @@ Yes. You can supply a custom audio file as the alarm sound, per alarm type. The 
 
 ### Does Nedaa sell my data?
 
-No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. Crash and performance telemetry is off by default and opt-in only. The source is open for audit.
+No. Nedaa does not collect personal data and has nothing to sell. No advertising or tracking SDKs. There is no crash or analytics SDK; diagnostic logs stay on-device unless you share them. The source is open for audit.
 
 ### Is Nedaa free?
 
