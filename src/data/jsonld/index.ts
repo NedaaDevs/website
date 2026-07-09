@@ -3,6 +3,7 @@ import prayerAlarm from './prayer-alarm';
 import athkar from './athkar';
 import qadaTracker from './qada-tracker';
 import comparison from './comparison-privacy-ads-openness';
+import muslimProAlternative from './muslim-pro-alternative';
 import alarmReliability from './alarm-reliability-methodology';
 import athkarBenchmark from './athkar-dataset-benchmark';
 
@@ -12,6 +13,7 @@ export const jsonLdBySlug: Record<string, unknown> = {
   athkar,
   'qada-tracker': qadaTracker,
   'comparison-privacy-ads-openness': comparison,
+  'muslim-pro-alternative': muslimProAlternative,
   'alarm-reliability-methodology': alarmReliability,
   'athkar-dataset-benchmark': athkarBenchmark,
 };
