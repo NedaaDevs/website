@@ -1,6 +1,24 @@
 import { get, type ApiResult } from '@/lib/api/client';
 
-export const NEDAA_API_BASE = (import.meta.env.PUBLIC_NEDAA_API ?? '').replace(/\/$/, '');
+type RuntimeConfig = { apiBase?: string; statsUrl?: string };
+
+declare global {
+  interface Window {
+    __NEDAA__?: RuntimeConfig;
+  }
+}
+
+/**
+ * Read at call time, never at module scope. These values come from
+ * /runtime-config.js, which the container rewrites on start — reading them
+ * eagerly would bake them into a content-hashed bundle whose filename does not
+ * change when the value does, so a CDN would serve the first copy forever.
+ */
+const config = (): RuntimeConfig =>
+  (typeof window === 'undefined' ? undefined : window.__NEDAA__) ?? {};
+
+export const apiBase = (): string => (config().apiBase ?? '').replace(/\/$/, '');
+export const statsUrl = (): string => config().statsUrl ?? '';
 
 // ── Prayer times ────────────────────────────────────────────────────────────
 
@@ -46,7 +64,7 @@ export const getPrayers = (q: PrayersQuery, opts?: { timeoutMs?: number }) => {
   if (q.year) params.set('year', String(q.year));
   if (q.month) params.set('month', String(q.month));
   if (q.provider) params.set('provider', q.provider);
-  return get<PrayersResponse>(`${NEDAA_API_BASE}/v3/prayers/?${params}`, opts);
+  return get<PrayersResponse>(`${apiBase()}/v3/prayers/?${params}`, opts);
 };
 
 export type PrayerProvider = {
@@ -58,7 +76,7 @@ export type PrayerProvider = {
 };
 
 export const getPrayerProviders = (opts?: { timeoutMs?: number }) =>
-  get<PrayerProvider[]>(`${NEDAA_API_BASE}/v3/prayers/providers`, opts);
+  get<PrayerProvider[]>(`${apiBase()}/v3/prayers/providers`, opts);
 
 // ── Reverse geocode ─────────────────────────────────────────────────────────
 
@@ -77,12 +95,10 @@ export const getReverseGeocode = (
     lng: String(q.lng),
     locale: q.locale,
   });
-  return get<ReverseGeocode>(`${NEDAA_API_BASE}/v3/locations/reverse-geocode?${params}`, opts);
+  return get<ReverseGeocode>(`${apiBase()}/v3/locations/reverse-geocode?${params}`, opts);
 };
 
 // ── Stats ───────────────────────────────────────────────────────────────────
-
-export const STATS_URL = import.meta.env.PUBLIC_STATS_URL ?? '';
 
 export type StatsPeriodKey = '24h' | '7d' | '30d';
 
@@ -110,14 +126,14 @@ export type StatsSnapshot = {
 
 /**
  * Static snapshot served by a Cloudflare Worker — no auth, no headers.
- * Resolves to a network error when `PUBLIC_STATS_URL` is unset so callers
- * render their error state instead of a zeroed panel.
+ * Resolves to a network error when the URL is unset so callers render their
+ * error state instead of a zeroed panel.
  */
 export const getStatsSnapshot = (opts?: {
   timeoutMs?: number;
 }): Promise<ApiResult<StatsSnapshot>> =>
-  STATS_URL
-    ? get<StatsSnapshot>(STATS_URL, opts)
+  statsUrl()
+    ? get<StatsSnapshot>(statsUrl(), opts)
     : Promise.resolve({
         ok: false,
         error: { kind: 'network', message: 'PUBLIC_STATS_URL is not set' },

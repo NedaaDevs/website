@@ -2,7 +2,7 @@
   import type { Locale } from '@/i18n/types';
   import {
     getStatsSnapshot,
-    STATS_URL,
+    statsUrl,
     type StatsPeriodKey,
     type StatsSnapshot,
   } from '@/lib/api/nedaa';
@@ -65,9 +65,10 @@
   let root: HTMLElement | undefined = $state();
 
   // The parent <section> ships hidden; reveal it only once we know stats can
-  // actually load. An unset URL, or a sentinel the container never swapped,
-  // leaves the whole section out of the page rather than showing a dead panel.
-  const configured = $derived(Boolean(STATS_URL) && !STATS_URL.startsWith('%%'));
+  // actually load, so an unconfigured deploy renders nothing rather than a dead
+  // panel. The %% guard catches a container that never ran the config rewrite.
+  const url = statsUrl();
+  const configured = Boolean(url) && !url.startsWith('%%');
 
   // The snapshot carries every window at once — tabs switch a field, not a fetch.
   $effect(() => {

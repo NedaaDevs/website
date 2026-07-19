@@ -38,6 +38,9 @@ const ogImage = new URL(ogPath, Astro.site).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Synchronous on purpose: module scripts are deferred, so this always
+        populates window.__NEDAA__ before any island hydrates. */}
+    <script is:inline src="/runtime-config.js"></script>
     {/* Set theme before paint: saved choice, else system preference. */}
     <script is:inline>
       try {
