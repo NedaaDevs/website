@@ -82,33 +82,46 @@ export const getReverseGeocode = (
 
 // ── Stats ───────────────────────────────────────────────────────────────────
 
-export type StatsPeriod = '24h' | '7d' | '30d';
+export const STATS_URL = import.meta.env.PUBLIC_STATS_URL ?? '';
 
-export type EndpointStat = {
-  endpoint: string;
-  count: number;
-  avgMs: number;
-  errorRate: number;
+export type StatsPeriodKey = '24h' | '7d' | '30d';
+
+export type StatsPeriodStats = {
+  requests: number;
+  /** Whole percent, e.g. `99.95` — not a 0–1 fraction. */
+  availabilityPct: number;
+  p50Ms: number;
+  p95Ms: number;
 };
 
-export type StatsSummary = {
-  period: string;
-  totalRequests: number;
-  errorRate: number;
-  avgResponseTimeMs: number;
-  endpoints: EndpointStat[];
-  statusCodes: Record<string, number>;
+export type StatsCounts = { day: number; week: number; month: number; year: number; all: number };
+
+export type StatsSnapshot = {
+  generatedAt: string;
+  periods: Record<StatsPeriodKey, StatsPeriodStats>;
+  lifetimeRequests: number;
+  catalog: { reciters: number; recitations: number; audioGB: number };
+  topRecitations: { recitationId: string; plays: StatsCounts }[];
+  /** Unreleased Quran reader feature — present in the payload, never rendered. */
+  editionDownloads: { version: string; downloads: StatsCounts }[];
+  requestsByModule: Record<string, number>;
+  intrusionAttempts: number;
 };
 
 /**
- * Called from the browser. The API authorises by `Origin`, which the
- * browser sets automatically when the site is served from nedaa.dev — so
- * no token is needed in production. In local dev (origin=localhost) the
- * request is rejected with 401, which the caller surfaces as an error
- * state.
+ * Static snapshot served by a Cloudflare Worker — no auth, no headers.
+ * Resolves to a network error when `PUBLIC_STATS_URL` is unset so callers
+ * render their error state instead of a zeroed panel.
  */
-export const getStatsSummary = (period: StatsPeriod = '24h', opts?: { timeoutMs?: number }) =>
-  get<StatsSummary>(`${NEDAA_API_BASE}/v3/stats/summary?period=${period}`, opts);
+export const getStatsSnapshot = (opts?: {
+  timeoutMs?: number;
+}): Promise<ApiResult<StatsSnapshot>> =>
+  STATS_URL
+    ? get<StatsSnapshot>(STATS_URL, opts)
+    : Promise.resolve({
+        ok: false,
+        error: { kind: 'network', message: 'PUBLIC_STATS_URL is not set' },
+      });
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 

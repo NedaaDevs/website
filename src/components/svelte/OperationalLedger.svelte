@@ -1,29 +1,29 @@
 <script lang="ts">
   import type { Locale } from '@/i18n/types';
-  import {
-    getStatsSummary,
-    type EndpointStat,
-    type StatsPeriod,
-    type StatsSummary,
-  } from '@/lib/api/nedaa';
+  import { getStatsSnapshot, type StatsPeriodKey, type StatsSnapshot } from '@/lib/api/nedaa';
 
   type Labels = {
     period: string;
     totalRequests: string;
-    errorRate: string;
-    avgResponse: string;
-    endpoints: string;
-    statusCodes: string;
-    path: string;
+    availability: string;
+    responseTime: string;
+    percentiles: string;
+    modules: string;
+    module: string;
     share: string;
-    avg: string;
+    percent: string;
     requests: string;
+    lifetime: string;
+    reciters: string;
+    recitations: string;
+    audio: string;
+    intrusions: string;
+    asOf: string;
     note: string;
     empty: string;
     loading: string;
     error: string;
     over: string;
-    acrossEndpoints: string;
     period24h: string;
     period7d: string;
     period30d: string;
@@ -32,102 +32,71 @@
 
   const { lang, labels }: Props = $props();
 
-  const PERIODS: { id: StatsPeriod; short: string }[] = [
+  const PERIODS = $derived<{ id: StatsPeriodKey; short: string }[]>([
     { id: '24h', short: labels.period24h },
     { id: '7d', short: labels.period7d },
     { id: '30d', short: labels.period30d },
-  ];
+  ]);
 
-  let active = $state<StatsPeriod>('24h');
-  const cache = new Map<StatsPeriod, StatsSummary | 'loading' | 'error'>();
-  let tick = $state(0);
+  let active = $state<StatsPeriodKey>('24h');
+  let status = $state<'loading' | 'ok' | 'error'>('loading');
+  let snapshot = $state<StatsSnapshot | null>(null);
 
-  const baseLocale = lang === 'en' ? 'en-US' : `${lang}-SA`;
-  const compact = new Intl.NumberFormat(baseLocale, {
-    notation: 'compact',
-    maximumFractionDigits: 1,
-  });
-  const exact = new Intl.NumberFormat(baseLocale);
-  const percent = new Intl.NumberFormat(baseLocale, {
-    style: 'percent',
-    maximumFractionDigits: 2,
-  });
+  const baseLocale = $derived(lang === 'en' ? 'en-US' : `${lang}-SA`);
+  const compact = $derived(
+    new Intl.NumberFormat(baseLocale, { notation: 'compact', maximumFractionDigits: 1 }),
+  );
+  const exact = $derived(new Intl.NumberFormat(baseLocale));
+  const percent = $derived(
+    new Intl.NumberFormat(baseLocale, { style: 'percent', maximumFractionDigits: 2 }),
+  );
+  const share = $derived(
+    new Intl.NumberFormat(baseLocale, { style: 'percent', maximumFractionDigits: 1 }),
+  );
+  const stamp = $derived(
+    new Intl.DateTimeFormat(baseLocale, { dateStyle: 'medium', timeStyle: 'short' }),
+  );
 
-  const isLegit = (e: EndpointStat): boolean =>
-    e.endpoint.startsWith('/v3/') && !e.endpoint.startsWith('/v3/health');
-
-  const sanitise = (s: StatsSummary): StatsSummary => {
-    const endpoints = s.endpoints.filter(isLegit).sort((a, b) => b.count - a.count);
-    const totalRequests = endpoints.reduce((acc, e) => acc + e.count, 0);
-    const errorRate =
-      totalRequests > 0
-        ? endpoints.reduce((acc, e) => acc + e.count * e.errorRate, 0) / totalRequests
-        : 0;
-    const avgResponseTimeMs =
-      totalRequests > 0
-        ? endpoints.reduce((acc, e) => acc + e.count * e.avgMs, 0) / totalRequests
-        : 0;
-    return {
-      ...s,
-      endpoints,
-      totalRequests,
-      errorRate,
-      avgResponseTimeMs: Math.round(avgResponseTimeMs * 10) / 10,
-    };
-  };
-
-  const load = async (period: StatsPeriod) => {
-    if (cache.get(period)) return;
-    cache.set(period, 'loading');
-    tick += 1;
-    const res = await getStatsSummary(period, { timeoutMs: 6000 });
-    cache.set(period, res.ok ? sanitise(res.data) : 'error');
-    tick += 1;
-  };
-
+  // The snapshot carries every window at once — tabs switch a field, not a fetch.
   $effect(() => {
-    void load(active);
+    void (async () => {
+      const res = await getStatsSnapshot({ timeoutMs: 6000 });
+      snapshot = res.ok ? res.data : null;
+      status = res.ok ? 'ok' : 'error';
+    })();
   });
 
-  const state = $derived.by(() => {
-    void tick;
-    return cache.get(active);
-  });
+  const stats = $derived(snapshot?.periods?.[active] ?? null);
 
-  const stats = $derived(typeof state === 'object' ? state : null);
-
-  const codeTone = (code: string): 'ok' | 'redir' | 'warn' | 'err' => {
-    const n = Number(code);
-    if (n >= 500) return 'err';
-    if (n >= 400) return 'warn';
-    if (n >= 300) return 'redir';
-    return 'ok';
-  };
-
-  const errorTone = $derived<'ok' | 'warn' | 'err'>(
+  const availabilityTone = $derived<'ok' | 'warn' | 'err'>(
     !stats
       ? 'ok'
-      : stats.errorRate < 0.01
+      : stats.availabilityPct >= 99.9
         ? 'ok'
-        : stats.errorRate < 0.05
+        : stats.availabilityPct >= 99
           ? 'warn'
           : 'err',
   );
 
-  type CodeRow = { code: string; count: number };
-  const statusRows = $derived<CodeRow[]>(
-    stats
-      ? Object.entries(stats.statusCodes ?? {})
-          .map(([code, count]) => ({ code, count: count as number }))
-          .sort((a, b) => Number(a.code) - Number(b.code))
-      : [],
+  type ModuleRow = { name: string; count: number };
+  const moduleRows = $derived<ModuleRow[]>(
+    Object.entries(snapshot?.requestsByModule ?? {})
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count),
   );
-  const statusTotal = $derived(statusRows.reduce((s, r) => s + r.count, 0) || 1);
+  const moduleTotal = $derived(moduleRows.reduce((s, r) => s + r.count, 0) || 1);
+
+  const generatedAt = $derived.by(() => {
+    const raw = snapshot?.generatedAt;
+    if (!raw) return null;
+    const d = new Date(raw);
+    return Number.isNaN(d.getTime()) ? null : stamp.format(d);
+  });
 </script>
 
 <div class="ledger-card">
   <div class="tabs" role="tablist" aria-label={labels.period}>
-    {#each PERIODS as p}
+    {#each PERIODS as p (p.id)}
       <button
         type="button"
         role="tab"
@@ -140,71 +109,86 @@
     {/each}
   </div>
 
-  {#if state === 'loading' || state === undefined}
+  {#if status === 'loading'}
     <p class="status-msg">{labels.loading}</p>
-  {:else if state === 'error'}
+  {:else if status === 'error' || !stats}
     <p class="status-msg err">{labels.error}</p>
-  {:else if stats && stats.totalRequests === 0}
+  {:else if stats.requests === 0}
     <p class="status-msg">{labels.empty}</p>
-  {:else if stats}
+  {:else}
     <div class="strip">
       <div class="metric">
         <div class="marginalia">{labels.totalRequests}</div>
-        <div class="metric-num tnum">{compact.format(stats.totalRequests)}</div>
-        <div class="metric-meta">{exact.format(stats.totalRequests)}</div>
+        <div class="metric-num tnum">{compact.format(stats.requests)}</div>
+        <div class="metric-meta">{exact.format(stats.requests)}</div>
       </div>
       <div class="metric">
-        <div class="marginalia">{labels.errorRate}</div>
-        <div class="metric-num tnum tone-{errorTone}">{percent.format(stats.errorRate)}</div>
+        <div class="marginalia">{labels.availability}</div>
+        <div class="metric-num tnum tone-{availabilityTone}">
+          {percent.format(stats.availabilityPct / 100)}
+        </div>
         <div class="metric-meta">{labels.over} {PERIODS.find((p) => p.id === active)?.short}</div>
       </div>
       <div class="metric">
-        <div class="marginalia">{labels.avgResponse}</div>
-        <div class="metric-num tnum">{exact.format(stats.avgResponseTimeMs)} <small>ms</small></div>
-        <div class="metric-meta">{labels.acrossEndpoints}</div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-head"><span class="marginalia">{labels.endpoints}</span></div>
-      <div class="ep-row ep-head">
-        <span>{labels.path}</span>
-        <span>{labels.share}</span>
-        <span>{labels.avg}</span>
-        <span>{labels.requests}</span>
-      </div>
-      {#each stats.endpoints as e}
-        <div class="ep-row">
-          <code class="path">{e.endpoint}</code>
-          <div class="bar"><div class="bar-fill" style="inline-size:{(e.count / stats.totalRequests) * 100}%"></div></div>
-          <span class="tnum num">{exact.format(e.avgMs)}</span>
-          <span class="tnum num">{exact.format(e.count)}</span>
+        <div class="marginalia">{labels.responseTime}</div>
+        <div class="metric-num tnum">
+          {exact.format(stats.p50Ms)} / {exact.format(stats.p95Ms)} <small>ms</small>
         </div>
-      {/each}
+        <div class="metric-meta">{labels.percentiles}</div>
+      </div>
     </div>
 
-    {#if statusRows.length > 0}
+    {#if moduleRows.length > 0}
       <div class="block">
-        <div class="block-head"><span class="marginalia">{labels.statusCodes}</span></div>
-        <div class="status-bar">
-          {#each statusRows as s}
-            <span
-              class="seg seg-{codeTone(s.code)}"
-              style="inline-size:{(s.count / statusTotal) * 100}%"
-              title="{s.code} — {exact.format(s.count)}"
-            ></span>
-          {/each}
+        <div class="block-head"><span class="marginalia">{labels.modules}</span></div>
+        <div class="ep-row ep-head">
+          <span>{labels.module}</span>
+          <span>{labels.share}</span>
+          <span>{labels.percent}</span>
+          <span>{labels.requests}</span>
         </div>
-        <ul class="legend">
-          {#each statusRows as s}
-            <li>
-              <span class="swatch swatch-{codeTone(s.code)}" aria-hidden="true"></span>
-              <span class="marginalia">{s.code}</span>
-              <span class="tnum num">{exact.format(s.count)}</span>
-            </li>
-          {/each}
-        </ul>
+        {#each moduleRows as m (m.name)}
+          <div class="ep-row">
+            <span class="mod">{m.name}</span>
+            <div class="bar">
+              <div class="bar-fill" style="inline-size:{(m.count / moduleTotal) * 100}%"></div>
+            </div>
+            <span class="tnum num">{share.format(m.count / moduleTotal)}</span>
+            <span class="tnum num">{exact.format(m.count)}</span>
+          </div>
+        {/each}
       </div>
+    {/if}
+
+    {#if snapshot}
+      <ul class="facts">
+        <li>
+          <span class="marginalia">{labels.lifetime}</span>
+          <span class="tnum fact-num">{exact.format(snapshot.lifetimeRequests)}</span>
+        </li>
+        <li>
+          <span class="marginalia">{labels.reciters}</span>
+          <span class="tnum fact-num">{exact.format(snapshot.catalog.reciters)}</span>
+        </li>
+        <li>
+          <span class="marginalia">{labels.recitations}</span>
+          <span class="tnum fact-num">{exact.format(snapshot.catalog.recitations)}</span>
+        </li>
+        <li>
+          <span class="marginalia">{labels.audio}</span>
+          <span class="tnum fact-num">
+            {exact.format(snapshot.catalog.audioGB)} <small>GB</small>
+          </span>
+        </li>
+        <li>
+          <span class="marginalia">{labels.intrusions}</span>
+          <span class="tnum fact-num">{exact.format(snapshot.intrusionAttempts)}</span>
+        </li>
+      </ul>
+    {/if}
+
+    {#if generatedAt}
+      <p class="marginalia as-of">{labels.asOf} {generatedAt}</p>
     {/if}
   {/if}
 
@@ -299,10 +283,11 @@
   .ep-head > :nth-child(3),
   .ep-head > :nth-child(4),
   .num { text-align: end; }
-  .path {
+  .mod {
     font-family: var(--f-mono);
     font-size: 13px;
     color: var(--type);
+    text-transform: capitalize;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -315,39 +300,33 @@
   }
   .bar-fill { block-size: 100%; background: var(--accent); }
 
-  .status-bar {
-    display: flex;
-    height: 8px;
-    margin: 16px 24px 0;
-    border-radius: 4px;
+  .facts {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    background: var(--bg-2);
+    border: 1px solid var(--outline);
+    border-radius: 14px;
     overflow: hidden;
   }
-  .seg { block-size: 100%; }
-  .seg-ok { background: var(--success-bd); }
-  .seg-redir { background: var(--info-bd); }
-  .seg-warn { background: var(--warning-bd); }
-  .seg-err { background: var(--error-bd); }
-  .legend {
-    list-style: none;
-    margin: 14px 24px 18px;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+  .facts li {
+    padding: 16px 20px;
+    border-inline-end: 1px solid var(--outline);
   }
-  .legend li {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
+  .facts li:last-child { border-inline-end: none; }
+  .fact-num {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--f-mono);
+    font-feature-settings: 'tnum' 1;
+    font-size: 20px;
     color: var(--type);
   }
-  .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-  .swatch-ok { background: var(--success-bd); }
-  .swatch-redir { background: var(--info-bd); }
-  .swatch-warn { background: var(--warning-bd); }
-  .swatch-err { background: var(--error-bd); }
+  .fact-num small { font-size: 12px; color: var(--type-2); }
 
+  .as-of { margin-top: 16px; }
   .note { margin-top: 20px; }
 
   @media (max-width: 768px) {
@@ -356,5 +335,7 @@
     .metric:last-child { border-bottom: none; }
     .ep-row { grid-template-columns: 1fr auto auto; }
     .ep-row > .bar { grid-column: 1 / -1; }
+    .facts li { border-inline-end: none; border-bottom: 1px solid var(--outline); }
+    .facts li:last-child { border-bottom: none; }
   }
 </style>
