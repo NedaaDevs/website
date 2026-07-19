@@ -1,6 +1,11 @@
 <script lang="ts">
   import type { Locale } from '@/i18n/types';
-  import { getStatsSnapshot, type StatsPeriodKey, type StatsSnapshot } from '@/lib/api/nedaa';
+  import {
+    getStatsSnapshot,
+    STATS_URL,
+    type StatsPeriodKey,
+    type StatsSnapshot,
+  } from '@/lib/api/nedaa';
 
   type Labels = {
     period: string;
@@ -57,8 +62,18 @@
     new Intl.DateTimeFormat(baseLocale, { dateStyle: 'medium', timeStyle: 'short' }),
   );
 
+  let root: HTMLElement | undefined = $state();
+
+  // The parent <section> ships hidden; reveal it only once we know stats can
+  // actually load. An unset URL, or a sentinel the container never swapped,
+  // leaves the whole section out of the page rather than showing a dead panel.
+  const configured = $derived(Boolean(STATS_URL) && !STATS_URL.startsWith('%%'));
+
   // The snapshot carries every window at once — tabs switch a field, not a fetch.
   $effect(() => {
+    if (!configured) return;
+    root?.closest('section.ledger')?.removeAttribute('hidden');
+
     void (async () => {
       const res = await getStatsSnapshot({ timeoutMs: 6000 });
       snapshot = res.ok ? res.data : null;
@@ -94,7 +109,7 @@
   });
 </script>
 
-<div class="ledger-card">
+<div class="ledger-card" bind:this={root}>
   <div class="tabs" role="tablist" aria-label={labels.period}>
     {#each PERIODS as p (p.id)}
       <button

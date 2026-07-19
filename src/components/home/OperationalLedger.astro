@@ -33,7 +33,14 @@ const labels = {
 };
 ---
 
-<section class="section ledger">
+<!--
+  Hidden until the island confirms a usable PUBLIC_STATS_URL. The check cannot
+  happen here: this HTML is emitted at build time, when the value is still the
+  %%PUBLIC_STATS_URL%% sentinel that docker/runtime-env.sh swaps at container
+  start. Starting hidden means an unconfigured deploy — or no JS at all —
+  renders nothing instead of a permanently failing panel.
+-->
+<section class="section ledger" hidden>
   <div class="shell">
     <div class="head fx-rise">
       <div>
