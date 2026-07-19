@@ -14,6 +14,7 @@ ENV NODE_ENV=production
 # Public config is injected at container start (docker/runtime-env.sh), not baked.
 # Build with sentinel tokens the entrypoint swaps for real values per environment.
 ENV PUBLIC_NEDAA_API=%%PUBLIC_NEDAA_API%% \
+    PUBLIC_STATS_URL=%%PUBLIC_STATS_URL%% \
     PUBLIC_RYBBIT_HOST=%%PUBLIC_RYBBIT_HOST%% \
     PUBLIC_RYBBIT_SITE_ID=%%PUBLIC_RYBBIT_SITE_ID%%
 ARG CROWDIN_PROJECT_ID

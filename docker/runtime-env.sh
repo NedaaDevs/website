@@ -9,7 +9,7 @@ set -eu
 
 ROOT=/usr/share/nginx/html
 
-for var in PUBLIC_NEDAA_API PUBLIC_RYBBIT_HOST PUBLIC_RYBBIT_SITE_ID; do
+for var in PUBLIC_NEDAA_API PUBLIC_STATS_URL PUBLIC_RYBBIT_HOST PUBLIC_RYBBIT_SITE_ID; do
   token="%%${var}%%"
   value="$(printenv "$var" 2>/dev/null || true)"
   # Escape sed replacement specials (\, &) and the | delimiter.
