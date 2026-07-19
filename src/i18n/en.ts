@@ -292,6 +292,7 @@ export default {
     'If we change anything material, we’ll show a one-time, dismissible notice in the app — never a wall of text you have to accept to continue praying.',
   'pp.contact': 'Questions?',
   'pp.gov': 'Governed under GPLv3 · code at github.com/NedaaDevs/nedaa',
+  'pp.exodus': 'Scanned independently by Exodus Privacy · no trackers found',
   // docs
   'docs.eyebrow': 'Docs · methodology, comparisons, datasets',
   'docs.title': 'How Nedaa works.',
