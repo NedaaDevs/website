@@ -50,7 +50,9 @@ const labels = {
       </div>
     </div>
 
-    <Ledger lang={lang} labels={labels} client:visible />
+    {/* Not client:visible — the section ships hidden, so it can never
+        intersect the viewport and the island would never hydrate to unhide it. */}
+    <Ledger lang={lang} labels={labels} client:idle />
   </div>
 </section>
 
