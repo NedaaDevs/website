@@ -117,7 +117,14 @@ export type StatsSnapshot = {
   periods: Record<StatsPeriodKey, StatsPeriodStats>;
   lifetimeRequests: number;
   catalog: { reciters: number; recitations: number; audioGB: number };
-  topRecitations: { recitationId: string; plays: StatsCounts }[];
+  topRecitations: {
+    recitationId: string;
+    /** Optional: older snapshots predate name enrichment, so fall back to the id. */
+    nameEn?: string;
+    nameAr?: string;
+    style?: string;
+    plays: StatsCounts;
+  }[];
   /** Unreleased Quran reader feature — present in the payload, never rendered. */
   editionDownloads: { version: string; downloads: StatsCounts }[];
   requestsByModule: Record<string, number>;

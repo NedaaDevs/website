@@ -15,6 +15,9 @@
     percentiles: string;
     modules: string;
     module: string;
+    topReciters: string;
+    reciter: string;
+    plays: string;
     share: string;
     percent: string;
     requests: string;
@@ -102,6 +105,24 @@
   );
   const moduleTotal = $derived(moduleRows.reduce((s, r) => s + r.count, 0) || 1);
 
+  type ReciterRow = { name: string; plays: number };
+  // Grouped by reciter, not recitation: one reciter can have several recitations
+  // (e.g. ayah- and surah-granularity of the same murattal) which would otherwise
+  // render as indistinguishable duplicate rows. Ranked on lifetime plays, which
+  // is what the API ranks on — the per-window counts use calendar buckets that
+  // don't line up with this card's rolling 24h/7d/30d tabs.
+  const reciterRows = $derived.by<ReciterRow[]>(() => {
+    const byName = new Map<string, number>();
+    for (const r of snapshot?.topRecitations ?? []) {
+      const name = (lang === 'ar' ? r.nameAr : r.nameEn) || r.recitationId;
+      byName.set(name, (byName.get(name) ?? 0) + r.plays.all);
+    }
+    return [...byName]
+      .map(([name, plays]) => ({ name, plays }))
+      .sort((a, b) => b.plays - a.plays);
+  });
+  const reciterTotal = $derived(reciterRows.reduce((s, r) => s + r.plays, 0) || 1);
+
   const generatedAt = $derived.by(() => {
     const raw = snapshot?.generatedAt;
     if (!raw) return null;
@@ -171,6 +192,28 @@
             </div>
             <span class="tnum num">{share.format(m.count / moduleTotal)}</span>
             <span class="tnum num">{exact.format(m.count)}</span>
+          </div>
+        {/each}
+      </div>
+    {/if}
+
+    {#if reciterRows.length > 0}
+      <div class="block">
+        <div class="block-head"><span class="marginalia">{labels.topReciters}</span></div>
+        <div class="ep-row ep-head">
+          <span>{labels.reciter}</span>
+          <span>{labels.share}</span>
+          <span>{labels.percent}</span>
+          <span>{labels.plays}</span>
+        </div>
+        {#each reciterRows as r (r.name)}
+          <div class="ep-row">
+            <span class="mod">{r.name}</span>
+            <div class="bar">
+              <div class="bar-fill" style="inline-size:{(r.plays / reciterTotal) * 100}%"></div>
+            </div>
+            <span class="tnum num">{share.format(r.plays / reciterTotal)}</span>
+            <span class="tnum num">{exact.format(r.plays)}</span>
           </div>
         {/each}
       </div>
