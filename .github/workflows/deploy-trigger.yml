@@ -1,5 +1,14 @@
 name: Deploy to Production
+
+# Deploys automatically once CI passes on master. Gated on workflow_run rather
+# than a plain push trigger so a failing build, Lighthouse regression, or broken
+# Docker smoke test never reaches production. workflow_dispatch stays as an
+# escape hatch for redeploying without a code change.
 on:
+  workflow_run:
+    workflows: ['CI']
+    types: [completed]
+    branches: [master]
   workflow_dispatch:
     inputs:
       confirm_deploy:
@@ -7,10 +16,18 @@ on:
         required: true
         default: ''
 
+# Force-pushes prod, so overlapping runs would race. Queue rather than cancel:
+# a run killed mid-push could leave prod behind master.
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.inputs.confirm_deploy == 'deploy'
+    if: >-
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_deploy == 'deploy')
     steps:
       - uses: actions/checkout@v5
         with:
