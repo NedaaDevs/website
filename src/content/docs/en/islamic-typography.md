@@ -1,10 +1,15 @@
 ---
 title: Why digital Quran apps look the way they do — a guide to Islamic typography on small screens
-slug: islamic-typography
 locale: en
-last_updated: 2026-05-06
+published: true
+last_updated: 2026-08-25
 description: Why Quran apps use page images instead of rendered text, the Uthmani/Imlaei script question, Arabic line-breaking on mobile, and the typography decisions hiding inside every Islamic app. Written from inside Nedaa's open-source codebase.
-canonical: https://nedaa.dev/research/islamic-typography
+canonical: https://nedaa.dev/docs/islamic-typography
+hreflang:
+  - lang: en
+    href: https://nedaa.dev/docs/islamic-typography
+  - lang: ar
+    href: https://nedaa.dev/ar/docs/islamic-typography
 ---
 
 # Why digital Quran apps look the way they do
@@ -13,7 +18,7 @@ A guide to Islamic typography on small screens — written by the team building 
 
 If you've ever opened two Quran apps side by side and noticed they show the same verse differently — different diacritic placement, different line breaks, different page numbers, sometimes a slightly different *spelling* — you've bumped into a thicket of typographic and editorial decisions that most apps make silently. This piece pulls those decisions into the open.
 
-It's written from a practitioner's seat: we're shipping a Quran reader inside Nedaa, the source code is public, and the decisions below are ones we either made deliberately or inherited from upstream sources. Where Nedaa picked a side, we'll say so.
+It's written from a practitioner's seat: we ship a Quran reader inside Nedaa, the source code is public, and the decisions below are ones we either made deliberately or inherited from upstream sources. Where Nedaa picked a side, we'll say so.
 
 ## Why digital Quran apps use page images, not text rendering
 
@@ -48,11 +53,11 @@ When apps render text from a font, they are committing to one. **Image-based mus
 
 Pure image-based mushafs have their own cost: **the app can't react to where on the page the user tapped.** If page 117 is just a PNG, the app doesn't know whether the user tapped on ayah 3 or ayah 4 unless someone manually annotated coordinate boxes for every ayah on every page. For 604 pages × ~7-15 ayat per page, that's a lot of manual work.
 
-The technique that has emerged in serious Quran apps is **hybrid rendering**: the page background is a high-fidelity image, but ayah numbers and ayah markers are positioned over the image using a custom font with known glyph coordinates. Because the font's glyph metrics are deterministic, the app can place an interactive marker at the correct on-screen position and use it as a tap target.
+The technique that has emerged in serious Quran apps is **hybrid rendering**: the page background is a high-fidelity image, and a separate, precomputed map says where every glyph sits on it. Because the coordinates are known, the app can draw an interactive region at the correct on-screen position and use it as a tap or highlight target.
 
-Nedaa's reader uses this pattern, with a custom font module (`expo-mushaf-line` in our codebase) that exposes glyph bounds so the React Native layer can register the right tap regions. The page itself stays an image — preserving calligraphic fidelity and memorisation positions — but it's no longer dumb.
+Nedaa's reader does this with a per-edition bounds database. Alongside each edition's page images we ship a `bounds-<version>.db` SQLite file holding, for every glyph, its surah, ayah, line number, x-offset, and width. To make an ayah tappable — or to highlight it during read-along — the reader queries the glyphs belonging to that ayah, groups them by line, and reduces each line to a single rectangle. The page stays an image, preserving calligraphic fidelity and memorisation positions, but it is no longer dumb.
 
-This is a real engineering tradeoff. It works well; it's also fiddly. Glyph coordinates have to match the page image at every supported display density. Font versioning has to track image versioning. Search has to query a separate text database (because you can't grep an image), and tapping on a search result has to navigate back to the right pixel rectangle on the right page.
+This is a real engineering tradeoff. It works well; it's also fiddly. The bounds have to be regenerated whenever the page images are, and versioned together, or every highlight lands slightly off. Line height is derived from the actual pixel height of the page image divided by fifteen lines, because a hardcoded value drifts across densities. When the glyphs for an ayah are missing, the reader has to fall back to rendered text rather than draw a wrong box. And search has to query a separate text database — you cannot grep an image — with a hit then navigating back to the right rectangle on the right page.
 
 ## The QCF page-image tradition
 
@@ -90,7 +95,7 @@ For Quran *body* text (the ayah display in text-mode reader, separate from the i
 A research piece that doesn't list the unsolved problems isn't honest. The hard parts of Islamic-app typography we're still working through:
 
 1. **High-DPI image scaling.** Page-image mushafs at modern phone resolutions are large. Shipping every density variant inflates the download. Generating them on the fly costs CPU and memory. There is no clean answer.
-2. **Word-level audio sync.** Ayah-level audio (the EveryAyah pattern) is straightforward; the audio file maps to one ayah, played end-to-end. Word-level sync — highlighting each word as the reciter recites it — needs accurate word timestamps for every reciter for every ayah, and those datasets are sparse and inconsistent.
+2. **Word-level audio sync, reciter by reciter.** Ayah-level audio is straightforward: the file maps to one ayah, played end-to-end. Word-level sync — highlighting each word as the reciter says it — needs an accurate timestamp for every word of every ayah, for that specific recording. Nedaa ships word-level read-along using QUL's timing data, but the data exists for some recitations and not others, so the reader degrades to verse-level highlighting where timings are missing. Closing that gap is not a rendering problem; it is a dataset problem, and it is the one we expect to be working on longest.
 3. **Right-to-left layout for mixed Arabic+Latin UI.** The whole app supports RTL, but specific edge cases (timestamps in chat-style logs, percentage indicators, version numbers) need bidi-text handling that platform components don't always get right.
 4. **Madhhab-neutral copy in a script-rich UI.** Every Arabic Islamic word the UI surfaces (Salah, Athan, Iqama, Sa'i, Tawaf) is also a typographic decision — bold or regular weight, with or without diacritics, transliterated or in script. Getting this consistent across five locales is its own work.
 
@@ -104,10 +109,10 @@ Nedaa's source code is at `github.com/NedaaDevs/nedaa`. The Quran reader's desig
 
 ## Credit
 
-- **King Fahd Quran Complex (KFQC)**, Madinah — page-image editions of the Madinah Mushaf (QCF v1, v2, v4) that anchor the image-based reader pattern across the ecosystem.
-- **Tanzil Project** (`tanzil.net`) — Quran text in Uthmani script, CC-BY 3.0. Required attribution preserved in our app's About screen.
-- **EveryAyah.com** — per-ayah reciter audio MP3 corpus that most Quran apps (including Nedaa's audio plans) build on.
-- **Quranic Universal Library (QUL)** by **Tarteel AI** — open metadata and word-timing source.
+- **King Fahd Glorious Qur'an Printing Complex (KFGQPC)**, Madinah — the UthmanicHafs font and the Madinah Mushaf page layout, shipped as the QCF v1, v2, and v4 page-image editions that anchor the image-based reader pattern across the ecosystem.
+- **Tanzil Project** (`tanzil.net`) — Quran text in Uthmani script, CC-BY 3.0. Required attribution preserved in our app's Acknowledgements screen.
+- **QuranicAudio** (`quranicaudio.com`) and **quran.com** — the reciter audio corpus Nedaa serves, mirrored via QUL.
+- **Quranic Universal Library (QUL)** by **Tarteel** — open metadata and word-timing source.
 - **IBM Plex Sans Arabic** (Open Font License) — UI Arabic typeface in Nedaa.
 - **Asap** (Open Font License) — UI Latin typeface in Nedaa.
 
