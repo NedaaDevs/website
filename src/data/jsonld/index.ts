@@ -6,6 +6,8 @@ import comparison from './comparison-privacy-ads-openness';
 import muslimProAlternative from './muslim-pro-alternative';
 import alarmReliability from './alarm-reliability-methodology';
 import athkarBenchmark from './athkar-dataset-benchmark';
+import quranReader from './quran-reader';
+import islamicTypography from './islamic-typography';
 
 export const jsonLdBySlug: Record<string, unknown> = {
   'prayer-times': prayerTimes,
@@ -16,4 +18,6 @@ export const jsonLdBySlug: Record<string, unknown> = {
   'muslim-pro-alternative': muslimProAlternative,
   'alarm-reliability-methodology': alarmReliability,
   'athkar-dataset-benchmark': athkarBenchmark,
+  'quran-reader': quranReader,
+  'islamic-typography': islamicTypography,
 };
