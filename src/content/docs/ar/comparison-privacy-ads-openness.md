@@ -2,7 +2,7 @@
 title: كيف تختلف تطبيقات الصلاة والأذكار في الخصوصية والإعلانات والشفافية
 locale: ar
 published: true
-last_updated: 2026-05-15
+last_updated: 2026-08-25
 description: مقارنة على مستوى الفئة لكيفية تعامل تطبيقات الصلاة والأذكار الإسلامية مع جمع البيانات والإعلانات والاشتراكات وشفافية المصادر، وموقع نداء من ذلك.
 canonical: https://nedaa.dev/ar/docs/comparison-privacy-ads-openness
 hreflang:
@@ -103,4 +103,4 @@ hreflang:
 
 ---
 
-_آخر تحديث: ٢٠٢٦-٠٥-١٥_
+_آخر تحديث: ٢٠٢٦-٠٨-٢٥_

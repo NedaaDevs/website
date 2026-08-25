@@ -2,7 +2,7 @@
 title: "Nedaa vs Muslim Pro: a free, ad-free, open-source alternative"
 locale: en
 published: true
-last_updated: 2026-07-03
+last_updated: 2026-08-25
 description: A sourced, date-stamped comparison of Nedaa and Muslim Pro on ads, pricing, App Store privacy labels, and source transparency — with every claim citable.
 canonical: https://nedaa.dev/docs/muslim-pro-alternative
 hreflang:
@@ -75,4 +75,4 @@ Choose Nedaa if you want prayer times, a Fajr alarm that reliably fires, Athkar 
 
 ---
 
-_Last updated: 2026-07-03_
+_Last updated: 2026-08-25_

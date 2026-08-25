@@ -2,7 +2,7 @@
 title: How Islamic prayer-time apps differ on privacy, ads, and openness
 locale: en
 published: true
-last_updated: 2026-05-10
+last_updated: 2026-08-25
 description: A category-level comparison of how Muslim prayer-time and athkar apps handle data collection, advertising, paywalls, and source transparency. Where Nedaa fits.
 canonical: https://nedaa.dev/docs/comparison-privacy-ads-openness
 hreflang:
@@ -103,4 +103,4 @@ These are the dimensions Nedaa was built around. Other dimensions matter to othe
 
 ---
 
-_Last updated: 2026-05-10_
+_Last updated: 2026-08-25_

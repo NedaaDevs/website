@@ -2,7 +2,7 @@
 title: "نداء بديلًا عن Muslim Pro: مجاني، بلا إعلانات، ومفتوح المصدر"
 locale: ar
 published: true
-last_updated: 2026-07-03
+last_updated: 2026-08-25
 description: مقارنة موثّقة ومؤرّخة بين نداء وMuslim Pro في الإعلانات والتسعير وبيانات الخصوصية المعلنة في App Store وشفافية المصدر — كل ادّعاء فيها قابل للتحقّق.
 canonical: https://nedaa.dev/ar/docs/muslim-pro-alternative
 hreflang:
@@ -75,4 +75,4 @@ _بيانات الخصوصية والأسعار كما هي معلنة على ap
 
 ---
 
-_آخر تحديث: 3 يوليو 2026_
+_آخر تحديث: ٢٥ أغسطس ٢٠٢٦_
