@@ -72,7 +72,7 @@ export default {
   'cap.umrah.b': 'A clear, step-by-step companion for the rituals of ʿUmrah.',
   'cap.quran.t': 'Quran reader',
   'cap.quran.b':
-    'Three Madinah Mushaf editions, or a text mode that needs no download — with recitation that highlights the word as it is read.',
+    'Three Madinah Mushaf editions, or a text mode that skips the edition download — with recitation that highlights the word as it is read.',
   // alarm
   'alarm.section': 'Notifications · Alarms',
   'alarm.title': 'A Fajr alarm that actually wakes you.',

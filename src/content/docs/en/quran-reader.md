@@ -14,13 +14,13 @@ hreflang:
 
 # Quran reader — the Madinah Mushaf, with audio and read-along
 
-Nedaa is a free, open-source prayer-times and Islamic-companion app for iOS and Android. The Quran reader is the largest feature in the app: the printed Madinah Mushaf on your screen, recitation that follows the page word by word, and the reading tools a person actually uses over years.
+Nedaa is a free, open-source prayer-times and Islamic-companion app for iOS and Android. The Quran reader is the largest feature in the app: the printed Madinah Mushaf on your screen, recitation that follows the page word by word, and the reading tools you keep using years later.
 
 ## What a Quran app has to get right
 
-Most people reading the Quran on a phone are not reading it for the first time. They have a mushaf they know. They may have memorised from it, and if so the position of a verse on its page is part of the memory — the end of page 5 *is* the end of a specific verse.
+You already have a mushaf you know. You may have memorised from it, and if you did, the position of a verse on its page is part of what you memorised. The end of page 5 *is* the end of a specific verse.
 
-That makes the design problem narrower than it looks. A Quran app is not asked to invent a reading experience. It is asked to reproduce a printed one faithfully, put recitation next to it, and then get out of the way. Everything below follows from that.
+That narrows the design problem. A Quran app should reproduce the printed page, put recitation beside it, then stay out of your way. Everything below follows from that.
 
 ## What Nedaa's Quran reader includes
 
@@ -36,65 +36,72 @@ The reader ships three editions of the Madinah Mushaf, produced by the **King Fa
 
 All three keep the standard 604-page layout, so page numbers, juz boundaries, and line positions match the printed copy you already own. You pick an edition, download it, and can switch or delete editions later.
 
-### A text mode that needs no download
+### What makes the Madinah Mushaf different
 
-Alongside the page-image mushaf there is a **text mode** that renders the Quran as live text — the Tanzil Uthmani text in the King Fahd Complex's UthmanicHafs face. It needs no download at all, so the reader works the moment you open it.
+Fifteen lines to a page, 604 pages, and every page ends where a verse ends. No verse is split across a page turn. The first two pages are the exception: al-Fatiha and the opening of al-Baqarah sit in a decorative frame of eight lines.
 
-Text mode keeps the same 604 page boundaries as the printed mushaf; the verses are reflowed, not re-paginated. Its reading size runs from 20 to 48 points, adjustable with a side-mounted stepper or by pinching the page. This is the mode to use if the printed mushaf's fixed type is too small to read comfortably.
+That last property is why huffaz memorise from this mushaf rather than another.
+
+### A text mode that skips the edition download
+
+Alongside the page-image mushaf there is a text mode that renders the Quran as live text, using the Tanzil Uthmani text in the King Fahd Complex's UthmanicHafs face. It needs no edition: none of the page images, and none of the space they take. What it does need is the verse text and metadata, which the app fetches once as a small content file and both modes share.
+
+Text mode keeps the same 604 page boundaries as the printed mushaf; the verses are reflowed, not re-paginated. Its reading size runs from 20 to 48 points, adjustable with a side-mounted stepper or by pinching the page. This is the mode to use if the printed mushaf's fixed type is too small to read.
 
 ### Recitation, with word-level read-along
 
-Pick a reciter and press play. The reader follows along: it can tint **the whole verse** as it is recited, or **the individual word**, and it turns pages for you as the recitation moves. Word-level highlighting depends on published word timings for that recitation; where they do not exist yet, read-along falls back to verse level.
+Pick a reciter and press play. The reader follows along: it can tint the whole verse as it is recited, or the individual word, and it turns pages for you as the recitation moves. Word-level highlighting depends on published word timings for that recitation; where they do not exist yet, read-along falls back to verse level.
 
-- Reciters are offered in **Murattal, Mujawwad, and Tajweed** styles where they exist.
-- Play a single verse, or play from a verse onward.
-- At the end of a surah, choose to continue, repeat, or stop.
-- A **sleep timer** stops playback after a set time or at the end of the current surah.
-- Audio downloads per surah or per reciter for offline listening, with a running storage total and a delete-all control.
+- Reciters come in Murattal, Mujawwad, and Tajweed styles where they exist.
+- Hold a verse to play it on its own, or to play from it onward.
+- Download a surah's audio so it plays without a connection.
 
-Playback uses native media controls — lock screen, AirPods, Bluetooth — and continues in the background.
+Reader playback is a companion to reading rather than a listening session of its own, so it stops when you leave the reader or send the app to the background.
 
-There is also a separate **Listen** surface for recitation without the page, which has been in the app since before the reader shipped.
+There is also a separate Listen surface for recitation without the page, in the app since before the reader shipped. It keeps playing when you leave the app, and it drives the native media controls on the lock screen, AirPods, and Bluetooth. It also holds the controls that belong to listening rather than reading: a sleep timer that stops playback after a set time or at the end of the surah, a choice of continuing, repeating, or stopping when a surah ends, and downloading a reciter's whole catalogue with a running storage total and a delete-all.
 
 ### Reading tools
 
-- **Bookmarks.** Four coloured ribbons you can name and move — the digital version of the ribbons sewn into a printed mushaf.
-- **Highlights.** Seven colours, and you rename the colours themselves to mean whatever you need them to mean. A colour's name is shared across the whole Quran, so "verses to memorise" stays "verses to memorise" everywhere.
-- **Similar verses.** The *mutashabihat* — near-identical verses that people who memorise routinely confuse. The reader marks them, shows them side by side, and lets you write your own memory aid against the pair.
-- **Share a verse** as a mushaf image or as text.
+Bookmarks are four coloured ribbons you can name and move. Printed mushafs solved this with sewn ribbons; we kept the idea.
+
+Highlights come in seven colours, and you rename the colours themselves to mean whatever you need them to mean. A colour's name is shared across the whole Quran, so "verses to memorise" stays "verses to memorise" everywhere you use it.
+
+Then there are the *mutashabihat*, the near-identical verses that trip up anyone memorising. The reader marks them, shows the pair side by side, and lets you write your own memory aid against them.
+
+Any verse can be shared as a mushaf image or as plain text.
 
 ### A built-in reference guide
 
 The reader carries a short reference for the marks printed on the page, so you can tap one rather than look it up:
 
-- **Tajweed colours** — ghunnah, idgham with and without ghunnah, and the rest of the colour key used by the v4 edition.
-- **Stop signs** — the waqf marks. Every waqf sign in the text is individually tappable.
-- **Prostration verses** — where sujood al-tilawah applies, with the supplication and its hadith reference.
+- The tajweed colour key used by the v4 edition: ghunnah, idgham with and without ghunnah, and the rest.
+- The waqf marks. You can tap any stop sign in the text on its own.
+- The prostration verses, where sujood al-tilawah applies, with the supplication and its hadith reference.
 
 ### Navigation
 
-Browse by surah or verse, search surah names, or jump directly to a surah, juz, hizb, or page number. The running header carries the surah name and the juz you are in.
+Browse by surah or verse, search surah names, or jump to a surah, juz, hizb, or page number. The running header carries the surah name and the juz you are in.
 
 ### Reading themes and layout
 
-Reading themes — Light, Sepia, Dark, and Nedaa — are **separate from the app's own appearance**, because the light you read in is not the light you check prayer times in. Editions with dedicated dark-theme page images offer them as an optional extra download.
+Reading themes are **separate from the app's own appearance**. You get Light, Sepia, Dark, and Nedaa, so you can read on a sepia page while the rest of the app stays dark. Editions with dedicated dark-theme page images offer them as an optional extra download.
 
 Layout options cover a one-page or two-page spread (useful on tablets), horizontal page turns or vertical scrolling, and an auto-scroll at three speeds for hands-free reading.
 
 ### A Friday reminder for Surah Al-Kahf
 
-An optional weekly reminder for **Surah Al-Kahf** on Fridays. It is off until you turn it on, like the rest of Nedaa's notifications.
+An optional weekly reminder for Surah Al-Kahf on Fridays. It is off until you turn it on, and it asks for notification permission at that point rather than up front.
 
 ## Downloading, storage, and offline use
 
 The mushaf editions are page images, so they are a real download rather than a few kilobytes of text. Nedaa is explicit about it:
 
-- The download runs in two steps — pages first, then decorations — with per-page progress.
+- The download runs in two steps, pages first and decorations second, with per-page progress.
 - You can **start reading while it downloads.**
 - Downloads pause, resume, and retry, and a failed page does not lose the rest.
 - Choose light-only or light-and-dark images.
 - The app checks free space first and tells you what it needs, and warns before a large download over cellular.
-- Editions can be deleted individually to free space.
+- Delete an edition on its own to free the space.
 
 **Once an edition is downloaded, reading it needs no network.** The same applies to recitation you have downloaded. What still needs the network is fetching an edition or a reciter you have not downloaded yet.
 
@@ -104,10 +111,10 @@ No account, no cloud sync, no advertising, no third-party tracking SDKs. Your bo
 
 Two things do leave the device, both controlled by a single **"Share anonymous usage stats"** switch in Settings, which you can turn off at any time:
 
-- When you play a recitation, the app sends the **recitation's id** — not who played it, not when you read, not what you read.
-- When you install a mushaf edition, the app sends the **edition version**.
+- When you play a recitation, the app sends the recitation's id. It does not send who played it, when you read, or what you read.
+- When you install a mushaf edition, the app sends the edition version.
 
-Neither carries an account, a device identifier, or a user id, and each is rate-limited to once every thirty minutes. They exist so we can see which reciters and editions people actually use, and they are the numbers published on the operational ledger on our home page. Everything else about your reading stays on your phone.
+Neither carries an account, a device identifier, or a user id, and each is rate-limited to once every thirty minutes. They exist so we can see which reciters and editions get used, and they are the numbers published on the operational ledger on our home page. Everything else about your reading stays on your phone.
 
 The full position is on the [Privacy page](/privacy).
 
@@ -115,11 +122,11 @@ The full position is on the [Privacy page](/privacy).
 
 ### Which mushaf does Nedaa use?
 
-The Madinah Mushaf from the King Fahd Glorious Qur'an Printing Complex, in three editions — 1405 (QCF v1), 1420 (QCF v2), and 1439 (QCF v4, with full tajweed colouring). All three use the standard 604-page layout.
+The Madinah Mushaf from the King Fahd Glorious Qur'an Printing Complex, in three editions: 1405 (QCF v1), 1420 (QCF v2), and 1439 (QCF v4, with full tajweed colouring). All three use the standard 604-page layout.
 
 ### Does the Quran reader work offline?
 
-Yes, once you have downloaded an edition. Text mode works offline immediately with no download at all. Recitation works offline for surahs you have downloaded.
+Yes, once you have downloaded an edition. Text mode asks for no edition at all, only the small content file the app fetches once for both modes. Recitation works offline for surahs you have downloaded.
 
 ### Can I follow the recitation on the page?
 
@@ -127,11 +134,11 @@ Yes. Read-along highlights either the whole verse or the individual word as it i
 
 ### Can I make the text bigger?
 
-In text mode, yes — from 20 to 48 points, by stepper or by pinching. The page-image mushaf reproduces a printed page, so its type is fixed; use text mode, or the two-page/whole-page layout options, if the print is too small.
+In text mode, yes: from 20 to 48 points, by stepper or by pinching. The page-image mushaf reproduces a printed page, so its type is fixed; use text mode, or the two-page/whole-page layout options, if the print is too small.
 
 ### What are "similar verses"?
 
-The *mutashabihat* — verses that closely resemble one another and are a common source of error when memorising. Nedaa marks them, shows the pair together, and lets you attach your own memory aid.
+The *mutashabihat*, verses that closely resemble one another and are a common source of error when memorising. Nedaa marks them, shows the pair together, and lets you attach your own memory aid.
 
 ### Where does the Quran text come from?
 
