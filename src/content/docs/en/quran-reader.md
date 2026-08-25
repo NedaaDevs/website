@@ -167,7 +167,7 @@ Yes. Free, no ads, no paywalls, no subscriptions, no premium tier. The Quran rea
 - **Quranic Universal Library (QUL)** by **Tarteel** (`qul.tarteel.ai`) — verse divisions and recitation timing.
 - **QuranicAudio** (`quranicaudio.com`) and **quran.com** — recitation audio, mirrored via QUL.
 
-The tool we wrote to render the mushaf page images is open source as well, at `github.com/NedaaDevs/quran-image-generator`, and was inspired by `quran/quran.com-images`.
+The tool we wrote to render the mushaf page images is open source too, at [NedaaDevs/quran-image-generator](https://github.com/NedaaDevs/quran-image-generator). It takes the King Fahd Complex fonts and the layout database and writes out the page images, which is the slow part of building a mushaf reader. If you are building one, take it. We took the idea from [quran/quran.com-images](https://github.com/quran/quran.com-images).
 
 ---
 

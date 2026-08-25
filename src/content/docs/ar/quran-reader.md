@@ -167,7 +167,7 @@ hreflang:
 - **المكتبة القرآنية الشاملة (QUL)** من **ترتيل** (`qul.tarteel.ai`) — حدود الآيات وتوقيتات التلاوة.
 - **QuranicAudio** (`quranicaudio.com`) و**quran.com** — صوت التلاوة، عبر مرآة QUL.
 
-والأداة التي كتبناها لتوليد صور صفحات المصحف مفتوحة المصدر كذلك، على `github.com/NedaaDevs/quran-image-generator`، وقد استفدنا فيها من `quran/quran.com-images`.
+والأداة التي كتبناها لتوليد صور صفحات المصحف مفتوحة المصدر كذلك، على [NedaaDevs/quran-image-generator](https://github.com/NedaaDevs/quran-image-generator). تأخذ خطوط مجمّع الملك فهد وقاعدة التخطيط وتُخرج صور الصفحات، وهو أبطأ ما في بناء مصحفٍ رقميّ. فإن كنت تبني واحدًا فخذها. وقد استفدنا في فكرتها من [quran/quran.com-images](https://github.com/quran/quran.com-images).
 
 ---
 

@@ -25,6 +25,12 @@ const contribUrl = `${repoUrl}/blob/${gh.branch}/CONTRIBUTING.md`;
           </a>
           <a class="btn btn-link" href={contribUrl}>{t('os.contrib')}</a>
         </div>
+
+        <p class="also body">
+          {t('os.also')}{' '}
+          <a href="https://github.com/NedaaDevs/quran-image-generator">{t('os.also.gen')}</a>{' '}
+          {t('os.also.genb')}
+        </p>
       </div>
 
       <div class="repo-card fx-rise">
@@ -52,6 +58,16 @@ const contribUrl = `${repoUrl}/blob/${gh.branch}/CONTRIBUTING.md`;
 </section>
 
 <style>
+  .also {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .also a {
+    color: var(--accent);
+    font-family: var(--f-mono);
+    font-size: 13.5px;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
