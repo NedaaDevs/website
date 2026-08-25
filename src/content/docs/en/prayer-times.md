@@ -16,7 +16,7 @@ hreflang:
 
 Nedaa is a free, open-source prayer-times app for iOS and Android. It computes the five daily prayers (Fajr, Dhuhr, Asr, Maghrib, Isha) anywhere in the world, with 23 named calculation methods plus a Custom option so you can match what your local mosque publishes.
 
-Times work offline after the first sync. Location stays on your device at low accuracy. No ads, no account, no paywall.
+Times work offline after the first sync. Location stays on your device at low accuracy, and you can skip the permission entirely by choosing your city. No ads, no account, no paywall.
 
 ## Why calculation method matters
 
@@ -81,7 +81,7 @@ Nedaa ships native widgets for both iOS (lock screen and home screen) and Androi
 
 ## How Nedaa handles your data
 
-The short version: Nedaa doesn't have a server profile of you. No account, no cloud sync, no advertising, no third-party tracking SDKs. Location is used at low accuracy on the device only — just enough to compute your prayer times. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. The source is at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
+The short version: Nedaa doesn't have a server profile of you. No account, no cloud sync, no advertising, no third-party tracking SDKs. Location is used at low accuracy on the device only, just enough to compute your prayer times. Deny the permission and you can pick a city or enter coordinates instead, in which case the app never reads your device location at all. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. The source is at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
 
 The full position is on the [Privacy page](/privacy).
 

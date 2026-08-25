@@ -36,7 +36,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li>We don't collect personal data. No accounts. No tracking.</li>
           <li>A few things happen locally on your device (your settings, custom Athkar, fasting Qada counter).</li>
-          <li>The only data that leaves your device is: anonymized crash reports from your app store (automatic, like every app), diagnostic log files you explicitly choose to share from the app, prayer-time API requests (no IPs, headers, or bodies retained), downloads you ask for (a mushaf edition, a reciter's audio), and, unless you switch them off, two anonymous counters that say a recitation was played or a mushaf edition was installed, never who did it.</li>
+          <li>The only data that leaves your device is: anonymized crash reports from your app store (automatic, like every app), diagnostic log files you explicitly choose to share from the app, prayer-time requests, which carry a location accurate to about a kilometre that we round again before forwarding, and which we retain nowhere, downloads you ask for (a mushaf edition, a reciter's audio), and, unless you switch them off, two anonymous counters that say a recitation was played or a mushaf edition was installed, never who did it.</li>
           <li>If you want your data gone: delete the app. There is nothing on a server to delete.</li>
         </ul>
 
@@ -45,16 +45,16 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <h3>On your device only (we never see it)</h3>
         <ul>
           <li>Your settings, custom Athkar, and fasting Qada counter. Stored locally so the app works between sessions.</li>
-          <li>Your location (only if you grant the permission). Used to compute your prayer times. Low-precision. Never transmitted off your device.</li>
         </ul>
 
         <h3>What may reach us — and only under these conditions</h3>
         <ul>
           <li><strong>App-store crash reports.</strong> When the app crashes, your platform (Apple or Google) sends us anonymized crash counts and stack traces. This is the same as every app; it is handled by the store, not by us.</li>
           <li><strong>In-app diagnostic logs (only if you share them).</strong> Nedaa has no crash-reporting SDK. The app writes diagnostic logs locally on your device (automatically pruned by age and size). If something goes wrong — including after a crash — the app asks whether you want to send a report; nothing is sent unless you choose to share it. Logs may contain app version, device/OS info, and a record of what the app did before the issue. We use them solely to help you.</li>
-          <li><strong>Content you download.</strong> When you ask for a mushaf edition, or for Quran or Athkar recitation, the app fetches it from our content server (<code>cdn.nedaa.dev</code>). Our server therefore sees the request for that file. We keep aggregate counts only: no account, no device identifier, no record of who asked for what. Once a file is on your device, reading or listening needs no further request.</li>
+          <li><strong>Content you download.</strong> When you ask for a mushaf edition, for Quran or Athkar recitation, or for the city database behind manual location, the app fetches it from our content server (<code>cdn.nedaa.dev</code>). Our server therefore sees the request for that file. We keep aggregate counts only: no account, no device identifier, no record of who asked for what. Once a file is on your device, reading or listening needs no further request.</li>
           <li><strong>Two anonymous counters (on by default, and you can switch them off).</strong> A setting called <em>Share anonymous usage stats</em> lets the app report that a recitation was played, or that a mushaf edition was installed. The request carries only the recitation id or the edition version, plus the app version. It carries no account, no device identifier, no user id, no location, and nothing about what or when you read. The app sends each at most once every thirty minutes, and never from a development build. We use these to see which reciters and editions get used, and we publish the totals on our own operational ledger. Turn the setting off in Settings and nothing is sent at all.</li>
-          <li><strong>Prayer-time API requests.</strong> Our API is a proxy that forwards requests to a prayer-time provider — currently Aladhan, which is open source. Nedaa requests times roughly once a year per area, plus an extra request whenever you change a setting that requires a refetch (e.g., calculation method or madhab); the rest of the year, timings are read from local storage on your device. At our proxy, your coordinates are rounded to a coarse grid before forwarding — only the area bucket is passed downstream to the provider. The exact coordinates, IPs, request headers, and request bodies are not retained.</li>
+          <li><strong>Where you are.</strong> Computing prayer times needs a location, so the app asks your device for one at its lowest setting, which is accurate to about a kilometre. Your precise position is never requested. That approximate point goes to our API, which rounds it further before doing anything with it, and the rounded pair is all we pass to the prayer-time provider and to the service that turns coordinates into a city name. We store none of it: request logs live inside the running server and go when it restarts, and nothing is aggregated or backed up. Your times are unaffected, because across that distance Fajr moves by a few seconds. To send nothing at all, choose your city by hand. The app then computes from the city you picked and never reads your device location.</li>
+          <li><strong>Prayer-time API requests.</strong> Our API is a proxy that forwards requests to a prayer-time provider — currently Aladhan, which is open source. Nedaa requests times roughly once a year per area, plus an extra request whenever you change a setting that requires a refetch (e.g., calculation method or madhab); the rest of the year, timings are read from local storage on your device. Your location is rounded at our proxy before anything is forwarded, so only the area bucket reaches the provider. We retain no IPs, request headers, or request bodies.</li>
         </ul>
 
         <h3>What we never collect</h3>
@@ -80,7 +80,8 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li><strong>Your app store</strong> (Apple App Store, Google Play, Huawei AppGallery) — distributes the app, reports anonymized crash counts.</li>
           <li><strong>The Nedaa API</strong> — operated by us; a proxy that forwards bucketed prayer-time requests to a provider. No retention as described above.</li>
-          <li><strong>Aladhan</strong> — current open-source provider behind our proxy. Receives only the bucketed area, never your exact location or device identifiers.</li>
+          <li><strong>Aladhan</strong> — current open-source provider behind our proxy. Receives the rounded area, never a precise position, and no device identifiers.</li>
+          <li><strong>BigDataCloud</strong> — turns a rounded coordinate into a city name for display. Receives the rounded area only.</li>
           <li><strong>The Nedaa content server</strong> (<code>cdn.nedaa.dev</code>) — operated by us; serves the mushaf page images and recitation audio you choose to download. Aggregate counts only.</li>
         </ul>
         <p>We do not work with advertising networks, analytics ad networks, or data brokers.</p>

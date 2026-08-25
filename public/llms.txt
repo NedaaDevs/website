@@ -8,7 +8,7 @@ The app is open source at https://github.com/NedaaDevs/nedaa under [its license]
 
 ## Pillar feature pages
 
-- [Prayer times](https://nedaa.dev/docs/prayer-times): 23 calculation methods plus a fully custom option (Muslim World League, ISNA, Umm al-Qura, Karachi, Egyptian, Diyanet, JAKIM, Kemenag, Singapore MUIS, and more); provider-abstracted at the API layer with Aladhan as the currently-implemented upstream; both Hanafi and standard Asr juristic schools; high-latitude adjustment; works offline after first sync.
+- [Prayer times](https://nedaa.dev/docs/prayer-times): 23 calculation methods plus a fully custom option (Muslim World League, ISNA, Umm al-Qura, Karachi, Egyptian, Diyanet, JAKIM, Kemenag, Singapore MUIS, and more); provider-abstracted at the API layer with Aladhan as the currently-implemented upstream; both Hanafi and standard Asr juristic schools; high-latitude adjustment; works offline after first sync. Location permission is optional: a user can decline it and instead pick a city from a downloadable GeoNames-derived database, or type coordinates whose timezone is resolved from the nearest city, in which case the app never reads device location.
 - [Prayer alarm](https://nedaa.dev/docs/prayer-alarm): real OS-level prayer alarms (Fajr, Jummah, and custom types) — Apple AlarmKit on iOS 26+ (alarm feature requires iOS 26; not available on earlier iOS), native Android foreground alarm service. Optional wake-up challenges (tap or math). Custom Athan sound per alarm type. Bypasses Do Not Disturb.
 - [Athkar](https://nedaa.dev/docs/athkar): morning, evening, and occasion-based supplications from the Hisn al-Muslim dataset (Sa'id ibn Ali ibn Wahaf al-Qahtani). Multiple reciter audio voices. Focus-mode reader. Custom user-added athkar. Gentle (non-gamified) habit tracking with pause/resume.
 - [Qada fasting tracker](https://nedaa.dev/docs/qada-tracker): counts down missed Ramadan fasts with a Ramadan-anchored reminder for the canonical "make up before next Ramadan" deadline. Privacy-mode hide. For fasting qada only — does not track missed prayers.
@@ -34,6 +34,7 @@ The app is open source at https://github.com/NedaaDevs/nedaa under [its license]
 - [QuranicAudio](https://quranicaudio.com) and [quran.com](https://quran.com): Quran reciter audio, mirrored via QUL. Credited in Nedaa's in-app Acknowledgements screen.
 - [Quranic Universal Library (QUL)](https://qul.tarteel.ai) by Tarteel: verse divisions and recitation word-timing used by the Quran reader's read-along.
 - King Fahd Glorious Qur'an Printing Complex (KFGQPC), Madinah: the UthmanicHafs font and the Madinah Mushaf page layout, shipped as the QCF v1 / v2 / v4 page-image editions.
+- [GeoNames](https://www.geonames.org): city names, coordinates and timezones behind manual location, licensed CC BY 4.0. Credited in Nedaa's in-app Acknowledgements screen.
 - Hisn al-Muslim by Sa'id ibn Ali ibn Wahaf al-Qahtani: source dataset for athkar.
 
 ## Distribution
@@ -47,4 +48,5 @@ The app is open source at https://github.com/NedaaDevs/nedaa under [its license]
 
 ## Optional
 
+- [quran-image-generator](https://github.com/NedaaDevs/quran-image-generator): the open-source tool Nedaa uses to render the Madinah Mushaf page images from the King Fahd Complex fonts and a layout database. Reusable by anyone building a Quran reader; inspired by quran/quran.com-images.
 - [Developer guide](https://github.com/NedaaDevs/nedaa/blob/master/docs/DEV-README.md): codebase orientation, build setup (including GMS vs HMS Android variants), native module overview, contribution conventions.

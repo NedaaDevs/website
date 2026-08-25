@@ -73,6 +73,39 @@ export default {
   'cap.quran.t': 'Quran reader',
   'cap.quran.b':
     'Three Madinah Mushaf editions, or a text mode that skips the edition download — with recitation that highlights the word as it is read.',
+  // quran
+  'qr.section': 'Quran · Mushaf',
+  'qr.title': 'Not a Quran tab. A Quran reader.',
+  'qr.lead':
+    'Prayer apps tend to bolt on a token mushaf. This one carries the Madinah printing, recitation that follows the word, and the marking-up tools you would want from a dedicated Quran app.',
+  'qr.tally': 'shipped in the reader',
+  'qr.soon': 'Khatmah tracking is still to come.',
+  'qr.cta': 'How the reader works',
+
+  'qr.g1.t': 'Reading',
+  'qr.g1.i1': 'Three Madinah editions — 1405, 1420, 1439',
+  'qr.g1.i2': 'Full tajweed colour on the 1439 printing',
+  'qr.g1.i3': 'Text mode at 20–48pt, with no edition to download',
+  'qr.g1.i4': 'One page, or a two-page spread on a tablet',
+  'qr.g1.i5': 'Four reading themes, separate from the app’s own',
+  'qr.g1.i6': 'Auto-scroll at three speeds',
+
+  'qr.g2.t': 'Listening',
+  'qr.g2.i1': 'Read-along that tints the verse, or the word',
+  'qr.g2.i2': 'Pages turn as the recitation moves',
+  'qr.g2.i3': 'Murattal, Mujawwad and Tajweed styles',
+  'qr.g2.i4': 'Download a surah to play it offline',
+
+  'qr.g3.t': 'Marking up',
+  'qr.g3.i1': 'Four coloured ribbons you name and move',
+  'qr.g3.i2': 'Seven highlight colours you name yourself',
+  'qr.g3.i3': 'Share a verse as a mushaf image or as text',
+
+  'qr.g4.t': 'Looking things up',
+  'qr.g4.i1': 'Similar verses, paired with your own memory aid',
+  'qr.g4.i2': 'Tajweed colours, stop signs and prostration verses',
+  'qr.g4.i3': 'Jump by surah, juz, hizb or page',
+  'qr.g4.i4': 'An optional Friday reminder for Surah Al-Kahf',
   // alarm
   'alarm.section': 'Notifications · Alarms',
   'alarm.title': 'A Fajr alarm that actually wakes you.',
@@ -106,7 +139,8 @@ export default {
   'priv.f1.t': 'No accounts. Ever.',
   'priv.f1.b': 'No sign-up. No email. No password. The app opens and works.',
   'priv.f2.t': 'Location stays on device.',
-  'priv.f2.b': 'We ask for low-precision location only — enough to compute your timings, no more.',
+  'priv.f2.b':
+    'Low-precision only, enough to compute your timings. Or deny it and pick your city — the app never asks the device where you are.',
   'priv.f3.t': 'No cloud sync.',
   'priv.f3.b':
     'Your settings, custom Athkar, and Qada counter live on your phone. Nothing is uploaded.',
@@ -151,6 +185,9 @@ export default {
     'Nedaa lives at NedaaDevs/nedaa on GitHub. Every prayer-time formula, every notification trigger, every line that touches your data — is there to read, audit, and improve.',
   'os.cta': 'NedaaDevs/nedaa',
   'os.contrib': 'Contribution guide',
+  'os.also': 'Also ours, also open:',
+  'os.also.gen': 'quran-image-generator',
+  'os.also.genb': 'renders the mushaf page images. Take it if you are building a reader.',
   // ledger
   'ledger.section': 'Operational ledger',
   'ledger.title': 'Read the numbers, not the marketing.',
