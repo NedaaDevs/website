@@ -1,0 +1,177 @@
+---
+import Icon from '@/components/Icon.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = useTranslatedPath(lang);
+
+// Grouped by what you do, not by the app's tabs — the app files most of the
+// last two groups under Library, which means nothing to someone who hasn't
+// opened it. The tally is counted from this list so the number can't drift
+// away from what's actually shown.
+const groups = [
+  { key: 'g1', items: 6 },
+  { key: 'g2', items: 4 },
+  { key: 'g3', items: 3 },
+  { key: 'g4', items: 4 },
+].map((g) => ({
+  title: t(`qr.${g.key}.t` as Parameters<typeof t>[0]),
+  items: Array.from({ length: g.items }, (_, i) =>
+    t(`qr.${g.key}.i${i + 1}` as Parameters<typeof t>[0]),
+  ),
+}));
+
+const total = groups.reduce((n, g) => n + g.items.length, 0);
+const totalLabel = new Intl.NumberFormat(lang === 'en' ? 'en-US' : `${lang}-SA`).format(total);
+---
+
+<section class="section quran">
+  <div class="shell">
+    <div class="almanac-rule">{t('qr.section')}</div>
+
+    <div class="head">
+      <h2 class="h-1">{t('qr.title')}</h2>
+      <p class="body lead-body">{t('qr.lead')}</p>
+    </div>
+
+    <div class="groups">
+      {
+        groups.map((g) => (
+          <section class="group fx-rise">
+            <h3 class="group-title">{g.title}</h3>
+            <ul class="items">
+              {g.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="tally">
+      <span class="count">
+        <b class="tnum">{totalLabel}</b> {t('qr.tally')}
+        <span class="soon">{t('qr.soon')}</span>
+      </span>
+      <a class="cta" href={path('/docs/quran-reader')}>
+        {t('qr.cta')}
+        <Icon name="arrow-end" size={14} />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 48px;
+    margin-top: 24px;
+    align-items: flex-start;
+  }
+  .lead-body {
+    font-size: 17px;
+    margin-top: 6px;
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 40px;
+    border-top: 1px solid var(--outline);
+  }
+  .group {
+    padding: 24px 24px 28px;
+    border-inline-end: 1px solid var(--outline);
+    border-bottom: 1px solid var(--outline);
+  }
+  .group:last-child {
+    border-inline-end: none;
+  }
+  .group-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--type);
+    letter-spacing: -0.005em;
+  }
+  .items {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .items li {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--type-2);
+    padding-inline-start: 15px;
+    position: relative;
+  }
+  .items li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--outline-strong);
+  }
+
+  .tally {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .count {
+    font-size: 14px;
+    color: var(--type-2);
+  }
+  .count b {
+    font-family: var(--f-mono);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--type);
+  }
+  .soon {
+    color: var(--type-2);
+    opacity: 0.75;
+    margin-inline-start: 10px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-size: 15px;
+  }
+
+  @media (max-width: 1024px) {
+    .groups {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .group:nth-child(2n) {
+      border-inline-end: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .head {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .groups {
+      grid-template-columns: 1fr;
+    }
+    .group {
+      border-inline-end: none !important;
+    }
+  }
+</style>
