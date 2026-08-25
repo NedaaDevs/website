@@ -36,7 +36,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li>We don't collect personal data. No accounts. No tracking.</li>
           <li>A few things happen locally on your device (your settings, custom Athkar, fasting Qada counter).</li>
-          <li>The only data that leaves your device is: anonymized crash reports from your app store (automatic, like every app), diagnostic log files you explicitly choose to share from the app, and prayer-time API requests (no IPs, headers, or bodies retained).</li>
+          <li>The only data that leaves your device is: anonymized crash reports from your app store (automatic, like every app), diagnostic log files you explicitly choose to share from the app, prayer-time API requests (no IPs, headers, or bodies retained), downloads you ask for (a mushaf edition, a reciter's audio), and — unless you switch it off — two anonymous counters that say a recitation was played or a mushaf edition was installed, never who did it.</li>
           <li>If you want your data gone: delete the app. There is nothing on a server to delete.</li>
         </ul>
 
@@ -52,6 +52,8 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li><strong>App-store crash reports.</strong> When the app crashes, your platform (Apple or Google) sends us anonymized crash counts and stack traces. This is the same as every app; it is handled by the store, not by us.</li>
           <li><strong>In-app diagnostic logs (only if you share them).</strong> Nedaa has no crash-reporting SDK. The app writes diagnostic logs locally on your device (automatically pruned by age and size). If something goes wrong — including after a crash — the app asks whether you want to send a report; nothing is sent unless you choose to share it. Logs may contain app version, device/OS info, and a record of what the app did before the issue. We use them solely to help you.</li>
+          <li><strong>Content you download.</strong> Mushaf page images for the Quran reader, and recitation audio for the Quran and Athkar, are fetched from our content server (<code>cdn.nedaa.dev</code>) when you ask for them. Downloading a file means our server sees the request for that file. We keep aggregate counts only — no account, no device identifier, no record of who asked for what. Once a file is on your device, reading or listening needs no further request.</li>
+          <li><strong>Two anonymous counters (on by default, and you can switch them off).</strong> A setting called <em>Share anonymous usage stats</em> lets the app report that a recitation was played, or that a mushaf edition was installed. The request carries only the recitation id or the edition version, plus the app version — no account, no device identifier, no user id, no location, and nothing about what or when you read. Each is rate-limited to once every thirty minutes, and it is never sent from development builds. We use these to see which reciters and editions people actually use, and we publish the totals on our own operational ledger. Turn the setting off in Settings and nothing is sent at all.</li>
           <li><strong>Prayer-time API requests.</strong> Our API is a proxy that forwards requests to a prayer-time provider — currently Aladhan, which is open source. Nedaa requests times roughly once a year per area, plus an extra request whenever you change a setting that requires a refetch (e.g., calculation method or madhab); the rest of the year, timings are read from local storage on your device. At our proxy, your coordinates are rounded to a coarse grid before forwarding — only the area bucket is passed downstream to the provider. The exact coordinates, IPs, request headers, and request bodies are not retained.</li>
         </ul>
 
@@ -70,6 +72,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
           <li><strong>App-store crash reports</strong> are used to diagnose and fix bugs. We do not sell, share, or use them for any other purpose.</li>
           <li><strong>Log files you send</strong> are used only to answer your support request.</li>
           <li><strong>Prayer-time requests</strong> are served and discarded; nothing about who requested them is retained.</li>
+          <li><strong>Download requests and the two anonymous counters</strong> are aggregated into public totals — how many people use a given reciter or mushaf edition — so we can decide what to add next. They are not joined to anything else, because there is nothing to join them to.</li>
         </ul>
 
         <h2>Sharing and third parties</h2>
@@ -78,6 +81,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
           <li><strong>Your app store</strong> (Apple App Store, Google Play, Huawei AppGallery) — distributes the app, reports anonymized crash counts.</li>
           <li><strong>The Nedaa API</strong> — operated by us; a proxy that forwards bucketed prayer-time requests to a provider. No retention as described above.</li>
           <li><strong>Aladhan</strong> — current open-source provider behind our proxy. Receives only the bucketed area, never your exact location or device identifiers.</li>
+          <li><strong>The Nedaa content server</strong> (<code>cdn.nedaa.dev</code>) — operated by us; serves mushaf page images and recitation audio you choose to download. Aggregate counts only.</li>
         </ul>
         <p>We do not work with advertising networks, analytics ad networks, or data brokers.</p>
 
@@ -85,7 +89,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li><strong>Diagnostic logs</strong> live on your device only, where the app prunes them automatically. Logs you share reach us as a support attachment.</li>
           <li><strong>Support emails and attached logs</strong> are retained for as long as the support thread is active, then deleted.</li>
-          <li><strong>API request logs</strong>: aggregate counts only; no identifying data is retained.</li>
+          <li><strong>API request logs, download requests, and usage counters</strong>: aggregate counts only; no identifying data is retained.</li>
         </ul>
 
         <h2>Your rights</h2>
@@ -96,6 +100,7 @@ const lastUpdated = gregorianShort(lang, new Date(release.releaseDate));
         <ul>
           <li><strong>To remove all data</strong>: delete the app. Local data is removed with it.</li>
           <li><strong>Diagnostic logs</strong>: stay on your device unless you share them — there is nothing to opt out of.</li>
+          <li><strong>Anonymous usage counters</strong>: turn off <em>Share anonymous usage stats</em> in Settings. Nothing is sent from then on. There is nothing to delete afterwards, because nothing sent was ever tied to you.</li>
           <li><strong>For any other privacy question</strong>: email <EmailLink user="support" />. We respond within five working days.</li>
         </ul>
 
