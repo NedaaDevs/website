@@ -14,9 +14,9 @@ hreflang:
 
 # A prayer alarm that actually wakes you
 
-Nedaa is a free, open-source prayer-times app for iOS and Android. The alarm feature ships with two alarm types — Fajr and Jummah — built on the same real OS-level alarm infrastructure. Fajr is the hardest case (an overnight alarm on a silenced phone), so most of this page focuses on it; Jummah behaves the same.
+Nedaa is a free, open-source prayer-times app for iOS and Android. The alarm feature ships with two alarm types, Fajr and Jummah, built on the same real OS-level alarm infrastructure. Fajr is the hardest case (an overnight alarm on a silenced phone), so most of this page focuses on it; Jummah behaves the same.
 
-Most prayer-time apps schedule notifications for Athan. A notification respects your Do Not Disturb settings and your media volume, so on a phone left on the bedside table for eight hours it often produces a quiet chime — or nothing. Nedaa schedules real alarms instead: the same OS-level mechanism your system Clock app uses. They override silent mode, ring at full volume, and require active dismissal.
+Most prayer-time apps schedule notifications for Athan. A notification respects your Do Not Disturb settings and your media volume, so on a phone left on the bedside table for eight hours it often produces a quiet chime, or nothing at all. Nedaa schedules real alarms instead: the same OS-level mechanism your system Clock app uses. They override silent mode, ring at full volume, and require active dismissal.
 
 ## How it works on each platform
 
@@ -26,10 +26,10 @@ On iPhones running iOS 26 or later, Nedaa uses Apple AlarmKit, the system framew
 
 - Ring even when the device is silenced or in Do Not Disturb / Focus modes.
 - Show on the lock screen as a system-style alarm UI, not a banner notification.
-- Persist through app termination — the OS handles the trigger, not Nedaa's process.
+- Persist through app termination, because the OS handles the trigger rather than Nedaa's process.
 - Are scheduled via the same authorization model as system alarms (the user grants alarm permission once).
 
-When a wake-up challenge is configured, Nedaa adds a layer on top of AlarmKit's standard dismiss. AlarmKit's system stop button hands the alarm back to the app instead of silencing it directly, which means a half-asleep dismiss doesn't end the alarm — you have to actually complete the challenge in-app before the audio stops. This closes the obvious loophole of just hitting "stop" and rolling back over.
+When a wake-up challenge is configured, Nedaa adds a layer on top of AlarmKit's standard dismiss. AlarmKit's system stop button hands the alarm back to the app instead of silencing it, so a half-asleep dismiss does not end the alarm. You complete the challenge in-app before the audio stops. This closes the obvious loophole of hitting "stop" and rolling back over.
 
 Nedaa requests AlarmKit authorization on first use of the alarm feature. On iOS versions earlier than 26, the alarm feature is not available; prayer notifications (a separate feature) work on all iOS versions.
 
@@ -37,16 +37,16 @@ Nedaa requests AlarmKit authorization on first use of the alarm feature. On iOS 
 
 On Android, Nedaa schedules an **exact alarm** with `AlarmManager` and runs a **foreground service** when it fires, with:
 
-- **Full-screen alarm activity** that takes over the lock screen — same behaviour as the system Clock app.
+- **Full-screen alarm activity** that takes over the lock screen, the same way the system Clock app does.
 - **Native audio routing** through a dedicated `AlarmAudioManager` so the alarm sound bypasses media-volume settings.
 - **Overlay service** for cases where the lock screen activity can't take focus.
-- **Persistent through reboot** — alarms re-register on `BOOT_COMPLETED`.
+- **Persistent through reboot**: alarms re-register on `BOOT_COMPLETED`.
 
-This is built as a custom Expo native module (`modules/expo-alarm`) — the source is in the public repository and can be audited.
+We built this as a custom Expo native module (`modules/expo-alarm`). The source sits in the public repository, so you can audit it.
 
 ### Android on Huawei devices (no Google Mobile Services)
 
-Most Islamic-app developers ship one Android build that depends on **Google Mobile Services (GMS)** — Google's proprietary location, push, and play-services APIs. On Huawei devices sold without GMS (the post-2019 international Huawei lineup), those apps degrade or fail outright.
+Most Islamic-app developers ship one Android build that depends on **Google Mobile Services (GMS)**, Google's proprietary location, push, and play-services APIs. On Huawei devices sold without GMS (the post-2019 international Huawei lineup), those apps degrade or fail outright.
 
 Nedaa ships a **separate `production-hms` build** for Huawei AppGallery that:
 
@@ -54,7 +54,7 @@ Nedaa ships a **separate `production-hms` build** for Huawei AppGallery that:
 - Uses Huawei Mobile Services for location and related platform integrations.
 - Falls back to AOSP rotation-vector sensors for the Qibla compass instead of Google's Fused Orientation Provider.
 
-The alarm itself is the same native module on both Android variants — alarm scheduling doesn't depend on GMS.
+Both Android variants run the same native alarm module, because alarm scheduling does not depend on GMS.
 
 ## Wake-up challenges
 
@@ -76,7 +76,7 @@ Each type has its own sound, challenge, and dismiss/snooze configuration.
 
 ## Custom Athan sounds
 
-Nedaa lets you provide **your own Athan audio file** as the alarm sound — useful if you want a recitation by a specific muezzin, or your home mosque's Athan, or a particular qari'. The file lives locally on your device.
+Nedaa lets you provide **your own Athan audio file** as the alarm sound. Use it for a recitation by a particular muezzin, your home mosque's Athan, or a qari' you follow. The file lives locally on your device.
 
 ## How Nedaa handles your data
 
@@ -88,7 +88,7 @@ The full position is on the [Privacy page](/privacy).
 
 ### Why does my current prayer app fail to wake me up?
 
-Most prayer apps schedule **notifications**, not alarms. Notifications respect your Do Not Disturb / Focus settings and your media-volume settings, so on a silenced phone overnight they often produce a quiet chime — or no audible signal at all — that doesn't wake the sleeper. Real OS-level alarms behave differently: they bypass silent mode and require active dismissal.
+Most prayer apps schedule **notifications**, not alarms. Notifications respect your Do Not Disturb / Focus settings and your media-volume settings, so on a silenced phone overnight they often produce a quiet chime, or no audible signal at all, and you sleep through it. Real OS-level alarms behave differently: they bypass silent mode and require active dismissal.
 
 ### What is AlarmKit and what iOS version do I need?
 
@@ -100,7 +100,7 @@ Yes. On iOS, the OS handles the trigger via AlarmKit independent of whether the 
 
 ### Does the alarm work if my phone is in Do Not Disturb / Focus mode?
 
-Yes. Real alarms are designed to override silent and DND modes — both AlarmKit on iOS and Android's alarm stream behave this way.
+Yes. Real alarms override silent and DND modes, and both AlarmKit on iOS and Android's alarm stream behave this way.
 
 ### Will Nedaa work on my Huawei phone without Google services?
 

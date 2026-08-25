@@ -14,13 +14,13 @@ hreflang:
 
 # How to actually measure whether a Fajr alarm wakes you
 
-Most prayer-time apps advertise "Fajr alarm." Most of those alarms are **notifications dressed up as alarms** — they fail to wake the user roughly as often as they succeed, especially when the phone is on silent overnight or in Do Not Disturb. This piece documents:
+Most prayer-time apps advertise "Fajr alarm." Most of those alarms are **notifications dressed up as alarms**, and they fail to wake you roughly as often as they succeed, especially when the phone is on silent overnight or in Do Not Disturb. This piece documents:
 
 1. The technical differences between an actual alarm and the various weaker mechanisms that get marketed as alarms.
 2. A reproducible measurement protocol for evaluating real-world wake reliability.
 3. Nedaa's implementation as a reference case, with code and platform-specific behaviour open for inspection.
 
-It does not (yet) include comparative results from other apps — running that test takes 30 days of measurement per device. The methodology is publishable now; results land when the test runs.
+It does not yet include comparative results from other apps, because that test takes 30 days of measurement per device. The methodology is publishable now; results land when the test runs.
 
 ## What "alarm" actually means in mobile OSes
 
@@ -36,7 +36,7 @@ This is what most Islamic apps actually ship as "Fajr alarm." It works in daytim
 
 A privileged notification that bypasses Do Not Disturb and silent mode. On iOS this requires the special **Critical Alerts entitlement**, which Apple grants sparingly; on Android it requires a high-importance notification channel and works on most OEM ROMs.
 
-More reliable than a standard notification. Still a notification, not an alarm — there's no full-screen takeover, no required-dismissal interaction, and behaviour varies across OEMs (Samsung, Xiaomi, OnePlus, Huawei all customise the notification stack).
+More reliable than a standard notification. Still a notification rather than an alarm: no full-screen takeover, no required-dismissal interaction, and behaviour varies across OEMs (Samsung, Xiaomi, OnePlus, Huawei all customise the notification stack).
 
 ### 3. Audio-in-background (the "fake alarm" pattern)
 
@@ -46,7 +46,7 @@ This pattern was common before iOS 26 / AlarmKit because real alarms weren't ava
 
 ### 4. Real OS-level alarm
 
-The OS itself owns the trigger — not the app's process. The app schedules the alarm; the alarm fires whether or not the app is running. Behaviour matches the system Clock app: full volume, lock-screen takeover, requires active dismissal, bypasses silent and Do Not Disturb modes.
+The OS owns the trigger, not the app's process. The app schedules the alarm; the alarm fires whether or not the app is running. Behaviour matches the system Clock app: full volume, lock-screen takeover, requires active dismissal, bypasses silent and Do Not Disturb modes.
 
 Implementations:
 
@@ -61,7 +61,7 @@ Implementations:
 Three reasons:
 
 1. **AlarmKit is new.** Apple shipped it in iOS 26. Apps that haven't been updated since 2025 are still on critical-notifications-or-worse.
-2. **Critical Alerts requires Apple's approval** — which is granted to relatively few apps. Apps that want to bypass DND without using AlarmKit need this entitlement.
+2. **Critical Alerts requires Apple's approval**, which Apple grants to few apps. Apps that want to bypass DND without using AlarmKit need this entitlement.
 3. **The Android implementation is non-trivial.** A real Android alarm requires `AlarmManager` scheduling, a foreground service with the right service type, an audio manager that bypasses media-volume settings, a full-screen activity requesting `USE_FULL_SCREEN_INTENT`, an overlay service for fallback, a `BOOT_COMPLETED` receiver, and handling for at least Samsung/Xiaomi/Huawei/OnePlus battery-saver behaviour. Nedaa's `modules/expo-alarm/android/` is roughly 3,800 lines of Kotlin/Java plus substantial QA across OEMs.
 
 Most teams ship the notification path because it's days of work, not months, and it's adequate for daytime prayers. For Fajr specifically, "adequate" isn't.
@@ -128,7 +128,7 @@ Nedaa is open source. The alarm code is at `modules/expo-alarm/` in the public r
 
 - Wake-up challenges (`"tap"` and `"math"`, in `modules/expo-alarm/src/index.ts`) require active cognitive dismissal, mitigating the "swipe to dismiss and fall back asleep" failure mode.
 - Alarm types are explicitly modelled (`"fajr" | "jummah"`) so each can have its own sound, challenge, and snooze configuration.
-- The source is open. Anyone evaluating this benchmark methodology can audit Nedaa's claims directly.
+- The source is open. Anyone evaluating this benchmark methodology can audit Nedaa's claims.
 
 ## What the benchmark is _not_ claiming
 
@@ -136,20 +136,20 @@ To stay honest about scope:
 
 - It does not measure **how pleasant** the alarm sound is.
 - It does not measure **how easy the configuration UI is**.
-- It does not evaluate **prayer-time accuracy** — that's a separate question covered on the [prayer-times page](/docs/prayer-times).
+- It does not evaluate **prayer-time accuracy**, a separate question covered on the [prayer-times page](/docs/prayer-times).
 - It does not certify any app as "the best." Reliability is a measurable property; subjective preference is not.
 
 ## Why this matters
 
 The audience that cares about Fajr is the audience that's trying to wake up to pray when most people are asleep. For that audience, "the alarm rang loudly enough to actually wake you" is the only metric that matters. Every other metric is a proxy.
 
-The measurement methodology above is reproducible and we'd welcome comparable results from other apps' teams — including ones that beat Nedaa's reliability. The point isn't to win the benchmark; it's to make the dimension measurable so users can choose informed.
+The measurement methodology above is reproducible and we'd welcome comparable results from other apps' teams, including ones that beat Nedaa's reliability. The point isn't to win the benchmark; it's to make the dimension measurable so users can choose informed.
 
 ## Contribute results
 
 If you run this protocol on any prayer-time app and want to publish results, open an issue at <https://github.com/NedaaDevs/nedaa/issues> with title `[alarm benchmark] <app name> v<version> on <device>` and include your 30-day numbers in the schema above.
 
-We'll publish results — including ones for Nedaa that show problems we need to fix.
+We'll publish results, including ones for Nedaa that show problems we need to fix.
 
 ---
 

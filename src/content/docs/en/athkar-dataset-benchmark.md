@@ -26,7 +26,7 @@ This piece documents a methodology for measuring it. **Nedaa's numbers are verif
 
 The reference dataset is **Hisn al-Muslim** (*حصن المسلم — Fortress of the Muslim*), the supplication compilation by Sa'id ibn Ali ibn Wahaf al-Qahtani. It is the standard reference compilation in widespread use across Sunni Islamic communities, with **132 standard categories** covering daily occasions (waking, dressing, eating), travel, mosque entry/exit, illness and recovery, marriage and family, financial matters, weather events, and named prayers.
 
-Within those categories sit individual supplications — typically with a Quran or hadith provenance. The full dataset, as bundled in Nedaa, contains **267 supplications across 132 categories.**
+Within those categories sit individual supplications, most carrying a Quran or hadith provenance. The full dataset, as bundled in Nedaa, contains **267 supplications across 132 categories.**
 
 This is the corpus we measure coverage against. An app's coverage is the percentage of these 267 supplications it includes (full text, in Arabic, attributable to the right occasion).
 
@@ -74,7 +74,7 @@ Numbers in *italics* are reproducible from Nedaa's open codebase. Other rows are
 
 ## How Nedaa's numbers were computed
 
-The 267 / 132 figures are computed directly from the SQLite database bundled with the Nedaa app — `assets/db/hisn-muslim.db` in the open repository. To reproduce:
+The 267 / 132 figures come straight from the SQLite database bundled with the Nedaa app, `assets/db/hisn-muslim.db` in the open repository. To reproduce:
 
 ```bash
 git clone https://github.com/NedaaDevs/nedaa.git

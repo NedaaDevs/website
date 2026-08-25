@@ -51,7 +51,7 @@ Advertising in religious apps is a different proposition from advertising in a p
 
 ### 3. Pricing model
 
-The category has fragmented across three patterns — free (often ad-supported), freemium with a "Pro" subscription, and one-time-paid. Each is a legitimate way to fund an app, with different tradeoffs. A transparently priced paid app, where the user pays the developer directly for nice-to-have features, is a clean exchange — and often the more sustainable model long-term.
+The category has fragmented across three patterns: free (often ad-supported), freemium with a "Pro" subscription, and one-time-paid. Each is a legitimate way to fund an app, with different tradeoffs. A transparently priced paid app, where the user pays the developer directly for nice-to-have features, is a clean exchange — and often the more sustainable model long-term.
 
 **Questions to ask** (so you know what you're picking up):
 
@@ -67,7 +67,7 @@ Islamic apps make consequential choices that the user can't see: which Quran tex
 
 **Questions to ask:**
 
-- Does the app name its data sources — Quran text, athkar dataset, calculation provider, reciter audio source?
+- Does the app name its data sources: Quran text, athkar dataset, calculation provider, reciter audio source?
 - Are the licence terms of those upstream sources respected (e.g. CC-BY attribution for Tanzil)?
 - Is the app source-code open? Can a knowledgeable user independently audit how data is handled?
 
@@ -87,7 +87,7 @@ Islamic apps make consequential choices that the user can't see: which Quran tex
 The feature list of any mature prayer-times app looks the same: Athan notifications, Qibla, Hijri date, a calculation-method picker. The non-feature differences above are where apps differ in ways that compound over time:
 
 - An app that collects data today may be acquired tomorrow and have its data-handling rules changed beyond the original team's control.
-- An app that runs ads today often runs more ads when growth slows — same code, different load.
+- An app that runs ads today often runs more ads when growth slows. Same code, heavier load.
 - A free app that adds a Pro tier next year may move features you currently use behind it. (This is a real pattern, not a moral failing — it's how the market works.)
 - An app whose sources are unnamed cannot be evaluated; you're trusting an implementation you can't see.
 

@@ -18,7 +18,7 @@ Nedaa is a free, open-source prayer-times and Islamic-companion app for iOS and 
 
 ## What's an athkar feature for
 
-The morning and evening **adhkar** (singular *dhikr*, plural *adhkar* — collectively, "athkar" in common usage) are the supplications, Qur'anic verses, and prophetic remembrances most Muslims aim to read once after Fajr and once before Maghrib each day. They are short, repetitive on purpose, and easy to either build into a daily rhythm or completely forget for weeks.
+The morning and evening **adhkar** (singular *dhikr*, plural *adhkar*, and "athkar" in common usage) are the supplications, Qur'anic verses, and prophetic remembrances most Muslims aim to read once after Fajr and once before Maghrib each day. They are short, repetitive on purpose, and easy to either build into a daily rhythm or completely forget for weeks.
 
 The job a good athkar app does is small but specific: keep the right text in front of you, with the option to listen rather than read, and remove every other reason your phone is in your hand at that moment.
 
@@ -26,15 +26,15 @@ The job a good athkar app does is small but specific: keep the right text in fro
 
 ### Hisn al-Muslim as the source dataset
 
-Nedaa uses the **Hisn al-Muslim** dataset — the widely used compilation by Sa'id ibn Ali ibn Wahaf al-Qahtani — as the source for morning, evening, and occasion-specific remembrances. Hisn al-Muslim is the same compilation many printed booklets and other apps draw from; using it directly means the text matches what your community already recognises.
+Nedaa draws its morning, evening, and occasion-specific remembrances from the **Hisn al-Muslim** dataset, the compilation by Sa'id ibn Ali ibn Wahaf al-Qahtani. Hisn al-Muslim is the same compilation many printed booklets and other apps draw from; using it means the text matches what your community already recognises.
 
-The text is bundled with the app — **no internet required to read athkar.**
+The text ships inside the app, so **you need no internet to read athkar.**
 
 ### Reciter audio
 
 Each athkar entry has audio recitation available. One reciter ships today; more are being added. Audio files download on demand from `cdn.nedaa.dev` and cache locally — once a voice is downloaded, it works offline.
 
-Playback uses native media controls (lock screen, AirPods, Bluetooth) — the same engine your podcast app uses, not a webview hack.
+Playback uses native media controls: lock screen, AirPods, Bluetooth. It runs on the same engine your podcast app uses, not a webview hack.
 
 ### Focus mode
 
@@ -42,11 +42,11 @@ A full-screen reader strips away the rest of the app: just the current dhikr, la
 
 ### Custom athkar — add your own
 
-If your routine includes athkar that aren't in Hisn al-Muslim — a personal dua, a verse you want to read every morning, a prayer your teacher gave you — you can **add custom athkar** and they appear alongside the built-in ones. Custom athkar live locally on your device.
+Your routine may include athkar that Hisn al-Muslim does not carry: a personal dua, a verse you read every morning, a prayer your teacher gave you. You can **add custom athkar** and they appear alongside the built-in ones. Custom athkar live locally on your device.
 
 ### Habit tracking, gently
 
-Nedaa tracks your daily completion as a streak — current streak, longest streak — but the streak system is built to **support a habit, not gamify worship.** You can pause and resume streaks (illness, travel, post-natal recovery, anything), and validation is forgiving rather than punishing. There are no badges, no leaderboards, and no "level up" framing. The streak is a quiet number that's there if it helps you and out of the way if it doesn't.
+Nedaa tracks your daily completion as a streak, current and longest. The streak exists to **support a habit, not to gamify worship.** You can pause and resume streaks (illness, travel, post-natal recovery, anything), and validation is forgiving rather than punishing. There are no badges, no leaderboards, and no "level up" framing. The streak is a quiet number that's there if it helps you and out of the way if it doesn't.
 
 ### Per-prayer reminders
 
@@ -62,7 +62,7 @@ The full position is on the [Privacy page](/privacy).
 
 ### What dataset does Nedaa use for the athkar text?
 
-The **Hisn al-Muslim** compilation by Sa'id ibn Ali ibn Wahaf al-Qahtani — the standard reference Muslims commonly use for morning, evening, and occasion-based supplications. The text is bundled in the app and works without internet.
+The **Hisn al-Muslim** compilation by Sa'id ibn Ali ibn Wahaf al-Qahtani, the reference most Muslims use for morning, evening, and occasion-based supplications. The text is bundled in the app and works without internet.
 
 ### Can I listen to the athkar instead of reading them?
 
@@ -74,7 +74,7 @@ Yes. The custom athkar feature lets you add any supplication, verse, or remembra
 
 ### Does the streak system gamify worship?
 
-No. Streaks are a habit-support tool — current streak, longest streak, with pause/resume so illness, travel, or post-natal recovery don't break it punitively. There are no badges, leaderboards, or "level up" framing.
+No. Streaks support a habit and nothing more: current streak, longest streak, and pause/resume so illness, travel, or post-natal recovery do not break it. There are no badges, leaderboards, or "level up" framing.
 
 ### Does Athkar work offline?
 

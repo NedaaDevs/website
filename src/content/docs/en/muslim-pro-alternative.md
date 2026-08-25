@@ -14,7 +14,7 @@ hreflang:
 
 # Nedaa vs Muslim Pro: a free, ad-free, open-source alternative
 
-Muslim Pro is the biggest app in this category, and on features it is genuinely extensive — community, media, and more. If that breadth is what you want, it's a reasonable choice. This page compares the two apps on a narrower set of questions: ads, pricing, what each app's own App Store privacy label declares, and whether you can audit any of it. Everything below is sourced and date-stamped; the framework behind these dimensions is explained in our [category comparison](/docs/comparison-privacy-ads-openness).
+Muslim Pro is the biggest app in this category, and on features it is extensive: community, media, and more. If that breadth is what you want, it's a reasonable choice. This page compares the two apps on a narrower set of questions: ads, pricing, what each app's own App Store privacy label declares, and whether you can audit any of it. Everything below is sourced and date-stamped; the framework behind these dimensions is explained in our [category comparison](/docs/comparison-privacy-ads-openness).
 
 ## The short answer
 
@@ -45,7 +45,7 @@ Apple requires every developer to declare what their app collects. These declara
 
 **Nedaa's label** declares nothing under "Data Used to Track You" and nothing under "Data Linked to You". Under "Data Not Linked to You" it declares coarse location — used to compute your prayer times. There is no crash-reporting or analytics SDK in the app: diagnostic logs are written locally on your device, pruned automatically, and reach us only if you choose to share a report. We state this plainly rather than claiming "no data at all": the difference that matters is that nothing is used for tracking or advertising, and nothing is tied to who you are. There is no account, so there is nothing to tie it to.
 
-Because Nedaa is open source, you don't have to trust the label either — the code that backs it is public.
+Because Nedaa is open source, you need not trust the label either. The code behind it is public.
 
 ## The 2020 location-data reporting, fairly stated
 
@@ -59,7 +59,7 @@ To be clear about what this does and doesn't show: it is a 2020 event, Muslim Pr
 
 ## Where Nedaa fits
 
-Choose Nedaa if you want prayer times, a Fajr alarm that reliably fires, Athkar (Hisn al-Muslim), Qibla, and Hijri date — free, in Arabic and English, with no ads, no account, and a codebase you (or anyone) can read.
+Choose Nedaa if you want prayer times, a Fajr alarm that reliably fires, Athkar (Hisn al-Muslim), Qibla, and Hijri date, free, in Arabic and English, with no ads, no account, and a codebase you (or anyone) can read.
 
 - **iOS:** [App Store](https://apps.apple.com/app/id6740703900)
 - **Android:** [Google Play](https://play.google.com/store/apps/details?id=dev.nedaa.android) · [Huawei AppGallery](https://appgallery.huawei.com/app/C114573733)

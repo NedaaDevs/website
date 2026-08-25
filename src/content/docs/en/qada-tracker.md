@@ -35,7 +35,7 @@ The tracker keeps three numbers correct and out of your way:
 
 - **Total missed** — the count of fasts you still owe.
 - **Total completed** — the count of qada fasts you have made up.
-- **Remaining** — what's left to do, displayed prominently.
+- **Remaining** — what's left to do, shown large.
 
 You add missed fasts as a single number (for example, *"7 days from Ramadan 1445"*) with optional notes. You mark them off one at a time as you fast them, with a swipe gesture. History is preserved.
 
@@ -59,7 +59,7 @@ The full position is on the [Privacy page](/privacy).
 
 ## Why a dedicated tracker
 
-Across the years, keeping track of qada — both within the year and between years — gets tedious. People returning to practice after a long absence often have whole or partial Ramadans behind them. The most common failure mode isn't laziness; it's **losing count** — over-counting from anxiety, or under-counting from forgetting.
+Across the years, keeping track of qada gets tedious, both within a year and between years. People returning to practice after a long absence often have whole or partial Ramadans behind them. The most common failure mode isn't laziness; it's **losing count** — over-counting from anxiety, or under-counting from forgetting.
 
 Nedaa's tracker is intentionally small. It does not gamify, streak, or shame. It counts.
 
@@ -75,7 +75,7 @@ No. The classical position is that qada days do not need to be consecutive. You 
 
 ### When is the deadline to make up missed fasts?
 
-Before the start of the next Ramadan. If a Ramadan passes and you still owe fasts from a previous Ramadan without a valid excuse, scholars discuss whether *fidya* (feeding a poor person per missed day) becomes due in addition to the fast. Nedaa stays neutral on these scholarly questions and just helps you get the fasts done in time.
+Before the start of the next Ramadan. If a Ramadan passes and you still owe fasts from a previous Ramadan without a valid excuse, scholars discuss whether *fidya* (feeding a poor person per missed day) becomes due in addition to the fast. Nedaa stays neutral on these scholarly questions and helps you get the fasts done in time.
 
 ### Does Nedaa track kaffara (expiation) for deliberately broken fasts?
 

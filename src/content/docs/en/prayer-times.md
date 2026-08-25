@@ -28,7 +28,7 @@ Apps that hardcode one method everywhere end up out of sync with most local mosq
 
 Each method below is a real institution or scholarly body whose Fajr/Isha angles Nedaa applies as published. The IDs match the [Aladhan API method numbers](https://aladhan.com/calculation-methods); index 6 is reserved by Aladhan for the Custom case (see below) and is therefore skipped here.
 
-Prayer-time computation in Nedaa is provider-abstracted at the API layer — the architecture supports multiple upstream providers, switchable without app updates. Currently the only implemented provider is the [Aladhan API](https://aladhan.com), so the methods on this page are the ones Aladhan exposes; if additional providers are added later, this list may extend.
+Nedaa abstracts prayer-time computation behind the API layer, so the architecture supports multiple upstream providers, switchable without app updates. Currently the only implemented provider is the [Aladhan API](https://aladhan.com), so the methods on this page are the ones Aladhan exposes; if additional providers are added later, this list may extend.
 
 | #   | Method                                        | Region / common use                                |
 | --- | --------------------------------------------- | -------------------------------------------------- |
@@ -56,7 +56,7 @@ Prayer-time computation in Nedaa is provider-abstracted at the API layer — the
 | 22  | Comunidade Islamica de Lisboa                 | Portugal                                           |
 | 23  | Jordan                                        | Jordan                                             |
 
-If your community uses a method not listed, Nedaa also supports a **Custom** method (Aladhan ID 99) where you set your own Fajr and Isha angles directly.
+If your community uses a method not listed, Nedaa also supports a **Custom** method (Aladhan ID 99) where you set your own Fajr and Isha angles.
 
 ## Asr juristic school
 
@@ -101,7 +101,7 @@ Yes. On first run, Nedaa caches the rest of the year (current month through Dece
 
 Each calculation method applies the published angles defined by its institution, so accuracy depends on which method you're using and how precise your location is. The location precision is intentionally low (city-level), which is enough for any of the methods above.
 
-If your local mosque consistently differs by a fixed offset, Nedaa supports per-prayer minute adjustments — bump Fajr by +2, Maghrib by −1, etc. — independent of the calculation method. The provider exposes this adjustment range; Nedaa lets you set it per prayer.
+If your local mosque consistently differs by a fixed offset, Nedaa supports per-prayer minute adjustments. Bump Fajr by +2, Maghrib by −1, etc. — independent of the calculation method. The provider exposes this adjustment range; Nedaa lets you set it per prayer.
 
 ### What's the calculation provider?
 

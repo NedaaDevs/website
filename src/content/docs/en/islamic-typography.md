@@ -14,27 +14,27 @@ hreflang:
 
 # Why digital Quran apps look the way they do
 
-A guide to Islamic typography on small screens — written by the team building Nedaa, an open-source prayer-times and Quran-reader app for iOS and Android.
+A guide to Islamic typography on small screens, written by the team building Nedaa, an open-source prayer-times and Quran-reader app for iOS and Android.
 
-If you've ever opened two Quran apps side by side and noticed they show the same verse differently — different diacritic placement, different line breaks, different page numbers, sometimes a slightly different *spelling* — you've bumped into a thicket of typographic and editorial decisions that most apps make silently. This piece pulls those decisions into the open.
+If you've ever opened two Quran apps side by side and noticed they show the same verse differently, you have seen it: different diacritic placement, different line breaks, different page numbers, sometimes a different *spelling*. You have bumped into a thicket of typographic and editorial decisions that most apps make without telling you. This piece pulls those decisions into the open.
 
-It's written from a practitioner's seat: we ship a Quran reader inside Nedaa, the source code is public, and the decisions below are ones we either made deliberately or inherited from upstream sources. Where Nedaa picked a side, we'll say so.
+It's written from a practitioner's seat: we ship a Quran reader inside Nedaa, the source code is public, and we made some of the decisions below ourselves and inherited the rest from upstream. Where Nedaa picked a side, we'll say so.
 
 ## Why digital Quran apps use page images, not text rendering
 
-The most common architectural choice in serious Quran apps surprises people: **the page is a picture, not text.** It's a PNG (or WebP) of a printed mushaf page rendered onto the screen. The app then overlays interactive elements — ayah-tap targets, highlight regions, audio sync — on top of an image.
+The most common architectural choice in serious Quran apps surprises people: **the page is a picture, not text.** It's a PNG (or WebP) of a printed mushaf page rendered onto the screen. The app then overlays interactive elements on top of that image: ayah-tap targets, highlight regions, audio sync.
 
-If you're a software engineer this looks backwards. Why ship images when you have a perfectly good Arabic text renderer? Three reasons converge:
+If you're a software engineer this looks backwards. Why ship images when you have a working Arabic text renderer? Three reasons converge:
 
 ### Reason 1 — Memorisers rely on page-end positions
 
-People who have memorised the Quran (huffaz, singular hafiz/hafiza) typically memorise the **Madinah Mushaf layout** — the standard 15-lines-per-page printing produced and distributed by the King Fahd Quran Complex in Madinah. After years of memorisation, the visual position of an ayah on its page becomes part of the memory. The end of page 5 *is* the end of a specific ayah. The fourth line of page 117 *contains* a specific phrase.
+Most people who memorise the Quran (huffaz, singular hafiz/hafiza) learn it from the **Madinah Mushaf layout**, the standard 15-lines-per-page printing that the King Fahd Quran Complex in Madinah produces and distributes. After years of memorisation, the visual position of an ayah on its page becomes part of the memory. The end of page 5 *is* the end of a specific ayah. The fourth line of page 117 *contains* a specific phrase.
 
 If a digital app reflows text to fit the user's font size, those positional anchors break. The hafiz can no longer use the page as a memory aid. **For an app whose target audience includes huffaz, reflowing the text is a worse trade-off than the cost of shipping image bundles.**
 
 ### Reason 2 — Calligraphic fidelity at small sizes
 
-Arabic script has features — ligature joins, contextual letter forms, diacritic stacking, the *tashkīl* (vowel marks) sitting precisely over their letters — that are difficult to render perfectly at the dense 15-line-per-page layout on a 6-inch phone screen. The printed Madinah Mushaf is the work of master calligraphers (Uthman Taha being the most prominent, with editions calligraphed in the 1980s onward). Reproducing that calligraphy precisely from a font-rendered fallback means competing with the calligrapher; the image is just *the calligrapher's work, photographed.*
+Arabic script asks a lot of a renderer: ligature joins, contextual letter forms, diacritic stacking, and the *tashkīl* sitting over the letter it belongs to. At the dense 15-lines-per-page layout on a 6-inch screen, a font struggles with all of it. The printed Madinah Mushaf is the work of master calligraphers (Uthman Taha being the most prominent, with editions calligraphed in the 1980s onward). Reproduce that from a font and you are competing with the calligrapher. The image is *the calligrapher's work, photographed.*
 
 ### Reason 3 — Diacritics, line-breaking, and the rasm
 
@@ -45,31 +45,31 @@ The Quran has been transmitted in two forms relevant to printed editions:
 - **Uthmani text** preserves the *rasm* — the original consonantal skeleton of the Uthmanic codex compiled in the seventh century. Diacritics and vowel marks were added later as reading aids. The Madinah Mushaf uses Uthmani text.
 - **Imlaei text** applies modern Arabic spelling rules to the same content. It's what you'd get if you typed the Quran into a contemporary Arabic word processor. It's easier for non-Arabic-native readers to follow because the spelling matches everyday Arabic.
 
-These differ in dozens of small but visible ways — letters with sukun marks, alef variants, the placement of the small alef (*alef khanjariyya*). For a memoriser the difference matters; for a casual reader it usually doesn't, but disclosing the choice is rare.
+These differ in dozens of small but visible ways: letters with sukun marks, alef variants, the placement of the small alef (*alef khanjariyya*). For a memoriser the difference matters; for a casual reader it usually doesn't, but disclosing the choice is rare.
 
-When apps render text from a font, they are committing to one. **Image-based mushafs sidestep the question by faithfully reproducing whatever printed edition they're scanning** — Madinah Mushaf in Uthmani, in this case.
+When apps render text from a font, they are committing to one. **Image-based mushafs sidestep the question by reproducing whatever printed edition they scanned**, which here is the Madinah Mushaf in Uthmani.
 
 ## The hybrid approach: image pages plus font glyphs
 
-Pure image-based mushafs have their own cost: **the app can't react to where on the page the user tapped.** If page 117 is just a PNG, the app doesn't know whether the user tapped on ayah 3 or ayah 4 unless someone manually annotated coordinate boxes for every ayah on every page. For 604 pages × ~7-15 ayat per page, that's a lot of manual work.
+Pure image-based mushafs have their own cost: **the app can't react to where on the page the user tapped.** If page 117 is only a PNG, the app cannot tell ayah 3 from ayah 4 unless someone sat down and drew coordinate boxes around every ayah on every page. For 604 pages × ~7-15 ayat per page, that's a lot of manual work.
 
-The technique that has emerged in serious Quran apps is **hybrid rendering**: the page background is a high-fidelity image, and a separate, precomputed map says where every glyph sits on it. Because the coordinates are known, the app can draw an interactive region at the correct on-screen position and use it as a tap or highlight target.
+The technique that has emerged in serious Quran apps is **hybrid rendering**: the page background is a high-fidelity image, and a separate, precomputed map says where every glyph sits on it. The app knows the coordinates, so it draws an interactive region at the right on-screen position and uses it as a tap or highlight target.
 
-Nedaa's reader does this with a per-edition bounds database. Alongside each edition's page images we ship a `bounds-<version>.db` SQLite file holding, for every glyph, its surah, ayah, line number, x-offset, and width. To make an ayah tappable — or to highlight it during read-along — the reader queries the glyphs belonging to that ayah, groups them by line, and reduces each line to a single rectangle. The page stays an image, preserving calligraphic fidelity and memorisation positions, but it is no longer dumb.
+Nedaa's reader does this with a per-edition bounds database. Alongside each edition's page images we ship a `bounds-<version>.db` SQLite file holding, for every glyph, its surah, ayah, line number, x-offset, and width. To make an ayah tappable, or to highlight it during read-along, the reader queries that ayah's glyphs, groups them by line, and reduces each line to one rectangle. The page stays an image, so it keeps the calligraphy and the memorisation positions, and the app can still tell where you tapped.
 
-This is a real engineering tradeoff. It works well; it's also fiddly. The bounds have to be regenerated whenever the page images are, and versioned together, or every highlight lands slightly off. Line height is derived from the actual pixel height of the page image divided by fifteen lines, because a hardcoded value drifts across densities. When the glyphs for an ayah are missing, the reader has to fall back to rendered text rather than draw a wrong box. And search has to query a separate text database — you cannot grep an image — with a hit then navigating back to the right rectangle on the right page.
+The tradeoff is real, and the work is fiddly. Regenerate the page images and you must regenerate the bounds with them, versioned together, or every highlight lands off by a few pixels. The reader computes line height from the page image's own pixel height divided by fifteen, since a hardcoded value drifts across screen densities. When an ayah's glyphs are missing, the reader falls back to rendered text instead of drawing a box in the wrong place. Search runs against a separate text database, since you cannot grep an image, and a hit has to navigate you back to the right rectangle on the right page.
 
 ## The QCF page-image tradition
 
-The widely-used corpus of Madinah Mushaf page images comes from the **King Fahd Quran Complex** (KFQC, also called King Fahd Glorious Quran Printing Complex) in Madinah. The complex has produced multiple editions of the Madinah Mushaf over the decades; in the digital ecosystem these are commonly referred to as **QCF v1, v2, and v4** (v3 exists but is less commonly distributed publicly). They differ in calligraphic detail, diacritic placement conventions, and rendering generation.
+Most Madinah Mushaf page images trace back to the **King Fahd Quran Complex** (KFQC, also called King Fahd Glorious Quran Printing Complex) in Madinah. The complex has produced several editions over the decades, which the digital ecosystem calls **QCF v1, v2, and v4**. A v3 exists, but few projects distribute it publicly. They differ in calligraphic detail, diacritic placement conventions, and rendering generation.
 
-Nedaa supports v1, v2, and v4. We don't editorialise about which is "best" — these are scholarly editions and the choice is the user's. We surface the version selector with visual previews so a user can pick the one that matches what they grew up with or memorised from.
+Nedaa supports v1, v2, and v4. We don't editorialise about which is "best". These are scholarly editions, and the choice is yours. We surface the version selector with visual previews so a user can pick the one that matches what they grew up with or memorised from.
 
 ## Searching across diacritics
 
 Search is the single hardest typographic problem inside a Quran app, and almost no user notices when it works.
 
-The naive approach — run a `LIKE` query against the verse text — fails because Arabic text in the database is fully voweled (with diacritics) and users typically search without typing diacritics. The query "الرحمن" should match "الرَّحْمَٰنِ" but a literal text comparison won't.
+The naive approach, a `LIKE` query against the verse text, fails: the database stores the verse fully voweled, and almost nobody types diacritics into a search box. The query "الرحمن" should match "الرَّحْمَٰنِ" but a literal text comparison won't.
 
 Nedaa's reader uses **SQLite's FTS5 (full-text search) module** with custom Arabic tokenizer rules to normalise diacritics out of the indexed text while preserving them in the displayed result. The indexed string strips tashkīl, *shadda*, and the small alef; the display string keeps everything. Search by "الرحمن"; see "الرَّحْمَٰنِ" highlighted on the page.
 
@@ -77,7 +77,7 @@ This is mostly invisible work that ships in the database file, not in the UI. It
 
 ## Pairing Latin and Arabic typefaces
 
-The Quran reader is half of Nedaa. The other half — prayer times, alarm settings, athkar — has UI in five languages: English, Arabic, Malay, Urdu, and growing.
+The Quran reader is half of Nedaa. The other half, meaning prayer times, alarm settings and athkar, has UI in five languages: English, Arabic, Malay, Urdu, and growing.
 
 Most apps pick a single typeface and let it render everything. That works badly. **Latin typefaces and Arabic typefaces have different baselines, different weights at the same nominal weight, different x-heights, and different line-height conventions.** A typeface that looks balanced in English will look thin or mis-aligned in Arabic, and vice versa.
 
@@ -86,24 +86,24 @@ Nedaa pairs:
 - **Asap** for Latin scripts (UI, English, Malay, Urdu transliteration)
 - **IBM Plex Sans Arabic** for Arabic UI text and labels
 
-The two are paired deliberately so that a settings screen with mixed Arabic and English (a common case) reads as one visual whole rather than two clashing systems. Locale-aware font swap is implemented at the component level: the same `Text` component renders Asap or IBM Plex Sans Arabic depending on the active locale.
+We paired the two so a settings screen carrying both Arabic and English, which is the common case, reads as one visual whole instead of two clashing systems. The font swap happens at the component level: the same `Text` component renders Asap or IBM Plex Sans Arabic depending on the active locale.
 
-For Quran *body* text (the ayah display in text-mode reader, separate from the image-based mushaf reader), the rules change again. Quran text needs typefaces designed specifically for Quranic typography — diacritic positioning, ligature behaviour, and aesthetic conventions specific to mushaf rendering. That's not what UI fonts are for.
+For Quran *body* text (the ayah display in text-mode reader, separate from the image-based mushaf reader), the rules change again. Quran text needs typefaces built for Quranic typography: diacritic positioning, ligature behaviour, and the aesthetic conventions of mushaf rendering. That's not what UI fonts are for.
 
 ## What's still hard
 
 A research piece that doesn't list the unsolved problems isn't honest. The hard parts of Islamic-app typography we're still working through:
 
 1. **High-DPI image scaling.** Page-image mushafs at modern phone resolutions are large. Shipping every density variant inflates the download. Generating them on the fly costs CPU and memory. There is no clean answer.
-2. **Word-level audio sync, reciter by reciter.** Ayah-level audio is straightforward: the file maps to one ayah, played end-to-end. Word-level sync — highlighting each word as the reciter says it — needs an accurate timestamp for every word of every ayah, for that specific recording. Nedaa ships word-level read-along using QUL's timing data, but the data exists for some recitations and not others, so the reader degrades to verse-level highlighting where timings are missing. Closing that gap is not a rendering problem; it is a dataset problem, and it is the one we expect to be working on longest.
+2. **Word-level audio sync, reciter by reciter.** Ayah-level audio is easy: the file maps to one ayah and plays end to end. Word-level sync, where the app highlights each word as the reciter says it, needs an accurate timestamp for every word of every ayah in that specific recording. Nedaa ships word-level read-along on QUL's timing data. QUL has that data for some recitations and not others, so the reader falls back to verse-level highlighting wherever the timings are missing. Closing the gap means finding or producing timing data for more reciters, which is slower work than any amount of rendering.
 3. **Right-to-left layout for mixed Arabic+Latin UI.** The whole app supports RTL, but specific edge cases (timestamps in chat-style logs, percentage indicators, version numbers) need bidi-text handling that platform components don't always get right.
-4. **Madhhab-neutral copy in a script-rich UI.** Every Arabic Islamic word the UI surfaces (Salah, Athan, Iqama, Sa'i, Tawaf) is also a typographic decision — bold or regular weight, with or without diacritics, transliterated or in script. Getting this consistent across five locales is its own work.
+4. **Madhhab-neutral copy in a script-rich UI.** Every Arabic Islamic word the UI surfaces (Salah, Athan, Iqama, Sa'i, Tawaf) is also a typographic decision: bold or regular weight, with or without diacritics, transliterated or in script. Getting this consistent across five locales is its own work.
 
 ## Why this matters beyond Nedaa
 
 The typographic decisions inside a Quran app aren't visible to most users, but they're load-bearing. **An app that picks Imlaei text without telling you is making an editorial choice on your behalf. An app that ships only one QCF version is silently picking which calligrapher's work you read. An app that renders text at low fidelity is choosing convenience over the printed tradition.**
 
-Most of these decisions are defensible — none of the options is *wrong* — but they are decisions, and they belong in the open where users can evaluate them. That's the job of writing this piece.
+Most of these decisions are defensible, and none of the options is *wrong*. They are still decisions, and they belong in the open where you can evaluate them. That's the job of writing this piece.
 
 Nedaa's source code is at `github.com/NedaaDevs/nedaa`. The Quran reader's design document is at `docs/plans/2026-03-14-quran-mushaf-reader-design.md` in that repo. Anything we got wrong here, you can audit; anything we describe, you can verify.
 
