@@ -125,7 +125,7 @@ export type StatsSnapshot = {
     style?: string;
     plays: StatsCounts;
   }[];
-  /** Unreleased Quran reader feature — present in the payload, never rendered. */
+  /** Mushaf editions installed, keyed by the edition's QCF version (`v1`, `v2`, `v4`). */
   editionDownloads: { version: string; downloads: StatsCounts }[];
   requestsByModule: Record<string, number>;
   intrusionAttempts: number;

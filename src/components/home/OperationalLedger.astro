@@ -24,6 +24,16 @@ const labels = {
   recitations: t('ledger.recitations'),
   audio: t('ledger.audio'),
   intrusions: t('ledger.intrusions'),
+  editions: t('ledger.editions'),
+  edition: t('ledger.edition'),
+  downloads: t('ledger.downloads'),
+  // Keyed by the QCF version the stats payload reports; an unknown version
+  // falls back to its raw id rather than rendering an empty cell.
+  editionNames: {
+    v1: t('ledger.edition.v1'),
+    v2: t('ledger.edition.v2'),
+    v4: t('ledger.edition.v4'),
+  },
   asOf: t('ledger.asOf'),
   note: t('ledger.note'),
   empty: t('ledger.empty'),

@@ -26,6 +26,10 @@
     recitations: string;
     audio: string;
     intrusions: string;
+    editions: string;
+    edition: string;
+    downloads: string;
+    editionNames: Record<string, string>;
     asOf: string;
     note: string;
     empty: string;
@@ -123,6 +127,20 @@
   });
   const reciterTotal = $derived(reciterRows.reduce((s, r) => s + r.plays, 0) || 1);
 
+  type EditionRow = { name: string; downloads: number };
+  // Ranked on lifetime installs for the same reason the reciter rows are: the
+  // per-window counts use calendar buckets that don't line up with this card's
+  // rolling 24h/7d/30d tabs.
+  const editionRows = $derived<EditionRow[]>(
+    (snapshot?.editionDownloads ?? [])
+      .map((e) => ({
+        name: labels.editionNames[e.version] ?? e.version,
+        downloads: e.downloads.all,
+      }))
+      .sort((a, b) => b.downloads - a.downloads),
+  );
+  const editionTotal = $derived(editionRows.reduce((s, r) => s + r.downloads, 0) || 1);
+
   const generatedAt = $derived.by(() => {
     const raw = snapshot?.generatedAt;
     if (!raw) return null;
@@ -214,6 +232,28 @@
             </div>
             <span class="tnum num">{share.format(r.plays / reciterTotal)}</span>
             <span class="tnum num">{exact.format(r.plays)}</span>
+          </div>
+        {/each}
+      </div>
+    {/if}
+
+    {#if editionRows.length > 0}
+      <div class="block">
+        <div class="block-head"><span class="marginalia">{labels.editions}</span></div>
+        <div class="ep-row ep-head">
+          <span>{labels.edition}</span>
+          <span>{labels.share}</span>
+          <span>{labels.percent}</span>
+          <span>{labels.downloads}</span>
+        </div>
+        {#each editionRows as e (e.name)}
+          <div class="ep-row">
+            <span class="mod">{e.name}</span>
+            <div class="bar">
+              <div class="bar-fill" style="inline-size:{(e.downloads / editionTotal) * 100}%"></div>
+            </div>
+            <span class="tnum num">{share.format(e.downloads / editionTotal)}</span>
+            <span class="tnum num">{exact.format(e.downloads)}</span>
           </div>
         {/each}
       </div>
