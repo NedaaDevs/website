@@ -1,9 +1,9 @@
 export default {
   // site
   'site.brand': 'Nedaa',
-  'site.title': 'Nedaa — Private prayer times, real Fajr alarm, daily athkar',
+  'site.title': 'Nedaa — Private prayer times, real Fajr alarm, Quran reader',
   'site.description':
-    'A quiet, private, free, open-source prayer-times companion: accurate timings, a real Fajr alarm, daily athkar, Qibla, and Hijri date — no ads, accounts, or trackers.',
+    'A quiet, private, free, open-source Islamic companion: accurate prayer times, a real Fajr alarm, the Madinah Mushaf with read-along recitation, daily athkar, Qibla, and Hijri date — no ads, accounts, or trackers.',
   // nav
   'nav.home': 'Home',
   'nav.privacy': 'Privacy',
@@ -26,7 +26,7 @@ export default {
   'hero.title': 'The call to prayer,',
   'hero.title2': 'dignified by design.',
   'hero.lead':
-    'Nedaa is a quiet, private prayer-times companion. Accurate timings, a real Fajr alarm, beautiful widgets, daily Athkar, Qibla, Hijri date — and not a single ad, account, or tracker.',
+    'Nedaa is a quiet, private prayer-times companion. Accurate timings, a real Fajr alarm, the Madinah Mushaf with read-along recitation, daily Athkar, Qibla, Hijri date — and not a single ad, account, or tracker.',
   'hero.fact': 'Free · Open source · No accounts',
   'hero.shipped': 'shipped 4 days ago',
   'hero.dateline.city': 'Riyadh',
@@ -71,8 +71,8 @@ export default {
   'cap.umrah.t': 'Umrah guide',
   'cap.umrah.b': 'A clear, step-by-step companion for the rituals of ʿUmrah.',
   'cap.quran.t': 'Quran reader',
-  'cap.quran.b': 'Image-based mushaf with theming and ayah highlighting.',
-  'cap.quran.tag': 'In development',
+  'cap.quran.b':
+    'Three Madinah Mushaf editions, or a text mode that needs no download — with recitation that highlights the word as it is read.',
   // alarm
   'alarm.section': 'Notifications · Alarms',
   'alarm.title': 'A Fajr alarm that actually wakes you.',
@@ -174,6 +174,12 @@ export default {
   'ledger.recitations': 'Recitations',
   'ledger.audio': 'Audio served',
   'ledger.intrusions': 'Probes blocked',
+  'ledger.editions': 'Mushaf editions installed',
+  'ledger.edition': 'Edition',
+  'ledger.downloads': 'Installs',
+  'ledger.edition.v1': 'Madinah Mushaf 1405',
+  'ledger.edition.v2': 'Madinah Mushaf 1420',
+  'ledger.edition.v4': 'Madinah Mushaf 1439',
   'ledger.asOf': 'Figures as of',
   'ledger.note': 'Spam routes filtered. No IPs, headers, or query bodies retained.',
   'ledger.empty': 'No data yet.',
@@ -249,7 +255,7 @@ export default {
   'pp.do.3':
     'Schedules notifications and the Fajr alarm via the operating system. The OS plays them.',
   'pp.do.4':
-    'Fetches a year of prayer times on first launch. Works offline otherwise — except when you’re browsing the Quran.',
+    'Fetches a year of prayer times on first launch, and downloads a mushaf or a reciter when you ask for one. Everything you have downloaded then works offline.',
   'pp.do.5':
     'The only exception is crash data: automatic reports from your app store (like any app), and in-app diagnostic logs — which stay on your device unless you choose to send them to support.',
   'pp.doesnot': 'What Nedaa does not',

@@ -14,7 +14,7 @@ hreflang:
 
 # Nedaa vs Muslim Pro: a free, ad-free, open-source alternative
 
-Muslim Pro is the biggest app in this category, and on features it is genuinely extensive — Quran reader, community, media, and more. If that breadth is what you want, it's a reasonable choice. This page compares the two apps on a narrower set of questions: ads, pricing, what each app's own App Store privacy label declares, and whether you can audit any of it. Everything below is sourced and date-stamped; the framework behind these dimensions is explained in our [category comparison](/docs/comparison-privacy-ads-openness).
+Muslim Pro is the biggest app in this category, and on features it is genuinely extensive — community, media, and more. If that breadth is what you want, it's a reasonable choice. This page compares the two apps on a narrower set of questions: ads, pricing, what each app's own App Store privacy label declares, and whether you can audit any of it. Everything below is sourced and date-stamped; the framework behind these dimensions is explained in our [category comparison](/docs/comparison-privacy-ads-openness).
 
 ## The short answer
 

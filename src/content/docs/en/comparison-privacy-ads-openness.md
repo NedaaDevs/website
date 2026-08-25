@@ -71,7 +71,7 @@ Islamic apps make consequential choices that the user can't see: which Quran tex
 - Are the licence terms of those upstream sources respected (e.g. CC-BY attribution for Tanzil)?
 - Is the app source-code open? Can a knowledgeable user independently audit how data is handled?
 
-**Where Nedaa sits:** Sources named publicly. Athkar from **Hisn al-Muslim**. Prayer-time computation is provider-abstracted at the API layer; the **Aladhan API** is currently the only implemented upstream provider. (When the Quran reader ships: text from **Tanzil Project** under CC-BY 3.0 with attribution preserved, audio from **EveryAyah.com**, metadata from the **Quranic Universal Library (QUL) by Tarteel AI**, page imagery from **QCF / King Fahd Quran Complex** font work.) All disclosed in-app and on this site. Source code open at `github.com/NedaaDevs/nedaa`.
+**Where Nedaa sits:** Sources named publicly. Athkar from **Hisn al-Muslim**. Prayer-time computation is provider-abstracted at the API layer; the **Aladhan API** is currently the only implemented upstream provider. In the Quran reader: text from the **Tanzil Project** under CC-BY 3.0 with attribution preserved; the UthmanicHafs font and Madinah Mushaf page layout from the **King Fahd Glorious Qur'an Printing Complex**; verse divisions and recitation timing from the **Quranic Universal Library (QUL) by Tarteel**; recitation audio from **QuranicAudio** and **quran.com**, mirrored via QUL. All disclosed in-app and on this site. Source code open at `github.com/NedaaDevs/nedaa`.
 
 ## The summary table
 

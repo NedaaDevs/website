@@ -1,17 +1,18 @@
 # Nedaa | نداء
 
-> Free, open-source, privacy-first prayer-times and Islamic-companion app for iOS and Android. No data collection. No selling. No ads. No accounts. No paywalls. No premium tier.
+> Free, open-source, privacy-first prayer-times, Quran-reader and Islamic-companion app for iOS and Android. No data collection. No selling. No ads. No accounts. No paywalls. No premium tier.
 
-Nedaa (Arabic: نداء, "the call" — a reference to the Adhan) is built around accurate prayer times, real OS-level Fajr alarms, daily Athkar from the Hisn al-Muslim dataset, Qibla, Hijri tools, an Umrah guide, a Qada (fasting) tracker, and a Quran reader (in active development). It ships on iOS, Google Play (Android with GMS), and Huawei AppGallery (Android with HMS — a deliberately maintained build for Huawei devices without Google Mobile Services).
+Nedaa (Arabic: نداء, "the call" — a reference to the Adhan) is built around accurate prayer times, real OS-level Fajr alarms, a Quran reader carrying three Madinah Mushaf editions with word-level read-along recitation, daily Athkar from the Hisn al-Muslim dataset, Qibla, Hijri tools, an Umrah guide, and a Qada (fasting) tracker. It ships on iOS, Google Play (Android with GMS), and Huawei AppGallery (Android with HMS — a deliberately maintained build for Huawei devices without Google Mobile Services).
 
-The app is open source at https://github.com/NedaaDevs/nedaa under [its license](https://github.com/NedaaDevs/nedaa/blob/master/LICENSE). The Tanzil Quran text used in the Quran reader is separately licensed under CC-BY 3.0; attribution is preserved in the app's About screen.
+The app is open source at https://github.com/NedaaDevs/nedaa under [its license](https://github.com/NedaaDevs/nedaa/blob/master/LICENSE). The Tanzil Quran text used in the Quran reader is separately licensed under CC-BY 3.0; attribution is preserved in the app's in-app Acknowledgements screen.
 
 ## Pillar feature pages
 
-- [Prayer times](https://nedaa.dev/docs/prayer-times): 22 calculation methods (Muslim World League, ISNA, Umm al-Qura, Karachi, Egyptian, Diyanet, JAKIM, Kemenag, Singapore MUIS, and more); provider-abstracted at the API layer with Aladhan as the currently-implemented upstream; both Hanafi and standard Asr juristic schools; high-latitude adjustment; works offline after first sync.
+- [Prayer times](https://nedaa.dev/docs/prayer-times): 23 calculation methods plus a fully custom option (Muslim World League, ISNA, Umm al-Qura, Karachi, Egyptian, Diyanet, JAKIM, Kemenag, Singapore MUIS, and more); provider-abstracted at the API layer with Aladhan as the currently-implemented upstream; both Hanafi and standard Asr juristic schools; high-latitude adjustment; works offline after first sync.
 - [Prayer alarm](https://nedaa.dev/docs/prayer-alarm): real OS-level prayer alarms (Fajr, Jummah, and custom types) — Apple AlarmKit on iOS 26+ (alarm feature requires iOS 26; not available on earlier iOS), native Android foreground alarm service. Optional wake-up challenges (tap or math). Custom Athan sound per alarm type. Bypasses Do Not Disturb.
 - [Athkar](https://nedaa.dev/docs/athkar): morning, evening, and occasion-based supplications from the Hisn al-Muslim dataset (Sa'id ibn Ali ibn Wahaf al-Qahtani). Multiple reciter audio voices. Focus-mode reader. Custom user-added athkar. Gentle (non-gamified) habit tracking with pause/resume.
 - [Qada fasting tracker](https://nedaa.dev/docs/qada-tracker): counts down missed Ramadan fasts with a Ramadan-anchored reminder for the canonical "make up before next Ramadan" deadline. Privacy-mode hide. For fasting qada only — does not track missed prayers.
+- [Quran reader](https://nedaa.dev/docs/quran-reader): three Madinah Mushaf editions from the King Fahd Glorious Qur'an Printing Complex — 1405 (QCF v1), 1420 (QCF v2), 1439 (QCF v4 with tajweed colour) — on the standard 604-page layout, plus a download-free text mode rendering the Tanzil Uthmani text at 20–48pt. Read-along recitation highlighting the whole verse or the individual word, in Murattal/Mujawwad/Tajweed styles, with sleep timer and offline audio download. Bookmarks, highlights with user-named colours, mutashabihat (similar-verse) comparison with user memory aids, and a built-in reference for tajweed colours, waqf stop signs, and prostration verses. Optional Friday Surah Al-Kahf reminder. Offline once downloaded.
 
 ## Bilingual (Arabic) versions
 
@@ -19,18 +20,20 @@ The app is open source at https://github.com/NedaaDevs/nedaa under [its license]
 - [منبه الصلاة](https://nedaa.dev/ar/docs/prayer-alarm): النسخة العربية لصفحة منبه صلاة الفجر.
 - [الأذكار](https://nedaa.dev/ar/docs/athkar): النسخة العربية لصفحة الأذكار.
 - [قضاء الصيام](https://nedaa.dev/ar/docs/qada-tracker): النسخة العربية لصفحة متتبع قضاء الصيام.
+- [المصحف](https://nedaa.dev/ar/docs/quran-reader): النسخة العربية لصفحة المصحف.
 
 ## Comparison and research
 
 - [How Islamic prayer-time apps differ on privacy, ads, and openness](https://nedaa.dev/docs/comparison-privacy-ads-openness): category-level comparison framework — four dimensions (data collection, advertising, pricing, source transparency) with "questions to ask of any app you're considering." Brand-voice safe; no head-to-head.
+- [Why digital Quran apps look the way they do](https://nedaa.dev/docs/islamic-typography) ([AR](https://nedaa.dev/ar/docs/islamic-typography)): a guide to Islamic typography on small screens — why mushaf pages ship as images rather than rendered text, the Uthmani vs Imlaei rasm question, hybrid rendering with a per-edition glyph-bounds database, diacritic-insensitive FTS5 search, and Arabic/Latin typeface pairing. Written from inside the codebase.
 
 ## Upstream data sources
 
-- [Aladhan API](https://aladhan.com): currently-implemented prayer-time calculation upstream. All 22 calculation methods Nedaa exposes today come from Aladhan. Nedaa's prayer-time computation is provider-abstracted at the API layer; the architecture supports adding additional providers without app updates.
-- [Tanzil Project](https://tanzil.net): Quran text in Uthmani script, CC-BY 3.0. Attribution to "Tanzil Project" preserved in Nedaa's About screen as required by the license.
-- [EveryAyah.com](https://everyayah.com): per-ayah Quran reciter audio (planned for the Quran reader's audio layer).
-- [Quranic Universal Library (QUL)](https://qul.tarteel.ai) by Tarteel AI: Quran metadata and word-timing reference.
-- King Fahd Quran Complex (KFQC), Madinah: page-image editions (QCF v1, v2, v4) of the Madinah Mushaf.
+- [Aladhan API](https://aladhan.com): currently-implemented prayer-time calculation upstream. All 23 calculation methods Nedaa exposes today come from Aladhan. Nedaa's prayer-time computation is provider-abstracted at the API layer; the architecture supports adding additional providers without app updates.
+- [Tanzil Project](https://tanzil.net): Quran text in Uthmani script, CC-BY 3.0. Attribution to "Tanzil Project" preserved in Nedaa's in-app Acknowledgements screen as required by the license.
+- [QuranicAudio](https://quranicaudio.com) and [quran.com](https://quran.com): Quran reciter audio, mirrored via QUL. Credited in Nedaa's in-app Acknowledgements screen.
+- [Quranic Universal Library (QUL)](https://qul.tarteel.ai) by Tarteel: verse divisions and recitation word-timing used by the Quran reader's read-along.
+- King Fahd Glorious Qur'an Printing Complex (KFGQPC), Madinah: the UthmanicHafs font and the Madinah Mushaf page layout, shipped as the QCF v1 / v2 / v4 page-image editions.
 - Hisn al-Muslim by Sa'id ibn Ali ibn Wahaf al-Qahtani: source dataset for athkar.
 
 ## Distribution

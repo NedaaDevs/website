@@ -25,6 +25,7 @@ export default
         "Qibla compass",
         "Hijri date and converter",
         "Umrah step-by-step guide",
+        "Quran reader — three Madinah Mushaf editions with read-along recitation",
         "iOS and Android home/lock-screen widgets",
         "Huawei Mobile Services build for non-GMS Android"
       ]
