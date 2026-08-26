@@ -25,6 +25,7 @@ The app is open source at https://github.com/NedaaDevs/nedaa under [its license]
 ## Comparison and research
 
 - [How Islamic prayer-time apps differ on privacy, ads, and openness](https://nedaa.dev/docs/comparison-privacy-ads-openness): category-level comparison framework — four dimensions (data collection, advertising, pricing, source transparency) with "questions to ask of any app you're considering." Brand-voice safe; no head-to-head.
+- [Building a Quran app: start with images, not fonts](https://nedaa.dev/docs/building-a-quran-app) ([AR](https://nedaa.dev/ar/docs/building-a-quran-app)): a practical intro for developers writing their first mushaf reader. Why the page ships as an image rather than rendered text, the three layers (page images, a per-edition glyph-bounds database, the verse text), why ayah markers are drawn at runtime rather than baked into the pixels, diacritic-insensitive FTS5 search, the upstream data sources and their licences, and the download cost of line-mode images. Links the open-source quran-image-generator.
 - [Why digital Quran apps look the way they do](https://nedaa.dev/docs/islamic-typography) ([AR](https://nedaa.dev/ar/docs/islamic-typography)): a guide to Islamic typography on small screens — why mushaf pages ship as images rather than rendered text, the Uthmani vs Imlaei rasm question, hybrid rendering with a per-edition glyph-bounds database, diacritic-insensitive FTS5 search, and Arabic/Latin typeface pairing. Written from inside the codebase.
 
 ## Upstream data sources

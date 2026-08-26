@@ -8,6 +8,7 @@ import alarmReliability from './alarm-reliability-methodology';
 import athkarBenchmark from './athkar-dataset-benchmark';
 import quranReader from './quran-reader';
 import islamicTypography from './islamic-typography';
+import buildingAQuranApp from './building-a-quran-app';
 
 export const jsonLdBySlug: Record<string, unknown> = {
   'prayer-times': prayerTimes,
@@ -20,4 +21,5 @@ export const jsonLdBySlug: Record<string, unknown> = {
   'athkar-dataset-benchmark': athkarBenchmark,
   'quran-reader': quranReader,
   'islamic-typography': islamicTypography,
+  'building-a-quran-app': buildingAQuranApp,
 };
