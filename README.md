@@ -1,3 +1,4 @@
+[![CI](https://github.com/NedaaDevs/website-v2/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/NedaaDevs/website-v2/actions/workflows/ci.yml)
 [![Deploy](https://github.com/NedaaDevs/website-v2/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/NedaaDevs/website-v2/actions/workflows/deploy.yml)
 
 # nedaa-website
