@@ -22,6 +22,14 @@
 
   const cur = $derived(screens[idx] ?? screens[0]);
 
+  // Every slide is stacked in the viewport, so lazy loading alone would still
+  // fetch the whole set on load. Only slides up to `reach` carry a src, and it
+  // never moves back down — a slide you have already seen stays loaded.
+  let reach = $state(1);
+  const carry = (i: number) => {
+    if (i + 1 > reach) reach = Math.min(N - 1, i + 1);
+  };
+
   onMount(() => {
     if (N < 2) return;
     const desktop = window.matchMedia('(min-width: 880px)').matches;
@@ -42,7 +50,10 @@
       if (pinned <= 0) return;
       const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / pinned));
       const ni = Math.min(N - 1, Math.floor(p * N));
-      if (ni !== idx) idx = ni;
+      if (ni !== idx) {
+        idx = ni;
+        carry(ni);
+      }
     };
     const onScroll = () => {
       if (ticking) return;
@@ -61,6 +72,7 @@
 
   const jump = (i: number) => {
     if (!trackEl) return;
+    carry(i);
     const top = window.scrollY + trackEl.getBoundingClientRect().top;
     const dist = trackEl.offsetHeight - window.innerHeight;
     window.scrollTo({ top: top + (dist * i) / (N - 1), behavior: 'smooth' });
@@ -76,8 +88,8 @@
             <div class="slide" class:active={i === idx}>
               <img
                 class="phone-img phone-img--light"
-                src={s.light.src}
-                srcset={s.light.srcset}
+                src={i <= reach ? s.light.src : undefined}
+                srcset={i <= reach ? s.light.srcset : undefined}
                 sizes="340px"
                 width={s.w}
                 height={s.h}
@@ -87,8 +99,8 @@
               />
               <img
                 class="phone-img phone-img--dark"
-                src={s.dark.src}
-                srcset={s.dark.srcset}
+                src={i <= reach ? s.dark.src : undefined}
+                srcset={i <= reach ? s.dark.srcset : undefined}
                 sizes="340px"
                 width={s.w}
                 height={s.h}

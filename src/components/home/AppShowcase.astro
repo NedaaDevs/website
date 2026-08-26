@@ -43,7 +43,12 @@ const screens = slugs
   })
   .filter((s): s is NonNullable<typeof s> => s !== null);
 
+// The plate caps every shot at the `.phone-img` max-width below, so the first
+// width is the widest a 1x screen ever paints; the second covers 2x.
+const GRID_WIDTHS = [264, 528];
+
 // Optimised image data for the scroll-story island (Svelte can't take <Image>).
+// The story sizes by height instead, so it needs the taller ladder.
 const STORY_WIDTHS = [340, 520, 760];
 const story = await Promise.all(
   screens.map(async (s) => {
@@ -79,6 +84,16 @@ const story = await Promise.all(
       <p class="body lead-body">{t('show.desc')}</p>
     </div>
 
+    {/* The media query that hides this plate assumes the island will replace it.
+        Without JS nothing does, so the grid comes back. */}
+    <noscript>
+      <style is:inline>
+        .plate-fallback {
+          display: block !important;
+        }
+      </style>
+    </noscript>
+
     {/* Ruled plate of phones — also the fallback for mobile / reduced-motion / no-JS */}
     <div class="plate plate-fallback">
       <div aria-hidden="true" class="ledger"></div>
@@ -91,8 +106,8 @@ const story = await Promise.all(
                   class="phone-img phone-img--light"
                   src={s.light}
                   alt={s.title}
-                  widths={[340, 520, 760]}
-                  sizes="340px"
+                  widths={GRID_WIDTHS}
+                  sizes={`${GRID_WIDTHS[0]}px`}
                   format="webp"
                   loading="lazy"
                   decoding="async"
@@ -101,8 +116,8 @@ const story = await Promise.all(
                   class="phone-img phone-img--dark"
                   src={s.dark}
                   alt={s.title}
-                  widths={[340, 520, 760]}
-                  sizes="340px"
+                  widths={GRID_WIDTHS}
+                  sizes={`${GRID_WIDTHS[0]}px`}
                   format="webp"
                   loading="lazy"
                   decoding="async"
@@ -161,6 +176,11 @@ const story = await Promise.all(
      static grid steps aside. No JS / mobile / reduced-motion keeps the grid. */
   :global(.has-scroll) .plate-fallback {
     display: none;
+  }
+  @media (min-width: 880px) and (prefers-reduced-motion: no-preference) {
+    .plate-fallback {
+      display: none;
+    }
   }
   /* faint ledger rules behind the shots */
   .ledger {
