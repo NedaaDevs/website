@@ -23,11 +23,12 @@
   "packageManager": "bun@1.2.21",
   "trustedDependencies": ["esbuild", "sharp"],
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/svelte": "^8.1.0",
-    "astro": "^6.3.1",
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^9.0.1",
+    "@fontsource-variable/asap": "^5.2.9",
+    "astro": "^7.2.7",
     "motion": "^12.23.20",
     "svelte": "^5.43.6",
     "typescript": "^5.7.3"
