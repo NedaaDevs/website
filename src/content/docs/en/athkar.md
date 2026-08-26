@@ -46,7 +46,9 @@ Your routine may include athkar that Hisn al-Muslim does not carry: a personal d
 
 ### Habit tracking, gently
 
-Nedaa tracks your daily completion as a streak, current and longest. The streak exists to **support a habit, not to gamify worship.** You can pause and resume streaks (illness, travel, post-natal recovery, anything), and validation is forgiving rather than punishing. There are no badges, no leaderboards, and no "level up" framing. The streak is a quiet number that's there if it helps you and out of the way if it doesn't.
+Nedaa tracks your daily completion as a streak, current and longest. The streak exists to **support a habit, not to gamify worship.** You can pause and resume streaks (illness, travel, post-natal recovery, anything), and validation is forgiving rather than punishing.
+
+There are no badges, no leaderboards, and no "level up" framing. The streak is a quiet number that's there if it helps you and out of the way if it doesn't.
 
 ### Per-prayer reminders
 

@@ -96,7 +96,9 @@ To stay honest about scope:
 
 ## Why "100%" is not the only thing that matters
 
-A 100% coverage app and a 30% coverage app are different products serving different users. **The benchmark exists to make the difference visible, not to declare a winner.** A user who only wants morning and evening adhkar and prefers a small, focused app may legitimately prefer a low-coverage app with a clean UI. A user who wants the full daily-occasion catalogue (illness duas, travel duas, household duas, financial duas) is poorly served by an app that only includes 50 supplications.
+A 100% coverage app and a 30% coverage app are different products serving different users. **The benchmark exists to make the difference visible, not to declare a winner.** A user who only wants morning and evening adhkar and prefers a small, focused app may legitimately prefer a low-coverage app with a clean UI.
+
+A user who wants the full daily-occasion catalogue (illness duas, travel duas, household duas, financial duas) is poorly served by an app that only includes 50 supplications.
 
 Coverage is a fact that should be visible at install time, not a discovery the user makes after months of use.
 

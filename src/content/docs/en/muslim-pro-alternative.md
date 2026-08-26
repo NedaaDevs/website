@@ -14,7 +14,9 @@ hreflang:
 
 # Nedaa vs Muslim Pro: a free, ad-free, open-source alternative
 
-Muslim Pro is the biggest app in this category, and on features it is extensive: community, media, and more. If that breadth is what you want, it's a reasonable choice. This page compares the two apps on a narrower set of questions: ads, pricing, what each app's own App Store privacy label declares, and whether you can audit any of it. Everything below is sourced and date-stamped; the framework behind these dimensions is explained in our [category comparison](/docs/comparison-privacy-ads-openness).
+Muslim Pro is the biggest app in this category, and on features it is extensive: community, media, and more. If that breadth is what you want, it's a reasonable choice. This page compares the two apps on a narrower set of questions: ads, pricing, what each app's own App Store privacy label declares, and whether you can audit any of it.
+
+Everything below is sourced and date-stamped; the framework behind these dimensions is explained in our [category comparison](/docs/comparison-privacy-ads-openness).
 
 ## The short answer
 
@@ -43,15 +45,23 @@ Apple requires every developer to declare what their app collects. These declara
 
 **Muslim Pro's label** (as declared by its developer, July 2026) lists Location and Identifiers under **"Data Used to Track You"**, and Location, contact info, user content, and identifiers under **"Data Linked to You"**, with stated purposes that include third-party advertising.
 
-**Nedaa's label** declares nothing under "Data Used to Track You" and nothing under "Data Linked to You". Under "Data Not Linked to You" it declares coarse location — used to compute your prayer times. There is no crash-reporting or analytics SDK in the app: diagnostic logs are written locally on your device, pruned automatically, and reach us only if you choose to share a report. We state this plainly rather than claiming "no data at all": the difference that matters is that nothing is used for tracking or advertising, and nothing is tied to who you are. There is no account, so there is nothing to tie it to.
+**Nedaa's label** declares nothing under "Data Used to Track You" and nothing under "Data Linked to You". Under "Data Not Linked to You" it declares coarse location — used to compute your prayer times. There is no crash-reporting or analytics SDK in the app: diagnostic logs are written locally on your device, pruned automatically, and reach us only if you choose to share a report.
+
+We state this plainly rather than claiming "no data at all". The difference that matters is that nothing is used for tracking or advertising, and nothing is tied to who you are. There is no account, so there is nothing to tie it to.
 
 Because Nedaa is open source, you need not trust the label either. The code behind it is public.
 
 ## The 2020 location-data reporting, fairly stated
 
-In November 2020, Vice Motherboard [reported](https://www.vice.com/en/article/muslim-pro-location-data-military-xmode/) that Muslim Pro had been sharing granular user location data with X-Mode, a data broker whose clients included U.S. military contractors. Muslim Pro [denied selling data to the U.S. military](https://www.aljazeera.com/news/2020/11/18/muslim-pro-app-denies-selling-user-data-to-us-military) and announced it was immediately terminating its relationships with all data partners, including X-Mode. In 2024, the U.S. FTC [banned X-Mode's successor Outlogic from selling sensitive location data](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data) — an action against the broker, not against Muslim Pro.
+In November 2020, Vice Motherboard [reported](https://www.vice.com/en/article/muslim-pro-location-data-military-xmode/) that Muslim Pro had been sharing granular user location data with X-Mode, a data broker whose clients included U.S. military contractors.
 
-To be clear about what this does and doesn't show: it is a 2020 event, Muslim Pro says it ended the practice, and there is no public evidence it shares data with brokers today. The reason we include it is structural, not accusatory. When an app's data pipeline is closed, users find out about arrangements like this only if a journalist does; the app's current label still declares tracking and third-party advertising purposes, and that is the part you can verify yourself today. An open-source app makes the same question auditable by anyone, at any time.
+Muslim Pro [denied selling data to the U.S. military](https://www.aljazeera.com/news/2020/11/18/muslim-pro-app-denies-selling-user-data-to-us-military) and announced it was immediately terminating its relationships with all data partners, including X-Mode.
+
+In 2024, the U.S. FTC [banned X-Mode's successor Outlogic from selling sensitive location data](https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data) — an action against the broker, not against Muslim Pro.
+
+To be clear about what this does and doesn't show: it is a 2020 event, Muslim Pro says it ended the practice, and there is no public evidence it shares data with brokers today. The reason we include it is structural, not accusatory.
+
+When an app's data pipeline is closed, users find out about arrangements like this only if a journalist does; the app's current label still declares tracking and third-party advertising purposes, and that is the part you can verify yourself today. An open-source app makes the same question auditable by anyone, at any time.
 
 ## What about Pillars?
 

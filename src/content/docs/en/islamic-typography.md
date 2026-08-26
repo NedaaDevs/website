@@ -28,13 +28,17 @@ If you're a software engineer this looks backwards. Why ship images when you hav
 
 ### Reason 1 — Memorisers rely on page-end positions
 
-Most people who memorise the Quran (huffaz, singular hafiz/hafiza) learn it from the **Madinah Mushaf layout**, the standard 15-lines-per-page printing that the King Fahd Quran Complex in Madinah produces and distributes. After years of memorisation, the visual position of an ayah on its page becomes part of the memory. The end of page 5 *is* the end of a specific ayah. The fourth line of page 117 *contains* a specific phrase.
+Most people who memorise the Quran (huffaz, singular hafiz/hafiza) learn it from the **Madinah Mushaf layout**, the standard 15-lines-per-page printing that the King Fahd Quran Complex in Madinah produces and distributes.
+
+After years of memorisation, the visual position of an ayah on its page becomes part of the memory. The end of page 5 *is* the end of a specific ayah. The fourth line of page 117 *contains* a specific phrase.
 
 If a digital app reflows text to fit the user's font size, those positional anchors break. The hafiz can no longer use the page as a memory aid. **For an app whose target audience includes huffaz, reflowing the text is a worse trade-off than the cost of shipping image bundles.**
 
 ### Reason 2 — Calligraphic fidelity at small sizes
 
-Arabic script asks a lot of a renderer: ligature joins, contextual letter forms, diacritic stacking, and the *tashkīl* sitting over the letter it belongs to. At the dense 15-lines-per-page layout on a 6-inch screen, a font struggles with all of it. The printed Madinah Mushaf is the work of master calligraphers (Uthman Taha being the most prominent, with editions calligraphed in the 1980s onward). Reproduce that from a font and you are competing with the calligrapher. The image is *the calligrapher's work, photographed.*
+Arabic script asks a lot of a renderer: ligature joins, contextual letter forms, diacritic stacking, and the *tashkīl* sitting over the letter it belongs to. At the dense 15-lines-per-page layout on a 6-inch screen, a font struggles with all of it.
+
+The printed Madinah Mushaf is the work of master calligraphers (Uthman Taha being the most prominent, with editions calligraphed in the 1980s onward). Reproduce that from a font and you are competing with the calligrapher. The image is *the calligrapher's work, photographed.*
 
 ### Reason 3 — Diacritics, line-breaking, and the rasm
 
@@ -55,9 +59,13 @@ Pure image-based mushafs have their own cost: **the app can't react to where on 
 
 The technique that has emerged in serious Quran apps is **hybrid rendering**: the page background is a high-fidelity image, and a separate, precomputed map says where every glyph sits on it. The app knows the coordinates, so it draws an interactive region at the right on-screen position and uses it as a tap or highlight target.
 
-Nedaa's reader does this with a per-edition bounds database. Alongside each edition's page images we ship a `bounds-<version>.db` SQLite file holding, for every glyph, its surah, ayah, line number, x-offset, and width. To make an ayah tappable, or to highlight it during read-along, the reader queries that ayah's glyphs, groups them by line, and reduces each line to one rectangle. The page stays an image, so it keeps the calligraphy and the memorisation positions, and the app can still tell where you tapped.
+Nedaa's reader does this with a per-edition bounds database. Alongside each edition's page images we ship a `bounds-<version>.db` SQLite file holding, for every glyph, its surah, ayah, line number, x-offset, and width.
 
-The tradeoff is real, and the work is fiddly. Regenerate the page images and you must regenerate the bounds with them, versioned together, or every highlight lands off by a few pixels. The reader computes line height from the page image's own pixel height divided by fifteen, since a hardcoded value drifts across screen densities. When an ayah's glyphs are missing, the reader falls back to rendered text instead of drawing a box in the wrong place. Search runs against a separate text database, since you cannot grep an image, and a hit has to navigate you back to the right rectangle on the right page.
+To make an ayah tappable, or to highlight it during read-along, the reader queries that ayah's glyphs, groups them by line, and reduces each line to one rectangle. The page stays an image, so it keeps the calligraphy and the memorisation positions, and the app can still tell where you tapped.
+
+The tradeoff is real, and the work is fiddly. Regenerate the page images and you must regenerate the bounds with them, versioned together, or every highlight lands off by a few pixels. The reader computes line height from the page image's own pixel height divided by fifteen, since a hardcoded value drifts across screen densities.
+
+When an ayah's glyphs are missing, the reader falls back to rendered text instead of drawing a box in the wrong place. Search runs against a separate text database, since you cannot grep an image, and a hit has to navigate you back to the right rectangle on the right page.
 
 ## The QCF page-image tradition
 

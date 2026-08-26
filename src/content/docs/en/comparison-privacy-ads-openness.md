@@ -37,9 +37,13 @@ What an app _collects_ and what an app _needs_ are two different things. A praye
 
 Advertising in religious apps is a different proposition from advertising in a productivity tool or a game. Two distinct concerns:
 
-**What gets shown.** Worship asks for presence; ads are designed to break it. An interstitial between Athkar entries, a banner under the Qibla compass, a video before a Quran reader — each one trades a moment of the user's attention to the highest bidder. Whether this is acceptable inside a worship surface is, ultimately, an aesthetic and ethical judgment users have to make for themselves. Our judgment is that it is not.
+**What gets shown.** Worship asks for presence; ads are designed to break it. An interstitial between Athkar entries, a banner under the Qibla compass, a video before a Quran reader — each one trades a moment of the user's attention to the highest bidder.
 
-**What gets collected.** Ad networks pay better when they can target. Targeting requires behavioural data — and a worship app generates uniquely sensitive signals: when you pray, how often, what you read, where you are. That data leaks observance level, denomination, and identity to a chain of brokers the dev no longer fully controls. This is a structural concern, not a comment on any specific app's intent.
+Whether this is acceptable inside a worship surface is, ultimately, an aesthetic and ethical judgment users have to make for themselves. Our judgment is that it is not.
+
+**What gets collected.** Ad networks pay better when they can target. Targeting requires behavioural data — and a worship app generates uniquely sensitive signals: when you pray, how often, what you read, where you are.
+
+That data leaks observance level, denomination, and identity to a chain of brokers the dev no longer fully controls. This is a structural concern, not a comment on any specific app's intent.
 
 **Questions to ask:**
 
@@ -71,7 +75,9 @@ Islamic apps make consequential choices that the user can't see: which Quran tex
 - Are the licence terms of those upstream sources respected (e.g. CC-BY attribution for Tanzil)?
 - Is the app source-code open? Can a knowledgeable user independently audit how data is handled?
 
-**Where Nedaa sits:** Sources named publicly. Athkar from **Hisn al-Muslim**. Prayer-time computation is provider-abstracted at the API layer; the **Aladhan API** is currently the only implemented upstream provider. In the Quran reader: text from the **Tanzil Project** under CC-BY 3.0 with attribution preserved; the UthmanicHafs font and Madinah Mushaf page layout from the **King Fahd Glorious Qur'an Printing Complex**; verse divisions and recitation timing from the **Quranic Universal Library (QUL) by Tarteel**; recitation audio from **QuranicAudio** and **quran.com**, mirrored via QUL. All disclosed in-app and on this site. Source code open at `github.com/NedaaDevs/nedaa`.
+**Where Nedaa sits:** Sources named publicly. Athkar from **Hisn al-Muslim**. Prayer-time computation is provider-abstracted at the API layer; the **Aladhan API** is currently the only implemented upstream provider.
+
+In the Quran reader: text from the **Tanzil Project** under CC-BY 3.0 with attribution preserved; the UthmanicHafs font and Madinah Mushaf page layout from the **King Fahd Glorious Qur'an Printing Complex**; verse divisions and recitation timing from the **Quranic Universal Library (QUL) by Tarteel**; recitation audio from **QuranicAudio** and **quran.com**, mirrored via QUL. All disclosed in-app and on this site. Source code open at `github.com/NedaaDevs/nedaa`.
 
 ## The summary table
 

@@ -20,7 +20,9 @@ Times work offline after the first sync. Location stays on your device at low ac
 
 ## Why calculation method matters
 
-Prayer times are not a single global truth. The exact moment of Fajr or Isha depends on conventions about how far the sun must be below the horizon — angles that different scholarly bodies have set differently for valid juristic reasons. A mosque in Riyadh and a mosque in Kuala Lumpur will publish different Fajr times for the same date, not because one is wrong but because they follow different methods.
+Prayer times are not a single global truth. The exact moment of Fajr or Isha depends on conventions about how far the sun must be below the horizon — angles that different scholarly bodies have set differently for valid juristic reasons.
+
+A mosque in Riyadh and a mosque in Kuala Lumpur will publish different Fajr times for the same date, not because one is wrong but because they follow different methods.
 
 Apps that hardcode one method everywhere end up out of sync with most local mosques. Nedaa relies on the provider to select a method appropriate to your country and surfaces that choice — you can override it if your mosque follows a different one.
 
@@ -73,7 +75,9 @@ In northern Europe, Canada, parts of Russia, and other high-latitude locations, 
 
 ## Offline behaviour
 
-On first run for your location, Nedaa fetches the rest of the current year (from the current month through December) and stores it in a local SQLite cache. The app works fully offline against that cache. Around December, the next year's data is fetched ahead of the rollover so the new year arrives without interruption. Background refresh (where the OS allows it) keeps the cache up to date without you opening the app.
+On first run for your location, Nedaa fetches the rest of the current year (from the current month through December) and stores it in a local SQLite cache. The app works fully offline against that cache.
+
+Around December, the next year's data is fetched ahead of the rollover so the new year arrives without interruption. Background refresh (where the OS allows it) keeps the cache up to date without you opening the app.
 
 ## Lock-screen and home-screen widgets
 
@@ -81,7 +85,9 @@ Nedaa ships native widgets for both iOS (lock screen and home screen) and Androi
 
 ## How Nedaa handles your data
 
-The short version: Nedaa doesn't have a server profile of you. No account, no cloud sync, no advertising, no third-party tracking SDKs. Location is used at low accuracy on the device only, just enough to compute your prayer times. Deny the permission and you can pick a city or enter coordinates instead, in which case the app never reads your device location at all. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. The source is at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
+The short version: Nedaa doesn't have a server profile of you. No account, no cloud sync, no advertising, no third-party tracking SDKs. Location is used at low accuracy on the device only, just enough to compute your prayer times.
+
+Deny the permission and you can pick a city or enter coordinates instead, in which case the app never reads your device location at all. There is no crash-reporting SDK; diagnostic logs stay on your device and reach us only if you share them. The source is at [github.com/NedaaDevs/nedaa](https://github.com/NedaaDevs/nedaa).
 
 The full position is on the [Privacy page](/privacy).
 

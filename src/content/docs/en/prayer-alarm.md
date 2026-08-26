@@ -16,7 +16,9 @@ hreflang:
 
 Nedaa is a free, open-source prayer-times app for iOS and Android. The alarm feature ships with two alarm types, Fajr and Jummah, built on the same real OS-level alarm infrastructure. Fajr is the hardest case (an overnight alarm on a silenced phone), so most of this page focuses on it; Jummah behaves the same.
 
-Most prayer-time apps schedule notifications for Athan. A notification respects your Do Not Disturb settings and your media volume, so on a phone left on the bedside table for eight hours it often produces a quiet chime, or nothing at all. Nedaa schedules real alarms instead: the same OS-level mechanism your system Clock app uses. They override silent mode, ring at full volume, and require active dismissal.
+Most prayer-time apps schedule notifications for Athan. A notification respects your Do Not Disturb settings and your media volume, so on a phone left on the bedside table for eight hours it often produces a quiet chime, or nothing at all.
+
+Nedaa schedules real alarms instead: the same OS-level mechanism your system Clock app uses. They override silent mode, ring at full volume, and require active dismissal.
 
 ## How it works on each platform
 
