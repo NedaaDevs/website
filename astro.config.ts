@@ -36,6 +36,10 @@ export default defineConfig({
     inlineStylesheets: 'always',
     assets: '_astro',
   },
+  // Prose wraps mid-sentence, so an inline element often starts a source line.
+  // HTML-aware compression keeps the space before it; JSX rules would fuse it
+  // into the preceding word.
+  compressHTML: true,
   devToolbar: { enabled: true },
   vite: {
     resolve: {
