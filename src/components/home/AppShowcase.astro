@@ -20,6 +20,7 @@ const slugs = [
   'reliable-alarms',
   'qibla',
   'athkar-with-audio',
+  'quran',
   'tools',
   'umrah',
 ] as const;
@@ -211,6 +212,11 @@ const story = await Promise.all(
     max-width: 300px;
     margin: 0;
   }
+  /* A count that doesn't fill the last row leaves the orphan hard against the
+     start edge. Push it to the middle column so the plate stays balanced. */
+  .cell:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
   .phone {
     display: flex;
     justify-content: center;
@@ -262,11 +268,18 @@ const story = await Promise.all(
       grid-template-columns: repeat(2, 1fr);
       gap: 40px 24px;
     }
+    .cell:last-child:nth-child(2n + 1) {
+      grid-column: span 2;
+    }
   }
   @media (max-width: 560px) {
     .grid {
       grid-template-columns: 1fr;
       gap: 48px;
+    }
+    .cell:last-child:nth-child(3n + 1),
+    .cell:last-child:nth-child(2n + 1) {
+      grid-column: auto;
     }
   }
 </style>

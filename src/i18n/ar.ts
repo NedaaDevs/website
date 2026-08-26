@@ -366,6 +366,8 @@ export default {
   'show.qada.cap': 'تتبّع أيام الصيام الفائتة واقضِها يومًا بيوم.',
   'show.athkar-with-audio.label': 'الأذكار',
   'show.athkar-with-audio.cap': 'أذكار الصباح والمساء، تُتلى بصوتٍ مسموع.',
+  'show.quran.label': 'المصحف',
+  'show.quran.cap': 'مصحف المدينة كما تعرفه، صفحةً بصفحة وسطرًا بسطر.',
   'show.tools.label': 'الأدوات',
   'show.tools.cap': 'محوّلات وعدّادات وأدلّة مجموعة في مكان واحد.',
   'show.umrah.label': 'دليل العمرة',

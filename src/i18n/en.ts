@@ -377,6 +377,8 @@ export default {
   'show.qada.cap': 'Count missed fasts and clear them, day by day.',
   'show.athkar-with-audio.label': 'Athkar',
   'show.athkar-with-audio.cap': 'Morning and evening remembrances, read aloud.',
+  'show.quran.label': 'Quran reader',
+  'show.quran.cap': 'The Madinah mushaf, page for page, as you know it on paper.',
   'show.tools.label': 'Tools',
   'show.tools.cap': 'Converters, trackers, and guides gathered in one place.',
   'show.umrah.label': 'Umrah guide',
