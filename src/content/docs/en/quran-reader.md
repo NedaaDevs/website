@@ -40,11 +40,11 @@ All three keep the standard 604-page layout, so page numbers, juz boundaries, an
 
 Fifteen lines to a page, 604 pages, and every page ends where a verse ends. No verse is split across a page turn. The first two pages are the exception: al-Fatiha and the opening of al-Baqarah sit in a decorative frame of eight lines.
 
-That last property is why huffaz memorise from this mushaf rather than another.
+Pages that end on a full verse are why huffaz memorise from this mushaf rather than another.
 
 ### A text mode that skips the edition download
 
-Alongside the page-image mushaf there is a text mode that renders the Quran as live text, using the Tanzil Uthmani text in the King Fahd Complex's UthmanicHafs face. It needs no edition: none of the page images, and none of the space they take. What it does need is the verse text and metadata, which the app fetches once as a small content file and both modes share.
+Alongside the page-image mushaf there is a text mode that renders the Quran as live text, using the Tanzil Uthmani text in the King Fahd Complex's KFGQPC HAFS Uthmanic face. It needs no edition: none of the page images, and none of the space they take. What it does need is the verse text and metadata, which the app fetches once as a small content file and both modes share.
 
 Text mode keeps the same 604 page boundaries as the printed mushaf; the verses are reflowed, not re-paginated. Its reading size runs from 20 to 48 points, adjustable with a side-mounted stepper or by pinching the page. This is the mode to use if the printed mushaf's fixed type is too small to read.
 
@@ -80,7 +80,7 @@ The reader carries a short reference for the marks printed on the page, so you c
 
 ### Navigation
 
-Browse by surah or verse, search surah names, or jump to a surah, juz, hizb, or page number. The running header carries the surah name and the juz you are in.
+Browse by surah or verse, search surah names or the verse text, or jump to a surah, juz, hizb, or page number. The running header carries the surah name and the juz you are in.
 
 ### Reading themes and layout
 
@@ -109,12 +109,12 @@ The mushaf editions are page images, so they are a real download rather than a f
 
 No account, no cloud sync, no advertising, no third-party tracking SDKs. Your bookmarks, highlights, memory-aid notes, reading position, and downloaded files live on your device.
 
-Two things do leave the device, both controlled by a single **"Share anonymous usage stats"** switch in Settings, which you can turn off at any time:
+Two things do leave the device, both controlled by a single **"Share anonymous usage stats"** switch in Settings. It is on by default, and you can turn it off at any time:
 
 - When you play a recitation, the app sends the recitation's id. It does not send who played it, when you read, or what you read.
 - When you install a mushaf edition, the app sends the edition version.
 
-Neither carries an account, a device identifier, or a user id, and each is rate-limited to once every thirty minutes. They exist so we can see which reciters and editions get used, and they are the numbers published on the operational ledger on our home page. Everything else about your reading stays on your phone.
+Neither carries an account, a device identifier, or a user id, and each is sent at most once every thirty minutes for a given recitation or edition. They exist so we can see which reciters and editions get used, and they are the numbers published on the operational ledger on our home page. Everything else about your reading stays on your phone.
 
 The full position is on the [Privacy page](/privacy).
 
@@ -134,7 +134,7 @@ Yes. Read-along highlights either the whole verse or the individual word as it i
 
 ### Can I make the text bigger?
 
-In text mode, yes: from 20 to 48 points, by stepper or by pinching. The page-image mushaf reproduces a printed page, so its type is fixed; use text mode, or the two-page/whole-page layout options, if the print is too small.
+In text mode, yes: from 20 to 48 points, by stepper or by pinching. The page-image mushaf reproduces a printed page, so its type is fixed; use text mode, or the **Bigger text** layout option, if the print is too small.
 
 ### What are "similar verses"?
 

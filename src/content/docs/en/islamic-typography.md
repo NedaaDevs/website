@@ -79,22 +79,22 @@ Search is the single hardest typographic problem inside a Quran app, and almost 
 
 The naive approach, a `LIKE` query against the verse text, fails: the database stores the verse fully voweled, and almost nobody types diacritics into a search box. The query "الرحمن" should match "الرَّحْمَٰنِ" but a literal text comparison won't.
 
-Nedaa's reader uses **SQLite's FTS5 (full-text search) module** with custom Arabic tokenizer rules to normalise diacritics out of the indexed text while preserving them in the displayed result. The indexed string strips tashkīl, *shadda*, and the small alef; the display string keeps everything. Search by "الرحمن"; see "الرَّحْمَٰنِ" highlighted on the page.
+Nedaa's reader uses **SQLite's FTS5 (full-text search) module** over a separate column with the diacritics already stripped, built with the database. The app normalises your query the same way before matching, and the displayed text keeps every mark. The indexed string drops tashkīl, *shadda*, and the small alef, and the query also folds the alef forms. Search by "الرحمن"; see "الرَّحْمَٰنِ" highlighted on the page.
 
 This is mostly invisible work that ships in the database file, not in the UI. It's the kind of detail that distinguishes a Quran app built by people who tried to use one from a Quran app built by people who didn't.
 
 ## Pairing Latin and Arabic typefaces
 
-The Quran reader is half of Nedaa. The other half, meaning prayer times, alarm settings and athkar, has UI in five languages: English, Arabic, Malay, Urdu, and growing.
+The Quran reader is half of Nedaa. The other half, meaning prayer times, alarm settings and athkar, has UI in four languages, English, Arabic, Malay and Urdu, and more are coming.
 
 Most apps pick a single typeface and let it render everything. That works badly. **Latin typefaces and Arabic typefaces have different baselines, different weights at the same nominal weight, different x-heights, and different line-height conventions.** A typeface that looks balanced in English will look thin or mis-aligned in Arabic, and vice versa.
 
 Nedaa pairs:
 
-- **Asap** for Latin scripts (UI, English, Malay, Urdu transliteration)
-- **IBM Plex Sans Arabic** for Arabic UI text and labels
+- **Asap** for Latin scripts (the English and Malay UI)
+- **IBM Plex Sans Arabic** for Arabic and Urdu UI text and labels
 
-We paired the two so a settings screen carrying both Arabic and English, which is the common case, reads as one visual whole instead of two clashing systems. The font swap happens at the component level: the same `Text` component renders Asap or IBM Plex Sans Arabic depending on the active locale.
+We paired the two so a settings screen carrying both Arabic and English, which is the common case, reads as one visual whole instead of two clashing systems. The font swap happens once, at the app root: the same `Text` component renders Asap or IBM Plex Sans Arabic depending on the active locale.
 
 For Quran *body* text (the ayah display in text-mode reader, separate from the image-based mushaf reader), the rules change again. Quran text needs typefaces built for Quranic typography: diacritic positioning, ligature behaviour, and the aesthetic conventions of mushaf rendering. That's not what UI fonts are for.
 
@@ -105,7 +105,7 @@ A research piece that doesn't list the unsolved problems isn't honest. The hard 
 1. **High-DPI image scaling.** Page-image mushafs at modern phone resolutions are large. Shipping every density variant inflates the download. Generating them on the fly costs CPU and memory. There is no clean answer.
 2. **Word-level audio sync, reciter by reciter.** Ayah-level audio is easy: the file maps to one ayah and plays end to end. Word-level sync, where the app highlights each word as the reciter says it, needs an accurate timestamp for every word of every ayah in that specific recording. Nedaa ships word-level read-along on QUL's timing data. QUL has that data for some recitations and not others, so the reader falls back to verse-level highlighting wherever the timings are missing. Closing the gap means finding or producing timing data for more reciters, which is slower work than any amount of rendering.
 3. **Right-to-left layout for mixed Arabic+Latin UI.** The whole app supports RTL, but specific edge cases (timestamps in chat-style logs, percentage indicators, version numbers) need bidi-text handling that platform components don't always get right.
-4. **Madhhab-neutral copy in a script-rich UI.** Every Arabic Islamic word the UI surfaces (Salah, Athan, Iqama, Sa'i, Tawaf) is also a typographic decision: bold or regular weight, with or without diacritics, transliterated or in script. Getting this consistent across five locales is its own work.
+4. **Madhhab-neutral copy in a script-rich UI.** Every Arabic Islamic word the UI surfaces (Salah, Athan, Iqama, Sa'i, Tawaf) is also a typographic decision: bold or regular weight, with or without diacritics, transliterated or in script. Getting this consistent across four locales is its own work.
 
 ## Why this matters beyond Nedaa
 
@@ -126,6 +126,6 @@ Nedaa's source code is at `github.com/NedaaDevs/nedaa`. The Quran reader's desig
 
 ---
 
-*Last updated: 2026-05-06.*
+*Last updated: 2026-08-25.*
 
 *This piece is part of an ongoing series from the Nedaa team on the engineering of Islamic apps. Nedaa is free, open source, and privacy-first. It does not collect personal data, has no ads, and has no premium tier.*

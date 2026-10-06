@@ -27,7 +27,7 @@ The tracker is for **fasting qada only.** It does not track missed prayers.
 - **Illness** that makes fasting harmful.
 - **Travel** during Ramadan.
 
-The classical fiqh rule, agreed across the four Sunni madhahib (Hanafi, Shafi'i, Maliki, Hanbali), is that **missed Ramadan fasts must be made up before the next Ramadan begins.** This is the deadline Nedaa's reminder is built around.
+The majority position, held by the Shafi'i, Maliki and Hanbali madhahib, is that **missed Ramadan fasts must be made up before the next Ramadan begins.** The Hanafi madhhab sets no deadline, though it holds that making them up sooner is better. Nedaa's reminder is built around the majority deadline.
 
 ## What the Qada tracker does
 
@@ -75,7 +75,7 @@ No. The classical position is that qada days do not need to be consecutive. You 
 
 ### When is the deadline to make up missed fasts?
 
-Before the start of the next Ramadan. If a Ramadan passes and you still owe fasts from a previous Ramadan without a valid excuse, scholars discuss whether *fidya* (feeding a poor person per missed day) becomes due in addition to the fast. Nedaa stays neutral on these scholarly questions and helps you get the fasts done in time.
+For the majority of scholars, before the next Ramadan begins; the Hanafi madhhab sets no deadline. If a Ramadan passes and you still owe fasts from a previous Ramadan without a valid excuse, scholars discuss whether *fidya* (feeding a poor person per missed day) becomes due in addition to the fast. Nedaa stays neutral on these scholarly questions and helps you get the fasts done in time.
 
 ### Does Nedaa track kaffara (expiation) for deliberately broken fasts?
 

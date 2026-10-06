@@ -69,7 +69,7 @@ When an app's data pipeline is closed, users find out about arrangements like th
 
 ## Where Nedaa fits
 
-Choose Nedaa if you want prayer times, a Fajr alarm that reliably fires, Athkar (Hisn al-Muslim), Qibla, and Hijri date, free, in Arabic and English, with no ads, no account, and a codebase you (or anyone) can read.
+Choose Nedaa if you want prayer times, a Fajr alarm that reliably fires, Athkar (Hisn al-Muslim), Qibla, and Hijri date, free, in Arabic, English, Malay and Urdu, with no ads, no account, and a codebase you (or anyone) can read.
 
 - **iOS:** [App Store](https://apps.apple.com/app/id6740703900)
 - **Android:** [Google Play](https://play.google.com/store/apps/details?id=dev.nedaa.android) · [Huawei AppGallery](https://appgallery.huawei.com/app/C114573733)
